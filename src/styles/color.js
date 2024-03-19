@@ -1,4 +1,10 @@
 export const COLOR = {
   MAIN_WHITE: "#ffffff",
   MAIN_BLACK: "#050E04",
+  MAIN_GREEN: "#016360",
+  MAIN_EMER: "#2EABA1",
+  MAIN_EMER_LIGHT: "#80BFB5",
+  MAIN_SKY: "#AACCD2",
+  MAIN_SKY_LIGHT: "#D4EFEF",
+  MAIN_BROWN: "#A6A08C",
 };
