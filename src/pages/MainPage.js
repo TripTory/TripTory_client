@@ -71,7 +71,19 @@ const DivNameP = styled.p`
 `;
 
 const AddBtn = styled(Button)`
-  background: ${COLOR.MAIN_GREEN};
+  display: flex;
+  background-color: ${COLOR.MAIN_GREEN};
+  border-radius: 1rem;
+  font-size: 1rem;
+  &:hover {
+    background-color: ${COLOR.MAIN_GREEN};
+  }
+  &:visited {
+    background-color: ${COLOR.MAIN_GREEN};
+  }
+  &:active {
+    background-color: ${COLOR.MAIN_GREEN};
+  }
 `;
 
 const DownDiv = styled.div`
@@ -84,7 +96,8 @@ const TagDiv = styled.div``;
 const HiP = styled.p`
   font-size: 1.5rem;
   color: white;
-  font:;
+  font-family: var(--inter-extrabold);
+  font-weight: 700;
 `;
 
 const WelcomeP = styled.p`
