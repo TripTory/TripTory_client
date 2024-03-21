@@ -33,60 +33,61 @@ const JoinPage = () => {
       <JoinP>회원가입</JoinP>
       <br />
 
-      <div>
-        <p>이름</p>
+      <NameDiv>
+        <NameP>이름</NameP>
         <NameInput placeholder="  이름을 입력해주세요." />
-      </div>
+      </NameDiv>
+
+      <EntireAgreeDiv>
+        <AllLabel>
+          <CustomCheckbox
+            type="checkbox"
+            name="all"
+            checked={isChecked.all}
+            onChange={handleCheckboxChange}
+          />{" "}
+          모두 동의합니다.
+        </AllLabel>
 
 
-      <label>
-        <CustomCheckbox
-          type="checkbox"
-          name="all"
-          checked={isChecked.all}
-          onChange={handleCheckboxChange}
-        />{" "}
-        모두 동의합니다.
-      </label>
+        <AgreeDiv>
+          <RadioDiv>
+            <label>
+              <CustomCheckbox
+                type="checkbox"
+                name="agreement"
+                checked={isChecked.agreement}
+                onChange={handleCheckboxChange}
+              />{" "}
+              이용약관 동의{" "}
+            </label>
+            <label>
+              <CustomCheckbox
+                type="checkbox"
+                name="privacy"
+                checked={isChecked.privacy}
+                onChange={handleCheckboxChange}
+              />{" "}
+              개인정보 취급방침 동의{" "}
+            </label>
+            <label>
+              <CustomCheckbox
+                type="checkbox"
+                name="marketing"
+                checked={isChecked.marketing}
+                onChange={handleCheckboxChange}
+              />{" "}
+              마케팅 정보 수신 동의{" "}
+            </label>
+          </RadioDiv>
 
-
-      <AgreeDiv>
-        <RadioDiv>
-          <label>
-            <CustomCheckbox
-              type="checkbox"
-              name="agreement"
-              checked={isChecked.agreement}
-              onChange={handleCheckboxChange}
-            />{" "}
-            이용약관 동의{" "}
-          </label>
-          <label>
-            <CustomCheckbox
-              type="checkbox"
-              name="privacy"
-              checked={isChecked.privacy}
-              onChange={handleCheckboxChange}
-            />{" "}
-            개인정보 취급방침 동의{" "}
-          </label>
-          <label>
-            <CustomCheckbox
-              type="checkbox"
-              name="marketing"
-              checked={isChecked.marketing}
-              onChange={handleCheckboxChange}
-            />{" "}
-            마케팅 정보 수신 동의{" "}
-          </label>
-        </RadioDiv>
-
-        <BtnDiv>
-          <CustomButton>보기 &gt;</CustomButton>
-          <CustomButton>보기 &gt;</CustomButton>
-          <CustomButton>보기 &gt;</CustomButton>
-        </BtnDiv>
-      </AgreeDiv>
+          <BtnDiv>
+            <CustomButton>보기 &gt;</CustomButton>
+            <CustomButton>보기 &gt;</CustomButton>
+            <CustomButton>보기 &gt;</CustomButton>
+          </BtnDiv>
+        </AgreeDiv>
+      </EntireAgreeDiv>
 
       <StartDiv>
         시작하기
@@ -114,6 +115,18 @@ const JoinP = styled.p`
   margin-top: 10px;
   margin-bottom: 6rem;
 `;
+const NameP = styled.div`
+  padding-right: 280px;
+
+`;
+
+const NameDiv = styled.div`
+  ${SharedContent}
+  display: flex; 
+  flex-direction: column;
+
+`;
+
 
 const NameInput = styled.input`
   height: 40px;
@@ -123,6 +136,18 @@ const NameInput = styled.input`
   box-shadow: 1px 1px #F6F6F6;
   margin-bottom: 30px;
 `;
+
+
+const EntireAgreeDiv = styled.div`
+  ${SharedContent}
+  display: flex; 
+  flex-direction: column;
+`;
+
+const AllLabel = styled.div`
+  padding-right: 150px;
+`;
+
 
 const RadioDiv = styled.div`
   display: flex; 
@@ -172,6 +197,7 @@ const CustomButton = styled.button`
 `;
 
 const AgreeDiv = styled.div`
+  
   display: flex;
   flex-direction: row;
   margin-top: 10px;
