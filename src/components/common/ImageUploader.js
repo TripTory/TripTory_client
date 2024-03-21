@@ -1,7 +1,8 @@
 import React, {useState ,useRef} from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import { Avatar } from "@mui/material";
+import { AiFillCamera } from "react-icons/ai";
+
 
 const ImageUploader = () => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -36,8 +37,8 @@ const ImageUploader = () => {
           height: "150px",
           borderRadius: "50%",
           overflow: "hidden",
-          // margin: "0 auto",
-          // border: "1px solid #ccc",
+          margin: "0 auto",
+          border: "1px solid #ccc",
         }}
         onClick={() => fileInput.current.click()}
       >
@@ -59,15 +60,23 @@ const ImageUploader = () => {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              backgroundColor: "#f0f0f0",
+              backgroundColor: "#d9d9d9",
             }}
           >
-            <span style={{ color: "#888", fontSize: "24px" }}>+</span>
+            <AiFillCamera
+              style={{
+                color: "#545454",
+                width: "30px",
+                height: "30px",
+              }}
+            />
           </div>
         )}
       </div>
     </div>
   );
 };
+
+
 
 export default ImageUploader;

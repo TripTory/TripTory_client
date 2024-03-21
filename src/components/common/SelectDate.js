@@ -2,11 +2,15 @@ import React,{useState} from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
+
 const SelectDate = () => {
   const [dateRange, setDateRange] = useState([null,null]);
   const [startDate, endDate] = dateRange;
   return(
     <DatePicker
+      style={{
+        border:"10px solid black",
+      }}
       dateFormat="yyyy.MM.dd"
       selectsRange={true}
       startDate={startDate}

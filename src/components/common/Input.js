@@ -2,12 +2,22 @@ import React, {useState} from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 
+const InputBox = styled.input`
+  background-color: none;
+  width: 90%;
+  border: none;
+  font-size: 15px;
+  border-bottom: solid #bfbfbf 1px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+`;
 
 const Input = ({name, value, onChange, placeholder}) => {
 
   return (
     <div>
-      <input
+      <InputBox
         type = "text"
         name = {name}
         value = {value}
