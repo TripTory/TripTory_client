@@ -116,7 +116,7 @@ const JoinP = styled.p`
   margin-bottom: 6rem;
 `;
 const NameP = styled.div`
-  padding-right: 280px;
+  padding-right: 85%;
 
 `;
 
@@ -130,7 +130,7 @@ const NameDiv = styled.div`
 
 const NameInput = styled.input`
   height: 40px;
-  width: 30rem;
+  width: 90%;
   border-radius: 5px;
   border-color: #E4E4E4;
   box-shadow: 1px 1px #F6F6F6;
