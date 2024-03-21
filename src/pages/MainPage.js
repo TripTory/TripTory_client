@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { COLOR } from "../styles/color";
 import { Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
+import TripList from "../components/TripList";
 import React from "react";
 
 const MainPage = () => {
@@ -15,12 +16,18 @@ const MainPage = () => {
         <MyTripDiv>
           <UpDiv>
             <DivNameP>내 여행</DivNameP>
-            <AddBtn variant="contained"><AddIcon/>추가하기</AddBtn>
+            <AddBtn variant="contained">+ 추가하기</AddBtn>
           </UpDiv>
-          <DownDiv></DownDiv>
+          <DownDiv>
+            <TripList />
+          </DownDiv>
         </MyTripDiv>
-        <RecomDiv></RecomDiv>
-        <TagDiv></TagDiv>
+        <RecomDiv>
+          <DivNameP>맞춤 여행지</DivNameP>
+        </RecomDiv>
+        <TagDiv>
+          <DivNameP>태그 별 사진 보기</DivNameP>
+        </TagDiv>
       </MainDiv>
     </StMainPage>
   );
@@ -57,24 +64,32 @@ const MainDiv = styled.div`
 `;
 
 const MyTripDiv = styled.div`
+  ${SharedContent};
+  width: 100%;
+  height: 33%;
+  flex-direction: column;
+  border: 1px solid black;
 `;
 
 const UpDiv = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  ${SharedContent};
+  width: 100%;
+  height: 20%;
+  justify-content: space-between;
+  border: 1px solid red;
 `;
 
 const DivNameP = styled.p`
   font-weight: bold;
   font-size: 1.4rem;
+  font-family: var(--inter-extrabold);
 `;
 
 const AddBtn = styled(Button)`
   display: flex;
   background-color: ${COLOR.MAIN_GREEN};
   border-radius: 1rem;
-  font-size: 1rem;
+  font-size: 0.8rem;
   &:hover {
     background-color: ${COLOR.MAIN_GREEN};
   }
@@ -87,11 +102,22 @@ const AddBtn = styled(Button)`
 `;
 
 const DownDiv = styled.div`
+  ${SharedContent};
+  width: 100%;
+  height: 80%;
 `;
 
-const RecomDiv = styled.div``;
+const RecomDiv = styled.div`
+  ${SharedContent};
+  width: 100%;
+  height: 33%;
+`;
 
-const TagDiv = styled.div``;
+const TagDiv = styled.div`
+  ${SharedContent};
+  width: 100%;
+  height: 33%;
+`;
 
 const HiP = styled.p`
   font-size: 1.5rem;
