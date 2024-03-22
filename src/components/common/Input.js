@@ -23,6 +23,7 @@ const Input = ({name, value, onChange, placeholder}) => {
         value = {value}
         onChange = {onChange}
         placeholder = {placeholder}
+        autocomplete="off"
       />
     </div>
   );

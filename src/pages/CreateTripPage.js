@@ -44,7 +44,7 @@ const CreateTripPage = () => {
           name="tripName"
           value={state.tripName}
           onChange={handleChange}
-          placeholder="여행 이름"
+          placeholder="여행 이름을 입력하세요."
         />
       </InputContainer>
       <InputContainer>
@@ -59,7 +59,7 @@ const CreateTripPage = () => {
           name="tripPlace"
           value={state.tripPlace}
           onChange={handleChange}
-          placeholder="여행 장소"
+          placeholder="여행 장소를 검색하세요."
         />
       </InputContainer>
       <Button onClick={handleSubmit}>여행 떠나기</Button>
