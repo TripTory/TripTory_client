@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import "react-datepicker/dist/react-datepicker.css";
 
 
-const SelectDate = ({onDateChange}) => {
+const SelectDateRange = ({onDateChange}) => {
   const [dateRange, setDateRange] = useState([null,null]);
   const [startDate, endDate] = dateRange;
 
@@ -27,8 +27,8 @@ const SelectDate = ({onDateChange}) => {
     />
   );
 };
-export default SelectDate;
+export default SelectDateRange;
 
-SelectDate.propTypes = {
+SelectDateRange.propTypes = {
   onDateChange: PropTypes.func.isRequired,
 };

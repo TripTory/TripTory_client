@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import React, { useState } from "react";
 import Input from "../components/common/Input";
-import SelectDate from "../components/common/SelectDate";
+import SelectDateRange from "../components/common/SelectDateRange";
 import ImageUploader from "../components/common/ImageUploader";
 
 const CreateTripPage = () => {
@@ -49,7 +49,7 @@ const CreateTripPage = () => {
       </InputContainer>
       <InputContainer>
         <Label>여행 일정</Label>
-        <SelectDate
+        <SelectDateRange
           onDateChange={handleDateChange}
         />
       </InputContainer>
