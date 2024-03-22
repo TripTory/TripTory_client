@@ -1,44 +1,68 @@
 import styled from "styled-components";
-import React,{useState} from "react";
+import React, { useState } from "react";
 import Input from "../components/common/Input";
 import SelectDate from "../components/common/SelectDate";
 import ImageUploader from "../components/common/ImageUploader";
 
 const CreateTripPage = () => {
   const [state, setState] = useState({
-    tripName:"",
-    tripPlace:"",
+    tripName: "",
+    tripPlace: "",
   });
+
+  const [dateRange, setDateRange] = useState([null, null]);
+
+  const handleDateChange = (e) => {
+    setDateRange(e);
+  };
 
   const handleChange = (e) => {
     setState({
       ...state,
-      [e.target.name] : e.target.value,
+      [e.target.name]: e.target.value,
     });
   };
+
+  const handleSubmit = () => {
+    const [startDate, endDate] = dateRange;
+    alert(`여행 이름: ${state.tripName} // 여행 날짜: ${startDate}~${endDate} // 여행 장소: ${state.tripPlace}` );
+  };
+
 
   return (
     <div className="CreateTripPage">
       <Title>어떤 여행을 만들까요?</Title>
-      <EmptyContainer/>
+      <EmptyContainer />
       <div>
-        <ImageUploader/>
+        <ImageUploader />
       </div>
-      <EmptyContainer/>
+      <EmptyContainer />
       <div></div>
       <InputContainer>
         <Label>여행 이름</Label>
-        <Input name="tripName" value={state.tripName} onChange={handleChange} placeholder="여행 이름"/>
+        <Input
+          name="tripName"
+          value={state.tripName}
+          onChange={handleChange}
+          placeholder="여행 이름"
+        />
       </InputContainer>
       <InputContainer>
         <Label>여행 일정</Label>
-        <SelectDate/>
+        <SelectDate
+          onDateChange={handleDateChange}
+        />
       </InputContainer>
       <InputContainer>
         <Label>여행 장소</Label>
-        <Input name="tripPlace" value={state.tripPlace} onChange={handleChange} placeholder="여행 장소"/>
+        <Input
+          name="tripPlace"
+          value={state.tripPlace}
+          onChange={handleChange}
+          placeholder="여행 장소"
+        />
       </InputContainer>
-      <Button>여행 떠나기</Button>
+      <Button onClick={handleSubmit}>여행 떠나기</Button>
     </div>
   );
 };

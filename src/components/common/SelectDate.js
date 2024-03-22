@@ -1,11 +1,18 @@
 import React,{useState} from "react";
 import DatePicker from "react-datepicker";
+import PropTypes from "prop-types";
 import "react-datepicker/dist/react-datepicker.css";
 
 
-const SelectDate = () => {
+const SelectDate = ({onDateChange}) => {
   const [dateRange, setDateRange] = useState([null,null]);
   const [startDate, endDate] = dateRange;
+
+  const handleDateChange = (update) =>{
+    setDateRange(update);
+    onDateChange(update);
+  };
+
   return(
     <DatePicker
       style={{
@@ -15,11 +22,13 @@ const SelectDate = () => {
       selectsRange={true}
       startDate={startDate}
       endDate={endDate}
-      onChange={(update) => {
-        setDateRange(update);
-      }}
+      onChange={handleDateChange}
       inClearable={true}
     />
   );
 };
 export default SelectDate;
+
+SelectDate.propTypes = {
+  onDateChange: PropTypes.func.isRequired,
+};
