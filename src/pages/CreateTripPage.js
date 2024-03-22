@@ -22,7 +22,7 @@ const CreateTripPage = () => {
       [e.target.name]: e.target.value,
     });
   };
-
+  // 여행 정보가 담긴 변수들. 여기서 가져다 쓰면 됨
   const handleSubmit = () => {
     const [startDate, endDate] = dateRange;
     alert(`여행 이름: ${state.tripName} // 여행 날짜: ${startDate}~${endDate} // 여행 장소: ${state.tripPlace}` );
