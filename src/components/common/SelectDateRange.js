@@ -50,6 +50,7 @@ const SelectDateRange = ({ onDateChange }) => {
         endDate={endDate}
         onChange={handleDateChange}
         inClearable={true}
+        placeholderText="날짜를 선택하세요"
       />
     </StyledDatePicker>
   );
