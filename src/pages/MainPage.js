@@ -127,7 +127,7 @@ const AddBtn = styled(Button)`
 const DownDiv = styled.div`
   ${SharedContent};
   width: 100%;
-  height: 100%;
+  height: 80%;
   border: 1px solid pink;
 `;
 

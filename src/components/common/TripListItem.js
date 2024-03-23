@@ -16,14 +16,14 @@ export default function TripListItem(props) {
             <ImageIcon />
           </Avatar>
         </ListItemAvatar>
-        <div>
+        <InfoDiv>
           <TitleP>{props.item}</TitleP>
           <DateP>2023.02.13~2023.02.16</DateP>
-          <LocationP>
-            <LocationOnIcon />
-            광주광역시
-          </LocationP>
-        </div>
+          <LocationDiv>
+            <LocationOnIcon sx={{ fontSize: 12 }} />
+            <LocationP>광주광역시</LocationP>
+          </LocationDiv>
+        </InfoDiv>
       </ListItem>
     </StTripListItem>
   );
@@ -37,8 +37,14 @@ const StTripListItem = styled.div`
   border: 0.1rem solid rgba(228, 228, 228);
   border-radius: 1rem;
   width: 95%;
+  height: 8rem;
   margin-bottom: 0.2rem;
+`;
 
+const InfoDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 0.1rem;
 `;
 
 const TitleP = styled.p`
@@ -50,15 +56,18 @@ const TitleP = styled.p`
 `;
 
 const DateP = styled.p`
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   color: rgba(119, 119, 119);
+`;
+
+const LocationDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: baseline;
+  padding-top: 0.3rem;
 `;
 
 const LocationP = styled.p`
   font-size: 0.8rem;
   color: rgba(119, 119, 119);
-`;
-
-const InfoDiv = styled.div`
-
 `;

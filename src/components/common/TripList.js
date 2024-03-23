@@ -1,6 +1,5 @@
 import * as React from "react";
 import styled from "styled-components";
-import { COLOR } from "../../styles/color";
 import List from "@mui/material/List";
 import TripListItem from "./TripListItem";
 
@@ -13,7 +12,7 @@ export default function TripList() {
         bgcolor: "background.paper",
         position: "relative",
         overflow: "auto",
-        height: "80%",
+        height: "100%",
       }}
     >
       <TripListItem item="1"/>
@@ -29,6 +28,5 @@ export default function TripList() {
 const StList = styled(List)`
   display: flex;
   align-items: center;
-  justify-content: center;
   flex-direction: column;
 `;
