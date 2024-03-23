@@ -5,7 +5,7 @@ import TripListItem from "./TripListItem";
 
 export default function TripList() {
   return (
-    <StList
+    <StTripList
       sx={{
         width: "100%",
         maxWidth: 360,
@@ -13,6 +13,7 @@ export default function TripList() {
         position: "relative",
         overflow: "auto",
         height: "100%",
+        scrollbarWidth: "none",
       }}
     >
       <TripListItem item="1"/>
@@ -21,11 +22,11 @@ export default function TripList() {
       <TripListItem item="4"/>
       <TripListItem item="5"/>
       <TripListItem item="6"/>
-    </StList>
+    </StTripList>
   );
 }
 
-const StList = styled(List)`
+const StTripList = styled(List)`
   display: flex;
   align-items: center;
   flex-direction: column;

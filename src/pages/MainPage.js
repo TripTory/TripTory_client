@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { COLOR } from "../styles/color";
 import { Button } from "@mui/material";
 import TripList from "../components/common/TripList";
+import RecomList from "../components/common/RecomList";
 import React from "react";
 
 const MainPage = () => {
@@ -22,7 +23,10 @@ const MainPage = () => {
           </DownDiv>
         </MyTripDiv>
         <RecomDiv>
-          <DivNameP>맞춤 여행지</DivNameP>
+          <UpDiv>
+            <DivNameP>맞춤 여행지</DivNameP>
+          </UpDiv>
+          <RecomList />
         </RecomDiv>
         <TagDiv>
           <DivNameP>태그 별 사진 보기</DivNameP>
@@ -92,7 +96,6 @@ const UpDiv = styled.div`
   width: 100%;
   height: 20%;
   justify-content: space-between;
-  margin-top: 1rem;
   padding-right: 1rem;
   border: 1px solid black;
 `;
@@ -107,7 +110,8 @@ const DivNameP = styled.p`
 const AddBtn = styled(Button)`
   display: flex;
   background-color: ${COLOR.MAIN_GREEN};
-  height: 80%;
+  width: 7.5rem;
+  height: 3rem;
   border-radius: 3rem;
   font-size: 0.9rem;
   font-weight: bold;
@@ -133,6 +137,7 @@ const DownDiv = styled.div`
 
 const RecomDiv = styled.div`
   ${SharedContent};
+  flex-direction: column;
   width: 100%;
   height: 33%;
   border: 1px solid blue;
@@ -144,7 +149,5 @@ const TagDiv = styled.div`
   height: 40%;
   border: 1px solid red;
 `;
-
-
 
 export default MainPage;
