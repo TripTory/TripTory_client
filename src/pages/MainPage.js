@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import { COLOR } from "../styles/color";
 import { Button } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
-import TripList from "../components/TripList";
+import TripList from "../components/common/TripList";
 import React from "react";
 
 const MainPage = () => {
@@ -16,7 +15,7 @@ const MainPage = () => {
         <MyTripDiv>
           <UpDiv>
             <DivNameP>내 여행</DivNameP>
-            <AddBtn variant="contained">+ 추가하기</AddBtn>
+            <AddBtn variant="contained">+ 여행 추가</AddBtn>
           </UpDiv>
           <DownDiv>
             <TripList />
@@ -48,10 +47,27 @@ const StMainPage = styled.div`
 `;
 
 const IntroDiv = styled.div`
-  ${SharedContent}
+  display: flex;
+  justify-content: end;
+  align-items: flex-start;
   flex-direction: column;
   width: 100%;
   height: 20%;
+  padding-left: 2rem;
+  padding-bottom: 1.7rem;
+`;
+
+const HiP = styled.p`
+  font-size: 2rem;
+  color: white;
+  font-family: var(--inter-extrabold);
+  font-weight: 700;
+  padding-bottom: 0.5rem;
+`;
+
+const WelcomeP = styled.p`
+  font-size: 1.2rem;
+  color: white;
 `;
 
 const MainDiv = styled.div`
@@ -66,7 +82,7 @@ const MainDiv = styled.div`
 const MyTripDiv = styled.div`
   ${SharedContent};
   width: 100%;
-  height: 33%;
+  height: 40%;
   flex-direction: column;
   border: 1px solid black;
 `;
@@ -76,20 +92,27 @@ const UpDiv = styled.div`
   width: 100%;
   height: 20%;
   justify-content: space-between;
-  border: 1px solid red;
+  margin-top: 1rem;
+  padding-right: 1rem;
+  border: 1px solid black;
 `;
 
 const DivNameP = styled.p`
   font-weight: bold;
   font-size: 1.4rem;
   font-family: var(--inter-extrabold);
+  margin-left: 2rem;
 `;
 
 const AddBtn = styled(Button)`
   display: flex;
   background-color: ${COLOR.MAIN_GREEN};
-  border-radius: 1rem;
-  font-size: 0.8rem;
+  height: 80%;
+  border-radius: 3rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+  padding-left: 1rem;
+  padding-right: 1rem;
   &:hover {
     background-color: ${COLOR.MAIN_GREEN};
   }
@@ -104,31 +127,24 @@ const AddBtn = styled(Button)`
 const DownDiv = styled.div`
   ${SharedContent};
   width: 100%;
-  height: 80%;
+  height: 100%;
+  border: 1px solid pink;
 `;
 
 const RecomDiv = styled.div`
   ${SharedContent};
   width: 100%;
   height: 33%;
+  border: 1px solid blue;
 `;
 
 const TagDiv = styled.div`
   ${SharedContent};
   width: 100%;
-  height: 33%;
+  height: 40%;
+  border: 1px solid red;
 `;
 
-const HiP = styled.p`
-  font-size: 1.5rem;
-  color: white;
-  font-family: var(--inter-extrabold);
-  font-weight: 700;
-`;
 
-const WelcomeP = styled.p`
-  font-size: 1rem;
-  color: white;
-`;
 
 export default MainPage;
