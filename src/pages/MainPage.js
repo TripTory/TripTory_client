@@ -26,7 +26,9 @@ const MainPage = () => {
           <UpDiv>
             <DivNameP>맞춤 여행지</DivNameP>
           </UpDiv>
-          <RecomList />
+          <DownRDiv>
+            <RecomList />
+          </DownRDiv>
         </RecomDiv>
         <TagDiv>
           <DivNameP>태그 별 사진 보기</DivNameP>
@@ -88,7 +90,6 @@ const MyTripDiv = styled.div`
   width: 100%;
   height: 40%;
   flex-direction: column;
-  border: 1px solid black;
 `;
 
 const UpDiv = styled.div`
@@ -97,7 +98,6 @@ const UpDiv = styled.div`
   height: 20%;
   justify-content: space-between;
   padding-right: 1rem;
-  border: 1px solid black;
 `;
 
 const DivNameP = styled.p`
@@ -139,15 +139,19 @@ const RecomDiv = styled.div`
   ${SharedContent};
   flex-direction: column;
   width: 100%;
-  height: 33%;
-  border: 1px solid blue;
+  height: 40%;
+  /* border: 1px solid blue; */
+`;
+
+const DownRDiv = styled.div`
+  ${SharedContent};
+  width: 100%;
+  height: 80%;
 `;
 
 const TagDiv = styled.div`
   ${SharedContent};
   width: 100%;
-  height: 40%;
-  border: 1px solid red;
 `;
 
 export default MainPage;

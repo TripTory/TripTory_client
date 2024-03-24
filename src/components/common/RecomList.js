@@ -7,13 +7,13 @@ export default function RecomList() {
   return (
     <StRecomList
       sx={{
-        maxWidth: 360,
         bgcolor: "background.paper",
-        position: "relative",
-        overflow: "auto",
-        height: "100%",
+        scrollbarWidth: "none",
       }}
     >
+      <RecomListItem />
+      <RecomListItem />
+      <RecomListItem />
       <RecomListItem />
       <RecomListItem />
       <RecomListItem />
@@ -24,8 +24,12 @@ export default function RecomList() {
 }
 
 const StRecomList = styled(List)`
-  //display: flex;
- // align-items: center;
-  //flex-direction: row;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
   width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: auto;
+  border: 1px solid purple;
 `;
