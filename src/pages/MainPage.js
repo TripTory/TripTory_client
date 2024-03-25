@@ -32,9 +32,9 @@ const MainPage = () => {
           </DownRDiv>
         </RecomDiv>
         <TagDiv>
-          <UpRDiv>
+          <UpTDiv>
             <DivNameP>태그 별 사진 보기</DivNameP>
-          </UpRDiv>
+          </UpTDiv>
           <DownRDiv>
             <TagImgList/>
           </DownRDiv>
@@ -64,7 +64,8 @@ const IntroDiv = styled.div`
   align-items: flex-start;
   flex-direction: column;
   width: 100%;
-  height: 20%;
+  /* height: 20rem; */
+  margin-top: 20rem;
   padding-left: 2rem;
   padding-bottom: 1.7rem;
 `;
@@ -172,6 +173,15 @@ const TagDiv = styled.div`
   flex-direction: column;
   width: 100%;
   height: 24rem;
+`;
+
+const UpTDiv = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-top: 2.5rem;
+  padding-bottom: 0.5rem;
+  padding-right: 1rem;
 `;
 
 export default MainPage;

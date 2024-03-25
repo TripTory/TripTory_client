@@ -31,5 +31,4 @@ const StRecomList = styled(List)`
   height: 100%;
   position: relative;
   overflow: auto;
-  /* border: 1px solid purple; */
 `;
