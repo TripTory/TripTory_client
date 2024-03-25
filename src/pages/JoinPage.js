@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 const JoinPage = () => {
   const [isChecked, setIsChecked] = useState({
@@ -36,11 +35,7 @@ const JoinPage = () => {
     }
   };
 
-  const navigate = useNavigate();
 
-  const navigateToAgree = () => {
-    navigate("/agreement");
-  };
 
   const openModal = (content) => {
     setModalContent(content);
