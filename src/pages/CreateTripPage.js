@@ -75,6 +75,7 @@ const Title = styled.h1`
   padding: 30px 20px 30px;
 `;
 
+
 const Button = styled.button`
   background-color: #2eaba1;
   width: 90%;
@@ -91,6 +92,10 @@ const Button = styled.button`
   bottom: 3rem;
   right: 5%;
   left: 5%;
+
+  &:active {
+    background-color: #016360; /* 바뀔 색상 */
+  }
 `;
 
 const Label = styled.div`
