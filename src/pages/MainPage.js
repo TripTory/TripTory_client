@@ -3,6 +3,7 @@ import { COLOR } from "../styles/color";
 import { Button } from "@mui/material";
 import TripList from "../components/common/TripList";
 import RecomList from "../components/common/RecomList";
+import TagImgList from "../components/common/TagImgList";
 import React from "react";
 
 const MainPage = () => {
@@ -30,9 +31,14 @@ const MainPage = () => {
             <RecomList />
           </DownRDiv>
         </RecomDiv>
-        {/* <TagDiv>
-          <DivNameP>태그 별 사진 보기</DivNameP>
-        </TagDiv> */}
+        <TagDiv>
+          <UpRDiv>
+            <DivNameP>태그 별 사진 보기</DivNameP>
+          </UpRDiv>
+          <DownRDiv>
+            <TagImgList/>
+          </DownRDiv>
+        </TagDiv>
       </MainDiv>
     </StMainPage>
   );
@@ -163,7 +169,9 @@ const DownRDiv = styled.div`
 
 const TagDiv = styled.div`
   ${SharedContent};
+  flex-direction: column;
   width: 100%;
+  height: 24rem;
 `;
 
 export default MainPage;
