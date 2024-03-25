@@ -753,13 +753,13 @@ const AgreementModal = styled.div`
   left: 50%;
   width: 80%;
   transform: translate(-50%, -50%);
-  z-index: 1000; /* 다른 요소보다 위에 오도록 설정 */
-  background-color: white; /* 모달 배경색 설정 */
-  padding: 10px; /* 모달 내용과의 간격 설정 */
-  border-radius: 8px; /* 모달 모서리 둥글게 설정 */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
-  max-height: 70vh; /* 모달의 최대 높이 설정 */
-  overflow-y: auto; /* 내용이 넘치면 스크롤이 생기도록 설정 */
+  z-index: 1000; 
+  background-color: white; 
+  padding: 10px;
+  border-radius: 8px; 
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-height: 70vh;
+  overflow-y: auto; 
 `;
 
 const BackgroundOverlay = styled.div`
@@ -768,8 +768,8 @@ const BackgroundOverlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* 어두운 블러 효과 */
-  z-index: 999; /* 배경화면을 모달 아래에 표시하도록 설정 */
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
 `;
 
 export default JoinPage;
