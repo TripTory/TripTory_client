@@ -3,28 +3,41 @@ import React, { useState } from "react";
 import Input from "../components/common/Input";
 import SelectDateRange from "../components/common/SelectDateRange";
 import ImageUploader from "../components/common/ImageUploader";
+import { RiErrorWarningFill } from "react-icons/ri";
 
 const CreateTripPage = () => {
+  // 사용자 입력 정보(여행이름, 여행장소)
   const [state, setState] = useState({
     tripName: "",
     tripPlace: "",
   });
-
+  //사용자 입력 정보(여행날짜)
   const [dateRange, setDateRange] = useState([null, null]);
 
-  const handleDateChange = (e) => {
-    setDateRange(e);
-  };
+  // input값 유효성 검사
+  const [errorMessage, setErrorMessage] = useState("");
 
+  //여행이름, 여행장소 값 변경
   const handleChange = (e) => {
     setState({
       ...state,
       [e.target.name]: e.target.value,
     });
   };
-  // 여행 정보가 담긴 변수들. 여기서 가져다 쓰면 됨
+  //여행장소 값 변경
+  const handleDateChange = (e) => {
+    setDateRange(e);
+  };
+
+  // 여행떠나기 버튼 클릭
   const handleSubmit = () => {
     const [startDate, endDate] = dateRange;
+    if (!state.tripName.trim() || !state.tripPlace.trim() || !startDate || !endDate){
+      setErrorMessage("여행 정보를 빠짐 없이 입력해주세요.");
+      return;
+    }else{
+      setErrorMessage("");
+    }
     alert(`여행 이름: ${state.tripName} // 여행 날짜: ${startDate}~${endDate} // 여행 장소: ${state.tripPlace}` );
   };
 
@@ -63,6 +76,19 @@ const CreateTripPage = () => {
         />
       </InputContainer>
       <Button onClick={handleSubmit}>여행 떠나기</Button>
+      {/* 에러 메시지 표시 */}
+      {errorMessage &&
+      <ErrorMessageContainer>
+        <RiErrorWarningFill
+          style={{
+            color: "red",
+            width: "2.5rem",
+            height: "2.5rem",
+            padding: "0.1rem",
+          }}
+        />
+        <ErrorMessage>{errorMessage}</ErrorMessage>
+      </ErrorMessageContainer>}
     </div>
   );
 };
@@ -116,4 +142,23 @@ const EmptyContainer = styled.div`
 
 const InputContainer = styled.div`
   margin: 2rem;
+`;
+
+const ErrorMessage = styled.div`
+  width: 29rem;
+  color: red;
+  font-size: 1.5rem;
+  display: flex;
+  text-align : center;
+  flex-grow: 1;
+  padding: 0.5rem 0.5rem 0.1rem 0.5rem;
+`;
+
+const ErrorMessageContainer = styled.div`
+  display: flex;
+  width: 85%;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
 `;
