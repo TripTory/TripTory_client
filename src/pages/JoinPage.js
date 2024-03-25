@@ -564,7 +564,7 @@ const JoinPage = () => {
 
         <AgreeDiv>
           <RadioDiv>
-            <label>
+            <ThreeLabel>
               <CustomCheckbox
                 type="checkbox"
                 name="agreement"
@@ -572,8 +572,8 @@ const JoinPage = () => {
                 onChange={handleCheckboxChange}
               />{" "}
               이용약관 동의{" "}
-            </label>
-            <label>
+            </ThreeLabel>
+            <ThreeLabel>
               <CustomCheckbox
                 type="checkbox"
                 name="privacy"
@@ -581,8 +581,8 @@ const JoinPage = () => {
                 onChange={handleCheckboxChange}
               />{" "}
               개인정보 취급방침 동의{" "}
-            </label>
-            <label>
+            </ThreeLabel>
+            <ThreeLabel>
               <CustomCheckbox
                 type="checkbox"
                 name="marketing"
@@ -590,7 +590,7 @@ const JoinPage = () => {
                 onChange={handleCheckboxChange}
               />{" "}
               마케팅 정보 수신 동의{" "}
-            </label>
+            </ThreeLabel>
           </RadioDiv>
 
           <BtnDiv>
@@ -629,13 +629,14 @@ const SharedContent = `
 `;
 
 const EntireDiv = styled.div`
-  margin: 3rem;
+  margin-top: 10rem;
+  margin-left: 3rem;
+  margin-right: 3rem;
 `;
 
 const JoinP = styled.p`
   ${SharedContent}
   font-size: 3rem;
-  font-family: var(--inter-extrabold);
   font-weight: 700;
   margin-top: 10px;
   margin-bottom: 6rem;
@@ -643,6 +644,7 @@ const JoinP = styled.p`
 
 const NameP = styled.div`
   padding-right: 85%;
+  font-size: 1.2rem;
 `;
 
 const NameDiv = styled.div`
@@ -652,12 +654,13 @@ const NameDiv = styled.div`
 `;
 
 const NameInput = styled.input`
-  height: 40px;
-  width: 90%;
+  height: 4.5rem;
+  width: 94%;
   border-radius: 5px;
-  border-color: #E4E4E4;
-  box-shadow: 1px 1px #F6F6F6;
+  border: 0.1rem solid #F6F6F6;
+  box-shadow: 0.1rem 0.1rem #F6F6F6;
   margin-bottom: 30px;
+  font-size: 1.5rem;
 `;
 
 const EntireAgreeDiv = styled.div`
@@ -668,12 +671,14 @@ const EntireAgreeDiv = styled.div`
 
 const AllLabel = styled.div`
   padding-right: 150px;
+  font-size: 1.4rem;
 `;
 
 const RadioDiv = styled.div`
   display: flex; 
   flex-direction: column;
-  margin-left: 20px;
+  margin-left: 0.8rem;
+  font-size: 1.3rem;
 `;
 
 const CustomCheckbox = styled.input`
@@ -684,7 +689,7 @@ const CustomCheckbox = styled.input`
   appearance: none;
   cursor: pointer;
   transition: background 0.2s;
-  margin-bottom: 6px;
+  margin-bottom: 0.6rem;
   vertical-align: middle;
   
   &:checked {
@@ -696,26 +701,33 @@ const CustomCheckbox = styled.input`
   }
 `;
 
+const ThreeLabel = styled.div`
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+
+`;
+
 const BtnDiv = styled.div`
   display: flex;
   flex-direction: column;
-  height: 10px;
-  width: 40px;
-  margin-left: 8rem;
+  height: 1rem;
+  width: 4rem;
+  margin-left: 4rem;
 `;
 
 const CustomButton = styled.button`
-  font-size: 8px; 
-  margin-bottom: 10px;
+  font-size: 1.3rem; 
+  margin-bottom: 1.1rem;
   border: 0;
   background-color: transparent;
+  width: 5rem;
 `;
 
 const AgreeDiv = styled.div`
   display: flex;
   flex-direction: row;
-  margin-top: 10px;
-  margin-bottom: 10rem;
+  margin-top: 1.2rem;
+  margin-bottom: 8rem;
 `;
 
 const StartDiv = styled.button`
@@ -727,7 +739,7 @@ const StartDiv = styled.button`
   background-color: #2EABA1;
   border: none;
   border-radius: 30px;
-  height: 5rem;
+  height: 4.7rem;
   width: 20rem;
   margin: auto;
 `;
