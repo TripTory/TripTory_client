@@ -1,10 +1,10 @@
 {
-  "name": "open-set-go",
+  "name": "triptory",
   "version": "1.0.0",
-  "description": "Open Source Project Toolkit",
+  "description": "Travel Diary",
   "main": "app.js",
-  "repository": "https://github.com/AgainIoT/Open-Set-Go.git",
-  "author": "AgainIoT",
+  "repository": "https://github.com/TripTory/TripTory_client.git",
+  "author": "T.T",
   "license": "Apache-2.0",
   "private": true,
   "dependencies": {
