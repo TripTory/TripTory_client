@@ -43,7 +43,8 @@ const IntroP = styled.p`
   font-size: 2.8rem;
   font-weight: 800;
   text-align: left;
-  margin-top: 8rem;
+  margin-top: 12rem;
+  margin-left: -5rem;
 `;
 
 
@@ -60,7 +61,7 @@ const SocialButton = styled.button`
   height: 50px;
   width: 90%;
   margin: auto;
-  margin-bottom: 10px;
+  margin-bottom: 1.2rem;
   border-width: 5px;
   border: #747474;
   border-radius: 10px;
