@@ -10,6 +10,13 @@ const JoinPage = () => {
     marketing: false,
   });
 
+  const [modalContent, setModalContent] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+
   const handleCheckboxChange = (event) => {
     const { name, checked } = event.target;
 
@@ -33,6 +40,15 @@ const JoinPage = () => {
 
   const navigateToAgree = () => {
     navigate("/agreement");
+  };
+
+  const openModal = (content) => {
+    setModalContent(content);
+    toggleModal();
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -89,9 +105,15 @@ const JoinPage = () => {
           </RadioDiv>
 
           <BtnDiv>
-            <CustomButton onClick={navigateToAgree}>보기 &gt;</CustomButton>
-            <CustomButton onClick={navigateToAgree}>보기 &gt;</CustomButton>
-            <CustomButton onClick={navigateToAgree}>보기 &gt;</CustomButton>
+            <CustomButton onClick={() => openModal("첫 번째 버튼 내용")}>
+              보기 &gt;
+            </CustomButton>
+            <CustomButton onClick={() => openModal("두 번째 버튼 내용")}>
+              보기 &gt;
+            </CustomButton>
+            <CustomButton onClick={() => openModal("세 번째 버튼 내용")}>
+              보기 &gt;
+            </CustomButton>
           </BtnDiv>
         </AgreeDiv>
       </EntireAgreeDiv>
@@ -99,6 +121,12 @@ const JoinPage = () => {
       <StartDiv>
         시작하기
       </StartDiv>
+      {isModalOpen && (
+        <AgreementModal>
+          {modalContent}
+          <CloseButton onClick={closeModal}>닫기</CloseButton>
+        </AgreementModal>
+      )}
     </EntireDiv>
   );
 };
@@ -113,7 +141,6 @@ const EntireDiv = styled.div`
   margin: 3rem;
 `;
 
-
 const JoinP = styled.p`
   ${SharedContent}
   font-size: 3rem;
@@ -122,18 +149,16 @@ const JoinP = styled.p`
   margin-top: 10px;
   margin-bottom: 6rem;
 `;
+
 const NameP = styled.div`
   padding-right: 85%;
-
 `;
 
 const NameDiv = styled.div`
   ${SharedContent}
   display: flex; 
   flex-direction: column;
-
 `;
-
 
 const NameInput = styled.input`
   height: 40px;
@@ -144,7 +169,6 @@ const NameInput = styled.input`
   margin-bottom: 30px;
 `;
 
-
 const EntireAgreeDiv = styled.div`
   ${SharedContent}
   display: flex; 
@@ -154,7 +178,6 @@ const EntireAgreeDiv = styled.div`
 const AllLabel = styled.div`
   padding-right: 150px;
 `;
-
 
 const RadioDiv = styled.div`
   display: flex; 
@@ -173,8 +196,6 @@ const CustomCheckbox = styled.input`
   margin-bottom: 6px;
   vertical-align: middle;
   
-  
-  
   &:checked {
     background-color: #AACCD2;
     border-color: #AACCD2;
@@ -182,9 +203,7 @@ const CustomCheckbox = styled.input`
     background-repeat: no-repeat;
     background-position: center; */
   }
-  
 `;
-
 
 const BtnDiv = styled.div`
   display: flex;
@@ -192,7 +211,6 @@ const BtnDiv = styled.div`
   height: 10px;
   width: 40px;
   margin-left: 8rem;
-  
 `;
 
 const CustomButton = styled.button`
@@ -200,16 +218,13 @@ const CustomButton = styled.button`
   margin-bottom: 10px;
   border: 0;
   background-color: transparent;
-  
 `;
 
 const AgreeDiv = styled.div`
-  
   display: flex;
   flex-direction: row;
   margin-top: 10px;
   margin-bottom: 10rem;
-  
 `;
 
 const StartDiv = styled.button`
@@ -226,5 +241,9 @@ const StartDiv = styled.button`
   margin: auto;
 `;
 
+const CloseButton = styled.button``;
+const ModalContainer = styled.div``;
+const ModalContent = styled.div``;
+const AgreementModal = styled.div``;
 
 export default JoinPage;
