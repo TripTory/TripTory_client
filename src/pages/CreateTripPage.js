@@ -147,6 +147,7 @@ const InputContainer = styled.div`
 const ErrorMessage = styled.div`
   width: 29rem;
   color: red;
+  font-weight: bold;
   font-size: 1.5rem;
   display: flex;
   text-align : center;
