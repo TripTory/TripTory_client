@@ -23,16 +23,16 @@ const MainPage = () => {
           </DownDiv>
         </MyTripDiv>
         <RecomDiv>
-          <UpDiv>
+          <UpRDiv>
             <DivNameP>맞춤 여행지</DivNameP>
-          </UpDiv>
+          </UpRDiv>
           <DownRDiv>
             <RecomList />
           </DownRDiv>
         </RecomDiv>
-        <TagDiv>
+        {/* <TagDiv>
           <DivNameP>태그 별 사진 보기</DivNameP>
-        </TagDiv>
+        </TagDiv> */}
       </MainDiv>
     </StMainPage>
   );
@@ -77,10 +77,11 @@ const WelcomeP = styled.p`
 `;
 
 const MainDiv = styled.div`
-  ${SharedContent}
+  display: flex;
+  align-items: center;
   flex-direction: column;
   width: 100%;
-  height: 80%;
+  height: fit-content;
   background-color: white;
   border-radius: 1rem 1rem 0rem 0rem;
 `;
@@ -88,7 +89,7 @@ const MainDiv = styled.div`
 const MyTripDiv = styled.div`
   ${SharedContent};
   width: 100%;
-  height: 40%;
+  height: 24rem;
   flex-direction: column;
 `;
 
@@ -97,7 +98,9 @@ const UpDiv = styled.div`
   width: 100%;
   height: 20%;
   justify-content: space-between;
+  margin-top: 1.5rem;
   padding-right: 1rem;
+  padding-bottom: 0.5rem;
 `;
 
 const DivNameP = styled.p`
@@ -132,15 +135,24 @@ const DownDiv = styled.div`
   ${SharedContent};
   width: 100%;
   height: 80%;
-  border: 1px solid pink;
 `;
 
 const RecomDiv = styled.div`
   ${SharedContent};
   flex-direction: column;
   width: 100%;
-  height: 40%;
+  height: 24rem;
+  padding-top: 1rem;
   /* border: 1px solid blue; */
+`;
+
+const UpRDiv = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-top: 2rem;
+  padding-bottom: 1rem;
+  padding-right: 1rem;
 `;
 
 const DownRDiv = styled.div`

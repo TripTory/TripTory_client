@@ -1,30 +1,34 @@
 import styled from "styled-components";
 import React from "react";
-import { PropTypes } from "prop-types";
+// import { PropTypes } from "prop-types";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import { Typography } from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 import ListItem from "@mui/material/ListItem";
-// import Busan from "../../assets/images/busan.jpg";
+import { Title } from "@mui/icons-material";
 
 export default function RecomListItem(props) {
   return (
     <StRecomListItem>
-      <ListItem sx={{ width: "100%", height: "100%" }}>
+      <ListItem
+        sx={{
+          width: "100%",
+          height: "100%",
+          padding: "0.2rem 0.6rem 0.2rem 0.6rem",
+        }}
+      >
         <ItemCard sx={{ width: "100%", height: "100%" }}>
           <CardMedia
             sx={{ width: "100%", height: "70%" }}
             image={require("../../assets/images/busan.jpg")}
           />
-          <CardContent sx={{ width: "100%", height: "30%" }}>
-            <Typography gutterBottom variant="h5" component="div">
-              부산시
-            </Typography>
+          <InfoCardContent sx={{ width: "100%", height: "30%" }}>
+            <TitleP>부산시</TitleP>
             <Typography variant="body2" color="text.secondary">
-              부산부산부산부산
+              시원한 바다를 느껴보아요
             </Typography>
-          </CardContent>
+          </InfoCardContent>
         </ItemCard>
       </ListItem>
     </StRecomListItem>
@@ -38,13 +42,28 @@ export default function RecomListItem(props) {
 const StRecomListItem = styled.div`
   width: 100%;
   height: 100%;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   /* padding: 0.1rem; */
 `;
 
 const ItemCard = styled(Card)`
-  width: 100%;
-  height: 100%;
+  width: 14rem;
+  height: 17rem;
   /* border: 1px solid blue; */
 `;
 
+const InfoCardContent = styled(CardContent)`
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  flex-direction: column;
+  margin-top: 0.5rem;
+  padding-left: 1rem;
+`;
+
+const TitleP = styled.p`
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  margin-right: 0.2rem;
+`;

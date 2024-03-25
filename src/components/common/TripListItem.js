@@ -34,7 +34,7 @@ TripListItem.propTypes = {
 };
 
 const StTripListItem = styled.div`
-  border: 0.1rem solid rgba(228, 228, 228);
+  border: 0.2rem solid rgba(228, 228, 228);
   border-radius: 1rem;
   width: 95%;
   height: 8rem;
