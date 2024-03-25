@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const JoinPage = () => {
   const [isChecked, setIsChecked] = useState({
@@ -26,6 +27,12 @@ const JoinPage = () => {
         all: false,
       });
     }
+  };
+
+  const navigate = useNavigate();
+
+  const navigateToAgree = () => {
+    navigate("/agreement");
   };
 
   return (
@@ -82,9 +89,9 @@ const JoinPage = () => {
           </RadioDiv>
 
           <BtnDiv>
-            <CustomButton>보기 &gt;</CustomButton>
-            <CustomButton>보기 &gt;</CustomButton>
-            <CustomButton>보기 &gt;</CustomButton>
+            <CustomButton onClick={navigateToAgree}>보기 &gt;</CustomButton>
+            <CustomButton onClick={navigateToAgree}>보기 &gt;</CustomButton>
+            <CustomButton onClick={navigateToAgree}>보기 &gt;</CustomButton>
           </BtnDiv>
         </AgreeDiv>
       </EntireAgreeDiv>
