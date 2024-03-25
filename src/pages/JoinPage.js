@@ -659,7 +659,7 @@ const NameInput = styled.input`
   border-radius: 5px;
   border: 0.1rem solid #F6F6F6;
   box-shadow: 0.1rem 0.1rem #F6F6F6;
-  margin-bottom: 30px;
+  margin-bottom: 3rem;
   font-size: 1.5rem;
 `;
 
@@ -721,13 +721,14 @@ const CustomButton = styled.button`
   border: 0;
   background-color: transparent;
   width: 5rem;
+  color: #CACACA;
 `;
 
 const AgreeDiv = styled.div`
   display: flex;
   flex-direction: row;
   margin-top: 1.2rem;
-  margin-bottom: 8rem;
+  margin-bottom: 6rem;
 `;
 
 const StartDiv = styled.button`
