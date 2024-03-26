@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import React, { useState, useEffect } from "react";
+import Modal from "../components/common/Modal";
 
 const JoinPage = () => {
   const [isChecked, setIsChecked] = useState({
@@ -122,13 +123,13 @@ const JoinPage = () => {
       <StartDiv disabled={!isRequiredChecked}>
         시작하기
       </StartDiv>
+
+      {/* 모달 관련 코드 */}
       {isModalOpen && (
-        <BackgroundOverlay>
-          <AgreementModal>
-            {modalContent}
-            <CloseButton onClick={closeModal}>닫기</CloseButton>
-          </AgreementModal>
-        </BackgroundOverlay>
+        <Modal
+          content={modalContent}
+          closeModals={closeModal}
+        />
       )}
     </EntireDiv>
   );
@@ -270,33 +271,6 @@ const CloseButton = styled.button`
   color: white;
   align-items: center;
   justify-content: center;
-`;
-const ModalContainer = styled.div``;
-const ModalContent = styled.div``;
-
-const AgreementModal = styled.div`
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  width: 80%;
-  transform: translate(-50%, -50%);
-  z-index: 1000; 
-  background-color: white; 
-  padding: 10px;
-  border-radius: 8px; 
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  max-height: 70vh;
-  overflow-y: auto; 
-`;
-
-const BackgroundOverlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 999;
 `;
 
 export default JoinPage;
