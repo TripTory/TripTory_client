@@ -260,17 +260,4 @@ const StartDiv = styled.button`
   background-color: ${(props) => props.disabled ? "rgba(46, 171, 161, 0.3)" : "#2EABA1"}
 `;
 
-const CloseButton = styled.button`
-  display: flex;
-  margin: auto;
-  background-color: #2EABA1;
-  border: none;
-  border-radius: 10px;
-  width: 40px;
-  height: 25px;
-  color: white;
-  align-items: center;
-  justify-content: center;
-`;
-
 export default JoinPage;
