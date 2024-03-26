@@ -1,14 +1,24 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { GoArrowLeft } from "react-icons/go";
 import { IoIosSearch } from "react-icons/io";
 
 const SearchPlacePage = () => {
+
+  const navigate = useNavigate();
+
+  const navigateToCreateTrip = () =>{
+    navigate("/createTrip");
+  };
+
   return (
     <div>
       <SearchBoxContainer>
-        <GoBack />
+        <GoBack
+          onClick={navigateToCreateTrip}
+        />
         <InputBox placeholder="어디로 떠날까요?" />
         <SearchIcon></SearchIcon>
       </SearchBoxContainer>
