@@ -1,9 +1,8 @@
-import styled from "styled-components";
+import styled,{css} from "styled-components";
 import React, { useState } from "react";
 import Input from "../components/common/Input";
 import SelectDateRange from "../components/common/SelectDateRange";
 import ImageUploader from "../components/common/ImageUploader";
-import { RiErrorWarningFill } from "react-icons/ri";
 
 const CreateTripPage = () => {
   // 사용자 입력 정보(여행이름, 여행장소)
@@ -13,10 +12,8 @@ const CreateTripPage = () => {
   });
   //사용자 입력 정보(여행날짜)
   const [dateRange, setDateRange] = useState([null, null]);
-
-  // input값 유효성 검사
-  const [errorMessage, setErrorMessage] = useState("");
-
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
   //여행이름, 여행장소 값 변경
   const handleChange = (e) => {
     setState({
@@ -24,20 +21,17 @@ const CreateTripPage = () => {
       [e.target.name]: e.target.value,
     });
   };
-  //여행장소 값 변경
+  //여행날짜 값 변경
   const handleDateChange = (e) => {
     setDateRange(e);
+    const [start, end] = e;
+    setStartDate(start);
+    setEndDate(end);
   };
 
   // 여행떠나기 버튼 클릭
   const handleSubmit = () => {
     const [startDate, endDate] = dateRange;
-    if (!state.tripName.trim() || !state.tripPlace.trim() || !startDate || !endDate){
-      setErrorMessage("여행 정보를 빠짐 없이 입력해주세요.");
-      return;
-    }else{
-      setErrorMessage("");
-    }
     alert(`여행 이름: ${state.tripName} // 여행 날짜: ${startDate}~${endDate} // 여행 장소: ${state.tripPlace}` );
   };
 
@@ -75,20 +69,9 @@ const CreateTripPage = () => {
           placeholder="장소를 검색하세요"
         />
       </InputContainer>
-      <Button onClick={handleSubmit}>여행 떠나기</Button>
-      {/* 에러 메시지 표시 */}
-      {errorMessage &&
-      <ErrorMessageContainer>
-        <RiErrorWarningFill
-          style={{
-            color: "red",
-            width: "2.5rem",
-            height: "2.5rem",
-            padding: "0.1rem",
-          }}
-        />
-        <ErrorMessage>{errorMessage}</ErrorMessage>
-      </ErrorMessageContainer>}
+      <Button disabled={!state.tripName.trim() || !state.tripPlace.trim() || !startDate || !endDate}
+        type="submit"
+        onClick={handleSubmit}>여행 떠나기</Button>
     </div>
   );
 };
@@ -118,10 +101,15 @@ const Button = styled.button`
   bottom: 3rem;
   right: 5%;
   left: 5%;
-
-  &:active {
-    background-color: #016360; /* 바뀔 색상 */
-  }
+  
+  //버튼 비활성화일때 색상
+  ${(props) =>
+    props.disabled &&
+    css`
+      background-color: #ccc; /* 비활성화된 상태일 때의 배경색 */
+      color: #666; /* 비활성화된 상태일 때의 글자색 */
+      cursor: not-allowed; /* 비활성화된 상태일 때의 커서 스타일 변경 */
+    `}
 `;
 
 const Label = styled.div`
@@ -144,22 +132,3 @@ const InputContainer = styled.div`
   margin: 2rem;
 `;
 
-const ErrorMessage = styled.div`
-  width: 29rem;
-  color: red;
-  font-weight: bold;
-  font-size: 1.5rem;
-  display: flex;
-  text-align : center;
-  flex-grow: 1;
-  padding: 0.5rem 0.5rem 0.1rem 0.5rem;
-`;
-
-const ErrorMessageContainer = styled.div`
-  display: flex;
-  width: 85%;
-  align-items: center;
-  margin-left: auto;
-  margin-right: auto;
-  justify-content: center;
-`;
