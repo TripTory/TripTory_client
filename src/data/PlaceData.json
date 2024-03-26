@@ -1,0 +1,24 @@
+{
+  "places": [
+    {
+      "placeName": "군산",
+      "location": "전북특별자치도 군산시",
+      "imagePath": "../../"
+    },
+    {
+      "placeName": "서울",
+      "location": "서울특별시",
+      "imagePath": "../../"
+    },
+    {
+      "placeName": "광주",
+      "location": "광주광역시",
+      "imagePath": "../../"
+    },
+    {
+      "placeName": "광주",
+      "location": "경기도 광주시",
+      "imagePath": "../../"
+    }
+  ]
+}

@@ -1,27 +1,43 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import PropTypes from "prop-types";
 import { GoArrowLeft } from "react-icons/go";
 import { IoIosSearch } from "react-icons/io";
+import PlaceList from "../components/common/PlaceList";
+import jsonData from "../data/PlaceData.json";
 
 const SearchPlacePage = () => {
-
   const navigate = useNavigate();
 
-  const navigateToCreateTrip = () =>{
+  const navigateToCreateTrip = () => {
     navigate("/createTrip");
   };
+  //전체 지역 데이터
+  const allPlaces = jsonData.places;
+
+  // 사용자 검색 내용
+  const [searchText, setSearchText] = useState("");
+  const handleInputChange = (e) => {
+    setSearchText(e.target.value);
+  };
+
+  //검색된 지역 리스트
+  const filteredPlaces = allPlaces.filter((place) =>
+    place.placeName.toLowerCase().includes(searchText.toLowerCase()),
+  );
 
   return (
     <div>
       <SearchBoxContainer>
-        <GoBack
-          onClick={navigateToCreateTrip}
+        <GoBack onClick={navigateToCreateTrip} />
+        <InputBox
+          placeholder="어디로 떠날까요?"
+          onChange={handleInputChange}
+          value={searchText}
         />
-        <InputBox placeholder="어디로 떠날까요?" />
         <SearchIcon></SearchIcon>
       </SearchBoxContainer>
+      <PlaceList places={filteredPlaces}/>
     </div>
   );
 };
