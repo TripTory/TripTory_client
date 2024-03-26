@@ -5,11 +5,10 @@ import TripList from "../components/common/TripList";
 import RecomList from "../components/common/RecomList";
 import TagImgList from "../components/common/TagImgList";
 import AddTripDialog from "../components/common/AddTripDialog";
-import React, { useState } from "react";
+import React from "react";
 import { useRecoilState } from "recoil";
 import { dialogState } from "../recoil/commonState";
 const MainPage = () => {
-  // const [dialog, setDialog] = useState(false);
   const [dialog, setDialog] = useRecoilState(dialogState);
   const handleOpen = () => {
     setDialog(true);
@@ -17,12 +16,12 @@ const MainPage = () => {
 
   return (
     <StMainPage>
-      <AddTripDialog />
       <IntroDiv>
         <HiP>이채영님&nbsp;반가워요!</HiP>
         <WelcomeP>트립토리와 함께 여행을 기록해요.</WelcomeP>
       </IntroDiv>
       <MainDiv>
+        <AddTripDialog />
         <MyTripDiv>
           <UpDiv>
             <DivNameP>내 여행</DivNameP>
