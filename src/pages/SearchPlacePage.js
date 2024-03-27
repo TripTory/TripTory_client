@@ -12,7 +12,7 @@ const SearchPlacePage = () => {
   const navigateToCreateTrip = () => {
     navigate("/createTrip");
   };
-  //전체 지역 데이터
+  //전체 지역 데이터 -> 나중에는 백에서 받아와야 함
   const allPlaces = jsonData.places;
 
   // 사용자 검색 내용
