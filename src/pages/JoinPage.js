@@ -155,6 +155,8 @@ const JoinP = styled.p`
   margin-bottom: 6rem;
 `;
 
+
+
 const NameP = styled.div`
   padding-right: 85%;
   font-size: 1.2rem;
