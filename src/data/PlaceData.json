@@ -19,6 +19,47 @@
       "placeName": "광주",
       "location": "경기도 광주시",
       "imagePath": "../assets/images/beach.png"
+    },
+    {
+      "placeName": "부산",
+      "location": "부산광역시",
+      "imagePath": "../assets/images/beach.png"
+    },
+    {
+      "placeName": "수원",
+      "location": "경기도 수원시",
+      "imagePath": "../assets/images/beach.png"
+    },
+    {
+      "placeName": "전주",
+      "location": "전북특별자치도 전주시",
+      "imagePath": "../assets/images/beach.png"
+    },
+    {
+      "placeName": "울산",
+      "location": "울산광역시",
+      "imagePath": "../assets/images/beach.png"
+    },
+    {
+      "placeName": "인천",
+      "location": "인천광역시",
+      "imagePath": "../assets/images/beach.png"
+    },
+    {
+      "placeName": "평택",
+      "location": "경기도 평택시",
+      "imagePath": "../assets/images/beach.png"
+    },
+    {
+      "placeName": "강릉",
+      "location": "강원도 강릉시",
+      "imagePath": "../assets/images/beach.png"
+    },
+    {
+      "placeName": "화성",
+      "location": "경기도 화성시",
+      "imagePath": "../assets/images/beach.png"
     }
   ]
 }
+
