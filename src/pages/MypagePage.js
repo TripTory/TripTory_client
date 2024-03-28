@@ -4,6 +4,7 @@ import { Typography } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Default from "../assets/images/defaultavatar.svg";
 import { COLOR } from "../styles/color";
+import { useNavigate } from "react-router-dom";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -12,10 +13,15 @@ import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import DoDisturbOutlinedIcon from "@mui/icons-material/DoDisturbOutlined";
 
 const MypagePage = () => {
+  const navigate = useNavigate();
+
+  const goToEdit = () => {
+    navigate("/editprofil");
+  };
   const Menu = [
-    { icon: <ModifyIcon />, text: "프로필 편집" },
-    { icon: <LogoutIcon />, text: "로그아웃" },
-    { icon: <CancelIcon />, text: "계정 탈퇴" },
+    { icon: <ModifyIcon />, text: "프로필 편집", action: goToEdit },
+    { icon: <LogoutIcon />, text: "로그아웃", action: goToEdit },
+    { icon: <CancelIcon />, text: "계정 탈퇴", action: goToEdit },
   ];
   return (
     <StMyPagePage>
@@ -28,12 +34,12 @@ const MypagePage = () => {
         <MailP>cy1234@naver.com</MailP>
       </ProfilDiv>
       <MenuDiv>
-        <List>
+        <List sx={{width: "100%"}}>
           {Menu.map((it) => {
             return (
               <div key={it.text}>
                 <MenuLstItem disablePadding>
-                  <MenuLIBtn>
+                  <MenuLIBtn onClick={it.action}>
                     {it.icon}
                     <MenuP>{it.text}</MenuP>
                   </MenuLIBtn>
@@ -106,14 +112,14 @@ const MenuDiv = styled.div`
 `;
 
 const MenuLstItem = styled(ListItem)`
-  /* border: 1px solid black; */
   width: 100%;
   height: 5rem;
+  margin-left: 0.2rem 0rem 0.2rem 1.2rem;
 `;
 
 const MenuLIBtn = styled(ListItemButton)`
-  /* border: 1px solid blue; */
   display: flex;
+  width: 100%;
 `;
 
 const MenuP = styled.p`

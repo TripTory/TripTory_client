@@ -4,6 +4,7 @@ import LoginPage from "../pages/LoginPage";
 import JoinPage from "../pages/JoinPage";
 import CreateTripPage from "../pages/CreateTripPage";
 import MypagePage from "../pages/MypagePage";
+import EditProfilPage from "../pages/EditProfilPage";
 import React from "react";
 
 const Router = () => {
@@ -15,6 +16,7 @@ const Router = () => {
         <Route path="/join" element={<JoinPage />} />
         <Route path="/createTrip" element={<CreateTripPage />} />
         <Route path="/mypage" element={<MypagePage />} />
+        <Route path="/editprofil" element={<EditProfilPage />} />
       </Routes>
     </BrowserRouter>
   );
