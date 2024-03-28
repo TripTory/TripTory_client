@@ -97,4 +97,8 @@ const SelectBtn = styled.button`
   border: none;
   background-color: #ececec;
   border-radius: 20px;
+
+  &:active {
+    background-color: #aaaaaa;
+  }
 `;

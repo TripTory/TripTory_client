@@ -37,7 +37,7 @@ const SearchPlacePage = () => {
         />
         <SearchIcon></SearchIcon>
       </SearchBoxContainer>
-      <PlaceList places={filteredPlaces}/>
+      <PlaceListContainer><PlaceList places={filteredPlaces}/></PlaceListContainer>
     </div>
   );
 };
@@ -51,6 +51,8 @@ const SearchBoxContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin: auto;
+  position: fixed;
+  background-color: white;
 `;
 
 const GoBack = styled(GoArrowLeft)`
@@ -75,4 +77,8 @@ const SearchIcon = styled(IoIosSearch)`
   padding: 0.3rem 0.5rem 0.3rem 0.3rem;
   color: #016360;
   margin: 3px 3px;
+`;
+
+const PlaceListContainer = styled.div`
+  padding-top: 50px;
 `;
