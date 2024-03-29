@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { React, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import calendar from "../assets/images/calendar.svg";
+import mapPing from "../assets/images/mapPing.svg";
 
 const DiaryWritePage = () => {
 
@@ -9,17 +11,23 @@ const DiaryWritePage = () => {
 
   return <div>
     <div>
-      <StyledDatePicker>
-        <DatePicker
-          placeholderText="날짜를 선택하세요"
-          selected={startDate}
-          dateFormat="yyyy-MM-dd"
-          onChange={(date) => setStartDate(date)}
-          selectsStart
-          startDate={startDate}
-        />
-      </StyledDatePicker>
-      <PlaceBox placeholder="장소를 검색하세요" />
+      <DateDiv>
+        <CalenderImage src={calendar} />
+        <StyledDatePicker>
+          <DatePicker
+            placeholderText="날짜를 선택하세요"
+            selected={startDate}
+            dateFormat="yyyy-MM-dd"
+            onChange={(date) => setStartDate(date)}
+            selectsStart
+            startDate={startDate}
+          />
+        </StyledDatePicker>
+      </DateDiv>
+      <PlaceDiv>
+        <MapImage src={mapPing} />
+        <PlaceBox placeholder="장소를 검색하세요" />
+      </PlaceDiv>
     </div>
 
     <DiaryDiv>
@@ -29,30 +37,41 @@ const DiaryWritePage = () => {
   </div>;
 };
 
+const DateDiv = styled.div`
+  display: flex;
+  align-items: center;
+  background-color: none;
+  width: 70%;
+  border: none;
+  font-size: 15px;
+  border-bottom: solid #bfbfbf 1px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 3%;
+`;
+const CalenderImage = styled.img`
+  padding: 1.2%;
+`;
+
 const StyledDatePicker = styled.div`
   .react-datepicker-wrapper{
     width: 70%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 5%;
   }
   .react-datepicker__input-container{
     width: 100%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
   }
   .react-datepicker__input-container input {
     background-color: none;
     width: 100%;
     border: none;
     font-size: 15px;
-    border-bottom: solid #bfbfbf 1px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    &::placeholder {
+      color: #bfbfbf;
+    }
   }
+`;
+
+const MapImage = styled.img`
 `;
 
 const PlaceBox = styled.input`
@@ -60,11 +79,22 @@ const PlaceBox = styled.input`
   width: 70%;
   border: none;
   font-size: 15px;
+  &::placeholder {
+    color: #bfbfbf;
+  }
+`;
+
+const PlaceDiv = styled.div`
+  display: flex;
+  align-items: center;
+  background-color: none;
+  width: 70%;
+  border: none;
+  font-size: 15px;
   border-bottom: solid #bfbfbf 1px;
-  display: block;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 5%;
+  margin-top: 3%;
 `;
 
 const TitleBox = styled.input`
