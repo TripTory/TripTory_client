@@ -1,14 +1,25 @@
 import styled from "styled-components";
-import React from "react";
-import SelectDateSingle from "../components/common/SelectDateSingle";
-
+import { React, useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const DiaryWritePage = () => {
+
+  const [startDate, setStartDate] = useState();
+
   return <div>
     <div>
-      {/* <InputBox placeholder="날짜를 선택하세요" /> */}
-      <SelectDateSingle></SelectDateSingle>
-      <InputBox placeholder="장소를 검색하세요" />
+      <StyledDatePicker>
+        <DatePicker
+          placeholderText="날짜를 선택하세요"
+          selected={startDate}
+          dateFormat="yyyy-MM-dd"
+          onChange={(date) => setStartDate(date)}
+          selectsStart
+          startDate={startDate}
+        />
+      </StyledDatePicker>
+      <PlaceBox placeholder="장소를 검색하세요" />
     </div>
 
     <DiaryDiv>
@@ -18,7 +29,33 @@ const DiaryWritePage = () => {
   </div>;
 };
 
-const InputBox = styled.input`
+const StyledDatePicker = styled.div`
+  .react-datepicker-wrapper{
+    width: 70%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+  }
+  .react-datepicker__input-container{
+    width: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .react-datepicker__input-container input {
+    background-color: none;
+    width: 100%;
+    border: none;
+    font-size: 15px;
+    border-bottom: solid #bfbfbf 1px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+`;
+
+const PlaceBox = styled.input`
   background-color: none;
   width: 70%;
   border: none;
