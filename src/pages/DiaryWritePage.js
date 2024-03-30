@@ -9,6 +9,26 @@ const DiaryWritePage = () => {
 
   const [startDate, setStartDate] = useState();
 
+  var arrInput = new Array(0);
+  var arrInputValue = new Array(0);
+
+  const addInput = function() {
+    arrInput.push(arrInput.length);
+    arrInputValue.push("");
+    display();
+  };
+
+  const display = function(){
+    document.getElementById("parah").innerHTML="";
+    for (let intI=0;intI<arrInput.length;intI++) {
+      document.getElementById("parah").innerHTML+=createInput(arrInput[intI], arrInputValue[intI]);
+    }
+  };
+
+  const createInput = function(id, value){
+    return "<input type='text' id='test "+ id +"' onChange='javascript:saveValue("+ id +",this.value)' value='"+value +"'><br>";
+  };
+
   return <div>
     <div>
       <DateDiv>
@@ -34,6 +54,11 @@ const DiaryWritePage = () => {
       <TitleBox placeholder="제목을 입력하세요" />
       <ContentBox type="text" placeholder="내용을 입력하세요" maxLength={1000}/>
     </DiaryDiv>
+
+    <ImageUploadDiv>
+      <ImgUploadBtn onClick={addInput}></ImgUploadBtn>
+      <div id="parah"></div>
+    </ImageUploadDiv>
   </div>;
 };
 
@@ -138,5 +163,23 @@ const DiaryDiv = styled.div`
   margin-left: 8%;
   margin-right: 8%;
 `;
+
+const ImageUploadDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-top: 2rem;
+  margin-left: 12%;
+  margin-right: 12%;
+`;
+const ImgUploadBtn = styled.button`
+  display: flex;
+  flex-direction: row;
+  background-color: #eeeeee;
+  border: none;
+  border-radius: 0.8rem;
+  height: 7rem;
+  width: 7rem;
+`;
+
 
 export default DiaryWritePage;
