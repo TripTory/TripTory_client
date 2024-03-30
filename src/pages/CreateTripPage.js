@@ -51,7 +51,7 @@ const CreateTripPage = () => {
           value={state.tripName}
           onChange={handleChange}
           placeholder="이름을 입력하세요"
-          autocomplete="off"
+          autoComplete="off"
         />
       </InputContainer>
       <InputContainer>
@@ -67,7 +67,7 @@ const CreateTripPage = () => {
           value={state.tripPlace}
           onChange={handleChange}
           placeholder="장소를 검색하세요"
-          autocomplete="off"
+          autoComplete="off"
         />
       </InputContainer>
       <Button disabled={!state.tripName.trim() || !state.tripPlace.trim() || !startDate || !endDate}
