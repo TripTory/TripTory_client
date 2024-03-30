@@ -3,7 +3,8 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import beachImg from "../../assets/images/beach.png";
 
-const PlaceList = ({ places }) => {
+const PlaceList = ({ places, onSelectPlace }) => {
+  console.log("PlaceList 렌더링");
   return (
     <div>
       <ul>
@@ -18,7 +19,7 @@ const PlaceList = ({ places }) => {
                 <LocationDiv>{place.location}</LocationDiv>
               </PlaceTextDiv>
               <ButtonDiv>
-                <SelectBtn>선택</SelectBtn>
+                <SelectBtn onClick={() => onSelectPlace(place)}>선택</SelectBtn>
               </ButtonDiv>
             </PlaceItemDiv>
           </li>
@@ -34,6 +35,7 @@ PlaceList.propTypes = {
       location: PropTypes.string.isRequired,
     }),
   ).isRequired,
+  onSelectPlace: PropTypes.func.isRequired,
 };
 
 export default PlaceList;

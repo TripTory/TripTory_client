@@ -2,8 +2,10 @@ import styled,{css} from "styled-components";
 import React, { useState } from "react";
 import SelectDateRange from "../components/common/SelectDateRange";
 import ImageUploader from "../components/common/ImageUploader";
+import PropTypes from "prop-types";
 
 const CreateTripPage = () => {
+  console.log("CreateTripPage 렌더링");
   // 사용자 입력 정보(여행이름, 여행장소)
   const [state, setState] = useState({
     tripName: "",
