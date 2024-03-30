@@ -1,15 +1,18 @@
-import styled,{css} from "styled-components";
+import styled, { css } from "styled-components";
 import React, { useState } from "react";
 import SelectDateRange from "../components/common/SelectDateRange";
 import ImageUploader from "../components/common/ImageUploader";
 import PropTypes from "prop-types";
+import { useLocation } from "react-router-dom";
 
 const CreateTripPage = () => {
+  const location = useLocation();
   console.log("CreateTripPage 렌더링");
+  console.log(location.state.tripPlace);
   // 사용자 입력 정보(여행이름, 여행장소)
   const [state, setState] = useState({
     tripName: "",
-    tripPlace: "",
+    tripPlace: location.state ? location.state.tripPlace : "",
   });
   //사용자 입력 정보(여행날짜)
   const [dateRange, setDateRange] = useState([null, null]);
@@ -33,9 +36,10 @@ const CreateTripPage = () => {
   // 여행떠나기 버튼 클릭
   const handleSubmit = () => {
     const [startDate, endDate] = dateRange;
-    alert(`여행 이름: ${state.tripName} // 여행 날짜: ${startDate}~${endDate} // 여행 장소: ${state.tripPlace}` );
+    alert(
+      `여행 이름: ${state.tripName} // 여행 날짜: ${startDate}~${endDate} // 여행 장소: ${state.tripPlace}`,
+    );
   };
-
 
   return (
     <div className="CreateTripPage">
@@ -58,9 +62,7 @@ const CreateTripPage = () => {
       </InputContainer>
       <InputContainer>
         <Label>여행 일정</Label>
-        <SelectDateRange
-          onDateChange={handleDateChange}
-        />
+        <SelectDateRange onDateChange={handleDateChange} />
       </InputContainer>
       <InputContainer>
         <Label>여행 장소</Label>
@@ -72,11 +74,23 @@ const CreateTripPage = () => {
           autoComplete="off"
         />
       </InputContainer>
-      <Button disabled={!state.tripName.trim() || !state.tripPlace.trim() || !startDate || !endDate}
+      <Button
+        disabled={
+          !state.tripName.trim() ||
+          !state.tripPlace.trim() ||
+          !startDate ||
+          !endDate
+        }
         type="submit"
-        onClick={handleSubmit}>여행 떠나기</Button>
+        onClick={handleSubmit}
+      >
+        여행 떠나기
+      </Button>
     </div>
   );
+};
+CreateTripPage.propTypes = {
+  location: PropTypes.object,
 };
 export default CreateTripPage;
 
@@ -86,7 +100,6 @@ const Title = styled.h1`
   font-size: 23px;
   padding: 30px 20px 30px;
 `;
-
 
 const Button = styled.button`
   background-color: #2eaba1;
@@ -104,7 +117,7 @@ const Button = styled.button`
   bottom: 3rem;
   right: 5%;
   left: 5%;
-  
+
   //버튼 비활성화일때 색상
   ${(props) =>
     props.disabled &&

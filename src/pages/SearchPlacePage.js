@@ -5,14 +5,13 @@ import { GoArrowLeft } from "react-icons/go";
 import { IoIosSearch } from "react-icons/io";
 import PlaceList from "../components/common/PlaceList";
 import jsonData from "../data/PlaceData.json";
-import PropTypes from "prop-types";
 
 const SearchPlacePage = () => {
   console.log("SearchPlacePage 렌더링");
   const navigate = useNavigate();
 
-  const navigateToCreateTrip = () => {
-    navigate("/createTrip");
+  const navigateToCreateTrip = (location) => {
+    navigate("/createtrip", { state: { tripPlace: location } });
   };
   //전체 지역 데이터 -> 나중에는 백에서 받아와야 함
   const allPlaces = jsonData.places;
@@ -28,14 +27,10 @@ const SearchPlacePage = () => {
     place.placeName.toLowerCase().includes(searchText.toLowerCase()),
   );
 
-  //선택 지역 정보
-  const [selectedLocation, setSelectedLocation] = useState("");
-
-  //선택된 지역 정보를 CreateTripPage로 넘기는 함수
+  //지역 선택시 실행되는 함수
   const handleSelectPlace = (place) => {
     console.log(place.location);
-    setSelectedLocation(place.location);
-    navigateToCreateTrip();
+    navigateToCreateTrip(place.location);
   };
 
   return (
