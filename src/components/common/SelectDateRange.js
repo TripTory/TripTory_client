@@ -4,11 +4,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import "react-datepicker/dist/react-datepicker.css";
 
-const SelectDateRange = ({ onDateChange }) => {
-  const [dateRange, setDateRange] = useState([null, null]);
-  const [startDate, endDate] = dateRange;
-
-  const StyledDatePicker = styled.div`
+const StyledDatePicker = styled.div`
     .react-datepicker-wrapper{
       width: 90%;
       display: block;
@@ -32,6 +28,10 @@ const SelectDateRange = ({ onDateChange }) => {
       margin-right: auto;
     }
   `;
+const SelectDateRange = ({ onDateChange }) => {
+  const [dateRange, setDateRange] = useState([null, null]);
+  const [startDate, endDate] = dateRange;
+
 
   const handleDateChange = (update) => {
     setDateRange(update);
