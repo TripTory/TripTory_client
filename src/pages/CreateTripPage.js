@@ -1,6 +1,5 @@
 import styled,{css} from "styled-components";
 import React, { useState } from "react";
-import Input from "../components/common/Input";
 import SelectDateRange from "../components/common/SelectDateRange";
 import ImageUploader from "../components/common/ImageUploader";
 
@@ -52,6 +51,7 @@ const CreateTripPage = () => {
           value={state.tripName}
           onChange={handleChange}
           placeholder="이름을 입력하세요"
+          autocomplete="off"
         />
       </InputContainer>
       <InputContainer>
@@ -67,6 +67,7 @@ const CreateTripPage = () => {
           value={state.tripPlace}
           onChange={handleChange}
           placeholder="장소를 검색하세요"
+          autocomplete="off"
         />
       </InputContainer>
       <Button disabled={!state.tripName.trim() || !state.tripPlace.trim() || !startDate || !endDate}
@@ -132,3 +133,13 @@ const InputContainer = styled.div`
   margin: 2rem;
 `;
 
+const Input = styled.input`
+  background-color: none;
+  width: 90%;
+  border: none;
+  font-size: 15px;
+  border-bottom: solid #bfbfbf 1px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+`;
