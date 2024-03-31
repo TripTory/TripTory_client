@@ -5,9 +5,28 @@ import "react-datepicker/dist/react-datepicker.css";
 import calendar from "../assets/images/calendar.svg";
 import mapPing from "../assets/images/mapPing.svg";
 
+import Modal from "../components/common/Modal";
+
+
 const DiaryWritePage = () => {
 
   const [startDate, setStartDate] = useState();
+
+  const [modalContent, setModalContent] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+
+  const openModal = (content) => {
+    setModalContent(content);
+    toggleModal();
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   var arrInput = new Array(0);
   var arrInputValue = new Array(0);
@@ -61,9 +80,16 @@ const DiaryWritePage = () => {
     </ImageUploadDiv>
 
     <BtnDiv>
-      <CancelBtn>취소</CancelBtn>
-      <SaveBtn>저장</SaveBtn>
+      <CancelBtn onClick={() => openModal("작성을 취소하시겠습니까?")}>취소</CancelBtn>
+      <SaveBtn onClick={() => openModal("일기를 저장할까요?")}>저장</SaveBtn>
     </BtnDiv>
+
+    {isModalOpen && (
+      <Modal
+        content={modalContent}
+        closeModals={closeModal}
+      />
+    )}
   </div>;
 };
 
