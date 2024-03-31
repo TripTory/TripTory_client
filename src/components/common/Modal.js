@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import React, { useState, useEffect } from "react";
+import { COLOR } from "../../styles/color.js";
 
 
 const ModalContainer = styled.div`
@@ -31,7 +32,7 @@ const BackgroundOverlay = styled.div`
 const CloseButton = styled.button`
   display: flex;
   margin: auto;
-  background-color: #2eaba1;
+  background-color: ${COLOR.MAIN_EMER};
   border: none;
   border-radius: 10px;
   width: 40px;

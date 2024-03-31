@@ -6,6 +6,7 @@ import calendar from "../assets/images/calendar.svg";
 import mapPing from "../assets/images/mapPing.svg";
 
 import Modal from "../components/common/Modal";
+import { COLOR } from "../styles/color";
 
 
 const DiaryWritePage = () => {
@@ -159,7 +160,7 @@ const TitleBox = styled.input`
   width: 92%;
   border: none;
   font-size: 15px;
-  border-bottom: solid #AACCD2 1px;
+  border-bottom: solid ${COLOR.MAIN_SKY} 1px;
   margin: auto;
   margin-top: 2rem;
   padding-bottom: 1rem;
@@ -188,7 +189,7 @@ const DiaryDiv = styled.div`
   background-color: none;
   font-size: 15px;
   color: #BFBFBF;
-  border: 1px solid #AACCD2;
+  border: 1px solid ${COLOR.MAIN_SKY};
   border-radius: 1.8rem;
   margin-top: 2rem;
   margin-left: 8%;
