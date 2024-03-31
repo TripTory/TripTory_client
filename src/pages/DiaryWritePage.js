@@ -146,7 +146,7 @@ const ContentBox = styled.textarea`
   display: flex;
   background-color: none;
   width: 92%;
-  height: 45rem;
+  height: 42rem;
   border: none;
   font-size: 15px;
   margin: auto;
@@ -164,7 +164,7 @@ const DiaryDiv = styled.div`
   color: #BFBFBF;
   border: 1px solid #AACCD2;
   border-radius: 1.8rem;
-  margin-top: 3rem;
+  margin-top: 2rem;
   margin-left: 8%;
   margin-right: 8%;
 `;
@@ -191,7 +191,7 @@ const BtnDiv = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center; 
-  padding: 3%;
+  margin-top: 10%;
 `;
 const CancelBtn = styled.button`
   height: 4rem;
