@@ -59,6 +59,11 @@ const DiaryWritePage = () => {
       <ImgUploadBtn onClick={addInput}></ImgUploadBtn>
       <div id="parah"></div>
     </ImageUploadDiv>
+
+    <BtnDiv>
+      <CancelBtn>취소</CancelBtn>
+      <SaveBtn>저장</SaveBtn>
+    </BtnDiv>
   </div>;
 };
 
@@ -179,6 +184,36 @@ const ImgUploadBtn = styled.button`
   border-radius: 0.8rem;
   height: 7rem;
   width: 7rem;
+`;
+
+const BtnDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center; 
+  padding: 3%;
+`;
+const CancelBtn = styled.button`
+  height: 4rem;
+  width: 15rem;
+  font-size: 1.8rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 3rem;
+  box-shadow: 2px 3px 5px 0px rgba(0, 0, 0, 0.8);
+  margin-right: 3%;
+`;
+const SaveBtn = styled.button`
+  height: 4rem;
+  width: 15rem;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: white;
+  background-color: #2EABA1;
+  border: none;
+  border-radius: 3rem;
+  box-shadow: 2px 3px 5px 0px rgba(0, 0, 0, 0.8); 
+  margin-left: 3%;
 `;
 
 
