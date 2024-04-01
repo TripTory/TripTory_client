@@ -5,6 +5,7 @@ import ImageUploader from "../components/common/ImageUploader";
 import PropTypes from "prop-types";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { COLOR } from "../styles/color";
 
 const CreateTripPage = () => {
   const location = useLocation();
@@ -102,14 +103,14 @@ CreateTripPage.propTypes = {
 export default CreateTripPage;
 
 const Title = styled.h1`
-  color: #016360;
+  color: ${COLOR.MAIN_GREEN};
   font-weight: 900;
   font-size: 23px;
   padding: 30px 20px 30px;
 `;
 
 const Button = styled.button`
-  background-color: #2eaba1;
+  background-color: ${COLOR.MAIN_EMER};
   width: 90%;
   height: 4rem;
   border: none;

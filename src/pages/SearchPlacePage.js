@@ -5,6 +5,7 @@ import { GoArrowLeft } from "react-icons/go";
 import { IoIosSearch } from "react-icons/io";
 import PlaceList from "../components/common/PlaceList";
 import jsonData from "../data/PlaceData.json";
+import { COLOR } from "../styles/color";
 
 const SearchPlacePage = () => {
   const navigate = useNavigate();
@@ -67,7 +68,7 @@ const GoBack = styled(GoArrowLeft)`
   width: 45px;
   height: 45px;
   padding: 3px;
-  color: #016360;
+  color: ${COLOR.MAIN_GREEN};
   margin: 3px 3px 3px 5px;
 `;
 
@@ -83,7 +84,7 @@ const SearchIcon = styled(IoIosSearch)`
   width: 45px;
   height: 45px;
   padding: 0.3rem 0.5rem 0.3rem 0.3rem;
-  color: #016360;
+  color: ${COLOR.MAIN_GREEN};
   margin: 3px 3px;
 `;
 
