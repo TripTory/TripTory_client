@@ -222,24 +222,25 @@ const BtnDiv = styled.div`
 `;
 const CancelBtn = styled.button`
   height: 4rem;
-  width: 15rem;
+  width: 14.5rem;
   font-size: 1.8rem;
   font-weight: 600;
+  background-color: white;
   border: none;
   border-radius: 3rem;
-  box-shadow: 2px 3px 5px 0px rgba(0, 0, 0, 0.8);
+  box-shadow: 2px 3px 5px 0px rgba(0, 0, 0, 0.6);
   margin-right: 3%;
 `;
 const SaveBtn = styled.button`
   height: 4rem;
-  width: 15rem;
+  width: 14.5rem;
   font-size: 1.8rem;
   font-weight: 600;
   color: white;
   background-color: #2EABA1;
   border: none;
   border-radius: 3rem;
-  box-shadow: 2px 3px 5px 0px rgba(0, 0, 0, 0.8); 
+  box-shadow: 2px 3px 5px 0px rgba(0, 0, 0, 0.6); 
   margin-left: 3%;
 `;
 
