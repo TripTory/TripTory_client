@@ -1,27 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Typography } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import Default from "../assets/images/defaultavatar.svg";
 import { COLOR } from "../styles/color";
 import { useNavigate } from "react-router-dom";
+import Modal from "../components/common/Modal";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import DoDisturbOutlinedIcon from "@mui/icons-material/DoDisturbOutlined";
+import CancelButtons from "../components/common/Button";
+import CancelContent from "../components/common/CancelContent";
+
 
 const MypagePage = () => {
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const toggleModal = () => {
+    console.log(isModalOpen);
+    setIsModalOpen(!isModalOpen);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   const goToEdit = () => {
     navigate("/editprofil");
   };
+
+  const goToLogin = () => {
+    navigate("/login");
+  };
   const Menu = [
     { icon: <ModifyIcon />, text: "프로필 편집", action: goToEdit },
     { icon: <LogoutIcon />, text: "로그아웃", action: goToEdit },
-    { icon: <CancelIcon />, text: "계정 탈퇴", action: goToEdit },
+    {
+      icon: <CancelIcon />,
+      text: "계정 탈퇴",
+      action: toggleModal,
+    },
   ];
   return (
     <StMyPagePage>
@@ -34,7 +56,7 @@ const MypagePage = () => {
         <MailP>cy1234@naver.com</MailP>
       </ProfilDiv>
       <MenuDiv>
-        <List sx={{width: "100%"}}>
+        <List sx={{ width: "100%" }}>
           {Menu.map((it) => {
             return (
               <div key={it.text}>
@@ -49,6 +71,13 @@ const MypagePage = () => {
           })}
         </List>
       </MenuDiv>
+      {isModalOpen && (
+        <CancelModal
+          content={<CancelContent/>}
+          closeModals={closeModal}
+          buttons={<CancelButtons onClick={goToLogin} />}
+        />
+      )}
     </StMyPagePage>
   );
 };
@@ -146,4 +175,8 @@ const LogoutIcon = styled(LogoutOutlinedIcon)`
   ${SharedAttr};
 `;
 
+const CancelModal = styled(Modal)`
+  width: 80%;
+  height: 80%;
+`;
 export default MypagePage;
