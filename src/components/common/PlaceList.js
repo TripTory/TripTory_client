@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import beachImg from "../../assets/images/beach.png";
 
 const PlaceList = ({ places, onSelectPlace }) => {
-  console.log("PlaceList 렌더링");
   return (
     <div>
       <ul>

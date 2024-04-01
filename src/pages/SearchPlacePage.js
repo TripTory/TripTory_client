@@ -7,7 +7,6 @@ import PlaceList from "../components/common/PlaceList";
 import jsonData from "../data/PlaceData.json";
 
 const SearchPlacePage = () => {
-  console.log("SearchPlacePage 렌더링");
   const navigate = useNavigate();
 
   const navigateToCreateTrip = (location) => {

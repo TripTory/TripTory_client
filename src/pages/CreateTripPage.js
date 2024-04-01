@@ -7,8 +7,6 @@ import { useLocation } from "react-router-dom";
 
 const CreateTripPage = () => {
   const location = useLocation();
-  console.log("CreateTripPage 렌더링");
-  console.log(location.state.tripPlace);
   // 사용자 입력 정보(여행이름, 여행장소)
   const [state, setState] = useState({
     tripName: "",
