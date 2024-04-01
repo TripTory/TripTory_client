@@ -47,9 +47,18 @@ const CreateTripPage = () => {
     navigate("/searchplace");
   };
 
+  const navigateToMain = () => {
+    navigate("/home");
+  };
+
   return (
     <div className="CreateTripPage">
-      <Title>어떤 여행을 만들까요?</Title>
+      <TitleContainer>
+        <Title>어떤 여행을 만들까요?</Title>
+        <CancelBtn
+          onClick={navigateToMain}
+        >취소</CancelBtn>
+      </TitleContainer>
       <EmptyContainer />
       <div>
         <ImageUploader />
@@ -109,6 +118,11 @@ const Title = styled.h1`
   padding: 30px 20px 30px;
 `;
 
+const TitleContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+`;
+
 const Button = styled.button`
   background-color: ${COLOR.MAIN_EMER};
   width: 90%;
@@ -134,6 +148,13 @@ const Button = styled.button`
       color: #666; /* 비활성화된 상태일 때의 글자색 */
       cursor: not-allowed; /* 비활성화된 상태일 때의 커서 스타일 변경 */
     `}
+`;
+
+const CancelBtn = styled.button`
+  height: 3rem;
+  margin: auto;
+  background-color: transparent;
+  border: none;
 `;
 
 const Label = styled.div`
