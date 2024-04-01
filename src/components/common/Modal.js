@@ -29,7 +29,7 @@ const BackgroundOverlay = styled.div`
   z-index: 999;
 `;
 
-const CloseButton = styled.button`
+const ButtonContainer = styled.div`
   display: flex;
   margin: auto;
   background-color: ${COLOR.MAIN_EMER};
@@ -40,20 +40,16 @@ const CloseButton = styled.button`
   color: white;
   align-items: center;
   justify-content: center;
+  margin-top: 2rem;
 `;
 
-const Modal = ({ content, closeModals }) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
+const Modal = ({ content, closeModals, buttons }) => {
 
   return (
     <BackgroundOverlay onClick={closeModals}>
       <ModalContainer>
         {content}
-        <CloseButton onClick={closeModal}>닫기</CloseButton>
+        {buttons && <ButtonContainer>{buttons}</ButtonContainer>}
       </ModalContainer>
     </BackgroundOverlay>
 
@@ -63,6 +59,8 @@ const Modal = ({ content, closeModals }) => {
 Modal.propTypes = {
   content: PropTypes.node.isRequired,
   closeModals: PropTypes.func.isRequired,
+  buttons: PropTypes.node,
 };
 
 export default Modal;
+
