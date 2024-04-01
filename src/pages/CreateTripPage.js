@@ -4,6 +4,7 @@ import SelectDateRange from "../components/common/SelectDateRange";
 import ImageUploader from "../components/common/ImageUploader";
 import PropTypes from "prop-types";
 import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const CreateTripPage = () => {
   const location = useLocation();
@@ -39,6 +40,12 @@ const CreateTripPage = () => {
     );
   };
 
+  const navigate = useNavigate();
+
+  const navigateToSearchPlace = () => {
+    navigate("/searchplace");
+  };
+
   return (
     <div className="CreateTripPage">
       <Title>어떤 여행을 만들까요?</Title>
@@ -64,13 +71,15 @@ const CreateTripPage = () => {
       </InputContainer>
       <InputContainer>
         <Label>여행 장소</Label>
-        <Input
-          name="tripPlace"
-          value={state.tripPlace}
-          onChange={handleChange}
-          placeholder="장소를 검색하세요"
-          autoComplete="off"
-        />
+        <SearchPlaceBtn onClick={navigateToSearchPlace}>
+          <Input
+            name="tripPlace"
+            value={state.tripPlace}
+            onChange={handleChange}
+            placeholder="장소를 검색하세요"
+            autoComplete="off"
+          />
+        </SearchPlaceBtn>
       </InputContainer>
       <Button
         disabled={
@@ -152,6 +161,17 @@ const Input = styled.input`
   border: none;
   font-size: 15px;
   border-bottom: solid #bfbfbf 1px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+`;
+
+const SearchPlaceBtn = styled.button`
+  background-color: transparent;
+  width: 100%;
+  border: none;
+  font-size: 15px;
+  padding: 0px;
   display: block;
   margin-left: auto;
   margin-right: auto;
