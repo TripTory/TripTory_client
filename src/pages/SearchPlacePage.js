@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { GoArrowLeft } from "react-icons/go";
 import { IoIosSearch } from "react-icons/io";
@@ -9,10 +9,15 @@ import { COLOR } from "../styles/color";
 
 const SearchPlacePage = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  //CreateTripPage에서 전달받은 tripname, daterange 정보
+  const tripName = location.state? location.state.tripName: "";
+  const dateRange = location.state? location.state.tripDate: [null, null];
 
   //선택 버튼 클릭시 페이지 이동
   const navigateToCreateTrip = (location) => {
-    navigate("/createtrip", { state: { tripPlace: location } });
+    navigate("/createtrip", { state: { tripPlace: location, tripName: tripName, dateRange: dateRange} });
   };
   //뒤로 가기 버튼 클릭시 페이지 이동
   const goBackToCreateTrip = () => {

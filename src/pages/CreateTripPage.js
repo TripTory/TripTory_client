@@ -4,21 +4,31 @@ import SelectDateRange from "../components/common/SelectDateRange";
 import ImageUploader from "../components/common/ImageUploader";
 import { PiMapPinFill } from "react-icons/pi";
 import PropTypes from "prop-types";
-import { useLocation } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { COLOR } from "../styles/color";
 
 const CreateTripPage = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+
   // 사용자 입력 정보(여행이름, 여행장소)
   const [state, setState] = useState({
-    tripName: "",
+    tripName: location.state ? location.state.tripName : "",
     tripPlace: location.state ? location.state.tripPlace : "",
   });
   //사용자 입력 정보(여행날짜)
-  const [dateRange, setDateRange] = useState([null, null]);
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
+  const [dateRange, setDateRange] = useState(
+    location.state ? location.state.dateRange : [null, null],
+  );
+  const [startDate, setStartDate] = useState(
+    location.state ? location.state.dateRange[0] : null,
+  );
+  const [endDate, setEndDate] = useState(
+    location.state ? location.state.dateRange[1] : null,
+  );
+  console.log(state.tripName);
+  console.log(dateRange);
+
   //여행이름, 여행장소 값 변경
   const handleChange = (e) => {
     setState({
@@ -42,10 +52,10 @@ const CreateTripPage = () => {
     );
   };
 
-  const navigate = useNavigate();
-
   const navigateToSearchPlace = () => {
-    navigate("/searchplace");
+    navigate("/searchplace", {
+      state: { tripName: state.tripName, tripDate: dateRange },
+    });
   };
 
   const navigateToMain = () => {
@@ -77,7 +87,10 @@ const CreateTripPage = () => {
       <InputContainer>
         <Label>여행 일정</Label>
         <DateWrapper>
-          <PinIcon /><SelectDateRange onDateChange={handleDateChange} />
+          <PinIcon />
+          <SelectDateRange
+            onDateChange={handleDateChange}
+            daterange={dateRange} />
         </DateWrapper>
       </InputContainer>
       <InputContainer>
@@ -214,4 +227,3 @@ const DateWrapper = styled.div`
   margin: auto;
   font-size: 0;
 `;
-
