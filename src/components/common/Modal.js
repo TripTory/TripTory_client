@@ -50,17 +50,8 @@ const BackgroundOverlay = styled.div`
 
 const ButtonContainer = styled.div`
   display: flex;
-  margin: auto;
-  background-color: ${COLOR.MAIN_EMER};
-  border: none;
-  border-radius: 10px;
-  width: 40px;
-  height: 25px;
-  color: white;
-  align-items: center;
   justify-content: center;
   margin-top: 2rem;
 `;
 
 export default Modal;
-
