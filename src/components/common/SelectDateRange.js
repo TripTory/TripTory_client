@@ -8,8 +8,6 @@ const StyledDatePicker = styled.div`
     .react-datepicker-wrapper{
       width: 90%;
       display: block;
-      margin-left: auto;
-      margin-right: auto;
     }
     .react-datepicker__input-container{
       width: 100%;
@@ -19,10 +17,9 @@ const StyledDatePicker = styled.div`
     }
     .react-datepicker__input-container input {
       background-color: none;
-      width: 100%;
       border: none;
+      width: 100%;
       font-size: 15px;
-      border-bottom: solid #bfbfbf 1px;
       display: block;
       margin-left: auto;
       margin-right: auto;

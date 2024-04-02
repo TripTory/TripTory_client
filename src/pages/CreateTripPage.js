@@ -2,6 +2,7 @@ import styled, { css } from "styled-components";
 import React, { useState } from "react";
 import SelectDateRange from "../components/common/SelectDateRange";
 import ImageUploader from "../components/common/ImageUploader";
+import { PiMapPinFill } from "react-icons/pi";
 import PropTypes from "prop-types";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -55,9 +56,7 @@ const CreateTripPage = () => {
     <div className="CreateTripPage">
       <TitleContainer>
         <Title>어떤 여행을 만들까요?</Title>
-        <CancelBtn
-          onClick={navigateToMain}
-        >취소</CancelBtn>
+        <CancelBtn onClick={navigateToMain}>취소</CancelBtn>
       </TitleContainer>
       <EmptyContainer />
       <div>
@@ -77,7 +76,9 @@ const CreateTripPage = () => {
       </InputContainer>
       <InputContainer>
         <Label>여행 일정</Label>
-        <SelectDateRange onDateChange={handleDateChange} />
+        <DateWrapper>
+          <PinIcon /><SelectDateRange onDateChange={handleDateChange} />
+        </DateWrapper>
       </InputContainer>
       <InputContainer>
         <Label>여행 장소</Label>
@@ -198,3 +199,19 @@ const SearchPlaceBtn = styled.button`
   margin-left: auto;
   margin-right: auto;
 `;
+
+const PinIcon = styled(PiMapPinFill)`
+  width: 1.7rem;
+  height: 1.7rem;
+  color: #545454;
+`;
+
+const DateWrapper = styled.div`
+  width: 90%;
+  display: flex;
+  justify-content: start;
+  border-bottom: solid #bfbfbf 1px;
+  margin: auto;
+  font-size: 0;
+`;
+
