@@ -88,26 +88,38 @@ const DiaryWritePage = () => {
 
     {isCancelModalOpen && (
       <Modal
-        content="작성을 취소하시겠습니까?"
+        content={
+          <ContentDiv>
+            작성을 취소하시겠습니까?
+          </ContentDiv>
+        }
         closeModal={closeModal}
+        w="70%"
+        h="15rem"
         buttons={
-          <>
+          <OkayDiv>
             <OkayBtn className="no" onClick={closeModal}>아니오</OkayBtn>
             <OkayBtn className="yes">예</OkayBtn>
-          </>
+          </OkayDiv>
         }
       />
     )}
 
     {isSaveModalOpen && (
       <Modal
-        content="일기를 저장할까요?"
+        content={
+          <ContentDiv>
+            일기를 저장할까요?
+          </ContentDiv>
+        }
         closeModal={closeModal}
+        w="70%"
+        h="15rem"
         buttons={
-          <>
+          <OkayDiv>
             <OkayBtn className="no" onClick={closeModal}>취소</OkayBtn>
             <OkayBtn className="yes">확인</OkayBtn>
-          </>
+          </OkayDiv>
         }
       />
     )}
@@ -265,23 +277,32 @@ const SaveBtn = styled.button`
   margin-left: 3%;
 `;
 const OkayBtn = styled.button`
-  height: 2rem;
-  width: 9rem;
-  font-size: 1rem;
+  height: 2.5rem;
+  width: 10rem;
+  font-size: 1.7rem;
   font-weight: 600;
   text-align: center;
   vertical-align: center;
   color: white;
   border: none;
   border-radius: 3rem;
-  box-shadow: 2px 3px 5px 0px rgba(0, 0, 0, 0.6); 
   &.no {
     color: black;
     background-color: #D9D9D9;
+    margin-right: 1rem;
   }
   &.yes {
-
+    background-color: ${COLOR.MAIN_GREEN};
   }
+`;
+const OkayDiv = styled.div`
+  padding: 1rem;
+`;
+
+const ContentDiv = styled.div`
+  text-align: center;
+  font-size: 1.8rem;
+  margin-top: 4rem;
 `;
 
 
