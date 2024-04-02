@@ -6,7 +6,7 @@ import calendar from "../assets/images/calendar.svg";
 import mapPing from "../assets/images/mapPing.svg";
 
 import Modal from "../components/common/Modal";
-import Uploader from "../components/Uploader";
+import Uploader from "../components/common/MultipleImageUploader";
 
 import { COLOR } from "../styles/color";
 
