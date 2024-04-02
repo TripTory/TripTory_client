@@ -51,7 +51,6 @@ const BackgroundOverlay = styled.div`
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 2rem;
 `;
 
 export default Modal;
