@@ -1,4 +1,4 @@
-import React, {useState ,useRef} from "react";
+import React, {useState ,useRef, useEffect} from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { AiFillCamera } from "react-icons/ai";
@@ -7,8 +7,14 @@ import { AiFillCamera } from "react-icons/ai";
 const ImageUploader = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
-
   const fileInput = useRef(null);
+
+  useEffect(()=>{
+    const storedImageUrl = localStorage.getItem("previewUrl");
+    if (storedImageUrl) {
+      setPreviewUrl(storedImageUrl);
+    }
+  }, []);
 
   const fileSelectedHandler = (e) => {
     const file = e.target.files[0];
@@ -16,7 +22,9 @@ const ImageUploader = () => {
     if(file){
       const reader = new FileReader();
       reader.onload = () => {
+        const imageUrl = reader.result;
         setPreviewUrl(reader.result);
+        localStorage.setItem("previewUrl", imageUrl);
       };
       reader.readAsDataURL(file);
     }
