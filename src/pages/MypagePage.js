@@ -12,7 +12,6 @@ import ListItemButton from "@mui/material/ListItemButton";
 import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import DoDisturbOutlinedIcon from "@mui/icons-material/DoDisturbOutlined";
-import CancelButtons from "../components/common/Button";
 import CancelContent from "../components/common/CancelContent";
 
 
@@ -38,7 +37,7 @@ const MypagePage = () => {
   };
   const Menu = [
     { icon: <ModifyIcon />, text: "프로필 편집", action: goToEdit },
-    { icon: <LogoutIcon />, text: "로그아웃", action: goToEdit },
+    { icon: <LogoutIcon />, text: "로그아웃", action: goToLogin },
     {
       icon: <CancelIcon />,
       text: "계정 탈퇴",
@@ -75,7 +74,10 @@ const MypagePage = () => {
         <CancelModal
           content={<CancelContent/>}
           closeModals={closeModal}
-          buttons={<CancelButtons onClick={goToLogin} />}
+          buttons={<StCancelButtons>
+            <NoBtn onClick={closeModal}>아니오</NoBtn>
+            <YesBtn onClick={goToLogin}>네</YesBtn>
+          </StCancelButtons>}
           w="80%"
           h="20%"
         />
@@ -178,5 +180,34 @@ const LogoutIcon = styled(LogoutOutlinedIcon)`
 `;
 
 const CancelModal = styled(Modal)`
+`;
+
+const StCancelButtons = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+`;
+
+const YesBtn = styled.button`
+  background-color: ${COLOR.MAIN_EMER};
+  width: 40%;
+  height: 3rem;
+  border: none;
+  border-radius: 2rem;
+  font-size: 1.3rem;
+  color: white;
+  font-weight: bolder;
+`;
+
+const NoBtn = styled.button`
+  background-color: #D9D9D9;
+  width: 40%;
+  height: 3rem;
+  border: none;
+  border-radius: 2rem;
+  font-size: 1.3rem;
+  color: black;
+  font-weight: bolder;
 `;
 export default MypagePage;

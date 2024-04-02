@@ -1,12 +1,16 @@
 import styled from "styled-components";
 import React, { useState, useEffect } from "react";
 import { COLOR } from "../../styles/color.js";
-
-const CancelButtons = () => {
+import { useNavigate } from "react-router-dom";
+const CancelButtons = (closeModals) => {
+  const navigate = useNavigate();
+  const goToLogin=()=> {
+    navigate("/login");
+  };
   return (
     <StCancelButtons>
       <NoBtn>아니오</NoBtn>
-      <YesBtn>네</YesBtn>
+      <YesBtn onClick={goToLogin}>네</YesBtn>
     </StCancelButtons>
   );
 };
