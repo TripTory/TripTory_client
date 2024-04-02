@@ -6,7 +6,7 @@ const Modal = ({ content, closeModals, buttons, w, h }) => {
 
   return (
     <BackgroundOverlay onClick={closeModals}>
-      <ModalContainer sx={{width: `${w}`, height: `${h}`}}>
+      <ModalContainer style={{width: `${w}`, height: `${h}`}}>
         {content}
         {buttons && <ButtonContainer>{buttons}</ButtonContainer>}
       </ModalContainer>
@@ -19,8 +19,8 @@ Modal.propTypes = {
   content: PropTypes.node.isRequired,
   closeModals: PropTypes.func.isRequired,
   buttons: PropTypes.node,
-  w: PropTypes.node.isRequired,
-  h: PropTypes.node.isRequired,
+  w: PropTypes.string.isRequired,
+  h: PropTypes.string.isRequired,
 };
 
 

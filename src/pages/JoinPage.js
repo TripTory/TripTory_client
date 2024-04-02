@@ -129,8 +129,8 @@ const JoinPage = () => {
         <Modal
           content={modalContent}
           closeModals={closeModal}
-          w="80%"
-          h="100%"
+          w="10rem"
+          h="10rem"
         />
       )}
     </EntireDiv>
