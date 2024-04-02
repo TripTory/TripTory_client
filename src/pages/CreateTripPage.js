@@ -26,8 +26,6 @@ const CreateTripPage = () => {
   const [endDate, setEndDate] = useState(
     location.state ? location.state.dateRange[1] : null,
   );
-  console.log(state.tripName);
-  console.log(dateRange);
 
   //여행이름, 여행장소 값 변경
   const handleChange = (e) => {
