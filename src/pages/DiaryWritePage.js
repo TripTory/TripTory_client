@@ -285,7 +285,7 @@ const OkayBtn = styled.button`
   }
 `;
 const OkayDiv = styled.div`
-  padding: 1rem;
+  margin-top: 3rem;
 `;
 
 const ContentDiv = styled.div`
