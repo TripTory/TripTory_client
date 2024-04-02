@@ -5,7 +5,7 @@ import React from "react";
 const Modal = ({ content, closeModals, buttons, w, h }) => {
 
   return (
-    <BackgroundOverlay onClick={closeModals}>
+    <BackgroundOverlay>
       <ModalContainer style={{width: `${w}`, height: `${h}`}}>
         {content}
         {buttons && <ButtonContainer>{buttons}</ButtonContainer>}
