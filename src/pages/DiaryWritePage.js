@@ -6,17 +6,17 @@ import calendar from "../assets/images/calendar.svg";
 import mapPing from "../assets/images/mapPing.svg";
 
 import Modal from "../components/common/Modal";
+import Uploader from "../components/Uploader";
+
 import { COLOR } from "../styles/color";
 
 
 const DiaryWritePage = () => {
 
   const [startDate, setStartDate] = useState();
-
-  // Cancel 버튼을 위한 모달 상태
-  const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
-  // Save 버튼을 위한 모달 상태
-  const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
+  const [isCancelModalOpen, setIsCancelModalOpen] = useState(false); // Cancel 버튼을 위한 모달 상태
+  const [isSaveModalOpen, setIsSaveModalOpen] = useState(false); // Save 버튼을 위한 모달 상태
+  const [imagePreview, setImagePreview] = useState(null);
 
   const openCancelModal = () => {
     setIsCancelModalOpen(true);
@@ -28,6 +28,10 @@ const DiaryWritePage = () => {
   const closeModal = () => {
     setIsCancelModalOpen(false);
     setIsSaveModalOpen(false);
+  };
+
+  const handleImageUpload = (preview) => {
+    setImagePreview(preview);
   };
 
   return <div>
@@ -56,9 +60,17 @@ const DiaryWritePage = () => {
       <ContentBox type="text" placeholder="내용을 입력하세요" maxLength={1000}/>
     </DiaryDiv>
 
-    <ImageUploadDiv>
+    {/* <ImageUploadDiv>
       <ImgUploadBtn></ImgUploadBtn>
-    </ImageUploadDiv>
+    </ImageUploadDiv> */}
+    <Uploader handleImageUpload={handleImageUpload} />
+
+    {/* 이미지 미리보기 */}
+    {imagePreview && (
+      <ImagePreview>
+        <img src={imagePreview} alt="Uploaded" />
+      </ImagePreview>
+    )}
 
     <BtnDiv>
       <CancelBtn onClick={openCancelModal}>취소</CancelBtn>
@@ -72,7 +84,6 @@ const DiaryWritePage = () => {
             작성을 취소하시겠습니까?
           </ContentDiv>
         }
-        closeModal={closeModal}
         w="70%"
         h="15rem"
         buttons={
@@ -91,7 +102,6 @@ const DiaryWritePage = () => {
             일기를 저장할까요?
           </ContentDiv>
         }
-        closeModal={closeModal}
         w="70%"
         h="15rem"
         buttons={
@@ -284,6 +294,8 @@ const ContentDiv = styled.div`
   margin-top: 4rem;
 `;
 
+const ImagePreview = styled.div`
+`;
 
 export default DiaryWritePage;
 
