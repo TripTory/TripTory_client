@@ -18,7 +18,7 @@ const CancelContent = () => {
 
 const StCancelContent = styled.div`
   width: 100%;
-  height: 50%;
+  height: fit-content;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -16,7 +16,6 @@ const StCancelButtons = styled.div`
   justify-content: space-around;
   align-items: center;
   width: 100%;
-  height: 50%;
 `;
 
 const YesBtn = styled.button`

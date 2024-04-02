@@ -76,6 +76,8 @@ const MypagePage = () => {
           content={<CancelContent/>}
           closeModals={closeModal}
           buttons={<CancelButtons onClick={goToLogin} />}
+          w="80%"
+          h="20%"
         />
       )}
     </StMyPagePage>
@@ -176,7 +178,5 @@ const LogoutIcon = styled(LogoutOutlinedIcon)`
 `;
 
 const CancelModal = styled(Modal)`
-  width: 80%;
-  height: 80%;
 `;
 export default MypagePage;
