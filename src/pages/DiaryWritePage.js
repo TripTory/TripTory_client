@@ -13,22 +13,6 @@ const DiaryWritePage = () => {
 
   const [startDate, setStartDate] = useState();
 
-  const [modalContent, setModalContent] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const toggleModal = () => {
-    setIsModalOpen(!isModalOpen);
-  };
-
-  const openModal = (content) => {
-    setModalContent(content);
-    toggleModal();
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
-
   var arrInput = new Array(0);
   var arrInputValue = new Array(0);
 
@@ -47,6 +31,23 @@ const DiaryWritePage = () => {
 
   const createInput = function(id, value){
     return "<input type='text' id='test "+ id +"' onChange='javascript:saveValue("+ id +",this.value)' value='"+value +"'><br>";
+  };
+
+  // Cancel 버튼을 위한 모달 상태
+  const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
+  // Save 버튼을 위한 모달 상태
+  const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
+
+  const openCancelModal = () => {
+    setIsCancelModalOpen(true);
+  };
+  const openSaveModal = () => {
+    setIsSaveModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsCancelModalOpen(false);
+    setIsSaveModalOpen(false);
   };
 
   return <div>
@@ -81,16 +82,36 @@ const DiaryWritePage = () => {
     </ImageUploadDiv>
 
     <BtnDiv>
-      <CancelBtn onClick={() => openModal("작성을 취소하시겠습니까?")}>취소</CancelBtn>
-      <SaveBtn onClick={() => openModal("일기를 저장할까요?")}>저장</SaveBtn>
+      <CancelBtn onClick={openCancelModal}>취소</CancelBtn>
+      <SaveBtn onClick={openSaveModal}>저장</SaveBtn>
     </BtnDiv>
 
-    {isModalOpen && (
+    {isCancelModalOpen && (
       <Modal
-        content={modalContent}
-        closeModals={closeModal}
+        content="작성을 취소하시겠습니까?"
+        closeModal={closeModal}
+        buttons={
+          <>
+            <OkayBtn className="no" onClick={closeModal}>아니오</OkayBtn>
+            <OkayBtn className="yes">예</OkayBtn>
+          </>
+        }
       />
     )}
+
+    {isSaveModalOpen && (
+      <Modal
+        content="일기를 저장할까요?"
+        closeModal={closeModal}
+        buttons={
+          <>
+            <OkayBtn className="no" onClick={closeModal}>취소</OkayBtn>
+            <OkayBtn className="yes">확인</OkayBtn>
+          </>
+        }
+      />
+    )}
+
   </div>;
 };
 
@@ -228,7 +249,7 @@ const CancelBtn = styled.button`
   background-color: white;
   border: none;
   border-radius: 3rem;
-  box-shadow: 2px 3px 5px 0px rgba(0, 0, 0, 0.6);
+  box-shadow: 2px 3px 5px 0px rgba(0, 0, 0, 0.3);
   margin-right: 3%;
 `;
 const SaveBtn = styled.button`
@@ -240,9 +261,29 @@ const SaveBtn = styled.button`
   background-color: #2EABA1;
   border: none;
   border-radius: 3rem;
-  box-shadow: 2px 3px 5px 0px rgba(0, 0, 0, 0.6); 
+  box-shadow: 2px 3px 5px 0px rgba(0, 0, 0, 0.4); 
   margin-left: 3%;
+`;
+const OkayBtn = styled.button`
+  height: 2rem;
+  width: 9rem;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  vertical-align: center;
+  color: white;
+  border: none;
+  border-radius: 3rem;
+  box-shadow: 2px 3px 5px 0px rgba(0, 0, 0, 0.6); 
+  &.no {
+    color: black;
+    background-color: #D9D9D9;
+  }
+  &.yes {
+
+  }
 `;
 
 
 export default DiaryWritePage;
+
