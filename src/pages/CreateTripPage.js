@@ -56,7 +56,10 @@ const CreateTripPage = () => {
     });
   };
 
-  const navigateToMain = () => {
+  const handleCancel = () => {
+    setDateRange([null,null]);
+    setStartDate(null);
+    setEndDate(null);
     navigate("/home");
   };
 
@@ -64,7 +67,7 @@ const CreateTripPage = () => {
     <div className="CreateTripPage">
       <TitleContainer>
         <Title>어떤 여행을 만들까요?</Title>
-        <CancelBtn onClick={navigateToMain}>취소</CancelBtn>
+        <CancelBtn onClick={handleCancel}>취소</CancelBtn>
       </TitleContainer>
       <EmptyContainer />
       <div>
