@@ -119,13 +119,13 @@ const DateDiv = styled.div`
   display: flex;
   align-items: center;
   background-color: none;
-  width: 70%;
+  width: 80%;
   border: none;
   font-size: 15px;
   border-bottom: solid #bfbfbf 1px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 3%;
+  margin-top: 8%;
 `;
 const CalenderImage = styled.img`
   padding: 1.2%;
@@ -166,7 +166,7 @@ const PlaceDiv = styled.div`
   display: flex;
   align-items: center;
   background-color: none;
-  width: 70%;
+  width: 80%;
   border: none;
   font-size: 15px;
   border-bottom: solid #bfbfbf 1px;
@@ -194,7 +194,7 @@ const ContentBox = styled.textarea`
   display: flex;
   background-color: none;
   width: 92%;
-  height: 42rem;
+  height: 39rem;
   border: none;
   font-size: 15px;
   margin: auto;
