@@ -13,26 +13,6 @@ const DiaryWritePage = () => {
 
   const [startDate, setStartDate] = useState();
 
-  var arrInput = new Array(0);
-  var arrInputValue = new Array(0);
-
-  const addInput = function() {
-    arrInput.push(arrInput.length);
-    arrInputValue.push("");
-    display();
-  };
-
-  const display = function(){
-    document.getElementById("parah").innerHTML="";
-    for (let intI=0;intI<arrInput.length;intI++) {
-      document.getElementById("parah").innerHTML+=createInput(arrInput[intI], arrInputValue[intI]);
-    }
-  };
-
-  const createInput = function(id, value){
-    return "<input type='text' id='test "+ id +"' onChange='javascript:saveValue("+ id +",this.value)' value='"+value +"'><br>";
-  };
-
   // Cancel 버튼을 위한 모달 상태
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
   // Save 버튼을 위한 모달 상태
@@ -77,8 +57,7 @@ const DiaryWritePage = () => {
     </DiaryDiv>
 
     <ImageUploadDiv>
-      <ImgUploadBtn onClick={addInput}></ImgUploadBtn>
-      <div id="parah"></div>
+      <ImgUploadBtn></ImgUploadBtn>
     </ImageUploadDiv>
 
     <BtnDiv>
