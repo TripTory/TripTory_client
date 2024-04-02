@@ -1,14 +1,33 @@
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import React, { useState, useEffect } from "react";
-import { COLOR } from "../../styles/color.js";
+import React from "react";
+
+const Modal = ({ content, closeModals, buttons, w, h }) => {
+
+  return (
+    <BackgroundOverlay onClick={closeModals}>
+      <ModalContainer style={{width: `${w}`, height: `${h}`}}>
+        {content}
+        {buttons && <ButtonContainer>{buttons}</ButtonContainer>}
+      </ModalContainer>
+    </BackgroundOverlay>
+
+  );
+};
+
+Modal.propTypes = {
+  content: PropTypes.node.isRequired,
+  closeModals: PropTypes.func.isRequired,
+  buttons: PropTypes.node,
+  w: PropTypes.string.isRequired,
+  h: PropTypes.string.isRequired,
+};
 
 
 const ModalContainer = styled.div`
   position: fixed;
   top: 50%;
   left: 50%;
-  width: 80%;
   transform: translate(-50%, -50%);
   z-index: 1000;
   background-color: white;
@@ -42,25 +61,6 @@ const ButtonContainer = styled.div`
   justify-content: center;
   margin-top: 2rem;
 `;
-
-const Modal = ({ content, closeModals, buttons }) => {
-
-  return (
-    <BackgroundOverlay onClick={closeModals}>
-      <ModalContainer>
-        {content}
-        {buttons && <ButtonContainer>{buttons}</ButtonContainer>}
-      </ModalContainer>
-    </BackgroundOverlay>
-
-  );
-};
-
-Modal.propTypes = {
-  content: PropTypes.node.isRequired,
-  closeModals: PropTypes.func.isRequired,
-  buttons: PropTypes.node,
-};
 
 export default Modal;
 
