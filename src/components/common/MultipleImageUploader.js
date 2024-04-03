@@ -1,5 +1,7 @@
 import React, { useState, useRef } from "react";
 import styled from "styled-components";
+import { COLOR } from "../../styles/color";
+import CancelIcon from "@mui/icons-material/Cancel";
 
 const Uploader = () => {
   const [files, setFiles] = useState([]);
@@ -20,11 +22,11 @@ const Uploader = () => {
     };
   };
 
-  // const deleteImage = (index) => {
-  //   const updatedFiles = [...files];
-  //   updatedFiles.splice(index, 1);
-  //   setFiles(updatedFiles);
-  // };
+  const deleteImage = (index) => {
+    const updatedFiles = [...files];
+    updatedFiles.splice(index, 1);
+    setFiles(updatedFiles);
+  };
 
   return (
     <div className="uploader-wrapper">
@@ -36,13 +38,13 @@ const Uploader = () => {
           e.target.value = null;
         }}
         style={{ display: "none" }}
-        ref={inputRef} // inputRef를 input 요소에 연결
+        ref={inputRef}
       />
 
       <ImageUploadDiv>
         <ImgUploadBtn
           variant="contained"
-          onClick={() => inputRef.current && inputRef.current.click()} // inputRef가 null인지 확인 후 click 메소드 호출
+          onClick={() => inputRef.current && inputRef.current.click()}
         >
           Preview
         </ImgUploadBtn>
@@ -50,12 +52,11 @@ const Uploader = () => {
           {Array.isArray(files) &&
             files.map((file, index) => (
               <div key={index}>
-                <div className="file-wrapper">
+                <ImageDiv>
                   <UploadedImage src={file.preview_URL} />
-                </div>
-                {/* <DeleteBtn variant="contained" onClick={() => deleteImage(index)}>
-                  Delete
-                </DeleteBtn> */}
+                  <CancelIcons
+                    onClick={() => deleteImage(index)} />
+                </ImageDiv>
               </div>
             ))}
         </Slider>
@@ -89,13 +90,13 @@ const UploadedImage = styled.img`
   margin: 0.5rem;
 `;
 
-const DeleteBtn = styled.button`
-  background-color: #eeeeee;
-  border: none;
-  border-radius: 0.8rem;
-  height: 3rem;
-  width: 7rem;
-  margin-top: 0.5rem;
+const CancelIcons = styled(CancelIcon)`
+  color: ${COLOR.MAIN_GREEN};
+  height: 2rem;
+  width: 2rem;
+  position: absolute;
+  top: 0;
+  right: 0;
 `;
 
 const Slider = styled.div`
@@ -104,6 +105,10 @@ const Slider = styled.div`
   flex-direction: row;
   position: relative;
   overflow: auto;
+`;
+
+const ImageDiv = styled.div`
+  position: relative;
 `;
 
 export default Uploader;
