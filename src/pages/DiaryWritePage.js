@@ -218,23 +218,6 @@ const DiaryDiv = styled.div`
   margin-right: 8%;
 `;
 
-const ImageUploadDiv = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin-top: 2rem;
-  margin-left: 12%;
-  margin-right: 12%;
-`;
-const ImgUploadBtn = styled.button`
-  display: flex;
-  flex-direction: row;
-  background-color: #eeeeee;
-  border: none;
-  border-radius: 0.8rem;
-  height: 7rem;
-  width: 7rem;
-`;
-
 const BtnDiv = styled.div`
   display: flex;
   flex-direction: row;
