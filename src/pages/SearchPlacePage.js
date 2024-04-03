@@ -21,7 +21,7 @@ const SearchPlacePage = () => {
   };
   //뒤로 가기 버튼 클릭시 페이지 이동
   const goBackToCreateTrip = () => {
-    navigate("/createtrip");
+    navigate("/createtrip", { state: { tripPlace:"", tripName: tripName, dateRange: dateRange} });
   };
   //전체 지역 데이터 -> 나중에는 백에서 받아와야 함
   const allPlaces = jsonData.places;
