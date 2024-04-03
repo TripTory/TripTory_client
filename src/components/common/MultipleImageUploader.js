@@ -46,17 +46,19 @@ const Uploader = () => {
         >
           Preview
         </ImgUploadBtn>
-        {Array.isArray(files) &&
-          files.map((file, index) => (
-            <div key={index}>
-              <div className="file-wrapper">
-                <UploadedImage src={file.preview_URL} />
+        <Slider>
+          {Array.isArray(files) &&
+            files.map((file, index) => (
+              <div key={index}>
+                <div className="file-wrapper">
+                  <UploadedImage src={file.preview_URL} />
+                </div>
+                {/* <DeleteBtn variant="contained" onClick={() => deleteImage(index)}>
+                  Delete
+                </DeleteBtn> */}
               </div>
-              {/* <DeleteBtn variant="contained" onClick={() => deleteImage(index)}>
-                Delete
-              </DeleteBtn> */}
-            </div>
-          ))}
+            ))}
+        </Slider>
       </ImageUploadDiv>
     </div>
   );
@@ -67,8 +69,8 @@ const ImageUploadDiv = styled.div`
   flex-direction: row;
   align-items: center;
   margin-top: 2rem;
-  margin-left: 12%;
-  margin-right: 12%;
+  margin-left: 8%;
+  margin-right: 8%;
 `;
 
 const ImgUploadBtn = styled.button`
@@ -77,12 +79,14 @@ const ImgUploadBtn = styled.button`
   border-radius: 0.8rem;
   height: 7rem;
   width: 7rem;
-  margin-right: 1rem;
+  margin-right: 0.5rem;
 `;
 
 const UploadedImage = styled.img`
+  border-radius: 0.8rem;
   height: 7rem;
   width: 7rem;
+  margin: 0.5rem;
 `;
 
 const DeleteBtn = styled.button`
@@ -92,6 +96,14 @@ const DeleteBtn = styled.button`
   height: 3rem;
   width: 7rem;
   margin-top: 0.5rem;
+`;
+
+const Slider = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  position: relative;
+  overflow: auto;
 `;
 
 export default Uploader;
