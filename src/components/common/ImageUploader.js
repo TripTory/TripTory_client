@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { AiFillCamera } from "react-icons/ai";
 
 
-const ImageUploader = () => {
+const ImageUploader = ({onChange}) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
   const fileInput = useRef(null);
@@ -18,6 +18,8 @@ const ImageUploader = () => {
       const reader = new FileReader();
       reader.onload = () => {
         setPreviewUrl(reader.result);
+        onChange(reader.result);
+
       };
       reader.readAsDataURL(file);
     }
@@ -76,6 +78,10 @@ const ImageUploader = () => {
       </div>
     </div>
   );
+};
+
+ImageUploader.propTypes = {
+  onChange: PropTypes.func,
 };
 
 export default ImageUploader;

@@ -16,13 +16,15 @@ const AddTripPage = () => {
 
   // 사용자 입력 정보(여행이름)
   const [tripName, setTripName] = useState("");
-  console.log(tripName);
   //사용자 입력 정보(여행지역)
   const [tripPlace, setTripPlace] = useState("");
   //사용자 입력 정보(여행날짜)
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
+  //사용자 업로드 이미지 url
+  const [imgUrl, setImgUrl] = useState(null);
+
   // 여행 이름값 변경
   const handleNameChange = (e) => {
     setTripName(e.target.value);
@@ -43,7 +45,7 @@ const AddTripPage = () => {
   const handleSubmit = () => {
     const [startDate, endDate] = dateRange;
     alert(
-      `여행 이름: ${tripName} // 여행 날짜: ${startDate}~${endDate} // 여행 장소: ${tripPlace}`,
+      `여행 이름: ${tripName} // 여행 날짜: ${startDate}~${endDate} // 여행 장소: ${tripPlace} // 이미지 url: ${imgUrl}`,
     );
   };
 
@@ -64,7 +66,7 @@ const AddTripPage = () => {
       </TitleContainer>
       <EmptyContainer />
       <div>
-        <ImageUploader />
+        <ImageUploader onChange={setImgUrl}/>
       </div>
       <EmptyContainer />
       <div></div>
