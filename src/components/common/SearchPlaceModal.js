@@ -1,28 +1,13 @@
 import React, { useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { GoArrowLeft } from "react-icons/go";
 import { IoIosSearch } from "react-icons/io";
-import PlaceList from "../components/common/PlaceList";
-import jsonData from "../data/PlaceData.json";
-import { COLOR } from "../styles/color";
+import PlaceList from "./PlaceList";
+import jsonData from "../../data/PlaceData.json";
+import { COLOR } from "../../styles/color";
+import PropTypes from "prop-types";
 
-const SearchPlacePage = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  //CreateTripPage에서 전달받은 tripname, daterange 정보
-  const tripName = location.state? location.state.tripName: "";
-  const dateRange = location.state? location.state.tripDate: [null, null];
-
-  //선택 버튼 클릭시 페이지 이동
-  const navigateToCreateTrip = (location) => {
-    navigate("/createtrip", { state: { tripPlace: location, tripName: tripName, dateRange: dateRange} });
-  };
-  //뒤로 가기 버튼 클릭시 페이지 이동
-  const goBackToCreateTrip = () => {
-    navigate("/createtrip", { state: { tripPlace:"", tripName: tripName, dateRange: dateRange} });
-  };
+const SearchPlaceModal = ({ setIsModal, setTripPlace }) => {
   //전체 지역 데이터 -> 나중에는 백에서 받아와야 함
   const allPlaces = jsonData.places;
 
@@ -39,29 +24,44 @@ const SearchPlacePage = () => {
 
   //지역 선택시 실행되는 함수
   const handleSelectPlace = (place) => {
-    console.log(place.location);
-    navigateToCreateTrip(place.location);
+    setTripPlace(place.location);
+    closeModal();
+  };
+
+  //모달창 닫기 함수
+  const closeModal = () => {
+    setIsModal(false);
   };
 
   return (
     <div>
-      <SearchBoxContainer>
-        <GoBack onClick={goBackToCreateTrip} />
-        <InputBox
-          placeholder="어디로 떠날까요?"
-          onChange={handleInputChange}
-          value={searchText}
-        />
-        <SearchIcon></SearchIcon>
-      </SearchBoxContainer>
-      <PlaceListContainer>
-        <PlaceList places={filteredPlaces} onSelectPlace={handleSelectPlace} />
-      </PlaceListContainer>
+      <ModalContainer>
+        <SearchBoxContainer>
+          <GoBack onClick={closeModal} />
+          <InputBox
+            placeholder="어디로 떠날까요?"
+            onChange={handleInputChange}
+            value={searchText}
+          />
+          <SearchIcon></SearchIcon>
+        </SearchBoxContainer>
+        <PlaceListContainer>
+          <PlaceList
+            places={filteredPlaces}
+            onSelectPlace={handleSelectPlace}
+          />
+        </PlaceListContainer>
+      </ModalContainer>
     </div>
   );
 };
 
-export default SearchPlacePage;
+SearchPlaceModal.propTypes = {
+  setIsModal: PropTypes.func,
+  setTripPlace: PropTypes.func,
+};
+
+export default SearchPlaceModal;
 
 const SearchBoxContainer = styled.div`
   width: 98%;
@@ -100,4 +100,16 @@ const SearchIcon = styled(IoIosSearch)`
 
 const PlaceListContainer = styled.div`
   padding-top: 50px;
+`;
+
+const ModalContainer = styled.div`
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
 `;

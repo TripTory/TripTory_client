@@ -2,39 +2,36 @@ import styled, { css } from "styled-components";
 import React, { useState } from "react";
 import SelectDateRange from "../components/common/SelectDateRange";
 import ImageUploader from "../components/common/ImageUploader";
+import SearchPlaceModal from "../components/common/SearchPlaceModal";
 import { PiMapPinFill } from "react-icons/pi";
 import PropTypes from "prop-types";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { COLOR } from "../styles/color";
 
-const CreateTripPage = () => {
-  const location = useLocation();
+const AddTripPage = () => {
   const navigate = useNavigate();
 
-  // 사용자 입력 정보(여행이름, 여행장소)
-  const [state, setState] = useState({
-    tripName: location.state ? location.state.tripName : "",
-    tripPlace: location.state ? location.state.tripPlace : "",
-  });
-  //사용자 입력 정보(여행날짜)
-  const [dateRange, setDateRange] = useState(
-    location.state ? location.state.dateRange : [null, null],
-  );
-  const [startDate, setStartDate] = useState(
-    location.state ? location.state.dateRange[0] : null,
-  );
-  const [endDate, setEndDate] = useState(
-    location.state ? location.state.dateRange[1] : null,
-  );
+  //모달창(여행지 검색) 관리 변수
+  const [isModal, setIsModal] = useState(false);
 
-  //여행이름, 여행장소 값 변경
-  const handleChange = (e) => {
-    setState({
-      ...state,
-      [e.target.name]: e.target.value,
-    });
+  // 사용자 입력 정보(여행이름)
+  const [tripName, setTripName] = useState("");
+  console.log(tripName);
+  //사용자 입력 정보(여행지역)
+  const [tripPlace, setTripPlace] = useState("");
+  //사용자 입력 정보(여행날짜)
+  const [dateRange, setDateRange] = useState([null, null]);
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  // 여행 이름값 변경
+  const handleNameChange = (e) => {
+    setTripName(e.target.value);
   };
-  //여행날짜 값 변경
+  // 여행 장소 값 변경
+  const handlePlaceChange = (e) => {
+    setTripPlace(e.target.value);
+  };
+  // 여행 날짜 값 변경
   const handleDateChange = (e) => {
     setDateRange(e);
     const [start, end] = e;
@@ -46,25 +43,21 @@ const CreateTripPage = () => {
   const handleSubmit = () => {
     const [startDate, endDate] = dateRange;
     alert(
-      `여행 이름: ${state.tripName} // 여행 날짜: ${startDate}~${endDate} // 여행 장소: ${state.tripPlace}`,
+      `여행 이름: ${tripName} // 여행 날짜: ${startDate}~${endDate} // 여행 장소: ${tripPlace}`,
     );
   };
 
-  const navigateToSearchPlace = () => {
-    navigate("/searchplace", {
-      state: { tripName: state.tripName, tripDate: dateRange },
-    });
+  const handleCancel = () => {
+    navigate("/home");
   };
 
-  const handleCancel = () => {
-    setDateRange([null,null]);
-    setStartDate(null);
-    setEndDate(null);
-    navigate("/home");
+  const openModal = () => {
+    setIsModal(true);
   };
 
   return (
     <div className="CreateTripPage">
+      {isModal && <SearchPlaceModal setIsModal={setIsModal} setTripPlace={setTripPlace}/>}
       <TitleContainer>
         <Title>어떤 여행을 만들까요?</Title>
         <CancelBtn onClick={handleCancel}>취소</CancelBtn>
@@ -79,8 +72,8 @@ const CreateTripPage = () => {
         <Label>여행 이름</Label>
         <Input
           name="tripName"
-          value={state.tripName}
-          onChange={handleChange}
+          value={tripName}
+          onChange={handleNameChange}
           placeholder="이름을 입력하세요"
           autoComplete="off"
         />
@@ -91,16 +84,17 @@ const CreateTripPage = () => {
           <PinIcon />
           <SelectDateRange
             onDateChange={handleDateChange}
-            daterange={dateRange} />
+            daterange={dateRange}
+          />
         </DateWrapper>
       </InputContainer>
       <InputContainer>
         <Label>여행 장소</Label>
-        <SearchPlaceBtn onClick={navigateToSearchPlace}>
+        <SearchPlaceBtn onClick={openModal}>
           <Input
             name="tripPlace"
-            value={state.tripPlace}
-            onChange={handleChange}
+            value={tripPlace}
+            onChange={handlePlaceChange}
             placeholder="장소를 검색하세요"
             autoComplete="off"
           />
@@ -108,10 +102,7 @@ const CreateTripPage = () => {
       </InputContainer>
       <Button
         disabled={
-          !state.tripName.trim() ||
-          !state.tripPlace.trim() ||
-          !startDate ||
-          !endDate
+          !tripName.trim() || !tripPlace.trim() || !startDate || !endDate
         }
         type="submit"
         onClick={handleSubmit}
@@ -121,10 +112,10 @@ const CreateTripPage = () => {
     </div>
   );
 };
-CreateTripPage.propTypes = {
+AddTripPage.propTypes = {
   location: PropTypes.object,
 };
-export default CreateTripPage;
+export default AddTripPage;
 
 const Title = styled.h1`
   color: ${COLOR.MAIN_GREEN};
