@@ -188,7 +188,7 @@ const EntireAgreeDiv = styled.div`
 `;
 
 const AllLabel = styled.div`
-  padding-right: 19rem;
+  padding-right: 16rem;
   font-size: 1.4rem;
 `;
 
@@ -221,7 +221,7 @@ const CustomCheckbox = styled.input`
 
 const ThreeLabel = styled.div`
   font-size: 1.4rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 
 `;
 
@@ -230,12 +230,12 @@ const BtnDiv = styled.div`
   flex-direction: column;
   height: 1rem;
   width: 4rem;
-  margin-left: 4rem;
+  margin-left: 1rem;
 `;
 
 const CustomButton = styled.button`
   font-size: 1.3rem; 
-  margin-bottom: 1.1rem;
+  margin-bottom: 1.6rem;
   border: 0;
   background-color: transparent;
   width: 5rem;
@@ -245,7 +245,7 @@ const CustomButton = styled.button`
 const AgreeDiv = styled.div`
   display: flex;
   flex-direction: row;
-  margin-top: 1.2rem;
+  margin-top: 1.5rem;
   margin-bottom: 6rem;
 `;
 
