@@ -71,7 +71,7 @@ const ImageUploadDiv = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   margin-left: 8%;
   margin-right: 8%;
 `;

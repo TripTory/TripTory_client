@@ -60,9 +60,6 @@ const DiaryWritePage = () => {
       <ContentBox type="text" placeholder="내용을 입력하세요" maxLength={1000}/>
     </DiaryDiv>
 
-    {/* <ImageUploadDiv>
-      <ImgUploadBtn></ImgUploadBtn>
-    </ImageUploadDiv> */}
     <Uploader handleImageUpload={handleImageUpload} />
 
     {/* 이미지 미리보기 */}
