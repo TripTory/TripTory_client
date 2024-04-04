@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import { COLOR } from "../../styles/color";
 import CancelIcon from "@mui/icons-material/Cancel";
+import CameraAltIcon from "@mui/icons-material/CameraAlt";
 
 const Uploader = () => {
   const [files, setFiles] = useState([]);
@@ -46,7 +47,8 @@ const Uploader = () => {
           variant="contained"
           onClick={() => inputRef.current && inputRef.current.click()}
         >
-          Preview
+          <CameraAltIcons />
+          <UploadCount>{files.length}/10</UploadCount>
         </ImgUploadBtn>
         <Slider>
           {Array.isArray(files) &&
@@ -111,4 +113,14 @@ const ImageDiv = styled.div`
   position: relative;
 `;
 
+const CameraAltIcons= styled(CameraAltIcon)`
+  height: 3rem;
+  width: 3rem;
+  fill: ${COLOR.MAIN_GREEN};
+`;
+
+const UploadCount = styled.p`
+  color: ${COLOR.MAIN_GREEN};
+  font-weight: 500;
+`;
 export default Uploader;
