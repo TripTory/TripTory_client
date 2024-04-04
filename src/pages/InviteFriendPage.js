@@ -1,11 +1,25 @@
 import React from "react";
 import styled from "styled-components";
 import { COLOR } from "../styles/color.js";
+import FriendList from "../components/common/FriendList.js";
+import jsonData from "../data/FriendData.json";
+import copyIcon from "../assets/icons/copy.svg";
 
 const InviteFriendPage = () => {
+  //임시 작성
+  const handleCancel = () => {
+    alert("일기 목록 화면으로 연결");
+  };
+  //임시 작성
+  const copyCode = () => {
+    alert("코드가 복사되었습니다.");
+  };
+
   return (
     <div>
-      <div><XButton>X</XButton></div>
+      <div>
+        <XButton onClick={handleCancel}>X</XButton>
+      </div>
       <EmptyDiv></EmptyDiv>
       <CopyCodeContainer>
         <Text className="tripName">마루와 함께하는 부산</Text>
@@ -15,15 +29,20 @@ const InviteFriendPage = () => {
           여행 일기를 함께 기록하고 공유할 수 있습니다.
         </Text>
         <ButtonWrapper>
-          <CopyCodeButton>랜덤코드 복사</CopyCodeButton>
+          <CopyCodeButton onClick={copyCode}>
+            <CopyIconImg src={copyIcon} />
+            <p>랜덤코드 복사</p>
+          </CopyCodeButton>
         </ButtonWrapper>
       </CopyCodeContainer>
+      <FriendListContainer>
+        <FriendList friends={jsonData.friends}></FriendList>
+      </FriendListContainer>
     </div>
   );
 };
 
 export default InviteFriendPage;
-
 
 const EmptyDiv = styled.div`
   width: 100%;
@@ -51,6 +70,13 @@ const CopyCodeButton = styled.button`
   margin: auto;
   margin-top: 3rem;
   margin-bottom: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:active {
+    background-color: ${COLOR.MAIN_GREEN};
+  }
 `;
 
 const ButtonWrapper = styled.div`
@@ -80,4 +106,10 @@ const Text = styled.p`
     padding: 0.5rem 1rem;
     margin: 0rem 2.5rem;
   }
+`;
+
+const FriendListContainer = styled.div``;
+
+const CopyIconImg = styled.img`
+  margin: 0.2rem;
 `;
