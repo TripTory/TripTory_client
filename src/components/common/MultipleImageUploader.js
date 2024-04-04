@@ -90,6 +90,7 @@ const UploadedImage = styled.img`
   height: 7rem;
   width: 7rem;
   margin: 0.5rem;
+  object-fit: cover;
 `;
 
 const CancelIcons = styled(CancelIcon)`
