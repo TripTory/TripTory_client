@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import React, { useState, useEffect } from "react";
 import Modal from "../components/common/Modal";
+import { COLOR } from "../styles/color";
 
 const JoinPage = () => {
   const [isChecked, setIsChecked] = useState({
@@ -157,6 +158,8 @@ const JoinP = styled.p`
   margin-bottom: 6rem;
 `;
 
+
+
 const NameP = styled.div`
   padding-right: 85%;
   font-size: 1.2rem;
@@ -252,14 +255,14 @@ const StartDiv = styled.button`
   font-size: 2.2rem;
   font-weight: 400;
   color: #ffffff;
-  background-color: #2EABA1;
+  background-color: ${COLOR.MAIN_EMER};
   border: none;
   border-radius: 30px;
   height: 4.7rem;
   width: 20rem;
   margin: auto;
 
-  background-color: ${(props) => props.disabled ? "rgba(46, 171, 161, 0.3)" : "#2EABA1"}
+  background-color: ${(props) => props.disabled ? "rgba(46, 171, 161, 0.3)" : "${COLOR.MAIN_EMER}"}
 `;
 
 export default JoinPage;

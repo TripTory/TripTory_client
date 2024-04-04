@@ -36,6 +36,10 @@ const ModalContainer = styled.div`
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   max-height: 70vh;
   overflow-y: auto;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const BackgroundOverlay = styled.div`
@@ -51,8 +55,8 @@ const BackgroundOverlay = styled.div`
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 2rem;
+  width: 100%;
+  height: 100%;
 `;
 
 export default Modal;
-

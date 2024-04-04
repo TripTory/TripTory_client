@@ -3,6 +3,10 @@ import MainPage from "../pages/MainPage";
 import LoginPage from "../pages/LoginPage";
 import JoinPage from "../pages/JoinPage";
 import AddTripPage from "../pages/AddTripPage";
+import DiaryWritePage from "../pages/DiaryWritePage";
+import MypagePage from "../pages/MypagePage";
+import EditProfilPage from "../pages/EditProfilPage";
+
 import React from "react";
 
 const Router = () => {
@@ -13,6 +17,9 @@ const Router = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/join" element={<JoinPage />} />
         <Route path="/addtrip" element={<AddTripPage/>} />
+        <Route path="/diary" element={<DiaryWritePage />} />
+        <Route path="/mypage" element={<MypagePage />} />
+        <Route path="/editprofil" element={<EditProfilPage />} />
       </Routes>
     </BrowserRouter>
   );
