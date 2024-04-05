@@ -6,6 +6,7 @@ import AddTripPage from "../pages/AddTripPage";
 import DiaryWritePage from "../pages/DiaryWritePage";
 import MypagePage from "../pages/MypagePage";
 import EditProfilPage from "../pages/EditProfilPage";
+import JoinTripPage from "../pages/JoinTripPage";
 
 import React from "react";
 
@@ -20,6 +21,7 @@ const Router = () => {
         <Route path="/diary" element={<DiaryWritePage />} />
         <Route path="/mypage" element={<MypagePage />} />
         <Route path="/editprofil" element={<EditProfilPage />} />
+        <Route path="/jointrip" element={<JoinTripPage />} />
       </Routes>
     </BrowserRouter>
   );
