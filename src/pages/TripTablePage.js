@@ -1,5 +1,5 @@
 import React from "react";
-import COLOR from "../styles/color";
+import { COLOR } from "../styles/color";
 import styled from "styled-components";
 import TripTable from "../components/common/TripTable";
 import Greenbar from "../assets/icons/greenbar.svg";
@@ -38,7 +38,13 @@ export default function TripTablePage() {
         <DiaryDiv>
           <SemiHeaderDiv>
             <SemititleDiv>
-              <FormatListBulletedIcon sx={{ height: "3rem", width: "3rem" }} />
+              <FormatListBulletedIcon
+                sx={{
+                  height: "2.5rem",
+                  width: "2.5rem",
+                  color: `${COLOR.MAIN_GREEN}`,
+                }}
+              />
               <SemititleP>일기목록</SemititleP>
             </SemititleDiv>
             <PencilImg src={Pencil} onClick={goToCreate} />
@@ -66,7 +72,8 @@ const TitleDiv = styled.div`
   justify-content: baseline;
   align-items: center;
   width: 100%;
-  height: 10%;
+  height: fit-content;
+  padding-left: 1rem;
 `;
 
 const TitleP = styled.p`
@@ -80,9 +87,8 @@ const MainDiv = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 100%;
+  width: 95%;
   height: 90%;
-  border: 1px solid red;
 `;
 
 const FriendDiv = styled.div`
@@ -101,7 +107,7 @@ const FriendAvt = styled(Avatar)`
 `;
 const DiaryDiv = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: baseline;
   align-items: center;
   flex-direction: column;
   width: 100%;
@@ -124,6 +130,7 @@ const SemititleDiv = styled.div`
 
 const SemititleP = styled.p`
   font-size: 1.7rem;
+  margin-left: 1rem;
 `;
 
 const PencilImg = styled.img`
@@ -136,6 +143,5 @@ const DiaryListDiv = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 90%;
-  border: 1px solid yellow;
+  height: 85%;
 `;

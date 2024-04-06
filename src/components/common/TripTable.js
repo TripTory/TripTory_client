@@ -1,17 +1,9 @@
 import React from "react";
-import COLOR from "../../styles/color";
 import styled from "styled-components";
 import TripTableItem from "./TripTableItem";
 export default function TripTable() {
   return (
-    <StTripTable
-      sx={{
-        bgcolor: "background.paper",
-        position: "relative",
-        overflow: "auto",
-        scrollbarWidth: "none",
-      }}
-    >
+    <StTripTable>
       <TripTableItem item="1" />
       <TripTableItem item="2" />
       <TripTableItem item="3" />
@@ -26,7 +18,12 @@ export default function TripTable() {
 }
 
 const StTripTable = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   width: 100%;
   height: 100%;
-  border: 1px solid black;
+  position: relative;
+  overflow: auto;
+  scrollbar-width: none;
 `;
