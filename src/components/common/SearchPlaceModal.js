@@ -65,8 +65,8 @@ export default SearchPlaceModal;
 
 const SearchBoxContainer = styled.div`
   width: 98%;
-  height: 50px;
-  border-bottom: solid #bfbfbf 1px;
+  height: 5rem;
+  border-bottom: solid #bfbfbf 0.1rem;
   display: flex;
   justify-content: space-between;
   margin: auto;
@@ -75,11 +75,11 @@ const SearchBoxContainer = styled.div`
 `;
 
 const GoBack = styled(GoArrowLeft)`
-  width: 45px;
-  height: 45px;
-  padding: 3px;
+  width: 4.5rem;
+  height: 4.5rem;
+  padding: 0.3rem;
   color: ${COLOR.MAIN_GREEN};
-  margin: 3px 3px 3px 5px;
+  margin: 0.3rem 0.3rem 0.3rem 0.5rem;
 `;
 
 const InputBox = styled.input`
@@ -91,15 +91,15 @@ const InputBox = styled.input`
 `;
 
 const SearchIcon = styled(IoIosSearch)`
-  width: 45px;
-  height: 45px;
+  width: 4.5rem;
+  height: 4.5rem;
   padding: 0.3rem 0.5rem 0.3rem 0.3rem;
   color: ${COLOR.MAIN_GREEN};
-  margin: 3px 3px;
+  margin: 0.3rem 0.3rem;
 `;
 
 const PlaceListContainer = styled.div`
-  padding-top: 50px;
+  padding-top: 5rem;
 `;
 
 const ModalContainer = styled.div`
@@ -110,6 +110,5 @@ const ModalContainer = styled.div`
   left: 0;
   z-index: 1000;
   background-color: white;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   overflow-y: auto;
 `;

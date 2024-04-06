@@ -122,13 +122,13 @@ export default AddTripPage;
 const Title = styled.h1`
   color: ${COLOR.MAIN_GREEN};
   font-weight: 900;
-  font-size: 23px;
-  padding: 30px 20px 30px;
+  font-size: 2.3rem;
+  padding: 3rem 2rem 3rem;
+  margin-right: auto;
 `;
 
 const TitleContainer = styled.div`
   display: flex;
-  justify-content: space-around;
 `;
 
 const Button = styled.button`
@@ -136,8 +136,8 @@ const Button = styled.button`
   width: 90%;
   height: 4rem;
   border: none;
-  border-radius: 20px;
-  font-size: 18px;
+  border-radius: 2rem;
+  font-size: 1.8rem;
   color: white;
   font-weight: bolder;
   display: flex;
@@ -163,16 +163,19 @@ const CancelBtn = styled.button`
   margin: auto;
   background-color: transparent;
   border: none;
+  margin-left: auto;
+  font-size: 1.7rem;
+  color: ${COLOR.MAIN_GREEN};
 `;
 
 const Label = styled.div`
-  font-size: 15px;
+  font-size: 1.5rem;
   width: 90%;
-  height: 35px;
+  height: 3.5rem;
   display: block;
   margin-left: auto;
   margin-right: auto;
-  padding: 8px 0px;
+  padding: 0.8rem 0rem;
   font-weight: bolder;
 `;
 
@@ -189,8 +192,8 @@ const Input = styled.input`
   background-color: none;
   width: 90%;
   border: none;
-  font-size: 15px;
-  border-bottom: solid #bfbfbf 1px;
+  font-size: 1.5rem;
+  border-bottom: solid #bfbfbf 0.1rem;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -200,8 +203,8 @@ const SearchPlaceBtn = styled.button`
   background-color: transparent;
   width: 100%;
   border: none;
-  font-size: 15px;
-  padding: 0px;
+  font-size: 1.5rem;
+  padding: 0rem;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -217,7 +220,7 @@ const DateWrapper = styled.div`
   width: 90%;
   display: flex;
   justify-content: start;
-  border-bottom: solid #bfbfbf 1px;
+  border-bottom: solid #bfbfbf 0.1rem;
   margin: auto;
   font-size: 0;
 `;

@@ -52,7 +52,7 @@ const StyledDatePicker = styled.div`
     background-color: none;
     border: none;
     width: 100%;
-    font-size: 15px;
+    font-size: 1.5rem;
     display: block;
     margin-left: auto;
     margin-right: auto;

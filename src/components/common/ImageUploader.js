@@ -36,12 +36,12 @@ const ImageUploader = ({onChange}) => {
       />
       <div
         style={{
-          width: "150px",
-          height: "150px",
+          width: "15rem",
+          height: "15rem",
           borderRadius: "50%",
           overflow: "hidden",
           margin: "0 auto",
-          border: "1px solid #ccc",
+          border: "0.1rem solid #ccc",
         }}
         onClick={() => fileInput.current.click()}
       >
@@ -69,8 +69,8 @@ const ImageUploader = ({onChange}) => {
             <AiFillCamera
               style={{
                 color: "#545454",
-                width: "30px",
-                height: "30px",
+                width: "3rem",
+                height: "3rem",
               }}
             />
           </div>
