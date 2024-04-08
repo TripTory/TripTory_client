@@ -195,7 +195,7 @@ const Input = styled.input`
   width: 90%;
   border: none;
   font-size: 1.5rem;
-  border-bottom: solid #bfbfbf 0.1rem;
+  border-bottom: solid #bfbfbf 1px;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -222,7 +222,7 @@ const DateWrapper = styled.div`
   width: 90%;
   display: flex;
   justify-content: start;
-  border-bottom: solid #bfbfbf 0.1rem;
+  border-bottom: solid #bfbfbf 1px;
   margin: auto;
   font-size: 0;
 `;

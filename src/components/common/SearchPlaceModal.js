@@ -66,7 +66,7 @@ export default SearchPlaceModal;
 const SearchBoxContainer = styled.div`
   width: 98%;
   height: 5rem;
-  border-bottom: solid #bfbfbf 0.1rem;
+  border-bottom: solid #bfbfbf 1px;
   display: flex;
   justify-content: space-between;
   margin: auto;
