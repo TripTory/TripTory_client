@@ -165,7 +165,7 @@ const CancelBtn = styled.button`
   margin: auto;
   background-color: transparent;
   border: none;
-  margin-left: auto;
+  margin-right: 2rem;
   font-size: 1.7rem;
   color: ${COLOR.MAIN_GREEN};
 `;
