@@ -9,7 +9,7 @@ import Modal from "../components/common/Modal";
 import Uploader from "../components/common/MultipleImageUploader";
 
 import { COLOR } from "../styles/color";
-
+import BottomNav from "../layout/BottomNav";
 
 const DiaryWritePage = () => {
 
@@ -109,7 +109,7 @@ const DiaryWritePage = () => {
         }
       />
     )}
-
+    <BottomNav />
   </div>;
 };
 

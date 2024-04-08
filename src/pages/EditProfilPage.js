@@ -6,6 +6,8 @@ import TextField from "@mui/material/TextField";
 import { useNavigate } from "react-router-dom";
 import ProfilUploader from "../components/common/ProfilUploader";
 import KeyboardArrowLeftOutlinedIcon from "@mui/icons-material/KeyboardArrowLeftOutlined";
+import BottomNav from "../layout/BottomNav";
+
 const EditProfilPage = () => {
   const navigate = useNavigate();
   const moveBack = () => {
@@ -28,6 +30,7 @@ const EditProfilPage = () => {
         />
         <Button>완료</Button>
       </ProfilDiv>
+      <BottomNav />
     </StEditProfilPage>
   );
 };
