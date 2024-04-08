@@ -25,7 +25,7 @@ const FailContent = styled.div`
 
 
 const ContentDiv =styled.div`
-  padding:  2rem 1em;
+  padding: 2rem 1em;
   margin: 1rem;
 `;
 
