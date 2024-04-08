@@ -8,6 +8,8 @@ import AddTripDialog from "../components/common/AddTripDialog";
 import React from "react";
 import { useRecoilState } from "recoil";
 import { dialogState } from "../recoil/commonState";
+import BottomNav from "../layout/BottomNav";
+
 const MainPage = () => {
   const [dialog, setDialog] = useRecoilState(dialogState);
   const handleOpen = () => {
@@ -50,6 +52,7 @@ const MainPage = () => {
           </DownRDiv>
         </TagDiv>
       </MainDiv>
+      <BottomNav />
     </StMainPage>
   );
 };
