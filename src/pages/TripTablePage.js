@@ -30,15 +30,19 @@ export default function TripTablePage() {
       </TitleDiv>
       <MainDiv>
         <FriendDiv>
-          <FriendGroup max={3}>
-            <FriendAvt alt="1" src={Busan} />
-            <FriendAvt alt="2" src={Gunsan} />
-            <FriendAvt alt="3" src={Busan} />
-            <FriendAvt alt="4" src={Busan} />
-            <FriendAvt alt="5" src={Busan} />
-            <FriendAvt alt="6" src={Busan} />
-          </FriendGroup>
-          <AddFriendBtn variant="contained" onClick={goToAdd}>+ 일행 추가</AddFriendBtn>
+          <FriendAvt
+            sx={{ position: "absolute", left: "56%" }}
+            alt="1"
+            src={Busan}
+          />
+          <FriendAvt
+            sx={{ position: "absolute", left: "63%" }}
+            alt="2"
+            src={Gunsan}
+          />
+          <AddFriendBtn variant="contained" onClick={goToAdd}>
+            + 일행 추가
+          </AddFriendBtn>
         </FriendDiv>
         <DiaryDiv>
           <SemiHeaderDiv>
@@ -104,16 +108,13 @@ const FriendDiv = styled.div`
   height: 10%;
 `;
 
-const FriendGroup = styled(AvatarGroup)`
-  position: absolute;
-  left: 53%;
-  .MuiAvatarGroup-avatar {
-    height: 3.5rem;
-    width: 3.5rem;
-  }
-`;
 
-const FriendAvt = styled(Avatar)``;
+
+const FriendAvt = styled(Avatar)`
+  width: 3.5rem;
+  height: 3.5rem;
+  border: 1.5px solid white;
+`;
 
 const AddFriendBtn = styled(Button)`
   position: absolute;

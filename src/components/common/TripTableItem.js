@@ -4,10 +4,7 @@ import styled from "styled-components";
 import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
-import ImageIcon from "@mui/icons-material/Image";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
 import Dot from "../../assets/icons/dot.svg";
-import { PropTypes } from "prop-types";
 import Busan from "../../assets/images/busan.jpg";
 
 export default function TripTableItem() {
@@ -18,7 +15,7 @@ export default function TripTableItem() {
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-          height: "100%",
+          height: "9.6rem",
           width: "100%",
           paddingLeft: "1rem"
         }}
@@ -50,7 +47,7 @@ const StTripTableItem = styled.div`
   border: 0.2rem solid rgba(228, 228, 228);
   border-radius: 1rem;
   width: 100%;
-  height: 8.5rem;
+  height: 100%;
   margin-bottom: 0.8rem;
   box-shadow: 1px 1px 3px rgba(228, 228, 228);
 `;
