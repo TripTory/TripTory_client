@@ -68,7 +68,7 @@ const JoinTripPage = () => {
             </ButtonContainer>
           }
           w="80%"
-          h="20%"
+          h="23%"
         />
       )}
       {isFailModal && (
@@ -81,7 +81,7 @@ const JoinTripPage = () => {
             </ButtonContainer>
           }
           w="80%"
-          h="20%"
+          h="23%"
         />
       )}
       <div>

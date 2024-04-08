@@ -30,10 +30,10 @@ const ContentDiv =styled.div`
 `;
 
 const ContentP = styled.p`
-  font-size: 2rem;
+  font-size: 1.8rem;
   text-align: center;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
   line-height: 1.5rem;
-  font-weight: 800;
+  font-weight: 700;
   padding: 1rem;
   line-height : normal;
 `;

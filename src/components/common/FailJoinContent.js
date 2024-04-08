@@ -1,19 +1,19 @@
 import React from "react";
 import styled from "styled-components";
 
-const AcceptJoinContent = () => {
+const FailJoinContent = () => {
   return (
-    <AcceptContent>
+    <FailContent>
       <ContentDiv>
         <ContentP>
           존재하지 않는 코드입니다.
         </ContentP>
       </ContentDiv>
-    </AcceptContent>
+    </FailContent>
   );
 };
 
-const AcceptContent = styled.div`
+const FailContent = styled.div`
   width: 100%;
   height: fit-content;
   display: flex;
@@ -30,11 +30,11 @@ const ContentDiv =styled.div`
 `;
 
 const ContentP = styled.p`
-  font-size: 2rem;
+  font-size: 1.8rem;
   text-align: center;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
   line-height: 1.5rem;
-  font-weight: 800;
+  font-weight: 700;
   line-height : normal;
 `;
 
-export default AcceptJoinContent;
+export default FailJoinContent;
