@@ -18,8 +18,8 @@ const BottomNav = () => {
 
   return (
     <NavDiv>
-      <NavBtn onClick={() => handleNavigation("/mypage")}><CalendarMonthIcons /></NavBtn>
-      <NavBtn onClick={() => handleNavigation("/")}><HomeIcons /></NavBtn>
+      <NavBtn onClick={() => handleNavigation("/")}><CalendarMonthIcons /></NavBtn>
+      <NavBtn onClick={() => handleNavigation("/home")}><HomeIcons /></NavBtn>
       <NavBtn onClick={() => handleNavigation("/")}><PlaceIcons /></NavBtn>
       <NavBtn onClick={() => handleNavigation("/mypage")}><PersonIcons /></NavBtn>
     </NavDiv>
