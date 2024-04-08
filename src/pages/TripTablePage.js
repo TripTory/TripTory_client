@@ -15,6 +15,9 @@ import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 export default function TripTablePage() {
   const dummyTitle = "마루와 함께하는 부산";
   const navigate = useNavigate();
+  const goToAdd = () => {
+    // navigate("/invitefriend");
+  };
   const goToCreate = () => {
     navigate("/createTrip");
   };
@@ -35,7 +38,7 @@ export default function TripTablePage() {
             <FriendAvt alt="5" src={Busan} />
             <FriendAvt alt="6" src={Busan} />
           </FriendGroup>
-          <AddFriendBtn variant="contained">+ 일행 추가</AddFriendBtn>
+          <AddFriendBtn variant="contained" onClick={goToAdd}>+ 일행 추가</AddFriendBtn>
         </FriendDiv>
         <DiaryDiv>
           <SemiHeaderDiv>
@@ -113,9 +116,6 @@ const FriendGroup = styled(AvatarGroup)`
 const FriendAvt = styled(Avatar)``;
 
 const AddFriendBtn = styled(Button)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
   position: absolute;
   right: 5%;
   left: 70%;
@@ -126,6 +126,12 @@ const AddFriendBtn = styled(Button)`
   font-size: 1.1rem;
   font-weight: 600;
   border-radius: 3rem;
+  &:hover {
+    background-color: ${COLOR.MAIN_EMER};
+  }
+  &:active {
+    background-color: ${COLOR.MAIN_EMER};
+  }
 `;
 
 const DiaryDiv = styled.div`
