@@ -4,6 +4,7 @@ import { COLOR } from "../styles/color.js";
 import FriendList from "../components/common/FriendList.js";
 import jsonData from "../data/FriendData.json";
 import copyIcon from "../assets/icons/copy.svg";
+import xicon from "../assets/icons/x-icon.svg";
 
 const InviteFriendPage = () => {
   //임시 작성
@@ -17,24 +18,29 @@ const InviteFriendPage = () => {
 
   return (
     <div>
-      <div>
-        <XButton onClick={handleCancel}>X</XButton>
-      </div>
-      <EmptyDiv></EmptyDiv>
-      <CopyCodeContainer>
-        <Text className="tripName">마루와 함께하는 부산</Text>
-        <Text className="tripFriend">트립토리 친구</Text>
-        <Text className="explain">함께 여행간 친구나 가족을 초대해보세요.</Text>
-        <Text className="explain">
-          여행 일기를 함께 기록하고 공유할 수 있습니다.
-        </Text>
-        <ButtonWrapper>
-          <CopyCodeButton onClick={copyCode}>
-            <CopyIconImg src={copyIcon} />
-            <p>랜덤코드 복사</p>
-          </CopyCodeButton>
-        </ButtonWrapper>
-      </CopyCodeContainer>
+      <FixedDiv>
+        <div>
+          <XButton onClick={handleCancel}>
+            <img src={xicon} />
+          </XButton>
+        </div>
+        <CopyCodeContainer>
+          <Text className="tripName">마루와 함께하는 부산</Text>
+          <Text className="tripFriend">트립토리 친구</Text>
+          <Text className="explain">
+            함께 여행간 친구나 가족을 초대해보세요.
+          </Text>
+          <Text className="explain">
+            여행 일기를 함께 기록하고 공유할 수 있습니다.
+          </Text>
+          <ButtonWrapper>
+            <CopyCodeButton onClick={copyCode}>
+              <CopyIconImg src={copyIcon} />
+              <p>랜덤코드 복사</p>
+            </CopyCodeButton>
+          </ButtonWrapper>
+        </CopyCodeContainer>
+      </FixedDiv>
       <FriendListContainer>
         <FriendList friends={jsonData.friends}></FriendList>
       </FriendListContainer>
@@ -44,9 +50,10 @@ const InviteFriendPage = () => {
 
 export default InviteFriendPage;
 
-const EmptyDiv = styled.div`
+const FixedDiv = styled.div`
   width: 100%;
-  height: 3rem;
+  position: fixed;
+  background-color: white;
 `;
 
 const XButton = styled.button`
@@ -108,7 +115,9 @@ const Text = styled.p`
   }
 `;
 
-const FriendListContainer = styled.div``;
+const FriendListContainer = styled.div`
+  padding-top: 37rem;
+`;
 
 const CopyIconImg = styled.img`
   margin: 0.2rem;
