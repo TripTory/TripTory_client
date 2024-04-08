@@ -186,6 +186,7 @@ const TagDiv = styled.div`
   flex-direction: column;
   width: 100%;
   height: 24rem;
+  margin-bottom: 5rem;
 `;
 
 const UpTDiv = styled.div`

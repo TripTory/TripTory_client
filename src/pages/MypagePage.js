@@ -143,6 +143,7 @@ const MenuDiv = styled.div`
   display: flex;
   align-items: end;
   padding-bottom: 4rem;
+  margin-bottom: 2rem;
 `;
 
 const MenuLstItem = styled(ListItem)`
