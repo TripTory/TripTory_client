@@ -1,5 +1,4 @@
 import React, {useState ,useRef} from "react";
-import styled from "styled-components";
 import PropTypes from "prop-types";
 import { AiFillCamera } from "react-icons/ai";
 

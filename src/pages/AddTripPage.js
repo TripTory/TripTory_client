@@ -7,6 +7,7 @@ import { PiMapPinFill } from "react-icons/pi";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { COLOR } from "../styles/color";
+import BottomNav from "../layout/BottomNav";
 
 const AddTripPage = () => {
   const navigate = useNavigate();
@@ -111,6 +112,7 @@ const AddTripPage = () => {
       >
         여행 떠나기
       </Button>
+      <BottomNav />
     </div>
   );
 };
