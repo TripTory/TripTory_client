@@ -53,23 +53,23 @@ const NavBtn = styled.button`
 `;
 
 const CalendarMonthIcons= styled(CalendarMonthIcon)`
-  height: 3rem;
-  width: 3rem;
+  height: 3.2rem;
+  width: 3.2rem;
   color: ${COLOR.MAIN_GREEN};
 `;
 const HomeIcons = styled(HomeIcon)`
-  height: 3rem;
-  width: 3rem;
+  height: 3.3rem;
+  width: 3.3rem;
   color: ${COLOR.MAIN_GREEN};
 `;
 const PlaceIcons = styled(PlaceIcon)`
-  height: 3rem;
-  width: 3rem;
+  height: 3.2rem;
+  width: 3.2rem;
   color: ${COLOR.MAIN_GREEN};
 `;
 const PersonIcons= styled(PersonIcon)`
-  height: 3rem;
-  width: 3rem;
+  height: 3.5rem;
+  width: 3.5rem;
   color: ${COLOR.MAIN_GREEN};
 `;
 
