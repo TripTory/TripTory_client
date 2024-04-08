@@ -1,0 +1,20 @@
+{
+  "friends": [
+    {
+      "friendName": "카리나",
+      "imagePath": "../../assets/images/karina.png"
+    },
+    {
+      "friendName": "윈터",
+      "imagePath": "../../assets/images/karina.png"
+    },
+    {
+      "friendName": "정우",
+      "imagePath": "../../assets/images/karina.png"
+    },
+    {
+      "friendName": "민지",
+      "imagePath": "../../assets/images/karina.png"
+    }
+  ]
+}
