@@ -1,10 +1,9 @@
 import React from "react";
 import { COLOR } from "../styles/color";
 import styled from "styled-components";
-import TripTable from "../components/common/TripTable";
+import DiaryList from "../components/common/DiaryList";
 import Greenbar from "../assets/icons/greenbar.svg";
 import Avatar from "@mui/material/Avatar";
-import AvatarGroup from "@mui/material/AvatarGroup";
 import Button from "@mui/material/Button";
 import Busan from "../assets/images/busan.jpg";
 import Gunsan from "../assets/images/gunsan.jpg";
@@ -12,7 +11,7 @@ import Pencil from "../assets/images/pencil.svg";
 import { useNavigate } from "react-router-dom";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 
-export default function TripTablePage() {
+export default function DiaryListPage() {
   const dummyTitle = "마루와 함께하는 부산";
   const navigate = useNavigate();
   const goToAdd = () => {
@@ -23,7 +22,7 @@ export default function TripTablePage() {
   };
 
   return (
-    <StTripTablePage>
+    <StDiaryListPage>
       <TitleDiv>
         <img src={Greenbar} style={{ height: "2.7rem" }} />
         <TitleP>{dummyTitle}</TitleP>
@@ -59,15 +58,15 @@ export default function TripTablePage() {
             <PencilImg src={Pencil} onClick={goToCreate} />
           </SemiHeaderDiv>
           <DiaryListDiv>
-            <TripTable />
+            <DiaryList />
           </DiaryListDiv>
         </DiaryDiv>
       </MainDiv>
-    </StTripTablePage>
+    </StDiaryListPage>
   );
 }
 
-const StTripTablePage = styled.div`
+const StDiaryListPage = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;

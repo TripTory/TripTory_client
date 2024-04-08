@@ -6,7 +6,7 @@ import CreateTripPage from "../pages/CreateTripPage";
 import MypagePage from "../pages/MypagePage";
 import EditProfilPage from "../pages/EditProfilPage";
 import React from "react";
-import TripTablePage from "../pages/TripTablePage";
+import DiaryListPage from "../pages/DiaryListPage";
 
 const Router = () => {
   return (
@@ -18,7 +18,7 @@ const Router = () => {
         <Route path="/createTrip" element={<CreateTripPage />} />
         <Route path="/mypage" element={<MypagePage />} />
         <Route path="/editprofil" element={<EditProfilPage />} />
-        <Route path="/triptable" element={<TripTablePage />} />
+        <Route path="/triptable" element={<DiaryListPage />} />
       </Routes>
     </BrowserRouter>
   );

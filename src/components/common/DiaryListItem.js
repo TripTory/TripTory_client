@@ -7,9 +7,9 @@ import Avatar from "@mui/material/Avatar";
 import Dot from "../../assets/icons/dot.svg";
 import Busan from "../../assets/images/busan.jpg";
 
-export default function TripTableItem() {
+export default function DiaryListItem() {
   return (
-    <StTripTableItem>
+    <StDiaryListItem>
       <ListItem
         sx={{
           display: "flex",
@@ -36,11 +36,11 @@ export default function TripTableItem() {
           <Avatar src={Busan} sx={{ width: "5rem", height: "5rem" }}></Avatar>
         </ListItemAvatar>
       </ListItem>
-    </StTripTableItem>
+    </StDiaryListItem>
   );
 }
 
-const StTripTableItem = styled.div`
+const StDiaryListItem = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
