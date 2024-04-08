@@ -10,6 +10,10 @@ const Uploader = () => {
 
   const saveImage = (e) => {
     e.preventDefault();
+
+    if (files.length >= 10) {
+      return;
+    }
     const fileReader = new FileReader();
     if (e.target.files[0]) {
       fileReader.readAsDataURL(e.target.files[0]);
@@ -46,6 +50,7 @@ const Uploader = () => {
         <ImgUploadBtn
           variant="contained"
           onClick={() => inputRef.current && inputRef.current.click()}
+          disabled={files.length >= 10}
         >
           <CameraAltIcons />
           <UploadCount>{files.length}/10</UploadCount>
@@ -84,6 +89,8 @@ const ImgUploadBtn = styled.button`
   height: 7rem;
   width: 7rem;
   margin-right: 0.5rem;
+  color: ${COLOR.MAIN_GREEN};
+  color: ${(props) => props.disabled ? "rgba(46, 171, 161, 0.3)" : "${COLOR.MAIN_GREEN}"}
 `;
 
 const UploadedImage = styled.img`
@@ -118,7 +125,6 @@ const ImageDiv = styled.div`
 const CameraAltIcons= styled(CameraAltIcon)`
   height: 3rem;
   width: 3rem;
-  fill: ${COLOR.MAIN_GREEN};
 `;
 
 const UploadCount = styled.p`
