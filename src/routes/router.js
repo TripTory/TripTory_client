@@ -9,6 +9,7 @@ import EditProfilPage from "../pages/EditProfilPage";
 import InviteFriendPage from "../pages/InviteFriendPage";
 
 import React from "react";
+import DiaryListPage from "../pages/DiaryListPage";
 
 const Router = () => {
   return (
@@ -22,6 +23,7 @@ const Router = () => {
         <Route path="/mypage" element={<MypagePage />} />
         <Route path="/editprofil" element={<EditProfilPage />} />
         <Route path="/invitefriend" element={<InviteFriendPage />} />
+        <Route path="/triptable" element={<DiaryListPage />} />
       </Routes>
     </BrowserRouter>
   );
