@@ -89,6 +89,8 @@ const ImgUploadBtn = styled.button`
   height: 7rem;
   width: 7rem;
   margin-right: 0.5rem;
+  min-width: 7rem;
+  min-height: 7rem;
   color: ${COLOR.MAIN_GREEN};
   color: ${(props) => props.disabled ? "rgba(46, 171, 161, 0.3)" : "${COLOR.MAIN_GREEN}"}
 `;
