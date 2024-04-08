@@ -13,7 +13,7 @@ import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import DoDisturbOutlinedIcon from "@mui/icons-material/DoDisturbOutlined";
 import CancelContent from "../components/common/CancelContent";
-
+import BottomNav from "../layout/BottomNav";
 
 const MypagePage = () => {
   const navigate = useNavigate();
@@ -82,6 +82,7 @@ const MypagePage = () => {
           h="20%"
         />
       )}
+      <BottomNav />
     </StMyPagePage>
   );
 };
