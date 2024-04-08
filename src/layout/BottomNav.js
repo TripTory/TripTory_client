@@ -1,27 +1,28 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useState } from "react";
+import styled, { css } from "styled-components";
 import { COLOR } from "../styles/color";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import PersonIcon from "@mui/icons-material/Person";
 import HomeIcon from "@mui/icons-material/Home";
 import PlaceIcon from "@mui/icons-material/Place";
-import { useNavigate } from "react-router-dom";
-
-
+import { useNavigate, useLocation } from "react-router-dom";
 
 const BottomNav = () => {
 
+  const [activeButton, setActiveButton] = useState("/");
+  const location = useLocation();
   const history = useNavigate();
-  const handleNavigation = (path) => {
-    history(path);
-  };
+
+  React.useEffect(() => {
+    setActiveButton(location.pathname);
+  }, [location]);
 
   return (
     <NavDiv>
-      <NavBtn onClick={() => handleNavigation("/")}><CalendarMonthIcons /></NavBtn>
-      <NavBtn onClick={() => handleNavigation("/home")}><HomeIcons /></NavBtn>
-      <NavBtn onClick={() => handleNavigation("/")}><PlaceIcons /></NavBtn>
-      <NavBtn onClick={() => handleNavigation("/mypage")}><PersonIcons /></NavBtn>
+      <NavBtn onClick={() => history("/")} active={activeButton === "/"}><CalendarMonthIcons /></NavBtn>
+      <NavBtn onClick={() => history("/home")} active={activeButton === "/home"}><HomeIcons /></NavBtn>
+      <NavBtn onClick={() => history("/")} active={activeButton === "/"}><PlaceIcons /></NavBtn>
+      <NavBtn onClick={() => history("/mypage")} active={activeButton === "/mypage"}><PersonIcons /></NavBtn>
     </NavDiv>
   );
 };
@@ -42,6 +43,13 @@ const NavBtn = styled.button`
   border: none;
   border-top: 1px solid #C3C3C3;
   background-color: white;
+  
+  ${({ active }) =>
+    active &&
+    css`
+      box-shadow: 0px 3px 3px 0px inset rgba(0, 0, 0, 0.3);
+    `}
+
 `;
 
 const CalendarMonthIcons= styled(CalendarMonthIcon)`
