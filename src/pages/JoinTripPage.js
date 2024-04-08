@@ -5,6 +5,7 @@ import { COLOR } from "../styles/color.js";
 import Modal from "../components/common/Modal";
 import AcceptJoinContent from "../components/common/AcceptJoinContent.js";
 import FailJoinContent from "../components/common/FailJoinContent.js";
+import xicon from "../assets/icons/x-icon.svg";
 
 const JoinTripPage = () => {
   const navigate = useNavigate();
@@ -85,7 +86,7 @@ const JoinTripPage = () => {
         />
       )}
       <div>
-        <XButton onClick={handleCancel}>X</XButton>
+        <XButton onClick={handleCancel}><img src={xicon} /></XButton>
         <EmptyDiv></EmptyDiv>
         <InputContainer>
           <Text className="tripName">친구 여행 참여하기</Text>
