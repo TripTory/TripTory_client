@@ -5,14 +5,23 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import PersonIcon from "@mui/icons-material/Person";
 import HomeIcon from "@mui/icons-material/Home";
 import PlaceIcon from "@mui/icons-material/Place";
+import { useNavigate } from "react-router-dom";
+
+
 
 const BottomNav = () => {
+
+  const history = useNavigate();
+  const handleNavigation = (path) => {
+    history(path);
+  };
+
   return (
     <NavDiv>
-      <NavBtn><CalendarMonthIcons /></NavBtn>
-      <NavBtn><HomeIcons /></NavBtn>
-      <NavBtn><PlaceIcons /></NavBtn>
-      <NavBtn><PersonIcons /></NavBtn>
+      <NavBtn onClick={() => handleNavigation("/mypage")}><CalendarMonthIcons /></NavBtn>
+      <NavBtn onClick={() => handleNavigation("/")}><HomeIcons /></NavBtn>
+      <NavBtn onClick={() => handleNavigation("/")}><PlaceIcons /></NavBtn>
+      <NavBtn onClick={() => handleNavigation("/mypage")}><PersonIcons /></NavBtn>
     </NavDiv>
   );
 };
@@ -31,7 +40,7 @@ const NavBtn = styled.button`
   width: 25%;
   height: 5rem;
   border: none;
-  border-top: 1px solid grey;
+  border-top: 1px solid #C3C3C3;
   background-color: white;
 `;
 
