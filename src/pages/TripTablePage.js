@@ -5,6 +5,7 @@ import TripTable from "../components/common/TripTable";
 import Greenbar from "../assets/icons/greenbar.svg";
 import Avatar from "@mui/material/Avatar";
 import AvatarGroup from "@mui/material/AvatarGroup";
+import Button from "@mui/material/Button";
 import Busan from "../assets/images/busan.jpg";
 import Gunsan from "../assets/images/gunsan.jpg";
 import Pencil from "../assets/images/pencil.svg";
@@ -34,6 +35,7 @@ export default function TripTablePage() {
             <FriendAvt alt="5" src={Busan} />
             <FriendAvt alt="6" src={Busan} />
           </FriendGroup>
+          <AddFriendBtn variant="contained">+ 일행 추가</AddFriendBtn>
         </FriendDiv>
         <DiaryDiv>
           <SemiHeaderDiv>
@@ -99,12 +101,33 @@ const FriendDiv = styled.div`
   height: 10%;
 `;
 
-const FriendGroup = styled(AvatarGroup)``;
-
-const FriendAvt = styled(Avatar)`
-  width: 4rem;
-  height: 4rem;
+const FriendGroup = styled(AvatarGroup)`
+  position: absolute;
+  left: 53%;
+  .MuiAvatarGroup-avatar {
+    height: 3.5rem;
+    width: 3.5rem;
+  }
 `;
+
+const FriendAvt = styled(Avatar)``;
+
+const AddFriendBtn = styled(Button)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 5%;
+  left: 70%;
+  height: 3.5rem;
+  width: 9rem;
+  background-color: ${COLOR.MAIN_EMER};
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 3rem;
+`;
+
 const DiaryDiv = styled.div`
   display: flex;
   justify-content: baseline;
