@@ -6,6 +6,8 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import ImageIcon from "@mui/icons-material/Image";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
+import XIcon from "../../assets/icons/deleteicon.svg";
+
 import { PropTypes } from "prop-types";
 export default function TripListItem(props) {
   return (
@@ -24,6 +26,7 @@ export default function TripListItem(props) {
             <LocationP>광주광역시</LocationP>
           </LocationDiv>
         </InfoDiv>
+        <DeleteBtn src={XIcon} />
       </ListItem>
     </StTripListItem>
   );
@@ -34,6 +37,8 @@ TripListItem.propTypes = {
 };
 
 const StTripListItem = styled.div`
+  display: flex;
+  justify-content: space-between;
   border: 0.2rem solid rgba(228, 228, 228);
   border-radius: 1rem;
   width: 95%;
@@ -45,6 +50,7 @@ const InfoDiv = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0.1rem;
+  width: 60%;
 `;
 
 const TitleP = styled.p`
@@ -70,4 +76,10 @@ const LocationDiv = styled.div`
 const LocationP = styled.p`
   font-size: 0.8rem;
   color: rgba(119, 119, 119);
+`;
+
+
+const DeleteBtn = styled.img`
+  width: 2rem;
+  margin-left: 5rem;
 `;
