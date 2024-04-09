@@ -119,7 +119,7 @@ const Text = styled.p`
 
 const FriendListContainer = styled.div`
   padding-top: 35rem;
-  margin-bottom: 30rem;
+  padding-bottom: 5rem;
 `;
 
 const CopyIconImg = styled.img`
