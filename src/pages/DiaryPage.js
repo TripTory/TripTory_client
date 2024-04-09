@@ -32,7 +32,7 @@ const DiaryPage = () => {
       </HeaderConatiner>
       <DiaryInfo diaryInfo={jsonData.diary_info}></DiaryInfo>
       <DiaryContent></DiaryContent>
-      <ImageSlider images={images}></ImageSlider>
+      <ImageSlider images={images}/>
     </div>
   );
 };

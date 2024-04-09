@@ -1,63 +1,36 @@
-import React, { useRef, useState } from "react";
+import React from "react";
+import Slider from "react-slick";
 import styled from "styled-components";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import PropTypes from "prop-types";
 
 const ImageSlider = ({ images }) => {
-  const [startIndex, setStartIndex] = useState(0);
-  const sliderRef = useRef(null);
-  const [startX, setStartX] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
-
-  const handleMouseDown = (event) => {
-    setIsDragging(true);
-    setStartX(event.pageX - sliderRef.current.offsetLeft);
-  };
-
-  const handleMouseMove = (event) => {
-    if (!isDragging) return;
-    event.preventDefault();
-    const x = event.pageX - sliderRef.current.offsetLeft;
-    const walk = (x - startX) * 3; // Adjust speed of dragging
-    sliderRef.current.scrollLeft = startIndex - walk;
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
-    setStartIndex(sliderRef.current.scrollLeft);
+  const settings = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
   };
 
   return (
-    <ImgSlider
-      ref={sliderRef}
-      className="image-slider"
-      onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseUp}
-    >
+    <Slider {...settings}>
       {images.map((image, index) => (
-        <Img key={index} src={image} alt={`Image ${index + 1}`} />
+        <div key={index}>
+          <Img src={image} alt={`Image ${index + 1}`} />
+        </div>
       ))}
-    </ImgSlider>
+    </Slider>
   );
 };
-
 ImageSlider.propTypes = {
-  images: PropTypes.arrayOf(PropTypes.string).isRequired, // images 속성의 타입을 배열로 지정
+  images: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 export default ImageSlider;
 
-const ImgSlider = styled.div`
-  display: flex;
-  overflow-x: scroll;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  cursor: grab;
-`;
-
 const Img = styled.img`
-  scroll-snap-align: start;
-  flex: 0 0 auto;
   width: 20rem;
   height: 20rem;
+  margin: auto;
 `;

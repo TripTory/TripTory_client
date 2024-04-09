@@ -28,7 +28,7 @@ export default DiaryContent;
 const ContentContainer = styled.div`
   width: 90%;
   margin: auto;
-  padding: 2rem;
+  padding: 3rem 2rem;
   line-height: 130%;
   font-size: 1.8rem;
 `;
