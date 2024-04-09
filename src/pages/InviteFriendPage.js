@@ -5,6 +5,7 @@ import FriendList from "../components/common/FriendList.js";
 import jsonData from "../data/FriendData.json";
 import copyIcon from "../assets/icons/copy.svg";
 import xicon from "../assets/icons/x-icon.svg";
+import BottomNav from "../layout/BottomNav";
 
 const InviteFriendPage = () => {
   //임시 작성
@@ -44,6 +45,7 @@ const InviteFriendPage = () => {
       <FriendListContainer>
         <FriendList friends={jsonData.friends}></FriendList>
       </FriendListContainer>
+      <BottomNav />
     </div>
   );
 };
@@ -116,7 +118,8 @@ const Text = styled.p`
 `;
 
 const FriendListContainer = styled.div`
-  padding-top: 37rem;
+  padding-top: 35rem;
+  padding-bottom: 5rem;
 `;
 
 const CopyIconImg = styled.img`

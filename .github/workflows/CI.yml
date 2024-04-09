@@ -1,4 +1,4 @@
-name: Open-Set-Go CI
+name: TripTory CI
 
 on: [ push, pull_request ]
 

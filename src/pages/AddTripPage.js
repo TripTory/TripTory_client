@@ -149,6 +149,7 @@ const Button = styled.button`
   bottom: 3rem;
   right: 5%;
   left: 5%;
+  margin-bottom: 5rem;
 
   //버튼 비활성화일때 색상
   ${(props) =>
