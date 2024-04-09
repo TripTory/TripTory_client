@@ -4,10 +4,8 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import calendar from "../assets/images/calendar.svg";
 import mapPing from "../assets/images/mapPing.svg";
-
 import Modal from "../components/common/Modal";
 import Uploader from "../components/common/MultipleImageUploader";
-
 import { COLOR } from "../styles/color";
 import BottomNav from "../layout/BottomNav";
 
@@ -123,7 +121,7 @@ const DateDiv = styled.div`
   border-bottom: solid #bfbfbf 1px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 8%;
+  margin-top: 6%;
 `;
 const CalenderImage = styled.img`
   padding: 1.2%;
@@ -192,7 +190,7 @@ const ContentBox = styled.textarea`
   display: flex;
   background-color: none;
   width: 92%;
-  height: 39rem;
+  height: 37rem;
   border: none;
   font-size: 15px;
   margin: auto;
@@ -220,7 +218,8 @@ const BtnDiv = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center; 
-  margin-top: 10%;
+  margin-top: 4%;
+  margin-bottom: 5rem;
 `;
 const CancelBtn = styled.button`
   height: 4rem;

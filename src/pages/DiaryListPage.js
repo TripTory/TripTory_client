@@ -10,6 +10,7 @@ import Gunsan from "../assets/images/gunsan.jpg";
 import Pencil from "../assets/images/pencil.svg";
 import { useNavigate } from "react-router-dom";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
+import BottomNav from "../layout/BottomNav";
 
 export default function DiaryListPage() {
   const dummyTitle = "마루와 함께하는 부산";
@@ -62,6 +63,7 @@ export default function DiaryListPage() {
           </DiaryListDiv>
         </DiaryDiv>
       </MainDiv>
+      <BottomNav />
     </StDiaryListPage>
   );
 }
