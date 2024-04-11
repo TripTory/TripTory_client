@@ -5,6 +5,7 @@ import goback from "../assets/icons/goback.svg";
 import DiaryInfo from "../components/common/DiaryInfo";
 import DiaryContent from "../components/common/DiaryContent";
 import ImageSlider from "../components/common/ImageSlider";
+import BottomNav from "../layout/BottomNav";
 import jsonData from "../data/DiaryInfoData.json";
 import { COLOR } from "../styles/color";
 import image1 from "../assets/images/gunsan.jpg";
@@ -33,6 +34,7 @@ const DiaryPage = () => {
       <DiaryInfo diaryInfo={jsonData.diary_info}></DiaryInfo>
       <DiaryContent></DiaryContent>
       <ImageSlider images={images}/>
+      <BottomNav />
     </div>
   );
 };
