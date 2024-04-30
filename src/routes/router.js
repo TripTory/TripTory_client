@@ -8,9 +8,10 @@ import MypagePage from "../pages/MypagePage";
 import EditProfilPage from "../pages/EditProfilPage";
 import JoinTripPage from "../pages/JoinTripPage";
 import InviteFriendPage from "../pages/InviteFriendPage";
+import TagPage from "../pages/TagPage";
+
 import React from "react";
 import DiaryListPage from "../pages/DiaryListPage";
-import DiaryPage from "../pages/DiaryPage";
 
 const Router = () => {
   return (
@@ -26,7 +27,7 @@ const Router = () => {
         <Route path="/jointrip" element={<JoinTripPage />} />
         <Route path="/invitefriend" element={<InviteFriendPage />} />
         <Route path="/triptable" element={<DiaryListPage />} />
-        <Route path="/showdiary" element={<DiaryPage />} />
+        <Route path="/tag/:tagName" element={<TagPage />} />
       </Routes>
     </BrowserRouter>
   );
