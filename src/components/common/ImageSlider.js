@@ -20,7 +20,7 @@ const ImageSlider = ({ images }) => {
     <SliderStyle {...settings}>
       {images.map((image, index) => (
         <div key={index}>
-          <Img src={image} alt={`Image ${index + 1}`} />
+          <Imgfile src={image} alt={`Image ${index + 1}`} />
         </div>
       ))}
     </SliderStyle>
@@ -31,7 +31,7 @@ ImageSlider.propTypes = {
 };
 export default ImageSlider;
 
-const Img = styled.img`
+const Imgfile = styled.img`
   width: 19rem;
   height: 19rem;
   margin: auto;
