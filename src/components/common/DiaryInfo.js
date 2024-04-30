@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { COLOR } from "../../styles/color";
 import PropTypes from "prop-types";
 import { IoMdPin } from "react-icons/io";
 import Karina from "../../assets/images/karina.png";
-import jsonData from "../../data/DiaryInfoData.json";
 
 const DiaryInfo = ({ diaryInfo }) => {
   return (
