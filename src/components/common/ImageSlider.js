@@ -61,6 +61,7 @@ const SliderStyle = styled(Slider)`
   .slick-prev:before,
   .slick-next:before {
     color: ${COLOR.MAIN_GREEN};
+    z-index: -1;
   }
 `;
 

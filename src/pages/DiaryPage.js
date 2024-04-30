@@ -55,8 +55,10 @@ const GoBackIcon = styled.img`
 `;
 
 const BtnContainer = styled.div`
+  height: 3rem;
   display: flex;
   align-items: center;
+  margin-top: 2.8rem;
 `;
 
 const EditBtn = styled.button`
