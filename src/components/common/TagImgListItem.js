@@ -1,30 +1,33 @@
 import styled from "styled-components";
 import React from "react";
-// import { PropTypes } from "prop-types";
-import Card from "@mui/material/Card";
+import PropTypes from "prop-types";
 import ListItem from "@mui/material/ListItem";
 import Jeju from "../../assets/images/jeju.jpg";
-export default function TagImgListItem(props) {
+import { Link } from "react-router-dom";
+
+export default function TagImgListItem({ tagName }) {
   return (
-    <StTagImgListItem>
-      <ListItem
-        sx={{
-          width: "100%",
-          height: "100%",
-          padding: "0.2rem 0.6rem 0.2rem 0.6rem",
-        }}
-      >
-        <ImgDiv style={{ backgroundImage: `url(${Jeju})` }}>
-          <TagP>#바다</TagP>
-        </ImgDiv>
-      </ListItem>
-    </StTagImgListItem>
+    <Link to={`/tag/${tagName}`} style={{ width: "100%", height: "100%",}}>
+      <StTagImgListItem>
+        <ListItem
+          sx={{
+            width: "100%",
+            height: "100%",
+            padding: "0.2rem 0.6rem 0.2rem 0.6rem",
+          }}
+        >
+          <ImgDiv style={{ backgroundImage: `url(${Jeju})` }}>
+            <TagP>#{tagName}</TagP>
+          </ImgDiv>
+        </ListItem>
+      </StTagImgListItem>
+    </Link>
   );
 }
 
-//TripListItem.propTypes = {
-//  item: PropTypes.string.isRequired,
-//};
+TagImgListItem.propTypes = {
+  tagName: PropTypes.string.isRequired,
+};
 
 const StTagImgListItem = styled.div`
   width: 100%;
