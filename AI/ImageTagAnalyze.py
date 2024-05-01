@@ -3,7 +3,23 @@ from azure.cognitiveservices.vision.computervision import ComputerVisionClient
 from azure.cognitiveservices.vision.computervision.models import VisualFeatureTypes
 from msrest.authentication import CognitiveServicesCredentials
 import os
+import re
 
+def load_bashrc():
+    bashrc_path = os.path.expanduser("~/.bashrc")
+    with open(bashrc_path, "r") as f:
+        lines = f.readlines()
+    
+    for line in lines:
+        match = re.match(r'^\s*export\s+([A-Za-z_]+)\s*=\s*(.+)\s*', line)
+        if match:
+            key = match.group(1)
+            value = match.group(2).strip('"\'')
+            os.environ[key] = value
+
+load_bashrc()
+
+#------------------------------------------------------------------------------------------------------
 
 # Authenticate
 # key, endpoint
