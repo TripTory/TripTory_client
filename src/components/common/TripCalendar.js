@@ -4,6 +4,8 @@ import "react-calendar/dist/Calendar.css";
 import styled from "styled-components";
 import moment from "moment";
 import { COLOR } from "../../styles/color";
+import nextButtonImage from "../../assets/icons/calendar_next_btn.svg";
+import prevButtonImage from "../../assets/icons/calendar_prev_btn.svg";
 
 const TripCalendar = () => {
   return (
@@ -23,6 +25,7 @@ const TripCalendar = () => {
 export default TripCalendar;
 
 const CalendarStyle = styled(Calendar)`
+margin-top: 8rem;
   .react-calendar{
     border: 3px solid red;
   }
@@ -34,6 +37,21 @@ const CalendarStyle = styled(Calendar)`
   .react-calendar__month-view__days__day--weekend {
     // 주말 글씨 빨간색 없애기
     color: var(--festie-gray-800, #3a3a3a);
+  }
+
+  .react-calendar__navigation__next-button{
+    color: transparent;
+    background-image: url(${nextButtonImage});
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+
+  .react-calendar__navigation__prev-button{
+    color: transparent;
+    background-image: url(${prevButtonImage});
+    background-repeat: no-repeat;
+    background-position: center center;
+
   }
 
   .react-calendar__navigation {
@@ -77,7 +95,6 @@ const CalendarStyle = styled(Calendar)`
 const CalendarWrapper = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh; /* 화면 전체 높이를 차지 */
   padding-bottom: 6rem;
+
 `;
