@@ -5,9 +5,15 @@ import googlelogo from "../assets/images/googleLogo.svg";
 import naverlogo from "../assets/images/naverLogo.svg";
 
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+
+  const goToGoogleOauth = () => {
+    navigate("/oauth/google");
+  };
 
   return (
     <EntireDiv>
@@ -18,7 +24,7 @@ const LoginPage = () => {
           <LogoImage src={kakaologo} />카카오 로그인 버튼
         </SocialButton>
 
-        <SocialButton className="googleBtn">
+        <SocialButton className="googleBtn" onClick={goToGoogleOauth}>
           <LogoImage src={googlelogo} /> 구글 로그인 버튼
         </SocialButton>
 
