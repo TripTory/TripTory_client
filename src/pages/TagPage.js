@@ -51,7 +51,7 @@ export default function TagPage() {
 
 
 const EntireDiv = styled.div`
-  margin: 1%;
+  margin: 2%;
 `;
 const GoBack = styled.div`
   margin-bottom: 3rem;
@@ -64,14 +64,14 @@ const TagP = styled.p`
 
 const ImageContainer = styled.div`
   display: flex;
-  flex-wrap: wrap;
-  //justify-content: center;
+  flex-wrap: wrap;  
 
   img {
-    width: 10rem;
-    height: 10rem;
+    flex: 0 0 calc(33.333% - 0.4rem);
     margin: 0.2rem;
     cursor: pointer;
+    object-fit: cover;
+    aspect-ratio: 1 / 1; // 종횡비 1:1
     transition: width 0.3s ease-in-out;
   }
 `;
