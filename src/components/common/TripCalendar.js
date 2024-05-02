@@ -2,32 +2,32 @@ import React from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 import moment from "moment";
 import { COLOR } from "../../styles/color";
 import nextButtonImage from "../../assets/icons/calendar_next_btn.svg";
 import prevButtonImage from "../../assets/icons/calendar_prev_btn.svg";
-import diaryImage from "../../assets/images/beach.png";
 
-const TripCalendar = () => {
+const TripCalendar = ({ diaryInfo }) => {
   const tileContent = ({ date, view }) => {
     if (view === "month") {
-      // 일기가 존재하는 날짜마다 이미지를 추가
-      if (
-        date.getDate() === 6 &&
-        date.getMonth() === 4 &&
-        date.getFullYear() === 2024
-      ) {
-        // 예시: 2024년 5월 6일
-        console.log(date.getDate());
-        console.log(date.getMonth());
+      // diaryInfo 요소를 순회하며 일기가 존재하는 날짜 검사
+      const diary = diaryInfo.find(
+        (item) =>
+          item.year === date.getFullYear() &&
+          item.month === date.getMonth() &&
+          item.day === date.getDate()
+      );
+
+      if (diary) {
         return (
           <div
             style={{
-              backgroundImage: `url(${diaryImage})`,
+              backgroundImage: `url(${diary.imagePath})`, //diaryInfo의 imagePath로 변경 필요
               backgroundSize: "cover",
-              width: "3rem",
-              height: "3rem",
-              borderRadius: "1.5rem",
+              width: "3.5rem",
+              height: "3.5rem",
+              borderRadius: "1.75rem",
               margin: "auto",
             }}
           />
@@ -54,9 +54,20 @@ const TripCalendar = () => {
 };
 export default TripCalendar;
 
+TripCalendar.propTypes = {
+  diaryInfo: PropTypes.arrayOf(
+    PropTypes.shape({
+      year: PropTypes.number.isRequired,
+      month: PropTypes.number.isRequired,
+      day: PropTypes.number.isRequired,
+      imagePath: PropTypes.string.isRequired
+    }),
+  ).isRequired,
+};
+
 const CalendarStyle = styled(Calendar)`
   margin-top: 8rem;
-  border: none;
+  border: none !important;
 
   .react-calendar {
     border: 3px solid red;
@@ -128,10 +139,7 @@ const CalendarStyle = styled(Calendar)`
     background-color: transparent !important;
     border-radius: 1rem;
   }
-  /* .react-calendar__month-view__days__day abbr[aria-label="May 6, 2024"]{
-    background-image: url(${diaryImage});
-    background-size: cover;
-  } */
+
 `;
 
 const CalendarWrapper = styled.div`
