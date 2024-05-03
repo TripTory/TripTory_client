@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { COLOR } from "../styles/color";
 import BottomNav from "../layout/BottomNav";
 import Drawer from "@mui/material/Drawer";
-import { Box } from "@mui/material";
 import Map from "../components/common/Map";
 import MapDrawer from "../components/common/MapDrawer";
 const MapPage = () => {
@@ -16,7 +15,9 @@ const MapPage = () => {
   return (
     <StMapPage>
       <button style={{color: "black"}} onClick={toggleDrawer(true)}>open</button>
-      <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>{MapDrawer}</Drawer>
+      <Drawer anchor="bottom" open={open} onClose={toggleDrawer(false)}>
+        <MapDrawer/>
+      </Drawer>
       {/* <Map style={{zIndex:1}}/> */}
       <BottomNav style={{zIndex:2}}/>
     </StMapPage>

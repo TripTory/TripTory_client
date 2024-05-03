@@ -8,8 +8,7 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 
 const MapDrawer = () => {
   return (
-    // <Box sx={{width: 250 }}  role="presentation"></Box>
-    <StMapDrawerBox role="presentation">
+    <StMapDrawer>
       <TripImg src={Jeju} />
       <InfoDiv>
         <TitleP>한옥 마을 탐방기!</TitleP>
@@ -20,20 +19,19 @@ const MapDrawer = () => {
         </LocationDiv>
       </InfoDiv>
       <GoToTripBtn>여행 보러 가기</GoToTripBtn>
-    </StMapDrawerBox>
+    </StMapDrawer>
   );
 };
 
-const StMapDrawerBox = styled(Box)`
-  width: 100%;
-  height: 50%;
+const StMapDrawer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 40rem;
   background-color: white;
-  border: 1px solid rgb(120, 120, 120);
   border-radius: 2rem;
+  border: 1px solid rgb(200,200,200);
 `;
 
 const TripImg = styled.img`
