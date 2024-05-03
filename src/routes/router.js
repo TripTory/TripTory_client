@@ -10,7 +10,7 @@ import JoinTripPage from "../pages/JoinTripPage";
 import InviteFriendPage from "../pages/InviteFriendPage";
 import React from "react";
 import DiaryListPage from "../pages/DiaryListPage";
-
+import MapPage from "../pages/MapPage";
 const Router = () => {
   return (
     <BrowserRouter>
@@ -25,6 +25,7 @@ const Router = () => {
         <Route path="/jointrip" element={<JoinTripPage />} />
         <Route path="/invitefriend" element={<InviteFriendPage />} />
         <Route path="/triptable" element={<DiaryListPage />} />
+        <Route path="/tripmap" element={<MapPage />} />
       </Routes>
     </BrowserRouter>
   );
