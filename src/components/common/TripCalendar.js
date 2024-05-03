@@ -9,6 +9,24 @@ import nextButtonImage from "../../assets/icons/calendar_next_btn.svg";
 import prevButtonImage from "../../assets/icons/calendar_prev_btn.svg";
 
 const TripCalendar = ({ diaryInfo }) => {
+
+  // 일기가 존재하는 날짜의 div에 클래스명 부여
+  const tileClassName = ({ date, view }) => {
+    if (view === "month") {
+      // diaryInfo 요소를 순회하며 일기가 존재하는 날짜 검사
+      const diary = diaryInfo.find(
+        (item) =>
+          item.year === date.getFullYear() &&
+          item.month === date.getMonth() &&
+          item.day === date.getDate(),
+      );
+      if (diary){
+        return "hasDiary";
+      }
+    }
+  };
+
+  // 일기가 있는 날짜에 사진 삽입
   const tileContent = ({ date, view }) => {
     if (view === "month") {
       // diaryInfo 요소를 순회하며 일기가 존재하는 날짜 검사
@@ -16,7 +34,7 @@ const TripCalendar = ({ diaryInfo }) => {
         (item) =>
           item.year === date.getFullYear() &&
           item.month === date.getMonth() &&
-          item.day === date.getDate()
+          item.day === date.getDate(),
       );
 
       if (diary) {
@@ -29,8 +47,13 @@ const TripCalendar = ({ diaryInfo }) => {
               height: "3.5rem",
               borderRadius: "1.75rem",
               margin: "auto",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              color: "white",
+              position: "absolute"
             }}
-          />
+          >{diary.day}</div>
         );
       }
     }
@@ -48,6 +71,7 @@ const TripCalendar = ({ diaryInfo }) => {
         next2Label={null} // 년 단위 이동 버튼 숨기기(+)
         prev2Label={null} // 년 단위 이동 버튼 숨기기(-)
         tileContent={tileContent}
+        tileClassName={tileClassName}
       />
     </CalendarWrapper>
   );
@@ -60,7 +84,7 @@ TripCalendar.propTypes = {
       year: PropTypes.number.isRequired,
       month: PropTypes.number.isRequired,
       day: PropTypes.number.isRequired,
-      imagePath: PropTypes.string.isRequired
+      imagePath: PropTypes.string.isRequired,
     }),
   ).isRequired,
 };
@@ -111,11 +135,19 @@ const CalendarStyle = styled(Calendar)`
     padding: 2rem 0rem;
     font-size: 1.5rem;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
+
+
   .react-calendar__month-view__weekdays__weekday {
     // 요일
     padding: 2rem 0rem;
     font-size: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
   }
   .react-calendar__month-view__weekdays__weekday--weekend abbr[title="Sunday"] {
@@ -140,6 +172,9 @@ const CalendarStyle = styled(Calendar)`
     border-radius: 1rem;
   }
 
+  .hasDiary abbr{
+    display:none;
+  }
 `;
 
 const CalendarWrapper = styled.div`
