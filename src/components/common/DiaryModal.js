@@ -3,8 +3,14 @@ import PropTypes from "prop-types";
 import React from "react";
 
 const Modal = ({ content, closeModals, buttons }) => {
+  const handleClickOutside = (event) => {
+    if (event.target === event.currentTarget) {
+      // 배경 클릭 시에만 모달 닫기
+      closeModals();
+    }
+  };
   return (
-    <BackgroundOverlay>
+    <BackgroundOverlay onClick={handleClickOutside}>
       <ModalContainer>
         {content}
         {buttons && <ButtonContainer>{buttons}</ButtonContainer>}
@@ -21,7 +27,7 @@ Modal.propTypes = {
 
 const ModalContainer = styled.div`
   width: 100%;
-  height: 50%;
+  height: 53%;
   position: fixed;
   bottom: 0;
   z-index: 100;

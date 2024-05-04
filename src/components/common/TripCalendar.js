@@ -23,6 +23,11 @@ const TripCalendar = ({ diaryInfo }) => {
     setSelectedDiary(null); // 선택된 일기 정보 초기화
   };
 
+  // 일기 보러 가기 함수 (추후에 수정 필요)
+  const goToDiary = () => {
+    return null;
+  };
+
   // 일기가 존재하는 날짜의 div에 클래스명 부여
   const tileClassName = ({ date, view }) => {
     if (view === "month") {
@@ -94,7 +99,7 @@ const TripCalendar = ({ diaryInfo }) => {
           content={<DiaryPreviewContent diary={selectedDiary}/>}
           closeModals={closeDiaryModal}
           buttons={
-            <GotoDiaryBtn onClick={closeDiaryModal}>
+            <GotoDiaryBtn onClick={goToDiary}>
               일기 보러 가기
             </GotoDiaryBtn>
           }
@@ -219,4 +224,5 @@ const GotoDiaryBtn = styled.button`
   font-size: 1.5rem;
   color: white;
   font-weight: bolder;
+  margin: 1rem 0rem;
 `;
