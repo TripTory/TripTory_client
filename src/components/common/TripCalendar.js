@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import styled from "styled-components";
@@ -7,8 +7,21 @@ import moment from "moment";
 import { COLOR } from "../../styles/color";
 import nextButtonImage from "../../assets/icons/calendar_next_btn.svg";
 import prevButtonImage from "../../assets/icons/calendar_prev_btn.svg";
+import DiaryModal from "../common/DiaryModal";
+import DiaryPreviewContent from "../common/DiaryPreviewContent";
 
 const TripCalendar = ({ diaryInfo }) => {
+  const [selectedDiary, setSelectedDiary] = useState(null); // 선택된 일기 정보 상태 추가
+
+  // 선택된 일기 정보 업데이트
+  const showDiary = (diary) => {
+    setSelectedDiary(diary);
+  };
+
+  // 모달 닫기
+  const closeDiaryModal = () => {
+    setSelectedDiary(null); // 선택된 일기 정보 초기화
+  };
 
   // 일기가 존재하는 날짜의 div에 클래스명 부여
   const tileClassName = ({ date, view }) => {
@@ -20,7 +33,7 @@ const TripCalendar = ({ diaryInfo }) => {
           item.month === date.getMonth() &&
           item.day === date.getDate(),
       );
-      if (diary){
+      if (diary) {
         return "hasDiary";
       }
     }
@@ -51,9 +64,12 @@ const TripCalendar = ({ diaryInfo }) => {
               alignItems: "center",
               justifyContent: "center",
               color: "white",
-              position: "absolute"
+              position: "absolute",
             }}
-          >{diary.day}</div>
+            onClick={() => showDiary(diary)} // 선택된 일기 정보 업데이트
+          >
+            {diary.day}
+          </div>
         );
       }
     }
@@ -73,9 +89,21 @@ const TripCalendar = ({ diaryInfo }) => {
         tileContent={tileContent}
         tileClassName={tileClassName}
       />
+      {selectedDiary && ( // 선택된 일기가 있을 때만 모달 렌더링
+        <DiaryModal
+          content={<DiaryPreviewContent diary={selectedDiary}/>}
+          closeModals={closeDiaryModal}
+          buttons={
+            <GotoDiaryBtn onClick={closeDiaryModal}>
+              일기 보러 가기
+            </GotoDiaryBtn>
+          }
+        />
+      )}
     </CalendarWrapper>
   );
 };
+
 export default TripCalendar;
 
 TripCalendar.propTypes = {
@@ -140,7 +168,6 @@ const CalendarStyle = styled(Calendar)`
     align-items: center;
   }
 
-
   .react-calendar__month-view__weekdays__weekday {
     // 요일
     padding: 2rem 0rem;
@@ -172,8 +199,8 @@ const CalendarStyle = styled(Calendar)`
     border-radius: 1rem;
   }
 
-  .hasDiary abbr{
-    display:none;
+  .hasDiary abbr {
+    display: none;
   }
 `;
 
@@ -181,4 +208,15 @@ const CalendarWrapper = styled.div`
   display: flex;
   justify-content: center;
   padding-bottom: 6rem;
+`;
+
+const GotoDiaryBtn = styled.button`
+  background-color: ${COLOR.MAIN_EMER};
+  width: 95%;
+  height: 3.5rem;
+  border: none;
+  border-radius: 2rem;
+  font-size: 1.5rem;
+  color: white;
+  font-weight: bolder;
 `;
