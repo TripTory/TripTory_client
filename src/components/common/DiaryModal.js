@@ -12,7 +12,7 @@ const Modal = ({ content, closeModals, buttons }) => {
   return (
     <BackgroundOverlay onClick={handleClickOutside}>
       <ModalContainer>
-        {content}
+        {content && <ContentContainer>{content}</ContentContainer>}
         {buttons && <ButtonContainer>{buttons}</ButtonContainer>}
       </ModalContainer>
     </BackgroundOverlay>
@@ -49,9 +49,14 @@ const BackgroundOverlay = styled.div`
   background-color: rgba(0, 0, 0, 0.4);
   z-index: 99;
 `;
+const ContentContainer = styled.div`
+  width: 100%;
+  height: 85%;
+`;
 
 const ButtonContainer = styled.div`
   width: 100%;
+  height: 15%;
   display: flex;
   justify-content: center;
 `;
