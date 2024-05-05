@@ -59,7 +59,7 @@ const TripCalendar = ({ diaryInfo }) => {
         return (
           <div
             style={{
-              backgroundImage: `url(${diary.imagePath})`, //diaryInfo의 imagePath로 변경 필요
+              backgroundImage: `url(${diary.imagePath})`,
               backgroundSize: "cover",
               width: "3.5rem",
               height: "3.5rem",

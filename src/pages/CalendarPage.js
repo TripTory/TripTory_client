@@ -7,7 +7,7 @@ import { COLOR } from "../styles/color";
 
 const CalendarPage = () => {
 
-  // DB에서 일기의 년,월,일,사진 정보 가져오기
+  // DB에서 일기의 년,월,일,사진,제목 등등.. 정보 가져오기
   const diaryInfo = [
     {
       "year": 2024,

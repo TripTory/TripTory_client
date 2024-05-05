@@ -5,7 +5,7 @@ import React from "react";
 const Modal = ({ content, closeModals, buttons }) => {
   const handleClickOutside = (event) => {
     if (event.target === event.currentTarget) {
-      // 배경 클릭 시에만 모달 닫기
+      // 배경 클릭 시에 모달 닫기
       closeModals();
     }
   };
