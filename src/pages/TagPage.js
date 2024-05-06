@@ -9,16 +9,16 @@ import xicon from "../assets/icons/x-icon.svg";
 import { useNavigate } from "react-router-dom";
 import React, { useState } from "react";
 
-import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
+import Menubar from "../components/common/Menubar.js";
 
 export default function TagPage() {
   const navigate = useNavigate();
   const { tagName } = useParams();
 
   const tag = tagData.tags.find((tag) => tag.tagName === tagName);
-  //const [expandedImage, setExpandedImage] = useState(null);
+
   const [open, setOpen] = React.useState(false);
   const [modalImageIndex, setModalImageIndex] = useState(null);
 
@@ -37,9 +37,12 @@ export default function TagPage() {
 
   return (
     <EntireDiv>
-      <GoBack>
-        <img src={goback} style={{ height: "2.7rem" }} onClick={goToHome} />
-      </GoBack>
+      <UpDiv>
+        <GoBack>
+          <img src={goback} style={{ height: "2.7rem" }} onClick={goToHome} />
+        </GoBack>
+        <Menubar />
+      </UpDiv>
       <div>
         <TagP>#{tagName}</TagP>
         <ImageContainer>
@@ -72,15 +75,25 @@ export default function TagPage() {
 }
 
 const EntireDiv = styled.div`
-  margin: 2%;
+  margin-top: 2%;
+  height: 100%;
 `;
+
+const UpDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
 const GoBack = styled.div`
+  margin-top: 1rem;
   margin-bottom: 3rem;
+  margin-left: 1rem;
 `;
 
 const TagP = styled.p`
   font-size: 2rem;
   margin-bottom: 3rem;
+  margin-left: 1rem;
 `;
 
 const ModalContent = styled(Box)`
@@ -94,6 +107,8 @@ const ModalContent = styled(Box)`
 const ImageContainer = styled.div`
   display: flex;
   flex-wrap: wrap;  
+  overflow: auto;
+  max-height: 84vh;
 
   img {
     flex: 0 0 calc(33.333% - 0.4rem);
