@@ -44,3 +44,5 @@ else:
     for tag in tags_result_remote.tags:
         print("'{}' with confidence {:.2f}%".format(tag.name, tag.confidence * 100))
         imageTag.append(tag.name)
+
+tag = imageTag[0]
