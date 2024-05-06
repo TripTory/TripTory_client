@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { COLOR } from "../styles/color";
 import tagData from "../data/TagData.js";
-import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
 import goback from "../assets/icons/goback.svg";
 import xicon from "../assets/icons/x-icon.svg";
@@ -44,7 +43,9 @@ export default function TagPage() {
         <Menubar />
       </UpDiv>
       <div>
-        <TagP>#{tagName}</TagP>
+        <Tagbox>
+          <TagP>#{tagName}</TagP>
+        </Tagbox>
         <ImageContainer>
           {tag &&
             tag.imagePaths.map((imagePath, index) => (
@@ -67,7 +68,9 @@ export default function TagPage() {
               style={{ padding: "1rem", width: "100%" }}
             />
           )}
-          <img src={xicon} style={{ height: "2.7rem" }} onClick={handleClose} />
+          <CircleDiv>
+            <img src={xicon} style={{ height: "3rem", marginTop: "0.1rem" }} onClick={handleClose} />
+          </CircleDiv>
         </ModalContent>
       </Modal>
     </EntireDiv>
@@ -90,10 +93,18 @@ const GoBack = styled.div`
   margin-left: 1rem;
 `;
 
-const TagP = styled.p`
-  font-size: 2rem;
+const Tagbox = styled.div`
+  background-color: ${COLOR.MAIN_SKY};
+  display: inline-block;
   margin-bottom: 3rem;
   margin-left: 1rem;
+  border-radius: 1.6rem;
+  padding: 0.7rem;
+  padding-right: 1rem;
+`;
+
+const TagP = styled.p`
+  font-size: 2rem;
 `;
 
 const ModalContent = styled(Box)`
@@ -118,4 +129,14 @@ const ImageContainer = styled.div`
     aspect-ratio: 1 / 1; // 종횡비 1:1
     transition: width 0.3s ease-in-out;
   }
+`;
+const CircleDiv = styled.div`
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  justify-content : center;
+  //background-color : ${COLOR.MAIN_EMER}; opacity : 0.5;
+  background-color : rgb(255, 255, 255); opacity : 0.5;
+  border-radius: 2rem;
+
 `;
