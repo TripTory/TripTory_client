@@ -30,11 +30,20 @@ const CalendarPage = () => {
     {
       "year": 2024,
       "month": 4,
-      "day": 16,
+      "day": 15,
       "place" : "인천 광역시",
       "author" : "카리나",
       "diaryTitle" : "신나는 바다 여행",
       "imagePath": "https://mediaim.expedia.com/destination/1/aaa0934df627fdf9d5ae9d1863195d63.jpg"
+    },
+    {
+      "year": 2024,
+      "month": 4,
+      "day": 20,
+      "place" : "인천 광역시",
+      "author" : "카리나",
+      "diaryTitle" : "신나는 바다 여행",
+      "imagePath": "https://blog.kakaocdn.net/dn/o1KIw/btqu9mflPY6/rGk1mM3iugV1c6jj9Z3E80/img.jpg"
     },
     {
       "year": 2024,

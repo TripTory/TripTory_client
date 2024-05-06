@@ -15,7 +15,16 @@ const TripCalendar = ({ diaryInfo }) => {
 
   // 선택된 일기 정보 업데이트
   const showDiary = (diary) => {
-    setSelectedDiary(diary);
+    // 선택된 날짜에 해당하는 모든 일기를 뽑아서 리턴하기
+    const selected = diaryInfo.filter(
+      (item) =>
+        item.year === diary.year &&
+        item.month === diary.month &&
+        item.day === diary.day,
+    );
+    console.log(selected);
+    // 찾은 일기들을 상태에 저장
+    setSelectedDiary(selected);
   };
 
   // 모달 닫기
@@ -96,12 +105,10 @@ const TripCalendar = ({ diaryInfo }) => {
       />
       {selectedDiary && ( // 선택된 일기가 있을 때만 모달 렌더링
         <DiaryModal
-          content={<DiaryPreviewContent diary={selectedDiary}/>}
+          content={<DiaryPreviewContent diaries={selectedDiary} />}
           closeModals={closeDiaryModal}
           buttons={
-            <GotoDiaryBtn onClick={goToDiary}>
-              일기 보러 가기
-            </GotoDiaryBtn>
+            <GotoDiaryBtn onClick={goToDiary}>일기 보러 가기</GotoDiaryBtn>
           }
         />
       )}
