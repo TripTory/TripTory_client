@@ -39,6 +39,15 @@ const CalendarPage = () => {
     {
       "year": 2024,
       "month": 4,
+      "day": 15,
+      "place" : "인천 광역시",
+      "author" : "카리나",
+      "diaryTitle" : "신나는 바다 여행",
+      "imagePath": "https://health.chosun.com/site/data/img_dir/2023/05/31/2023053102582_0.jpg"
+    },
+    {
+      "year": 2024,
+      "month": 4,
       "day": 20,
       "place" : "인천 광역시",
       "author" : "카리나",
