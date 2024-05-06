@@ -47,6 +47,20 @@ const tagData = {
         dog4,
         dog5,
         dog6,
+        dog7,
+        dog1,
+        dog2,
+        dog3,
+        dog4,
+        dog5,
+        dog6,
+        dog7,
+        dog1,
+        dog2,
+        dog3,
+        dog4,
+        dog5,
+        dog6,
         dog7
       ]
     }
