@@ -1,38 +1,20 @@
 from azure.cognitiveservices.vision.computervision import ComputerVisionClient
-#from azure.cognitiveservices.vision.computervision.models import OperationStatusCodes
 from azure.cognitiveservices.vision.computervision.models import VisualFeatureTypes
 from msrest.authentication import CognitiveServicesCredentials
 import os
-import re
-
 from dotenv import load_dotenv
 import googletrans
 
+
 load_dotenv()
 
-subscription_key = os.environ.get('VISION_KEY')
-endpoint = os.environ.get('VISION_ENDPOINT')
-
-# def load_bashrc():
-#     bashrc_path = os.path.expanduser("~/.bashrc")
-#     with open(bashrc_path, "r") as f:
-#         lines = f.readlines()
-    
-#     for line in lines:
-#         match = re.match(r'^\s*export\s+([A-Za-z_]+)\s*=\s*(.+)\s*', line)
-#         if match:
-#             key = match.group(1)
-#             value = match.group(2).strip('"\'')
-#             os.environ[key] = value
-
-# load_bashrc()
 
 #------------------------------------------------------------------------------------------------------
 
 # Authenticate
 # key, endpoint
-# subscription_key = os.environ["VISION_KEY"]
-# endpoint = os.environ["VISION_ENDPOINT"]
+subscription_key = os.environ.get('VISION_KEY')
+endpoint = os.environ.get('VISION_ENDPOINT')
 computervision_client = ComputerVisionClient(endpoint, CognitiveServicesCredentials(subscription_key))
 
 # Quickstart variables
@@ -52,6 +34,8 @@ else:
         print("'{}' with confidence {:.2f}%".format(tag.name, tag.confidence * 100))
         imageTag.append(tag.name)
 
+
+#------------------------------------------------------------------------------------------------------
 
 tag_list = [
     "beach",
@@ -80,17 +64,17 @@ if len(imageTag) % 2 == 0:
 else:
     len_ = int(len(imageTag) / 2) + 1
 
-ret = []
+en_tag_result = []
 for i in range(len(imageTag[:len_])):
     for j in range(len(tag_list)):
         if imageTag[i] == tag_list[j]:
-            ret.append(tag_list[j])
-print(ret)
+            en_tag_result.append(tag_list[j])
+print(en_tag_result)
 
 translator = googletrans.Translator()
 
-tag_result = []
-for i in ret:
+ko_tag_result = []
+for i in en_tag_result:
     result = translator.translate(i, dest="ko")
-    tag_result.append(result.text)
-print(tag_result)
+    ko_tag_result.append(result.text)
+print(ko_tag_result)
