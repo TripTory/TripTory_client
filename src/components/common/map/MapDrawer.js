@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import React, { useState } from "react";
-import { COLOR } from "../../styles/color";
-import Jeju from "../../assets/images/jeju.jpg";
+import { COLOR } from "../../../styles/color";
+import Jeju from "../../../assets/images/jeju.jpg";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
@@ -31,7 +31,7 @@ const StMapDrawer = styled.div`
   height: 35rem;
   background-color: white;
   border-radius: 2rem 2rem 0rem 0rem;
-  border: 1px solid rgb(200,200,200);
+  border: 1px solid rgb(200, 200, 200);
 `;
 
 const TripImg = styled.img`
@@ -72,7 +72,6 @@ const LocationP = styled.p`
   color: rgba(119, 119, 119);
   margin-left: 0.3rem;
 `;
-
 
 const GoToTripBtn = styled(Button)`
   color: ${COLOR.MAIN_WHITE};
