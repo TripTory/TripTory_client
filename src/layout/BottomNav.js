@@ -34,7 +34,7 @@ const NavDiv = styled.div`
   right: 0;
   position: fixed;
   color: white;
-  z-index:30;
+  z-index:1000;
 `;
 
 const NavBtn = styled.button`
