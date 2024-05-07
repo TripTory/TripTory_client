@@ -22,7 +22,6 @@ const TripCalendar = ({ diaryInfo }) => {
         item.month === diary.month &&
         item.day === diary.day,
     );
-    console.log(selected);
     // 찾은 일기들을 상태에 저장
     setSelectedDiary(selected);
   };
