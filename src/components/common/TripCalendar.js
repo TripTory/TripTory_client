@@ -161,12 +161,15 @@ const CalendarStyle = styled(Calendar)`
 
   .react-calendar__navigation {
     //년, 월 간격
-    margin: 2rem 0rem;
+    width: 65%;
+    margin: auto;
     display: flex;
-    justify-content: center;
+    justify-content: center !important;
+    align-items: center;
   }
   .react-calendar__navigation__label {
-    font-size: 2rem;
+    font-size: 2.5rem;
+    font-weight: 600;
   }
 
   .react-calendar__tile {
@@ -181,7 +184,7 @@ const CalendarStyle = styled(Calendar)`
 
   .react-calendar__month-view__weekdays__weekday {
     // 요일
-    padding: 2rem 0rem;
+    padding: 3rem 0rem 2rem 0rem;
     font-size: 1.5rem;
     display: flex;
     justify-content: center;
