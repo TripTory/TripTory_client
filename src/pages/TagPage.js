@@ -44,7 +44,7 @@ export default function TagPage() {
       </UpDiv>
       <div>
         <Tagbox>
-          <TagP>#{tagName}</TagP>
+          <TagP># {tagName}</TagP>
         </Tagbox>
         <ImageContainer>
           {tag &&
@@ -94,17 +94,18 @@ const GoBack = styled.div`
 `;
 
 const Tagbox = styled.div`
-  background-color: ${COLOR.MAIN_SKY};
+  //background-color : ${COLOR.MAIN_SKY}; opacity : 0.6;
   display: inline-block;
   margin-bottom: 3rem;
   margin-left: 1rem;
   border-radius: 1.6rem;
   padding: 0.7rem;
   padding-right: 1rem;
+  border: 1px solid #d9d9d9;
 `;
 
 const TagP = styled.p`
-  font-size: 2rem;
+  font-size: 1.5rem;
 `;
 
 const ModalContent = styled(Box)`
