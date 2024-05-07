@@ -5,32 +5,39 @@ from msrest.authentication import CognitiveServicesCredentials
 import os
 import re
 
-def load_bashrc():
-    bashrc_path = os.path.expanduser("~/.bashrc")
-    with open(bashrc_path, "r") as f:
-        lines = f.readlines()
-    
-    for line in lines:
-        match = re.match(r'^\s*export\s+([A-Za-z_]+)\s*=\s*(.+)\s*', line)
-        if match:
-            key = match.group(1)
-            value = match.group(2).strip('"\'')
-            os.environ[key] = value
+from dotenv import load_dotenv
 
-load_bashrc()
+# load .env
+load_dotenv()
+
+subscription_key = os.environ.get('VISION_KEY')
+endpoint = os.environ.get('VISION_ENDPOINT')
+
+# def load_bashrc():
+#     bashrc_path = os.path.expanduser("~/.bashrc")
+#     with open(bashrc_path, "r") as f:
+#         lines = f.readlines()
+    
+#     for line in lines:
+#         match = re.match(r'^\s*export\s+([A-Za-z_]+)\s*=\s*(.+)\s*', line)
+#         if match:
+#             key = match.group(1)
+#             value = match.group(2).strip('"\'')
+#             os.environ[key] = value
+
+# load_bashrc()
 
 #------------------------------------------------------------------------------------------------------
 
 # Authenticate
 # key, endpoint
-subscription_key = os.environ["VISION_KEY"]
-endpoint = os.environ["VISION_ENDPOINT"]
+# subscription_key = os.environ["VISION_KEY"]
+# endpoint = os.environ["VISION_ENDPOINT"]
 computervision_client = ComputerVisionClient(endpoint, CognitiveServicesCredentials(subscription_key))
 
 # Quickstart variables
 images_folder = os.path.join (os.path.dirname(os.path.abspath(__file__)), "images")
-# remote_image_url = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/landmark.jpg"
-remote_image_url = "https://media.istockphoto.com/id/1915475779/ko/%EC%82%AC%EC%A7%84/pink-cherry-blossom.jpg?s=1024x1024&w=is&k=20&c=AQHjiXu5_xNJOqr4W-eSHVzf7Mlva6SoAJtF_E8RMUE="
+remote_image_url = "https://img4.daumcdn.net/thumb/R658x0.q70/?fname=https://t1.daumcdn.net/news/202304/07/kinolights/20230407081026931lbzg.jpg"
 
 # tagging the image
 imageTag = []
