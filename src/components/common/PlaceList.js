@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import beachImg from "../../assets/images/beach.png";
+import { PiMapPinFill } from "react-icons/pi";
 
 const PlaceList = ({ places, onSelectPlace }) => {
   return (
@@ -10,9 +10,7 @@ const PlaceList = ({ places, onSelectPlace }) => {
         {places.map((place, index) => (
           <li key={index}>
             <PlaceItemDiv>
-              <PlacePicDiv>
-                <PlaceImg src={beachImg}></PlaceImg>
-              </PlacePicDiv>
+              <PinIcon/>
               <PlaceTextDiv>
                 <PlaceNameDiv>{place.placeName}</PlaceNameDiv>
                 <LocationDiv>{place.location}</LocationDiv>
@@ -45,15 +43,10 @@ const PlaceItemDiv = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem;
+  padding: 1rem;
+
 `;
 
-const PlacePicDiv = styled.div`
-  width: 20%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
 
 const PlaceTextDiv = styled.div`
   width: 60%;
@@ -66,7 +59,7 @@ const PlaceNameDiv = styled.div`
   color: black;
   font-weight: 700;
   font-size: 1.8rem;
-  padding: 0.2rem 0.8rem;
+  padding: 0.2rem;
   margin: 0.2rem;
 `;
 
@@ -74,16 +67,10 @@ const LocationDiv = styled.div`
   color: #767676;
   font-size: 1.5rem;
   font-weight: 200;
-  padding: 0.2rem 0.8rem;
+  padding: 0.2rem;
   margin: 0.2rem;
 `;
 
-const PlaceImg = styled.img`
-  width: 5rem;
-  height: 5rem;
-  border-radius: 2.5rem;
-  margin: 1rem;
-`;
 
 const ButtonDiv = styled.div`
   width: 20%;
@@ -102,4 +89,10 @@ const SelectBtn = styled.button`
   &:active {
     background-color: #aaaaaa;
   }
+`;
+const PinIcon = styled(PiMapPinFill)`
+  width: 2.5rem;
+  height: 2.5rem;
+  color: #797979;
+  margin: 0rem 0rem 0rem 0.5rem;
 `;

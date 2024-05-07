@@ -6,6 +6,7 @@ import PlaceList from "./PlaceList";
 import jsonData from "../../data/PlaceData.json";
 import { COLOR } from "../../styles/color";
 import PropTypes from "prop-types";
+import { PiMapPinFill } from "react-icons/pi";
 
 const SearchPlaceModal = ({ setIsModal, setTripPlace }) => {
   //전체 지역 데이터 -> 나중에는 백에서 받아와야 함
@@ -100,6 +101,7 @@ const SearchIcon = styled(IoIosSearch)`
 
 const PlaceListContainer = styled.div`
   padding-top: 5rem;
+  padding-bottom: 6rem;
 `;
 
 const ModalContainer = styled.div`
@@ -111,4 +113,10 @@ const ModalContainer = styled.div`
   z-index: 1000;
   background-color: white;
   overflow-y: auto;
+`;
+
+const PinIcon = styled(PiMapPinFill)`
+  width: 1.7rem;
+  height: 1.7rem;
+  color: #545454;
 `;
