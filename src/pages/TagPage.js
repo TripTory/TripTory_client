@@ -99,7 +99,7 @@ const Tagbox = styled.div`
   margin-bottom: 3rem;
   margin-left: 1rem;
   border-radius: 1.6rem;
-  padding: 0.7rem;
+  padding: 0.8rem;
   padding-right: 1rem;
   border: 1px solid #d9d9d9;
 `;
