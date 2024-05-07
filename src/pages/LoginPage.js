@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { COLOR } from "../styles/color";
 import kakaologo from "../assets/images/kakaoLogo.svg";
 import googlelogo from "../assets/images/googleLogo.svg";
 import naverlogo from "../assets/images/naverLogo.svg";
@@ -14,13 +13,19 @@ const LoginPage = () => {
   const goToGoogleOauth = () => {
     navigate("/oauth/google");
   };
+  const goToNaverOauth = () => {
+    navigate("/oauth/naver");
+  };
+  const goToKakaoOauth = () => {
+    navigate("/oauth/kakao");
+  };
 
   return (
     <EntireDiv>
       <IntroP>트립토리로 <br />여행을 기록해보세요!</IntroP>
 
       <SocialDiv>
-        <SocialButton className="kakaoBtn">
+        <SocialButton className="kakaoBtn" onClick={goToKakaoOauth}>
           <LogoImage src={kakaologo} />카카오 로그인 버튼
         </SocialButton>
 
@@ -28,7 +33,7 @@ const LoginPage = () => {
           <LogoImage src={googlelogo} /> 구글 로그인 버튼
         </SocialButton>
 
-        <SocialButton className="naverBtn">
+        <SocialButton className="naverBtn" onClick={goToNaverOauth}>
           <LogoImage src={naverlogo} /> 네이버 로그인 버튼
         </SocialButton>
       </SocialDiv>
