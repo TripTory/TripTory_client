@@ -19,7 +19,7 @@ const BottomNav = () => {
 
   return (
     <NavDiv>
-      <NavBtn onClick={() => history("/")} active={activeButton === "/"}><CalendarMonthIcons /></NavBtn>
+      <NavBtn onClick={() => history("/calendar")} active={activeButton === "/calendar"}><CalendarMonthIcons /></NavBtn>
       <NavBtn onClick={() => history("/home")} active={activeButton === "/home"}><HomeIcons /></NavBtn>
       <NavBtn onClick={() => history("/")} active={activeButton === "/"}><PlaceIcons /></NavBtn>
       <NavBtn onClick={() => history("/mypage")} active={activeButton === "/mypage"}><PersonIcons /></NavBtn>
