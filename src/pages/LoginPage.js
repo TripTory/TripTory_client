@@ -4,20 +4,18 @@ import googlelogo from "../assets/images/googleLogo.svg";
 import naverlogo from "../assets/images/naverLogo.svg";
 
 import React from "react";
-import { useNavigate } from "react-router-dom";
 
 
 const LoginPage = () => {
-  const navigate = useNavigate();
 
   const goToGoogleOauth = () => {
-    navigate("/oauth/google");
+    window.location.href = "https://triptoryserver-jwakz2rnea-du.a.run.app/oauth/google";
   };
   const goToNaverOauth = () => {
-    navigate("/oauth/naver");
+    window.location.href = "https://triptoryserver-jwakz2rnea-du.a.run.app/oauth/naver";
   };
   const goToKakaoOauth = () => {
-    navigate("/oauth/kakao");
+    window.location.href = "https://triptoryserver-jwakz2rnea-du.a.run.app/oauth/kakao";
   };
 
   return (
