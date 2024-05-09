@@ -8,16 +8,34 @@ import { useNavigate } from "react-router-dom";
 
 
 const LoginPage = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+
+  // fetch("https://triptoryserver-jwakz2rnea-du.a.run.app/", { method : "GET" })
+  //   .then((res) => res.json())
+  //   .then((res) => {
+  //     console.log(1, res);
+  //   });
+
+  // fetch("https://triptoryserver-jwakz2rnea-du.a.run.app/oauth/naver")
+  // .then((res) => res.json())
+  // .then((res)=> {
+  //   console.log("네이버 로그인");
+  //   if (res.success) {
+  //     console.log("네이버 로그인");
+  //   }
+  // });
 
   const goToGoogleOauth = () => {
-    navigate("/oauth/google");
+    // navigate("/oauth/google");
+    window.location.href = "https://triptoryserver-jwakz2rnea-du.a.run.app/oauth/google";
   };
   const goToNaverOauth = () => {
-    navigate("/oauth/naver");
+    //navigate("/oauth/naver");
+    window.location.href = "https://triptoryserver-jwakz2rnea-du.a.run.app/oauth/naver";
   };
   const goToKakaoOauth = () => {
-    navigate("/oauth/kakao");
+    // navigate("/oauth/kakao");
+    window.location.href = "https://triptoryserver-jwakz2rnea-du.a.run.app/oauth/kakao";
   };
 
   return (
