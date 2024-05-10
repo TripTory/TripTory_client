@@ -14,7 +14,7 @@ const MapPage = () => {
 
   return (
     <StMapPage>
-      {/* <button style={{color: "black"}} onClick={toggleDrawer(true)}>open</button> */}
+      <button style={{color: "black"}} onClick={toggleDrawer(true)}>open</button>
       <Drawer anchor="bottom" open={open} onClose={toggleDrawer(false)}>
         <MapDrawer />
       </Drawer>

@@ -5,6 +5,26 @@ import Busan from "../../../assets/images/busan.jpg";
 import MARKERFRAME from "../../../assets/icons/markericon.svg";
 import CustomMarker from "./CustomMarker";
 const MapComponent = () => {
+  //dummy data(추후 api 연결하여 lat, lng 지정 예정)
+  const positions = [
+    {
+      title: "대전",
+      latlng: { lat: 36.75, lng: 127.36 },
+    },
+    {
+      title: "서울",
+      latlng: { lat: 38, lng: 127 },
+    },
+    {
+      title: "대구",
+      latlng: { lat: 36.25, lng: 128.55 },
+    },
+    {
+      title: "제주",
+      latlng: { lat: 33.6, lng: 126.55 },
+    },
+  ];
+
   return (
     <StMap>
       <Map
@@ -12,24 +32,20 @@ const MapComponent = () => {
         style={{ width: "100%", height: "93.2%" }}
         level={13}
       >
-        {/* <MapMarker
-          position={{ lat: 35.1795543, lng: 129.0756416 }}
-          image={{
-            src: "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png",
-            size: { width: 30, height: 35 },
-          }}
-        /> */}
-        <CustomOverlayMap
-          position={{
-            lat: 37.4562557,
-            lng: 126.7052062,
-          }}
-        >
-          <div>
-            <MarkerImg src={MARKERFRAME} />
-            <TripImg src={Busan} />
-          </div>
-        </CustomOverlayMap>
+        {positions.map((position) => (
+          <CustomOverlayMap
+            key={position.title}
+            position={{
+              lat: position.latlng.lat,
+              lng: position.latlng.lng,
+            }}
+          >
+            <div>
+              <MarkerImg src={MARKERFRAME} onClick={console.log(position.title)}/>
+              <TripImg src={Busan} />
+            </div>
+          </CustomOverlayMap>
+        ))}
       </Map>
     </StMap>
   );
