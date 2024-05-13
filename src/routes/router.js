@@ -12,6 +12,7 @@ import TagPage from "../pages/TagPage";
 
 import React from "react";
 import DiaryListPage from "../pages/DiaryListPage";
+import MapPage from "../pages/MapPage";
 import DiaryPage from "../pages/DiaryPage";
 import CalendarPage from "../pages/CalendarPage";
 
@@ -29,6 +30,7 @@ const Router = () => {
         <Route path="/jointrip" element={<JoinTripPage />} />
         <Route path="/invitefriend" element={<InviteFriendPage />} />
         <Route path="/triptable" element={<DiaryListPage />} />
+        <Route path="/tripmap" element={<MapPage />} />
         <Route path="/showdiary" element={<DiaryPage />} />
         <Route path="/calendar" element={<CalendarPage />} />
         <Route path="/tag/:tagName" element={<TagPage />} />
