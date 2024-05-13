@@ -1,26 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
+import { Typography } from "@mui/material";
 import { COLOR } from "../styles/color";
 import BottomNav from "../layout/BottomNav";
-import Drawer from "@mui/material/Drawer";
 import MapComponent from "../components/common/map/MapComponent";
-import MapDrawer from "../components/common/map/MapDrawer";
-import CustomMarker from "../components/common/map/CustomMarker";
 const MapPage = () => {
-  const [open, setOpen] = useState(false);
-  const toggleDrawer = (newOpen) => () => {
-    setOpen(newOpen);
-  };
-
   return (
     <StMapPage>
-      <button style={{color: "black"}} onClick={toggleDrawer(true)}>open</button>
-      <Drawer anchor="bottom" open={open} onClose={toggleDrawer(false)}>
-        <MapDrawer />
-      </Drawer>
-      <MapComponent style={{ zIndex: 1 }} />
-      {/* <CustomMarker/> */}
-      <BottomNav style={{ zIndex: 2 }} />
+      <TitleDiv>
+        <TitleTypo variant="h4">나의 여행 지도</TitleTypo>
+      </TitleDiv>
+      <MapComponent style={{ zIndex: 999 }} />
+      <BottomNav style={{ zIndex: 900 }} />
     </StMapPage>
   );
 };
@@ -31,6 +22,22 @@ const StMapPage = styled.div`
   align-items: end;
   width: 100%;
   height: 100%;
+`;
+
+const TitleDiv = styled.div`
+  display: flex;
+  justify-content: baseline;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  height: 10%;
+  padding-left: 2rem;
+  z-index: 1000;
+`;
+
+const TitleTypo = styled(Typography)`
+  color: ${COLOR.MAIN_GREEN};
+  font-weight: 1000;
 `;
 
 export default MapPage;
