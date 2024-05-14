@@ -11,9 +11,23 @@ const LoginPage = () => {
   const goToGoogleOauth = () => {
     window.location.href = "https://triptoryserver-jwakz2rnea-du.a.run.app/oauth/google";
   };
+
   const goToNaverOauth = () => {
-    window.location.href = "https://triptoryserver-jwakz2rnea-du.a.run.app/oauth/naver";
+    fetch("https://triptoryserver-jwakz2rnea-du.a.run.app/oauth/naver", {
+      method: "GET",
+      credentials: "include"
+    })
+    .then((response) => {
+      if (response.ok) {
+        console.log("네이버 로그인 성공!");
+        window.location.href = "https://triptoryserver-jwakz2rnea-du.a.run.app/oauth/naver/callback";
+      } else {
+        console.log("네이버 로그인 실패");
+      }
+    })
+    .catch((error) => console.error("네이버 로그인 에러:", error));
   };
+
   const goToKakaoOauth = () => {
     window.location.href = "https://triptoryserver-jwakz2rnea-du.a.run.app/oauth/kakao";
   };
