@@ -6,10 +6,9 @@ import DiaryInfo from "../components/common/DiaryInfo";
 import DiaryContent from "../components/common/DiaryContent";
 import ImageSlider from "../components/common/ImageSlider";
 import BottomNav from "../layout/BottomNav";
-import jsonData from "../data/DiaryInfoData.json";
 import { COLOR } from "../styles/color";
 import { useRecoilState } from "recoil";
-import { TITLE,CONTENT,DATE,IMG,TRAVEL,USERID, USERNAME, USERIMG } from "../recoil/commonState";
+import { TITLE, CONTENT, DATE, IMG, USERNAME, USERIMG } from "../recoil/commonState";
 
 const DiaryPage = () => {
   const navigate = useNavigate();
