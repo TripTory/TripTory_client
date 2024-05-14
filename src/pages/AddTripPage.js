@@ -135,7 +135,7 @@ const AddTripPage = () => {
       </InputContainer>
       <Button
         disabled={
-          !tripName.trim() || !tripPlace.trim() || !startDate || !endDate
+          !tripName.trim() || !tripPlace.trim() || !startDate || !endDate || !imgUrl
         }
         type="submit"
         onClick={handleSubmit}
