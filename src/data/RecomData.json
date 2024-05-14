@@ -2,27 +2,22 @@
   "RecomData": [
     {
       "destination": "군산",
-      "information": "레트로한 감성이 좋아요",
-      "imagePath": "../../assets/images/gunsan.jpg"
+      "information": "레트로한 감성이 좋아요"
     },
     {
       "destination": "울산",
-      "information": "자연경관이 아름다워요",
-      "imagePath": "../../assets/images/ulsan.jpg"
+      "information": "자연경관이 아름다워요"
     },
     {
       "destination": "제주",
-      "information": "3월 유채꽃이 아름다워요",
-      "imagePath": "../../assets/images/jeju.jpg"
+      "information": "3월 유채꽃이 아름다워요"
     },
     {
       "destination": "부산",
-      "information": "바다를 보면 마음이 편해져요",
-      "imagePath": "../../assets/images/busan.jpg"
+      "information": "바다를 보면 마음이 편해져요"
     },{
       "destination": "광주",
-      "information": "한국의 근현대사를 마주해요",
-      "imagePath": "../../assets/images/gwangju.jpg"
+      "information": "한국의 근현대사를 마주해요"
     }
   ]
 }

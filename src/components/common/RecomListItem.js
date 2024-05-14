@@ -60,7 +60,6 @@ RecomListItem.propTypes = {
   data: PropTypes.node.isRequired,
   destination: PropTypes.string.isRequired,
   information: PropTypes.string.isRequired,
-  imagePath: PropTypes.string.isRequired,
 };
 
 const StRecomListItem = styled.div`

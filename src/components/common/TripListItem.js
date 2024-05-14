@@ -10,11 +10,19 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import Modal from "../../components/common/Modal";
 import { PropTypes } from "prop-types";
 import DelTripContent from "../../components/common/DelTripContent";
+import gunsanImage from "../../assets/images/gunsan.jpg";
+// import ulsanImage from "../../assets/images/ulsan.jpg";
+// import jejuImage from "../../assets/images/jeju.jpg";
+// import busanImage from "../../assets/images/busan.jpg";
+// import gwangjuImage from "../../assets/images/gwangju.jpg";
 
 export default function TripListItem(props) {
+  const getImagePath = () => {
+    return require(props.data.travelimg);
+  };
+
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const goToDel = () => {
     closeModal();
     //여행 삭제시 이루어져야하는 로직 추가 예정
@@ -37,13 +45,13 @@ export default function TripListItem(props) {
     <StTripListItem>
       <ListItem>
         <ListItemAvatar>
-          <Avatar>
-            <ImageIcon />
-          </Avatar>
+          <Avatar src={gunsanImage}/>
         </ListItemAvatar>
         <InfoDiv>
-          <TitleP>{props.item}</TitleP>
-          <DateP>2023.02.13~2023.02.16</DateP>
+          <TitleP>{props.data.title}</TitleP>
+          <DateP>
+            {props.data.startdate}~{props.data.enddate}
+          </DateP>
           <LocationDiv>
             <LocationOnIcon sx={{ fontSize: 12 }} />
             <LocationP>광주광역시</LocationP>
@@ -51,21 +59,27 @@ export default function TripListItem(props) {
         </InfoDiv>
         <DeleteDiv>
           <ModiDiv>
-            <p style={{ color: "#a1a1a1" }} onClick={goToEdit}>수정</p>
+            <p style={{ color: "#a1a1a1" }} onClick={goToEdit}>
+              수정
+            </p>
           </ModiDiv>
           <DelDiv>
-            <p style={{ color: "#a1a1a1" }} onClick={toggleModal}>삭제</p>
+            <p style={{ color: "#a1a1a1" }} onClick={toggleModal}>
+              삭제
+            </p>
           </DelDiv>
         </DeleteDiv>
       </ListItem>
       {isModalOpen && (
         <CancelModal
-          content={<DelTripContent/>}
+          content={<DelTripContent />}
           closeModals={closeModal}
-          buttons={<StCancelButtons>
-            <NoBtn onClick={closeModal}>아니오</NoBtn>
-            <YesBtn onClick={goToDel}>네</YesBtn>
-          </StCancelButtons>}
+          buttons={
+            <StCancelButtons>
+              <NoBtn onClick={closeModal}>아니오</NoBtn>
+              <YesBtn onClick={goToDel}>네</YesBtn>
+            </StCancelButtons>
+          }
           w="80%"
           h="20%"
         />
@@ -75,11 +89,14 @@ export default function TripListItem(props) {
 }
 
 TripListItem.propTypes = {
-  item: PropTypes.string.isRequired,
+  data: PropTypes.node.isRequired,
+  title: PropTypes.string.isRequired,
+  startdate: PropTypes.string.isRequired,
+  enddate: PropTypes.string.isRequired,
+  travelimg: PropTypes.string.isRequired,
 };
 
-const CancelModal = styled(Modal)`
-`;
+const CancelModal = styled(Modal)``;
 
 const StTripListItem = styled.div`
   display: flex;
@@ -159,7 +176,7 @@ const YesBtn = styled.button`
 `;
 
 const NoBtn = styled.button`
-  background-color: #D9D9D9;
+  background-color: #d9d9d9;
   width: 40%;
   height: 3rem;
   border: none;

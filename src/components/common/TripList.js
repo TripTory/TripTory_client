@@ -2,7 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 import List from "@mui/material/List";
 import TripListItem from "./TripListItem";
-
+import TripData from "../../data/TripData.json";
 export default function TripList() {
   return (
     <StTripList
@@ -15,12 +15,11 @@ export default function TripList() {
         scrollbarWidth: "none",
       }}
     >
-      <TripListItem item="1"/>
-      <TripListItem item="2"/>
-      <TripListItem item="3"/>
-      <TripListItem item="4"/>
-      <TripListItem item="5"/>
-      <TripListItem item="6"/>
+      {TripData.TripData.map((it)=> {
+        return(
+          <TripListItem key={it._id} data={it}/>
+        );
+      })}
     </StTripList>
   );
 }
