@@ -149,10 +149,11 @@ const CalendarStyle = styled(Calendar)`
   }
 
   .react-calendar__navigation__next-button {
-    color: transparent;
+    color: transparent ;
     background-image: url(${nextButtonImage});
     background-repeat: no-repeat;
     background-position: center center;
+    background-color: transparent !important;
   }
 
   .react-calendar__navigation__prev-button {
@@ -160,6 +161,7 @@ const CalendarStyle = styled(Calendar)`
     background-image: url(${prevButtonImage});
     background-repeat: no-repeat;
     background-position: center center;
+    background-color: transparent !important;
   }
 
   .react-calendar__navigation {
