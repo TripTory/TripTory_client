@@ -7,6 +7,11 @@ import leftBtn from "../../assets/icons/diary_left_btn.svg";
 import rightBtn from "../../assets/icons/diary_right_btn.svg";
 
 const DiaryPreviewContent = ({ diaries }) => {
+
+  if (!diaries || diaries.length === 0) {
+    return null; // diaries가 null이거나 비어있으면 렌더링하지 않음
+  }
+
   const sliderRef = useRef(null);
 
   const slideLeft = () => {

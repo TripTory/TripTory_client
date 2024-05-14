@@ -2,20 +2,12 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import React from "react";
 
-const DiaryModal = ({ content, closeModals, buttons }) => {
-  const handleClickOutside = (event) => {
-    if (event.target === event.currentTarget) {
-      // 배경 클릭 시에 모달 닫기
-      closeModals();
-    }
-  };
+const DiaryModal = ({ content, buttons }) => {
   return (
-    <BackgroundOverlay onClick={handleClickOutside}>
-      <ModalContainer>
-        {content && <ContentContainer>{content}</ContentContainer>}
-        {buttons && <ButtonContainer>{buttons}</ButtonContainer>}
-      </ModalContainer>
-    </BackgroundOverlay>
+    <ModalContainer>
+      {content && <ContentContainer>{content}</ContentContainer>}
+      {buttons && <ButtonContainer>{buttons}</ButtonContainer>}
+    </ModalContainer>
   );
 };
 
