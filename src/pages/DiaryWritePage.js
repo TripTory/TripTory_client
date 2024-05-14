@@ -181,31 +181,6 @@ const StyledDatePicker = styled.div`
   }
 `;
 
-const MapImage = styled.img`
-`;
-
-const PlaceBox = styled.input`
-  background-color: none;
-  width: 70%;
-  border: none;
-  font-size: 15px;
-  &::placeholder {
-    color: #bfbfbf;
-  }
-`;
-
-const PlaceDiv = styled.div`
-  display: flex;
-  align-items: center;
-  background-color: none;
-  width: 80%;
-  border: none;
-  font-size: 15px;
-  border-bottom: solid #bfbfbf 1px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 3%;
-`;
 
 const TitleBox = styled.input`
   display: flex;
