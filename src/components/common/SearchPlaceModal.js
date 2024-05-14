@@ -6,7 +6,6 @@ import PlaceList from "./PlaceList";
 import jsonData from "../../data/PlaceData.json";
 import { COLOR } from "../../styles/color";
 import PropTypes from "prop-types";
-import { PiMapPinFill } from "react-icons/pi";
 
 const SearchPlaceModal = ({ setIsModal, setTripPlace, setLongitude, setLatitude}) => {
   const allPlaces = jsonData.places;
