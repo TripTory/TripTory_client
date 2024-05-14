@@ -2,7 +2,7 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import React from "react";
 
-const Modal = ({ content, closeModals, buttons }) => {
+const DiaryModal = ({ content, closeModals, buttons }) => {
   const handleClickOutside = (event) => {
     if (event.target === event.currentTarget) {
       // 배경 클릭 시에 모달 닫기
@@ -19,7 +19,7 @@ const Modal = ({ content, closeModals, buttons }) => {
   );
 };
 
-Modal.propTypes = {
+DiaryModal.propTypes = {
   content: PropTypes.node.isRequired,
   closeModals: PropTypes.func.isRequired,
   buttons: PropTypes.node,
