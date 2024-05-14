@@ -8,6 +8,7 @@ import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { COLOR } from "../styles/color";
 import BottomNav from "../layout/BottomNav";
+import moment from "moment";
 
 const AddTripPage = () => {
   const navigate = useNavigate();
@@ -19,6 +20,8 @@ const AddTripPage = () => {
   const [tripName, setTripName] = useState("");
   //사용자 입력 정보(여행지역)
   const [tripPlace, setTripPlace] = useState("");
+  const [longitude, setLongitude] = useState("");
+  const [latitude, setLatitude] = useState("");
   //사용자 입력 정보(여행날짜)
   const [dateRange, setDateRange] = useState([null, null]);
   const [startDate, setStartDate] = useState(null);
@@ -44,10 +47,30 @@ const AddTripPage = () => {
 
   // 여행떠나기 버튼 클릭
   const handleSubmit = () => {
-    const [startDate, endDate] = dateRange;
+    const startDate = moment(dateRange[0]).format("YY-MM-DD");
+    const endDate = moment(dateRange[1]).format("YY-MM-DD");
     alert(
-      `여행 이름: ${tripName} // 여행 날짜: ${startDate}~${endDate} // 여행 장소: ${tripPlace} // 이미지 url: ${imgUrl}`,
+      `여행 이름: ${tripName} // 여행 날짜: ${startDate}~${endDate} // 여행 장소: ${tripPlace} // 이미지 url: ${imgUrl} // longitude:${longitude} //latitude:${latitude}`,
     );
+
+    fetch("url", {
+      method: "post",
+      body: JSON.stringify({
+        title: tripName,
+        startdate: startDate,
+        enddate: endDate,
+        location: {
+          latitude: latitude,
+          longitude: longitude,
+        },
+      }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.success) {
+          alert("저장 완료");
+        }
+      });
   };
 
   const handleCancel = () => {
@@ -60,14 +83,21 @@ const AddTripPage = () => {
 
   return (
     <div className="CreateTripPage">
-      {isModal && <SearchPlaceModal setIsModal={setIsModal} setTripPlace={setTripPlace}/>}
+      {isModal && (
+        <SearchPlaceModal
+          setIsModal={setIsModal}
+          setTripPlace={setTripPlace}
+          setLongitude={setLongitude}
+          setLatitude={setLatitude}
+        />
+      )}
       <TitleContainer>
         <Title>어떤 여행을 만들까요?</Title>
         <CancelBtn onClick={handleCancel}>취소</CancelBtn>
       </TitleContainer>
       <EmptyContainer />
       <div>
-        <ImageUploader onChange={setImgUrl}/>
+        <ImageUploader onChange={setImgUrl} />
       </div>
       <EmptyContainer />
       <div></div>
