@@ -37,6 +37,11 @@ const MypagePage = () => {
   const goToLogin = () => {
     navigate("/login");
   };
+
+  const DelAccount = () =>{
+    //백에 계정 삭제 DELETE (/user) 요청
+    goToLogin();
+  };
   const Menu = [
     { icon: <ModifyIcon />, text: "프로필 편집", action: goToEdit },
     { icon: <LogoutIcon />, text: "로그아웃", action: goToLogin },
@@ -78,7 +83,7 @@ const MypagePage = () => {
           closeModals={closeModal}
           buttons={<StCancelButtons>
             <NoBtn onClick={closeModal}>아니오</NoBtn>
-            <YesBtn onClick={goToLogin}>네</YesBtn>
+            <YesBtn onClick={DelAccount}>네</YesBtn>
           </StCancelButtons>}
           w="80%"
           h="20%"
