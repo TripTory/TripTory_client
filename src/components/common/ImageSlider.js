@@ -6,8 +6,10 @@ import "slick-carousel/slick/slick-theme.css";
 import PropTypes from "prop-types";
 import { COLOR } from "../../styles/color";
 
-
 const ImageSlider = ({ images }) => {
+  if (images[0] === null) {
+    return null;
+  }
   const settings = {
     dots: false,
     infinite: false,
@@ -27,7 +29,7 @@ const ImageSlider = ({ images }) => {
   );
 };
 ImageSlider.propTypes = {
-  images: PropTypes.arrayOf(PropTypes.string).isRequired
+  images: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 export default ImageSlider;
 
@@ -64,4 +66,3 @@ const SliderStyle = styled(Slider)`
     z-index: -1;
   }
 `;
-

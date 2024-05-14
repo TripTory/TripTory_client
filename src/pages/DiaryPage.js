@@ -8,14 +8,19 @@ import ImageSlider from "../components/common/ImageSlider";
 import BottomNav from "../layout/BottomNav";
 import jsonData from "../data/DiaryInfoData.json";
 import { COLOR } from "../styles/color";
-import image1 from "../assets/images/gunsan.jpg";
-import image2 from "../assets/images/ulsan.jpg";
-import image3 from "../assets/images/jeju.jpg";
+import { useRecoilState } from "recoil";
+import { TITLE,CONTENT,DATE,IMG,TRAVEL,USERID, USERNAME, USERIMG } from "../recoil/commonState";
 
 const DiaryPage = () => {
   const navigate = useNavigate();
 
-  const images = [image1, image2, image3];
+  // const images = [image1, image2, image3];
+  const [title, setTitle] = useRecoilState(TITLE);
+  const [content, setContent] = useRecoilState(CONTENT);
+  const [date, setDate] = useRecoilState(DATE);
+  const [img, setImg] = useRecoilState(IMG);
+  const [username, setUsername] = useRecoilState(USERNAME);
+  const [userimg, setUserimg] = useRecoilState(USERIMG);
 
   const goToTriptable = () => {
     navigate("/triptable");
@@ -31,9 +36,9 @@ const DiaryPage = () => {
           <DeleteBtn>삭제</DeleteBtn>
         </BtnContainer>
       </HeaderConatiner>
-      <DiaryInfo diaryInfo={jsonData.diary_info}></DiaryInfo>
-      <DiaryContent></DiaryContent>
-      <ImageSlider images={images}/>
+      <DiaryInfo title={title} date={date} username={username} userimg={userimg} ></DiaryInfo>
+      <DiaryContent content={content}></DiaryContent>
+      <ImageSlider images={img}/>
       <BottomNav />
     </div>
   );

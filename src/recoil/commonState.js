@@ -19,7 +19,7 @@ export const DATE = atom({
 });
 export const IMG = atom({
   key: "IMG",
-  default: ["https://health.chosun.com/site/data/img_dir/2023/05/31/2023053102582_0.jpg"],
+  default: ["https://health.chosun.com/site/data/img_dir/2023/05/31/2023053102582_0.jpg","https://health.chosun.com/site/data/img_dir/2023/05/31/2023053102582_0.jpg"],
 });
 export const TRAVEL = atom({
   key: "TRAVEL",

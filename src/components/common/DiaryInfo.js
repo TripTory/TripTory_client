@@ -3,34 +3,28 @@ import styled from "styled-components";
 import { COLOR } from "../../styles/color";
 import PropTypes from "prop-types";
 import { IoMdPin } from "react-icons/io";
-import Karina from "../../assets/images/karina.png";
+import moment from "moment";
 
-const DiaryInfo = ({ diaryInfo }) => {
+const DiaryInfo = ({title, date, username, userimg}) => {
   return (
     <InfoContainer>
-      <TitleDiv>신나는 바다 여행</TitleDiv>
+      <TitleDiv>{title}</TitleDiv>
       <DatePlaceContainer>
-        <DateDiv>2024.03.11</DateDiv>
-        <PinIcon /><PlaceDiv>을왕리 해수욕장</PlaceDiv>
+        <DateDiv>{moment(date, "YY-MM-DD").format("YYYY.MM.DD")}</DateDiv>
       </DatePlaceContainer>
       <AuthorContainer>
-        <AuthorImg src={Karina}></AuthorImg>
-        <AuthorDiv>카리나</AuthorDiv>
+        <AuthorImg src={userimg}></AuthorImg>
+        <AuthorDiv>{username}</AuthorDiv>
       </AuthorContainer>
     </InfoContainer>
   );
 };
 
 DiaryInfo.propTypes = {
-  diaryInfo: PropTypes.arrayOf(
-    PropTypes.shape({
-      diaryTitle: PropTypes.string.isRequired,
-      date: PropTypes.string.isRequired,
-      place: PropTypes.string.isRequired,
-      author: PropTypes.string.isRequired,
-      author_img: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
+  title: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  username: PropTypes.string.isRequired,
+  userimg: PropTypes.string.isRequired
 };
 
 export default DiaryInfo;
