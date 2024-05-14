@@ -14,8 +14,10 @@ import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import DoDisturbOutlinedIcon from "@mui/icons-material/DoDisturbOutlined";
 import CancelContent from "../components/common/CancelContent";
 import BottomNav from "../layout/BottomNav";
+import UserData from "../data/UserData.json";
 
 const MypagePage = () => {
+  //axios get으로 받아온 username location으로 전달
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -29,7 +31,7 @@ const MypagePage = () => {
   };
 
   const goToEdit = () => {
-    navigate("/editprofil");
+    navigate("/editprofil", { state: UserData.user.name });
   };
 
   const goToLogin = () => {
@@ -51,8 +53,8 @@ const MypagePage = () => {
       </TitleDiv>
       <ProfilDiv>
         <ProfilAvatar alt="default" src={Default} />
-        <NameP>이채영</NameP>
-        <MailP>cy1234@naver.com</MailP>
+        <NameP>{UserData.user.name}</NameP>
+        <MailP>{UserData.user.email}</MailP>
       </ProfilDiv>
       <MenuDiv>
         <List sx={{ width: "100%" }}>
