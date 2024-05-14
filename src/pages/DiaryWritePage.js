@@ -3,7 +3,6 @@ import { React, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import calendar from "../assets/images/calendar.svg";
-import mapPing from "../assets/images/mapPing.svg";
 import Modal from "../components/common/Modal";
 import Uploader from "../components/common/MultipleImageUploader";
 import { COLOR } from "../styles/color";
@@ -105,7 +104,7 @@ const DiaryWritePage = () => {
 
     <BtnDiv>
       <CancelBtn onClick={openCancelModal}>취소</CancelBtn>
-      <SaveBtn onClick={openSaveModal}>저장</SaveBtn>
+      <SaveBtn onClick={openSaveModal} disabled={!(startDate && title && content)} >저장</SaveBtn>
     </BtnDiv>
 
     {isCancelModalOpen && (
@@ -254,6 +253,7 @@ const SaveBtn = styled.button`
   border-radius: 3rem;
   box-shadow: 2px 3px 5px 0px rgba(0, 0, 0, 0.4); 
   margin-left: 3%;
+  background-color: ${(props) => props.disabled ? "rgba(46, 171, 161, 0.3)" : "${COLOR.MAIN_EMER}"}
 `;
 const OkayBtn = styled.button`
   height: 2.5rem;
