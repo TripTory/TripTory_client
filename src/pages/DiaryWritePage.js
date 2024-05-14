@@ -157,7 +157,7 @@ const DateDiv = styled.div`
   border-bottom: solid #bfbfbf 1px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 6%;
+  margin-top: 10%;
 `;
 const CalenderImage = styled.img`
   padding: 1.2%;
@@ -219,7 +219,7 @@ const DiaryDiv = styled.div`
   color: #BFBFBF;
   border: 1px solid ${COLOR.MAIN_SKY};
   border-radius: 1.8rem;
-  margin-top: 2rem;
+  margin-top: 2.5rem;
   margin-left: 8%;
   margin-right: 8%;
 `;
