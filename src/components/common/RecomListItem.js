@@ -1,14 +1,35 @@
 import styled from "styled-components";
 import React from "react";
-// import { PropTypes } from "prop-types";
+import { PropTypes } from "prop-types";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import { Typography } from "@mui/material";
 import CardContent from "@mui/material/CardContent";
 import ListItem from "@mui/material/ListItem";
-import { Title } from "@mui/icons-material";
+import gunsanImage from "../../assets/images/gunsan.jpg";
+import ulsanImage from "../../assets/images/ulsan.jpg";
+import jejuImage from "../../assets/images/jeju.jpg";
+import busanImage from "../../assets/images/busan.jpg";
+import gwangjuImage from "../../assets/images/gwangju.jpg";
 
 export default function RecomListItem(props) {
+  const getImagePath = (destination) => {
+    switch (destination) {
+      case "군산":
+        return gunsanImage;
+      case "울산":
+        return ulsanImage;
+      case "제주":
+        return jejuImage;
+      case "부산":
+        return busanImage;
+      case "광주":
+        return gwangjuImage;
+      default:
+        return "";
+    }
+  };
+
   return (
     <StRecomListItem>
       <ListItem
@@ -21,12 +42,12 @@ export default function RecomListItem(props) {
         <ItemCard sx={{ width: "100%", height: "100%" }}>
           <CardMedia
             sx={{ width: "100%", height: "70%" }}
-            image={require("../../assets/images/busan.jpg")}
+            image={getImagePath(props.data.destination)}
           />
           <InfoCardContent sx={{ width: "100%", height: "30%" }}>
-            <TitleP>부산시</TitleP>
+            <TitleP>{props.data.destination}</TitleP>
             <Typography variant="body2" color="text.secondary">
-              시원한 바다를 느껴보아요
+              {props.data.information}
             </Typography>
           </InfoCardContent>
         </ItemCard>
@@ -35,9 +56,12 @@ export default function RecomListItem(props) {
   );
 }
 
-//TripListItem.propTypes = {
-//  item: PropTypes.string.isRequired,
-//};
+RecomListItem.propTypes = {
+  data: PropTypes.node.isRequired,
+  destination: PropTypes.string.isRequired,
+  information: PropTypes.string.isRequired,
+  imagePath: PropTypes.string.isRequired,
+};
 
 const StRecomListItem = styled.div`
   width: 100%;

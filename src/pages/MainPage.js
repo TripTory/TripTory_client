@@ -11,6 +11,9 @@ import { dialogState } from "../recoil/commonState";
 import BottomNav from "../layout/BottomNav";
 
 const MainPage = () => {
+  //db에서 get 해온 username
+  const dummyName = "이채영";
+
   const [dialog, setDialog] = useRecoilState(dialogState);
   const handleOpen = () => {
     setDialog(true);
@@ -19,7 +22,7 @@ const MainPage = () => {
   return (
     <StMainPage>
       <IntroDiv>
-        <HiP>이채영님&nbsp;반가워요!</HiP>
+        <HiP>{dummyName}님&nbsp;반가워요!</HiP>
         <WelcomeP>트립토리와 함께 여행을 기록해요.</WelcomeP>
       </IntroDiv>
       <MainDiv>
