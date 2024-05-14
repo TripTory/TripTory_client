@@ -77,10 +77,6 @@ const DiaryWritePage = () => {
           />
         </StyledDatePicker>
       </DateDiv>
-      <PlaceDiv>
-        <MapImage src={mapPing} />
-        <PlaceBox placeholder="장소를 검색하세요" />
-      </PlaceDiv>
     </div>
 
     <DiaryDiv>
