@@ -5,17 +5,15 @@ import PropTypes from "prop-types";
 import { IoMdPin } from "react-icons/io";
 import moment from "moment";
 
-const DiaryInfo = ({title, date, username, userimg}) => {
+const DiaryInfo = ({ title, date, username, userimg }) => {
   return (
     <InfoContainer>
       <TitleDiv>{title}</TitleDiv>
-      <DatePlaceContainer>
-        <DateDiv>{moment(date, "YY-MM-DD").format("YYYY.MM.DD")}</DateDiv>
-      </DatePlaceContainer>
       <AuthorContainer>
         <AuthorImg src={userimg}></AuthorImg>
         <AuthorDiv>{username}</AuthorDiv>
       </AuthorContainer>
+      <DateDiv>{moment(date, "YY-MM-DD").format("YYYY.MM.DD")}</DateDiv>
     </InfoContainer>
   );
 };
@@ -24,7 +22,7 @@ DiaryInfo.propTypes = {
   title: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   username: PropTypes.string.isRequired,
-  userimg: PropTypes.string.isRequired
+  userimg: PropTypes.string.isRequired,
 };
 
 export default DiaryInfo;
@@ -43,29 +41,10 @@ const TitleDiv = styled.div`
   padding: 0.8rem 0.5rem;
 `;
 
-const DatePlaceContainer = styled.div`
-  display: flex;
-  justify-content: start;
-  padding: 1rem 0.5rem;
-  color: #7e7e7e;
-`;
-
 const DateDiv = styled.div`
   font-size: 1.7rem;
   font-weight: 700;
-`;
-
-const PinIcon = styled(IoMdPin)`
-  width: 1.9rem;
-  height: 1.9rem;
-  margin: 0rem 0rem 0rem 0.8rem;
-  color: ${COLOR.MAIN_GREEN};
-
-`;
-
-const PlaceDiv = styled.div`
-  font-size: 1.7rem;
-  font-weight: 700;
+  padding: 1rem 0.5rem;
 `;
 
 const AuthorContainer = styled.div`
@@ -80,7 +59,6 @@ const AuthorDiv = styled.div`
   font-weight: 700;
   display: flex;
   align-items: center;
-  
 `;
 
 const AuthorImg = styled.img`
@@ -88,5 +66,4 @@ const AuthorImg = styled.img`
   height: 3rem;
   border-radius: 1.5rem;
   margin: 0rem 0.8rem 0rem 0rem;
-
 `;
