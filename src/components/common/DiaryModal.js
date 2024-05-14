@@ -61,4 +61,4 @@ const ButtonContainer = styled.div`
   justify-content: center;
 `;
 
-export default Modal;
+export default DiaryModal;
