@@ -3,6 +3,7 @@ import kakaologo from "../assets/images/kakaoLogo.svg";
 import googlelogo from "../assets/images/googleLogo.svg";
 import naverlogo from "../assets/images/naverLogo.svg";
 import React from "react";
+import axios from "axios";
 
 
 const LoginPage = () => {
@@ -50,26 +51,14 @@ const LoginPage = () => {
     .catch((error) => console.error("구글 로그인 에러:", error));
   };
 
-  const goToNaverOauth = () => {
-
-    //sendRequest();
-
-
-    fetch(`${SERVER_URL}/oauth/naver`, {
-      method: "GET",
-      credentials: "include",
-      mode: "no-cors"
-    })
-    .then((response) => {
-      console.log(response);
-      if (response) {
-        console.log("네이버 로그인 성공!");
-        window.location.href = `${process.env.REACT_APP_SERVER_URL}/oauth/naver`;
-      } else {
-        console.log("네이버 로그인 실패");
-      }
-    })
-    .catch((error) => console.error("네이버 로그인 에러:", error));
+  const goToNaverOauth = async () => {
+    try {
+      const response = await axios.get(`${SERVER_URL}/oauth/naver`);
+      const { authorizationUrl } = response.data;
+      window.location.href = authorizationUrl;
+    } catch (error) {
+      console.error("네이버 로그인 에러:", error);
+    }
   };
     ///////////
     // fetch(`${SERVER_URL}/oauth/naver/callback`)
