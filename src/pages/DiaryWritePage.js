@@ -12,9 +12,12 @@ import BottomNav from "../layout/BottomNav";
 const DiaryWritePage = () => {
 
   const [startDate, setStartDate] = useState();
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false); // Cancel 버튼을 위한 모달 상태
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(false); // Save 버튼을 위한 모달 상태
   const [imagePreview, setImagePreview] = useState(null);
+  const [imageFile, setImageFile] = useState(null);
 
   const openCancelModal = () => {
     setIsCancelModalOpen(true);
@@ -28,8 +31,35 @@ const DiaryWritePage = () => {
     setIsSaveModalOpen(false);
   };
 
-  const handleImageUpload = (preview) => {
+  const handleImageUpload = (preview, file) => {
     setImagePreview(preview);
+    //setImageFile(file);
+  };
+
+  const handleConfirm = () => {
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("content", content);
+    formData.append("date", startDate.toISOString().split("T")[0]);
+    formData.append("image", imageFile);
+    for (let pair of formData.entries()) {
+      console.log(pair[0], pair[1]);
+    }
+
+    fetch(`${process.env.REACT_APP_SERVER_URL}/diary`, {
+      method: "POST",
+      mode: "no-cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: formData,
+    })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.error("에러", error);
+      });
   };
 
   return <div>
@@ -54,8 +84,18 @@ const DiaryWritePage = () => {
     </div>
 
     <DiaryDiv>
-      <TitleBox placeholder="제목을 입력하세요" />
-      <ContentBox type="text" placeholder="내용을 입력하세요" maxLength={1000}/>
+      <TitleBox
+        placeholder="제목을 입력하세요"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
+      <ContentBox
+        type="text"
+        placeholder="내용을 입력하세요"
+        maxLength={1000}
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
+      />
     </DiaryDiv>
 
     <Uploader handleImageUpload={handleImageUpload} />
@@ -102,7 +142,7 @@ const DiaryWritePage = () => {
         buttons={
           <OkayDiv>
             <OkayBtn className="no" onClick={closeModal}>취소</OkayBtn>
-            <OkayBtn className="yes">확인</OkayBtn>
+            <OkayBtn className="yes" onClick={handleConfirm}>확인</OkayBtn>
           </OkayDiv>
         }
       />
@@ -277,4 +317,5 @@ const ImagePreview = styled.div`
 `;
 
 export default DiaryWritePage;
+
 
