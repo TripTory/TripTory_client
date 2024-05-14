@@ -18,6 +18,8 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.6.8",
+    "date-fns": "^3.6.0",
+    "datepicker": "^0.0.0",
     "dayjs": "^1.11.10",
     "dotenv": "^16.4.5",
     "jquery": "^3.7.1",
