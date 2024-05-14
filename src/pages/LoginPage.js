@@ -2,13 +2,11 @@ import styled from "styled-components";
 import kakaologo from "../assets/images/kakaoLogo.svg";
 import googlelogo from "../assets/images/googleLogo.svg";
 import naverlogo from "../assets/images/naverLogo.svg";
-
 import React from "react";
 
 
-const SERVER_URL = process.env.REACT_APP_SERVER_URL;
-
 const LoginPage = () => {
+  const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
   const goToGoogleOauth = () => {
     window.location.href = `${SERVER_URL}/oauth/google`;
@@ -24,7 +22,7 @@ const LoginPage = () => {
       console.log(response);
       if (response) {
         console.log("네이버 로그인 성공!");
-        window.location.href = `${SERVER_URL}/oauth/naver`;
+        window.location.href = `${process.env.REACT_APP_SERVER_URL}/oauth/naver`;
       } else {
         console.log("네이버 로그인 실패");
       }
@@ -76,7 +74,6 @@ const IntroP = styled.p`
 
 
 const LogoImage = styled.img`
-  //width: 20px;
   height: 38px;
   margin-right: 9px;
 `;
