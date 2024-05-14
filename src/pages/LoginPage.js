@@ -6,21 +6,25 @@ import naverlogo from "../assets/images/naverLogo.svg";
 import React from "react";
 
 
+const SERVER_URL = process.env.REACT_APP_SERVER_URL;
+
 const LoginPage = () => {
 
   const goToGoogleOauth = () => {
-    window.location.href = "https://triptoryserver-jwakz2rnea-du.a.run.app/oauth/google";
+    window.location.href = `${SERVER_URL}/oauth/google`;
   };
 
   const goToNaverOauth = () => {
-    fetch("https://triptoryserver-jwakz2rnea-du.a.run.app/oauth/naver", {
+    fetch(`${SERVER_URL}/oauth/naver`, {
       method: "GET",
-      credentials: "include"
+      credentials: "include",
+      mode: "no-cors"
     })
     .then((response) => {
-      if (response.ok) {
+      console.log(response);
+      if (response) {
         console.log("네이버 로그인 성공!");
-        window.location.href = "https://triptoryserver-jwakz2rnea-du.a.run.app/oauth/naver/callback";
+        window.location.href = `${SERVER_URL}/oauth/naver`;
       } else {
         console.log("네이버 로그인 실패");
       }
@@ -29,7 +33,7 @@ const LoginPage = () => {
   };
 
   const goToKakaoOauth = () => {
-    window.location.href = "https://triptoryserver-jwakz2rnea-du.a.run.app/oauth/kakao";
+    window.location.href = `${SERVER_URL}/oauth/kakao`;
   };
 
   return (
