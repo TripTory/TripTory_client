@@ -29,18 +29,8 @@ const ModalContainer = styled.div`
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   max-height: 70vh;
   overflow-y: auto;
-  padding-bottom: 6rem;
 `;
 
-const BackgroundOverlay = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
-  z-index: 99;
-`;
 const ContentContainer = styled.div`
   width: 100%;
   height: 85%;
