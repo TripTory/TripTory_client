@@ -30,10 +30,8 @@ const DiaryWritePage = () => {
     setIsSaveModalOpen(false);
   };
 
-  const handleImageUpload = (preview, newFiles) => {
+  const handleImageUpload = (preview) => {
     setImagePreview(preview);
-
-    //setFiles(newFiles);
   };
 
   const handleConfirm = () => {
@@ -100,12 +98,6 @@ const DiaryWritePage = () => {
 
     <Uploader onFilesChange={handleImageUpload} files={files} setFiles={setFiles} />
 
-    {/* 이미지 미리보기 */}
-    {imagePreview && (
-      <ImagePreview>
-        <img src={imagePreview} alt="Uploaded" />
-      </ImagePreview>
-    )}
 
     <BtnDiv>
       <CancelBtn onClick={openCancelModal}>취소</CancelBtn>
@@ -289,8 +281,6 @@ const ContentDiv = styled.div`
   margin-top: 4rem;
 `;
 
-const ImagePreview = styled.div`
-`;
 
 export default DiaryWritePage;
 
