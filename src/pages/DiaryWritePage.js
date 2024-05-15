@@ -16,7 +16,7 @@ const DiaryWritePage = () => {
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false); // Cancel 버튼을 위한 모달 상태
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(false); // Save 버튼을 위한 모달 상태
   const [imagePreview, setImagePreview] = useState(null);
-  const [imageFile, setImageFile] = useState(null);
+  const [files, setFiles] = useState([]);
 
   const openCancelModal = () => {
     setIsCancelModalOpen(true);
@@ -30,9 +30,10 @@ const DiaryWritePage = () => {
     setIsSaveModalOpen(false);
   };
 
-  const handleImageUpload = (preview, file) => {
+  const handleImageUpload = (preview, newFiles) => {
     setImagePreview(preview);
-    //setImageFile(file);
+
+    //setFiles(newFiles);
   };
 
   const handleConfirm = () => {
@@ -40,7 +41,11 @@ const DiaryWritePage = () => {
     formData.append("title", title);
     formData.append("content", content);
     formData.append("date", startDate.toISOString().split("T")[0]);
-    formData.append("image", imageFile);
+
+    files.forEach((file, index) => {
+      formData.append(`image${index}`, file.fileObject);
+    });
+
     for (let pair of formData.entries()) {
       console.log(pair[0], pair[1]);
     }
@@ -93,7 +98,7 @@ const DiaryWritePage = () => {
       />
     </DiaryDiv>
 
-    <Uploader handleImageUpload={handleImageUpload} />
+    <Uploader onFilesChange={handleImageUpload} files={files} setFiles={setFiles} />
 
     {/* 이미지 미리보기 */}
     {imagePreview && (
