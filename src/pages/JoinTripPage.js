@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import styled, { css } from "styled-components";
 import { COLOR } from "../styles/color.js";
 import Modal from "../components/common/Modal";
@@ -13,6 +14,9 @@ const JoinTripPage = () => {
   const [inputCode, setInputCode] = useState("");
   const [isCheckModal, setIsCheckModal] = useState(false);
   const [isFailModal, setIsFailModal] = useState(false);
+
+  const [inviter, setInviter] = useState("");
+  const [tripId, setTripId] = useState("");
 
   // X 버튼 클릭
   const handleCancel = () => {
@@ -28,15 +32,28 @@ const JoinTripPage = () => {
   const joinTrip = () => {
     alert("남궁희 님의 여행에 참여되었습니다.");
     closeCheckModal();
+    navigate("/triptable", { state: { tripID: `${tripId}` } });
+    // 일기 목록 페이지로 navigate 하면서 여행 id 넘겨줌
+    // 그럼 일기 목록 페이지에서는 여행 id를 받아서 다시 서버에서 get 해와서 화면에 보여줌
   };
 
   // 확인하기 버튼 클릭
   const handleSubmit = () => {
+    axios
+      .get(`.../travel/${inputCode}`)
+      .then((res) => {
+        setInviter(res.invited[0]);
+        setTripId(res._id);
+        openCheckModal();
+      })
+      .catch((error) => {
+        openFailModal();
+      });
     //코드가 유효한지 확인하는 로직
     if (inputCode === "1234") {
       openCheckModal();
     } else {
-      openFailkModal();
+      openFailModal();
     }
   };
 
@@ -49,7 +66,7 @@ const JoinTripPage = () => {
     setIsCheckModal(false);
   };
   //fail modal 열기
-  const openFailkModal = () => {
+  const openFailModal = () => {
     setIsFailModal(true);
   };
   //fail modal 닫기
@@ -61,7 +78,7 @@ const JoinTripPage = () => {
     <div>
       {isCheckModal && (
         <Modal
-          content={<AcceptJoinContent />}
+          content={<AcceptJoinContent inviter={inviter} />}
           closeModals={closeCheckModal}
           buttons={
             <ButtonContainer>
@@ -87,7 +104,9 @@ const JoinTripPage = () => {
         />
       )}
       <div>
-        <XButton onClick={handleCancel}><img src={xicon} /></XButton>
+        <XButton onClick={handleCancel}>
+          <img src={xicon} />
+        </XButton>
         <EmptyDiv></EmptyDiv>
         <InputContainer>
           <Text className="tripName">친구 여행 참여하기</Text>
@@ -104,9 +123,7 @@ const JoinTripPage = () => {
             ></InputCode>
           </InputWrapper>
           <ButtonWrapper>
-            <SubmitButton
-              onClick={handleSubmit}
-              disabled={!inputCode.trim()}>
+            <SubmitButton onClick={handleSubmit} disabled={!inputCode.trim()}>
               <p>확인하기</p>
             </SubmitButton>
           </ButtonWrapper>
@@ -206,7 +223,6 @@ const ButtonContainer = styled.div`
   align-items: center;
   width: 100%;
   height: 50%;
-
 `;
 const YesBtn = styled.button`
   background-color: ${COLOR.MAIN_GREEN};
@@ -240,4 +256,3 @@ const CloseBtn = styled.button`
   color: white;
   font-weight: bolder;
 `;
-
