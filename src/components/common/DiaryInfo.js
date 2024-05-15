@@ -31,7 +31,7 @@ const InfoContainer = styled.div`
   border-bottom: 1px solid ${COLOR.MAIN_EMER_LIGHT};
   border-top: 1px solid ${COLOR.MAIN_EMER_LIGHT};
   margin: auto;
-  padding: 2rem;
+  padding: 1.5rem 2rem;
 `;
 
 const TitleDiv = styled.div`
