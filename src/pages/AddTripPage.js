@@ -9,8 +9,11 @@ import { useNavigate } from "react-router-dom";
 import { COLOR } from "../styles/color";
 import BottomNav from "../layout/BottomNav";
 import moment from "moment";
+import axios from "axios";
 
 const AddTripPage = () => {
+  const SERVER_URL = process.env.REACT_APP_SERVER_URL;
+
   const navigate = useNavigate();
 
   //모달창(여행지 검색) 관리 변수
@@ -49,13 +52,12 @@ const AddTripPage = () => {
   const handleSubmit = () => {
     const startDate = moment(dateRange[0]).format("YY-MM-DD");
     const endDate = moment(dateRange[1]).format("YY-MM-DD");
-    alert(
-      `여행 이름: ${tripName} // 여행 날짜: ${startDate}~${endDate} // 여행 장소: ${tripPlace} // 이미지 url: ${imgUrl} // longitude:${longitude} //latitude:${latitude}`,
-    );
+    // alert(
+    //   `여행 이름: ${tripName} // 여행 날짜: ${startDate}~${endDate} // 여행 장소: ${tripPlace} // 이미지 url: ${imgUrl} // longitude:${longitude} //latitude:${latitude}`,
+    // );
 
-    fetch("url", {
-      method: "post",
-      body: JSON.stringify({
+    axios
+      .post(`${SERVER_URL}/travel`, {
         title: tripName,
         startdate: startDate,
         enddate: endDate,
@@ -63,13 +65,14 @@ const AddTripPage = () => {
           latitude: latitude,
           longitude: longitude,
         },
-      }),
-    })
-      .then((res) => res.json())
+        image: "....",
+      })
       .then((res) => {
-        if (res.success) {
-          alert("저장 완료");
-        }
+        console.log(res);
+        alert("저장 완료");
+      })
+      .catch((error) => {
+        console.log(error);
       });
   };
 
@@ -135,7 +138,11 @@ const AddTripPage = () => {
       </InputContainer>
       <Button
         disabled={
-          !tripName.trim() || !tripPlace.trim() || !startDate || !endDate || !imgUrl
+          !tripName.trim() ||
+          !tripPlace.trim() ||
+          !startDate ||
+          !endDate ||
+          !imgUrl
         }
         type="submit"
         onClick={handleSubmit}
