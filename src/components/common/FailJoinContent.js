@@ -6,7 +6,7 @@ const FailJoinContent = () => {
     <FailContent>
       <ContentDiv>
         <ContentP>
-          존재하지 않는 코드입니다.
+          이미 참여중이거나 <br/> 존재하지 않는 여행입니다.
         </ContentP>
       </ContentDiv>
     </FailContent>
