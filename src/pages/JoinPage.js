@@ -329,9 +329,6 @@ const CustomCheckbox = styled.input`
   &:checked {
     background-color: #AACCD2;
     border-color: #AACCD2;
-    /* background-image: url('src/assets/images/check.svg');
-    background-repeat: no-repeat;
-    background-position: center; */
   }
 `;
 
