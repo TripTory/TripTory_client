@@ -10,13 +10,14 @@ import xicon from "../assets/icons/x-icon.svg";
 import BottomNav from "../layout/BottomNav";
 
 const JoinTripPage = () => {
+  const SERVER_URL = process.env.REACT_APP_SERVER_URL;
   const navigate = useNavigate();
   const [inputCode, setInputCode] = useState("");
   const [isCheckModal, setIsCheckModal] = useState(false);
   const [isFailModal, setIsFailModal] = useState(false);
 
   const [inviter, setInviter] = useState("");
-  const [tripId, setTripId] = useState("");
+  const [travelId, setTravelId] = useState("");
 
   // X 버튼 클릭
   const handleCancel = () => {
@@ -30,31 +31,27 @@ const JoinTripPage = () => {
 
   // 초대 수락시 실행되는 함수
   const joinTrip = () => {
-    alert("남궁희 님의 여행에 참여되었습니다.");
-    closeCheckModal();
-    navigate("/triptable", { state: { tripID: `${tripId}` } });
-    // 일기 목록 페이지로 navigate 하면서 여행 id 넘겨줌
-    // 그럼 일기 목록 페이지에서는 여행 id를 받아서 다시 서버에서 get 해와서 화면에 보여줌
+    alert(`${inviter} 님의 여행에 참여되었습니다.`);
+    setIsCheckModal(false);
+    navigate("/triptable", { state: { travelID: `${travelId}` } });
   };
 
   // 확인하기 버튼 클릭
   const handleSubmit = () => {
     axios
-      .get(`.../travel/${inputCode}`)
+      .put(`${SERVER_URL}/travel/invite`, {ivtoken: inputCode})
       .then((res) => {
-        setInviter(res.invited[0]);
-        setTripId(res._id);
-        openCheckModal();
+        if (res.status === 200) {
+          setInviter(res.invited[0]);
+          setTravelId(res._id);
+          openCheckModal();
+        } else {
+          openFailModal();
+        }
       })
       .catch((error) => {
         openFailModal();
       });
-    //코드가 유효한지 확인하는 로직
-    if (inputCode === "1234") {
-      openCheckModal();
-    } else {
-      openFailModal();
-    }
   };
 
   // check modal 열기
@@ -64,6 +61,8 @@ const JoinTripPage = () => {
   //check modal 닫기
   const closeCheckModal = () => {
     setIsCheckModal(false);
+    setInviter("");
+    setTravelId("");
   };
   //fail modal 열기
   const openFailModal = () => {
@@ -87,7 +86,7 @@ const JoinTripPage = () => {
             </ButtonContainer>
           }
           w="80%"
-          h="23%"
+          h="25%"
         />
       )}
       {isFailModal && (
@@ -100,7 +99,7 @@ const JoinTripPage = () => {
             </ButtonContainer>
           }
           w="80%"
-          h="23%"
+          h="25%"
         />
       )}
       <div>
