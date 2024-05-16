@@ -6,6 +6,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Dialog from "@mui/material/Dialog";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { dialog, dialogState } from "../../recoil/commonState";
 import People from "../../assets/icons/people.svg";
@@ -13,6 +14,15 @@ import Person from "../../assets/icons/person.svg";
 
 export default function AddTripDialog(props) {
   const [dialog, setDialog] = useRecoilState(dialogState);
+  const navigate = useNavigate();
+
+  const goToAdd = () => {
+    navigate("/addtrip");
+  };
+
+  const goToParticipate = () => {
+    navigate("/jointrip");
+  };
 
   const handleClose = () => {
     setDialog(false);
@@ -21,13 +31,13 @@ export default function AddTripDialog(props) {
   return (
     <StDialog onClose={handleClose} open={dialog}>
       <AddList>
-        <AddlstItm disableGutters>
+        <AddlstItm disableGutters onClick={goToAdd}>
           <AddItemBtn onClick={handleClose}>
             <IconImg src={Person} />
             <ListItemText>여행 추가하기</ListItemText>
           </AddItemBtn>
         </AddlstItm>
-        <AddlstItm disableGutters>
+        <AddlstItm disableGutters onClick={goToParticipate}>
           <AddItemBtn onClick={handleClose}>
             <IconImg src={People} />
             <ListItemText>친구 여행 참여하기</ListItemText>
@@ -49,9 +59,8 @@ const StDialog = styled(Dialog)`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding-left: 20rem;
-  padding-bottom: 31.6rem;
-  border: 1px solid red;
+  padding-left: 21rem;
+  padding-bottom: 36.5rem;
 `;
 
 const AddList = styled(List)`
