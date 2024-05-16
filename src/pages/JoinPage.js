@@ -62,7 +62,7 @@ const JoinPage = () => {
 
       <NameDiv>
         <NameP>이름</NameP>
-        <NameInput placeholder="  이름을 입력해주세요." />
+        <NameInput placeholder="이름을 입력해주세요." />
       </NameDiv>
 
       <EntireAgreeDiv>
@@ -179,6 +179,7 @@ const NameInput = styled.input`
   box-shadow: 0.1rem 0.1rem #F6F6F6;
   margin-bottom: 3rem;
   font-size: 1.5rem;
+  padding: 1rem;
 `;
 
 const EntireAgreeDiv = styled.div`
