@@ -4,13 +4,13 @@ import { COLOR } from "../../../styles/color";
 import Jeju from "../../../assets/images/jeju.jpg";
 import Button from "@mui/material/Button";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-const MapDrawer = () => {
+const MapDrawer = (data) => {
   return (
     <StMapDrawer>
       <TripImg src={Jeju} />
       <InfoDiv>
-        <TitleP>한옥 마을 탐방기!</TitleP>
-        <DataP>2024.03.01~2024.03.04</DataP>
+        <TitleP>{data.title}</TitleP>
+        <DataP>{data.startdate}~{data.enddate}</DataP>
         <LocationDiv>
           <LocationOnIcon sx={{ fontSize: 14, color: COLOR.MAIN_GREEN }} />
           <LocationP>전북특별자치도 전주시</LocationP>
