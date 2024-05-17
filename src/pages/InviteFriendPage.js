@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
 import styled from "styled-components";
 import { COLOR } from "../styles/color.js";
 import FriendList from "../components/common/FriendList.js";
@@ -6,15 +7,42 @@ import jsonData from "../data/FriendData.json";
 import copyIcon from "../assets/icons/copy.svg";
 import xicon from "../assets/icons/x-icon.svg";
 import BottomNav from "../layout/BottomNav";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const InviteFriendPage = () => {
-  //임시 작성
+  const SERVER_URL = process.env.REACT_APP_SERVER_URL;
+  const navigate = useNavigate();
+  // navigate 하면서 받은 travel id 값
+  const location = useLocation();
+  const travelID = location.state.travelID;
+  // travel의 정보
+  const [invitecode, setInvitecode] = useState("");
+  const [title, setTitle] = useState("");
+
+  // 서버로부터 invite code 받아오기
+  axios
+    .get(`${SERVER_URL}/travel/${travelID}`)
+    .then((res) => {
+      setInvitecode(res.data.ivtoken);
+      setTitle(res.data.title);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
+  // 취소 버튼
   const handleCancel = () => {
-    alert("일기 목록 화면으로 연결");
+    navigate("/triptable", { state: { travelID: travelID } });
   };
-  //임시 작성
-  const copyCode = () => {
-    alert("코드가 복사되었습니다.");
+
+  // 코드 복사 버튼
+  const copyCode = async () => {
+    try {
+      await navigator.clipboard.writeText(invitecode);
+      alert("copied");
+    } catch (e) {
+      alert("failed");
+    }
   };
 
   return (
@@ -26,7 +54,7 @@ const InviteFriendPage = () => {
           </XButton>
         </div>
         <CopyCodeContainer>
-          <Text className="tripName">마루와 함께하는 부산</Text>
+          <Text className="tripName">{title}</Text>
           <Text className="tripFriend">트립토리 친구</Text>
           <Text className="explain">
             함께 여행간 친구나 가족을 초대해보세요.
