@@ -9,10 +9,18 @@ import nextButtonImage from "../../assets/icons/calendar_next_btn.svg";
 import prevButtonImage from "../../assets/icons/calendar_prev_btn.svg";
 import DiaryModal from "../common/DiaryModal";
 import DiaryPreviewContent from "../common/DiaryPreviewContent";
+import Drawer from "@mui/material/Drawer";
 
 const TripCalendar = ({ diaryInfo }) => {
   const [selectedDiary, setSelectedDiary] = useState(null); // 선택된 일기 정보 상태 추가
+  const [isOpen, setIsOpen] = useState(false);
 
+  const toggleDrawer = (newOpen) => () => {
+    setIsOpen(newOpen);
+    if (newOpen===false){
+      setSelectedDiary(null);
+    }
+  };
   // 선택된 일기 정보 업데이트
   const showDiary = (diary) => {
     // 선택된 날짜에 해당하는 모든 일기를 뽑아서 리턴하기
@@ -24,11 +32,7 @@ const TripCalendar = ({ diaryInfo }) => {
     );
     // 찾은 일기들을 상태에 저장
     setSelectedDiary(selected);
-  };
-
-  // 모달 닫기
-  const closeDiaryModal = () => {
-    setSelectedDiary(null); // 선택된 일기 정보 초기화
+    setIsOpen(true);
   };
 
   // 일기 보러 가기 함수 (추후에 수정 필요)
@@ -102,15 +106,14 @@ const TripCalendar = ({ diaryInfo }) => {
         tileContent={tileContent}
         tileClassName={tileClassName}
       />
-      {selectedDiary && ( // 선택된 일기가 있을 때만 모달 렌더링
+      <Drawer anchor="bottom" open={isOpen} onClose={toggleDrawer(false)}>
         <DiaryModal
           content={<DiaryPreviewContent diaries={selectedDiary} />}
-          closeModals={closeDiaryModal}
           buttons={
             <GotoDiaryBtn onClick={goToDiary}>일기 보러 가기</GotoDiaryBtn>
           }
         />
-      )}
+      </Drawer>
     </CalendarWrapper>
   );
 };
@@ -146,10 +149,11 @@ const CalendarStyle = styled(Calendar)`
   }
 
   .react-calendar__navigation__next-button {
-    color: transparent;
+    color: transparent ;
     background-image: url(${nextButtonImage});
     background-repeat: no-repeat;
     background-position: center center;
+    background-color: transparent !important;
   }
 
   .react-calendar__navigation__prev-button {
@@ -157,6 +161,7 @@ const CalendarStyle = styled(Calendar)`
     background-image: url(${prevButtonImage});
     background-repeat: no-repeat;
     background-position: center center;
+    background-color: transparent !important;
   }
 
   .react-calendar__navigation {
