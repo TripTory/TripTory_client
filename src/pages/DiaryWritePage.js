@@ -7,6 +7,7 @@ import Modal from "../components/common/Modal";
 import Uploader from "../components/common/MultipleImageUploader";
 import { COLOR } from "../styles/color";
 import BottomNav from "../layout/BottomNav";
+import axios from "axios";
 
 const DiaryWritePage = () => {
 
@@ -48,19 +49,19 @@ const DiaryWritePage = () => {
       console.log(pair[0], pair[1]);
     }
 
-    fetch(`${process.env.REACT_APP_SERVER_URL}/diary`, {
-      method: "POST",
-      mode: "no-cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: formData,
-    })
-      .then((response) => {
-        console.log(response);
+    axios
+      .post(`${process.env.REACT_APP_SERVER_URL}/diary`, {
+        title: title,
+        content: content,
+        date: startDate,
+        //images: files,
+        travel: "travelid(string)"
+      })
+      .then((res) => {
+        console.log(res);
       })
       .catch((error) => {
-        console.error("에러", error);
+        console.log("에러", error);
       });
   };
 
