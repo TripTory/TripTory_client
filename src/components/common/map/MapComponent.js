@@ -6,6 +6,7 @@ import MARKERFRAME from "../../../assets/icons/markericon.svg";
 // import CustomMarker from "./CustomMarker";
 import Drawer from "@mui/material/Drawer";
 import MapDrawer from "../../../components/common/map/MapDrawer";
+import TripData from "../../../data/TripData.json";
 
 const MapComponent = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -45,6 +46,7 @@ const MapComponent = () => {
         center={{ lat: 36.34, lng: 127.77 }}
         style={{ width: "100%", height: "93.2%" }}
         level={13}
+        zoomable={false}
       >
         {positions.map((position) => (
           <CustomOverlayMap
