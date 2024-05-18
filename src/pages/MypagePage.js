@@ -40,6 +40,26 @@ const MypagePage = () => {
     navigate("/login");
   };
 
+  const handleLogout = () => {
+    console.log(1111);
+    axios.get(`${process.env.REACT_APP_SERVER_URL}/user/logout`)
+      .then((response) => {
+        const status = response.status;
+        if (status === 200) {
+          setMessage("로그아웃 성공");
+        } else if (status === 401) {
+          setMessage("로그인이 필요합니다.");
+        } else if (status === 500) {
+          setMessage("서버 오류가 발생했습니다.");
+        }
+      })
+      .catch((error) => {
+        console.error("요청 실패:", error);
+        setMessage("서버 요청 중 오류가 발생했습니다.");
+      });
+  };
+
+
   const DelAccount = () =>{
     axios.delete(`${process.env.REACT_APP_SERVER_URL}/user`)
       .then((response) => {
