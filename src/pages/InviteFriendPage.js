@@ -3,7 +3,6 @@ import axios from "axios";
 import styled from "styled-components";
 import { COLOR } from "../styles/color.js";
 import FriendList from "../components/common/FriendList.js";
-import jsonData from "../data/FriendData.json";
 import copyIcon from "../assets/icons/copy.svg";
 import xicon from "../assets/icons/x-icon.svg";
 import BottomNav from "../layout/BottomNav";
@@ -18,6 +17,7 @@ const InviteFriendPage = () => {
   // travel의 정보
   const [invitecode, setInvitecode] = useState("");
   const [title, setTitle] = useState("");
+  const [friendList, setFriendList] = useState([]);
 
   // 서버로부터 invite code 받아오기
   axios
@@ -25,6 +25,7 @@ const InviteFriendPage = () => {
     .then((res) => {
       setInvitecode(res.data.ivtoken);
       setTitle(res.data.title);
+      setFriendList(res.data.invited);
     })
     .catch((error) => {
       console.log(error);
@@ -71,7 +72,7 @@ const InviteFriendPage = () => {
         </CopyCodeContainer>
       </FixedDiv>
       <FriendListContainer>
-        <FriendList friends={jsonData.friends}></FriendList>
+        <FriendList friends={friendList}></FriendList>
       </FriendListContainer>
       <BottomNav />
     </div>
