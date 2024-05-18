@@ -41,7 +41,6 @@ const MypagePage = () => {
   };
 
   const handleLogout = () => {
-    console.log(1111);
     axios.get(`${process.env.REACT_APP_SERVER_URL}/user/logout`)
       .then((response) => {
         const status = response.status;
@@ -83,7 +82,7 @@ const MypagePage = () => {
   };
   const Menu = [
     { icon: <ModifyIcon />, text: "프로필 편집", action: goToEdit },
-    { icon: <LogoutIcon />, text: "로그아웃", action: goToLogin },
+    { icon: <LogoutIcon />, text: "로그아웃", action: [handleLogout, goToLogin] },
     {
       icon: <CancelIcon />,
       text: "계정 탈퇴",
@@ -106,7 +105,7 @@ const MypagePage = () => {
             return (
               <div key={it.text}>
                 <MenuLstItem disablePadding>
-                  <MenuLIBtn onClick={it.action}>
+                  <MenuLIBtn onClick={Array.isArray(it.action) ? () => it.action.forEach((actionFunc) => actionFunc()) : it.action}>
                     {it.icon}
                     <MenuP>{it.text}</MenuP>
                   </MenuLIBtn>
