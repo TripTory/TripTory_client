@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Typography } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
@@ -22,6 +22,7 @@ const MypagePage = () => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [message, setMessage] = useState("");
+  const [userInfo, setUserInfo] = useState({ name: "", email: "" });
 
   const toggleModal = () => {
     console.log(isModalOpen);
@@ -38,6 +39,39 @@ const MypagePage = () => {
 
   const goToLogin = () => {
     navigate("/login");
+  };
+
+  useEffect(() => {
+    handleUserInfo();
+  }, []);
+
+  const handleUserInfo = () => {
+    console.log(12123123);
+    axios.get(`${process.env.REACT_APP_SERVER_URL}/user`)
+    .then((res) => {
+      const data = res.data;
+      setUserInfo(
+        { _id: data._id,
+          name: data.name,
+          email: data.email,
+          profileimg: data.profileimg,
+          authprovider: data.authprovider,
+          oauthId: data.oauthId,
+          oauthAcessToken: data.oauthAcessToken });
+    })
+    .catch((error) => {
+      const status = error.status;
+      if (status === 404) {
+        setMessage("사용자를 찾을 수 없습니다.");
+      } else if (status === 401) {
+        setMessage("로그인이 필요합니다.");
+      } else if (status === 500) {
+        setMessage("서버 오류가 발생했습니다.");
+      } else {
+        setMessage("알 수 없는 오류가 발생했습니다.");
+      }
+      console.error("요청 실패:", error);
+    });
   };
 
   const handleLogout = () => {
@@ -96,8 +130,8 @@ const MypagePage = () => {
       </TitleDiv>
       <ProfilDiv>
         <ProfilAvatar alt="default" src={Default} />
-        <NameP>{UserData.user.name}</NameP>
-        <MailP>{UserData.user.email}</MailP>
+        <NameP>{userInfo.name}</NameP>
+        <MailP>{userInfo.email}</MailP>
       </ProfilDiv>
       <MenuDiv>
         <List sx={{ width: "100%" }}>
