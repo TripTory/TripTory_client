@@ -1,12 +1,23 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { PiMapPinFill } from "react-icons/pi";
 import { COLOR } from "../../styles/color";
 import leftBtn from "../../assets/icons/diary_left_btn.svg";
 import rightBtn from "../../assets/icons/diary_right_btn.svg";
+import { useRecoilState } from "recoil";
+import { TITLE, CONTENT, DATE, IMG, USERNAME } from "../recoil/commonState";
 
 const DiaryPreviewContent = ({ diaries }) => {
+  const [title, setTitle] = useRecoilState(TITLE);
+  const [content, setContent] = useRecoilState(CONTENT);
+  const [date, setDate] = useRecoilState(DATE);
+  const [img, setImg] = useRecoilState(IMG);
+  const [username, setUsername] = useRecoilState(USERNAME);
+
+  const navigate = useNavigate();
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
 
   if (!diaries || diaries.length === 0) {
     return null; // diaries가 null이거나 비어있으면 렌더링하지 않음
@@ -15,39 +26,60 @@ const DiaryPreviewContent = ({ diaries }) => {
   const sliderRef = useRef(null);
 
   const slideLeft = () => {
+    if (sliderRef.current.scrollLeft === 0) return;
     sliderRef.current.scrollLeft -= sliderRef.current.offsetWidth;
+    setCurrentSlideIndex((prevIndex) => Math.max(prevIndex - 1, 0));
   };
 
   const slideRight = () => {
+    if (sliderRef.current.scrollLeft + sliderRef.current.offsetWidth >= sliderRef.current.scrollWidth) return;
     sliderRef.current.scrollLeft += sliderRef.current.offsetWidth;
+    setCurrentSlideIndex((prevIndex) => Math.min(prevIndex + 1, diaries.length - 1));
+  };
+
+  const goToDiary = () => {
+    const currentDiary = diaries[currentSlideIndex];
+    setTitle(currentDiary[title]);
+    setContent(currentDiary[content]);
+    setDate(currentDiary[date]);
+    setImg(currentDiary[img]);
+    setUsername(currentDiary[username]);
+    navigate("/showdiary");
   };
 
   return (
-    <ContentWrapper>
-      <Slider ref={sliderRef}>
-        {diaries.map((diary, index) => (
-          <DiaryEntry key={index}>
-            <ImgDiv>
-              <DiaryImage src={diary.imagePath} />
-            </ImgDiv>
-            <TitleDiv>{diary.diaryTitle}</TitleDiv>
-            <DateDiv>
-              {diary.year}.{diary.month}.{diary.day} | {diary.author}
-            </DateDiv>
-            <PlaceDiv>
-              <PinIcon />
-              {diary.place}
-            </PlaceDiv>
-          </DiaryEntry>
-        ))}
-      </Slider>
-      {diaries.length > 1 && (
-        <>
-          <ButtonLeft onClick={slideLeft}><img src={leftBtn}/></ButtonLeft>
-          <ButtonRight onClick={slideRight}><img src={rightBtn}/></ButtonRight>
-        </>
-      )}
-    </ContentWrapper>
+    <div>
+      <ContentWrapper>
+        <Slider ref={sliderRef}>
+          {diaries.map((diary, index) => (
+            <DiaryEntry key={index}>
+              <ImgDiv>
+                <DiaryImage src={diary.imgpath} />
+              </ImgDiv>
+              <TitleDiv>{diary.title}</TitleDiv>
+              <DateDiv>
+                {diary.date} | {diary.username}
+              </DateDiv>
+              <PlaceDiv>
+                <PinIcon />
+                {diary.place}
+              </PlaceDiv>
+            </DiaryEntry>
+          ))}
+        </Slider>
+        {diaries.length > 1 && (
+          <>
+            <ButtonLeft onClick={slideLeft}>
+              <img src={leftBtn} />
+            </ButtonLeft>
+            <ButtonRight onClick={slideRight}>
+              <img src={rightBtn} />
+            </ButtonRight>
+          </>
+        )}
+      </ContentWrapper>
+      <ButtonContainer><GotoDiaryBtn onClick={goToDiary}/></ButtonContainer>
+    </div>
   );
 };
 
@@ -69,7 +101,7 @@ DiaryPreviewContent.propTypes = {
 
 const ContentWrapper = styled.div`
   width: 100%;
-  height: 100%;
+  height: 85%;
   overflow: hidden;
   position: relative;
 `;
@@ -158,4 +190,23 @@ const ButtonLeft = styled(Button)`
 
 const ButtonRight = styled(Button)`
   right: -1.5rem;
+`;
+
+const ButtonContainer = styled.div`
+  width: 100%;
+  height: 15%;
+  display: flex;
+  justify-content: center;
+`;
+
+const GotoDiaryBtn = styled.button`
+  background-color: ${COLOR.MAIN_EMER};
+  width: 95%;
+  height: 3.5rem;
+  border: none;
+  border-radius: 2rem;
+  font-size: 1.5rem;
+  color: white;
+  font-weight: bolder;
+  margin: 1rem 0rem;
 `;

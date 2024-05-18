@@ -17,7 +17,7 @@ const TripCalendar = ({ diaryInfo }) => {
 
   const toggleDrawer = (newOpen) => () => {
     setIsOpen(newOpen);
-    if (newOpen===false){
+    if (newOpen === false) {
       setSelectedDiary(null);
     }
   };
@@ -26,18 +26,13 @@ const TripCalendar = ({ diaryInfo }) => {
     // 선택된 날짜에 해당하는 모든 일기를 뽑아서 리턴하기
     const selected = diaryInfo.filter(
       (item) =>
-        item.year === diary.year &&
-        item.month === diary.month &&
-        item.day === diary.day,
+        moment(item.date, "YY-MM-DD").format("YYYY") === diary.year &&
+        moment(item.date, "YY-MM-DD").format("M") === diary.month &&
+        moment(item.date, "YY-MM-DD").format("D") === diary.day,
     );
     // 찾은 일기들을 상태에 저장
     setSelectedDiary(selected);
     setIsOpen(true);
-  };
-
-  // 일기 보러 가기 함수 (추후에 수정 필요)
-  const goToDiary = () => {
-    return null;
   };
 
   // 일기가 존재하는 날짜의 div에 클래스명 부여
@@ -46,9 +41,9 @@ const TripCalendar = ({ diaryInfo }) => {
       // diaryInfo 요소를 순회하며 일기가 존재하는 날짜 검사
       const diary = diaryInfo.find(
         (item) =>
-          item.year === date.getFullYear() &&
-          item.month === date.getMonth() &&
-          item.day === date.getDate(),
+          moment(item.date, "YY-MM-DD").format("YYYY") === date.getFullYear() &&
+          moment(item.date, "YY-MM-DD").format("M") === date.getMonth() &&
+          moment(item.date, "YY-MM-DD").format("D") === date.getDate(),
       );
       if (diary) {
         return "hasDiary";
@@ -62,16 +57,16 @@ const TripCalendar = ({ diaryInfo }) => {
       // diaryInfo 요소를 순회하며 일기가 존재하는 날짜 검사
       const diary = diaryInfo.find(
         (item) =>
-          item.year === date.getFullYear() &&
-          item.month === date.getMonth() &&
-          item.day === date.getDate(),
+          moment(item.date, "YY-MM-DD").format("YYYY") &&
+          moment(item.date, "YY-MM-DD").format("M") &&
+          moment(item.date, "YY-MM-DD").format("D") === date.getDate(),
       );
 
       if (diary) {
         return (
           <div
             style={{
-              backgroundImage: `url(${diary.imagePath})`,
+              backgroundImage: `url(${diary.imgpath})`,
               backgroundSize: "cover",
               width: "3.5rem",
               height: "3.5rem",
@@ -109,9 +104,6 @@ const TripCalendar = ({ diaryInfo }) => {
       <Drawer anchor="bottom" open={isOpen} onClose={toggleDrawer(false)}>
         <DiaryModal
           content={<DiaryPreviewContent diaries={selectedDiary} />}
-          buttons={
-            <GotoDiaryBtn onClick={goToDiary}>일기 보러 가기</GotoDiaryBtn>
-          }
         />
       </Drawer>
     </CalendarWrapper>
@@ -149,7 +141,7 @@ const CalendarStyle = styled(Calendar)`
   }
 
   .react-calendar__navigation__next-button {
-    color: transparent ;
+    color: transparent;
     background-image: url(${nextButtonImage});
     background-repeat: no-repeat;
     background-position: center center;
@@ -229,14 +221,4 @@ const CalendarWrapper = styled.div`
   padding-bottom: 6rem;
 `;
 
-const GotoDiaryBtn = styled.button`
-  background-color: ${COLOR.MAIN_EMER};
-  width: 95%;
-  height: 3.5rem;
-  border: none;
-  border-radius: 2rem;
-  font-size: 1.5rem;
-  color: white;
-  font-weight: bolder;
-  margin: 1rem 0rem;
-`;
+
