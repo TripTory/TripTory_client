@@ -15,11 +15,13 @@ import DoDisturbOutlinedIcon from "@mui/icons-material/DoDisturbOutlined";
 import CancelContent from "../components/common/CancelContent";
 import BottomNav from "../layout/BottomNav";
 import UserData from "../data/UserData.json";
+import axios from "axios";
 
 const MypagePage = () => {
   //axios get으로 받아온 username location으로 전달
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [message, setMessage] = useState("");
 
   const toggleModal = () => {
     console.log(isModalOpen);
@@ -39,7 +41,24 @@ const MypagePage = () => {
   };
 
   const DelAccount = () =>{
-    //백에 계정 삭제 DELETE (/user) 요청
+    axios.delete(`${process.env.REACT_APP_SERVER_URL}/user`)
+      .then((response) => {
+        const status = response.status;
+        if (status === 200) {
+          setMessage("계정이 성공적으로 삭제되었습니다.");
+        } else if (status === 404) {
+          setMessage("사용자를 찾을 수 없습니다.");
+        } else if (status === 401) {
+          setMessage("로그인이 필요합니다.");
+        } else if (status === 500) {
+          setMessage("서버 오류가 발생했습니다.");
+        }
+      })
+      .catch((error) => {
+        console.error("요청 실패:", error);
+        setMessage("서버 요청 중 오류가 발생했습니다.");
+      });
+
     goToLogin();
   };
   const Menu = [
