@@ -47,7 +47,7 @@ const MypagePage = () => {
 
   const handleUserInfo = () => {
     console.log(12123123);
-    axios.get(`${process.env.REACT_APP_SERVER_URL}/user`)
+    axios.get("http://localhost:5000/user")
     .then((res) => {
       const data = res.data;
       setUserInfo(
@@ -75,9 +75,10 @@ const MypagePage = () => {
   };
 
   const handleLogout = () => {
-    axios.get(`${process.env.REACT_APP_SERVER_URL}/user/logout`)
+    axios.get("http://localhost:5000/user/logout")
       .then((response) => {
         const status = response.status;
+        console.log("hihi", status);
         if (status === 200) {
           setMessage("로그아웃 성공");
         } else if (status === 401) {
@@ -94,7 +95,7 @@ const MypagePage = () => {
 
 
   const DelAccount = () =>{
-    axios.delete(`${process.env.REACT_APP_SERVER_URL}/user`)
+    axios.delete("http://localhost:5000/user")
       .then((response) => {
         const status = response.status;
         if (status === 200) {
