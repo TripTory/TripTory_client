@@ -17,7 +17,7 @@ const ImageUploader = ({onChange}) => {
       const reader = new FileReader();
       reader.onload = () => {
         setPreviewUrl(reader.result);
-        onChange(reader.result);
+        onChange(file);
 
       };
       reader.readAsDataURL(file);

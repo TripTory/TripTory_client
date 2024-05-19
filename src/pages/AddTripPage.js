@@ -52,9 +52,6 @@ const AddTripPage = () => {
   const handleSubmit = () => {
     const startDate = moment(dateRange[0]).toISOString();
     const endDate = moment(dateRange[1]).toISOString();
-    // alert(
-    //   `여행 이름: ${tripName} // 여행 날짜: ${startDate}~${endDate} // 여행 장소: ${tripPlace} // 이미지 url: ${imgUrl} // longitude:${longitude} //latitude:${latitude}`,
-    // );
 
     axios
       .post(
@@ -67,7 +64,7 @@ const AddTripPage = () => {
             latitude: latitude,
             longitude: longitude,
           },
-          image: "....",
+          TravelImg: imgUrl,
         },
         {
           withCredentials: true,
@@ -76,6 +73,7 @@ const AddTripPage = () => {
       .then((res) => {
         console.log(res);
         alert("저장 완료");
+        navigate("/home");
       })
       .catch((error) => {
         console.log(error);
