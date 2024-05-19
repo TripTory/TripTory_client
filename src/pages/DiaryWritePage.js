@@ -8,6 +8,7 @@ import Uploader from "../components/common/MultipleImageUploader";
 import { COLOR } from "../styles/color";
 import BottomNav from "../layout/BottomNav";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const DiaryWritePage = () => {
 
@@ -53,6 +54,9 @@ const DiaryWritePage = () => {
     .catch((error) => {
       console.log("에러", error);
     });
+
+    const navigate = useNavigate();
+    navigate("/showdiary");
   };
 
   return <div>
