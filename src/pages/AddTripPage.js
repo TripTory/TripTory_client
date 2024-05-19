@@ -50,8 +50,8 @@ const AddTripPage = () => {
 
   // 여행떠나기 버튼 클릭
   const handleSubmit = () => {
-    const startDate = moment(dateRange[0]).format("YY-MM-DD");
-    const endDate = moment(dateRange[1]).format("YY-MM-DD");
+    const startDate = moment(dateRange[0]).toISOString();
+    const endDate = moment(dateRange[1]).toISOString();
     // alert(
     //   `여행 이름: ${tripName} // 여행 날짜: ${startDate}~${endDate} // 여행 장소: ${tripPlace} // 이미지 url: ${imgUrl} // longitude:${longitude} //latitude:${latitude}`,
     // );
