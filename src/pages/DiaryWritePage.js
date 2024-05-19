@@ -36,33 +36,6 @@ const DiaryWritePage = () => {
   };
 
   const handleConfirm = () => {
-    // const formData = new FormData();
-    // formData.append("title", title);
-    // formData.append("content", content);
-    // formData.append("date", startDate.toISOString().split("T")[0]);
-
-    // files.forEach((file, index) => {
-    //   formData.append(`image${index}`, file.fileObject);
-    // });
-
-    // for (let pair of formData.entries()) {
-    //   console.log(pair[0], pair[1]);
-    // }
-
-    // axios
-    //   .post("http://localhost:5000/diary", {
-    //     title: title,
-    //     content: content,
-    //     date: startDate,
-    //     //images: files,
-    //     travel: "travelid(string)"
-    //   })
-    //   .then((res) => {
-    //     console.log(res);
-    //   })
-    //   .catch((error) => {
-    //     console.log("에러", error);
-    //   });
     const formData = new FormData();
     formData.append("title", title);
     formData.append("content", content);
