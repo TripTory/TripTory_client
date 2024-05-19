@@ -36,33 +36,50 @@ const DiaryWritePage = () => {
   };
 
   const handleConfirm = () => {
+    // const formData = new FormData();
+    // formData.append("title", title);
+    // formData.append("content", content);
+    // formData.append("date", startDate.toISOString().split("T")[0]);
+
+    // files.forEach((file, index) => {
+    //   formData.append(`image${index}`, file.fileObject);
+    // });
+
+    // for (let pair of formData.entries()) {
+    //   console.log(pair[0], pair[1]);
+    // }
+
+    // axios
+    //   .post("http://localhost:5000/diary", {
+    //     title: title,
+    //     content: content,
+    //     date: startDate,
+    //     //images: files,
+    //     travel: "travelid(string)"
+    //   })
+    //   .then((res) => {
+    //     console.log(res);
+    //   })
+    //   .catch((error) => {
+    //     console.log("에러", error);
+    //   });
     const formData = new FormData();
     formData.append("title", title);
     formData.append("content", content);
     formData.append("date", startDate.toISOString().split("T")[0]);
+    formData.append("travel", "6643016de9bde360d3d6cc53"); // 예시 travel id
 
-    files.forEach((file, index) => {
-      formData.append(`image${index}`, file.fileObject);
+    files.forEach((file) => {
+      formData.append("images", file.fileObject);
     });
 
-    for (let pair of formData.entries()) {
-      console.log(pair[0], pair[1]);
-    }
-
-    axios
-      .post(`${process.env.REACT_APP_SERVER_URL}/diary`, {
-        title: title,
-        content: content,
-        date: startDate,
-        //images: files,
-        travel: "travelid(string)"
-      })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((error) => {
-        console.log("에러", error);
-      });
+    axios.post("http://localhost:5000/diary", formData, { withCredentials: true, headers: {"Content-Type": "multipart/form-data"} })
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((error) => {
+      console.log("에러", error);
+    });
   };
 
   return <div>
