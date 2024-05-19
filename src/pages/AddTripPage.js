@@ -57,16 +57,22 @@ const AddTripPage = () => {
     // );
 
     axios
-      .post(`${SERVER_URL}/travel`, {
-        title: tripName,
-        startdate: startDate,
-        enddate: endDate,
-        location: {
-          latitude: latitude,
-          longitude: longitude,
+      .post(
+        "http://localhost:5000/travel",
+        {
+          title: tripName,
+          startdate: startDate,
+          enddate: endDate,
+          location: {
+            latitude: latitude,
+            longitude: longitude,
+          },
+          image: "....",
         },
-        image: "....",
-      })
+        {
+          withCredentials: true,
+        },
+      )
       .then((res) => {
         console.log(res);
         alert("저장 완료");
