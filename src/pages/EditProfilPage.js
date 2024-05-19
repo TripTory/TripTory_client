@@ -9,11 +9,13 @@ import ProfilUploader from "../components/common/ProfilUploader";
 import KeyboardArrowLeftOutlinedIcon from "@mui/icons-material/KeyboardArrowLeftOutlined";
 import BottomNav from "../layout/BottomNav";
 import { useLocation } from "react-router";
+import axios from "axios";
 
 const EditProfilPage = () => {
   const { state } = useLocation();
   const [user, setUser] = useState(state);
   const navigate = useNavigate();
+  const [message, setMessage] = useState("");
 
   const moveBack = () => {
     navigate("/mypage");
@@ -27,6 +29,26 @@ const EditProfilPage = () => {
     //db에 바뀐 이름 post해서 반영
     //db에 이미지 formdata로 반영
     //변경된 이름은 메인페이지, 작성자, 등에서 모두 바뀌어야 하는데.. 되는 건가? 그렇다!
+    axios.put(`${process.env.REACT_APP_SERVER_URL}/user`, {
+      // name : string,
+      // email : string,
+      // profileImg: file
+    })
+      .then((res) => {
+        if (res === 404) {
+          setMessage("사용자를 찾을 수 없습니다.");
+        } else if (res === 401) {
+          setMessage("로그인이 필요합니다.");
+        } else if (res === 500) {
+          setMessage("서버 오류가 발생했습니다.");
+        } else {
+          setMessage("알 수 없는 오류가 발생했습니다.");
+        }
+      })
+      .catch((error) => {
+        console.error("요청 실패:", error);
+      });
+
   };
   return (
     <StEditProfilPage>
