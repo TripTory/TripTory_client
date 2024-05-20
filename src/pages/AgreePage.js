@@ -4,7 +4,7 @@ import Modal from "../components/common/Modal";
 import { COLOR } from "../styles/color";
 import { useNavigate } from "react-router-dom";
 
-const JoinPage = () => {
+const AgreePage = () => {
   const navigate = useNavigate();
 
   const [isChecked, setIsChecked] = useState({
@@ -379,4 +379,4 @@ const ContentDiv = styled.div`
   padding-bottom: 20rem;
 `;
 
-export default JoinPage;
+export default AgreePage;
