@@ -50,7 +50,7 @@ const MypagePage = () => {
     axios.get("http://localhost:5000/user", { withCredentials: true})
     .then((res) => {
       const data = res.data.user;
-      console.log("responsesjelfsdkfj", data.user);
+      // console.log("responsesjelfsdkfj", data);
       setUserInfo(
         { _id: data._id,
           name: data.name,
@@ -96,9 +96,10 @@ const MypagePage = () => {
 
 
   const DelAccount = () =>{
-    axios.delete("http://localhost:5000/user")
+    axios.delete("http://localhost:5000/user", { withCredentials: true})
       .then((response) => {
         const status = response.status;
+        console.log("res",status);
         if (status === 200) {
           setMessage("계정이 성공적으로 삭제되었습니다.");
         } else if (status === 404) {
