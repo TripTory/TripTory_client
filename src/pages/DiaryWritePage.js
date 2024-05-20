@@ -21,7 +21,7 @@ const DiaryWritePage = () => {
   const [imagePreview, setImagePreview] = useState(null);
   const [files, setFiles] = useState([]);
   const { state } = useLocation();
-  const [travelid, setTravelId] = useState(state.travelid);
+  // const [travelid, setTravelId] = useState(state.travelid);
   const [diaryid, setDiaryId] = useState({ diaryid: "" });
 
   const navigate = useNavigate();
@@ -47,8 +47,8 @@ const DiaryWritePage = () => {
     formData.append("title", title);
     formData.append("content", content);
     formData.append("date", startDate.toISOString().split("T")[0]);
-    formData.append("travelid", travelid); // 예시 travel id
-    formData.append("diaryid", diaryid);
+    formData.append("travelid", "6643016de9bde360d3d6cc53"); // 예시 travel id
+    // formData.append("diaryid", setDiaryId.diaryid);
 
     files.forEach((file) => {
       formData.append("images", file.fileObject);
@@ -60,6 +60,10 @@ const DiaryWritePage = () => {
 
     axios.post("http://localhost:5000/diary", formData, { withCredentials: true, headers: {"Content-Type": "multipart/form-data"} })
     .then((res) => {
+      setDiaryId({
+        diaryid: res.diaryid,
+      });
+      console.log("diaryid", setDiaryId.diaryid);
       console.log(res);
     })
     .catch((error) => {
