@@ -19,9 +19,11 @@ const ImageUploader = ({onChange}) => {
       const reader = new FileReader();
       reader.onload = () => {
         setPreviewUrl(reader.result);
-        onChange(reader.result);
-        // // setPreviewUrl(img);
-        // onChange(img.data);
+        onChange({
+          fileObject: file,
+          preview_URL: reader.result,
+          type: file.type
+        });
 
       };
       reader.readAsDataURL(file);
