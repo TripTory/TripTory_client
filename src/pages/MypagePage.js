@@ -34,7 +34,7 @@ const MypagePage = () => {
   };
 
   const goToEdit = () => {
-    navigate("/editprofil", { state: UserData.user.name });
+    navigate("/editprofil", { state: { name: userInfo.name } });
   };
 
   const goToLogin = () => {
