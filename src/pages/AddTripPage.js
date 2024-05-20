@@ -58,7 +58,7 @@ const AddTripPage = () => {
     formData.append("enddate", endDate);
     formData.append("location[latitude]", latitude);
     formData.append("location[longitude]", longitude);
-    formData.append("image", imgUrl);
+    formData.append("image", imgUrl.fileObject);
     console.log(imgUrl);
 
     axios
