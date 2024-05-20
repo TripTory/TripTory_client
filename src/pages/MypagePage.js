@@ -47,9 +47,10 @@ const MypagePage = () => {
 
   const handleUserInfo = () => {
     console.log(12123123);
-    axios.get("http://localhost:5000/user")
+    axios.get("http://localhost:5000/user", { withCredentials: true})
     .then((res) => {
-      const data = res.data;
+      const data = res.data.user;
+      console.log("responsesjelfsdkfj", data.user);
       setUserInfo(
         { _id: data._id,
           name: data.name,

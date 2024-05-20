@@ -13,7 +13,7 @@ import axios from "axios";
 
 const EditProfilPage = () => {
   const { state } = useLocation();
-  const [user, setUser] = useState(state);
+  const [user, setUser] = useState(state.name);
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
 
