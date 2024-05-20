@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import { COLOR } from "../styles/color.js";
@@ -12,24 +12,27 @@ const InviteFriendPage = () => {
   const SERVER_URL = process.env.REACT_APP_SERVER_URL;
   const navigate = useNavigate();
   // navigate 하면서 받은 travel id 값
-  const location = useLocation();
-  const travelID = location.state.travelID;
+  const {state} = useLocation();
+  // const travelID = state;
+  const travelID = "664b1a4dd3a661ebf34c3206";
   // travel의 정보
   const [invitecode, setInvitecode] = useState("");
   const [title, setTitle] = useState("");
   const [friendList, setFriendList] = useState([]);
 
-  // 서버로부터 invite code 받아오기
-  axios
-    .get(`${SERVER_URL}/travel/${travelID}`)
-    .then((res) => {
-      setInvitecode(res.data.ivtoken);
-      setTitle(res.data.title);
-      setFriendList(res.data.invited);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  // 서버로부터 여행 정보 받아오기
+  useEffect(() => {
+    axios
+      .get(`${SERVER_URL}/travel/${travelID}`)
+      .then((res) => {
+        setInvitecode(res.data.travel.ivtoken);
+        setTitle(res.data.travel.title);
+        setFriendList(res.data.travel.invited);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [SERVER_URL, travelID]);
 
   // 취소 버튼
   const handleCancel = () => {
