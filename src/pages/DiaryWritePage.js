@@ -47,8 +47,7 @@ const DiaryWritePage = () => {
     formData.append("title", title);
     formData.append("content", content);
     formData.append("date", startDate.toISOString().split("T")[0]);
-    formData.append("travelid", "6643016de9bde360d3d6cc53"); // 예시 travel id
-    // formData.append("diaryid", setDiaryId.diaryid);
+    formData.append("travel", "664b1a4dd3a661ebf34c3206"); // travelid 대체
 
     files.forEach((file) => {
       formData.append("images", file.fileObject);
@@ -61,10 +60,8 @@ const DiaryWritePage = () => {
     axios.post("http://localhost:5000/diary", formData, { withCredentials: true, headers: {"Content-Type": "multipart/form-data"} })
     .then((res) => {
       setDiaryId({
-        diaryid: res.diaryid,
+        diaryid: res.data.diaryid,
       });
-      console.log("diaryid", setDiaryId.diaryid);
-      console.log(res);
     })
     .catch((error) => {
       console.log("에러", error);
