@@ -21,7 +21,7 @@ const LoginPage = () => {
 
   const goToNaverOauth = async () => {
     try {
-      const response = await axios.get(`${SERVER_URL}/oauth/naver`);
+      const response = await axios.get("http://localhost:5000/oauth/naver", {withCredentials:true});
       const { authorizationUrl } = response.data;
       window.location.href = authorizationUrl;
     } catch (error) {
