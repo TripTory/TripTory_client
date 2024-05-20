@@ -3,10 +3,13 @@ import Avatar from "@mui/material/Avatar";
 import styled from "styled-components";
 import Default from "../../assets/images/profilavatar.svg";
 import PropTypes from "prop-types";
+import { useLocation } from "react-router";
 
 const ProfilUploader = ({ onFileSelect }) => {
   const [previewUrl, setPreviewUrl] = useState(null);
   const fileInput = useRef(null);
+  const { state } = useLocation();
+  const [profileImg, setProfileImg] = useState(state.profileimg);
 
   const fileSelectedHandler = (e) => {
     const file = e.target.files[0];
@@ -53,7 +56,7 @@ const ProfilUploader = ({ onFileSelect }) => {
             }}
           />
         ) : (
-          <ProfilAvatar alt="default" src={Default} />
+          <ProfilAvatar alt="default" src={profileImg || Default} />
         )}
       </div>
     </StProfilUploader>
