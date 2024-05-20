@@ -29,12 +29,13 @@ const EditProfilPage = () => {
     //db에 바뀐 이름 post해서 반영
     //db에 이미지 formdata로 반영
     //변경된 이름은 메인페이지, 작성자, 등에서 모두 바뀌어야 하는데.. 되는 건가? 그렇다!
-    axios.put(`${process.env.REACT_APP_SERVER_URL}/user`, {
-      // name : string,
+    axios.put("http://localhost:5000/user", {
+      name : user,
       // email : string,
       // profileImg: file
-    })
+    }, { withCredentials: true})
       .then((res) => {
+        console.log("hih",res);
         if (res === 404) {
           setMessage("사용자를 찾을 수 없습니다.");
         } else if (res === 401) {
@@ -48,6 +49,8 @@ const EditProfilPage = () => {
       .catch((error) => {
         console.error("요청 실패:", error);
       });
+
+    navigate("/mypage");
 
   };
   return (
