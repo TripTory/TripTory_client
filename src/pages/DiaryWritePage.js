@@ -3,18 +3,28 @@ import { React, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import calendar from "../assets/images/calendar.svg";
-import mapPing from "../assets/images/mapPing.svg";
 import Modal from "../components/common/Modal";
 import Uploader from "../components/common/MultipleImageUploader";
 import { COLOR } from "../styles/color";
 import BottomNav from "../layout/BottomNav";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router";
 
 const DiaryWritePage = () => {
 
   const [startDate, setStartDate] = useState();
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false); // Cancel 버튼을 위한 모달 상태
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(false); // Save 버튼을 위한 모달 상태
   const [imagePreview, setImagePreview] = useState(null);
+  const [files, setFiles] = useState([]);
+  const { state } = useLocation();
+  // const [travelid, setTravelId] = useState(state.travelid);
+  const [diaryid, setDiaryId] = useState({ diaryid: "" });
+
+  const navigate = useNavigate();
 
   const openCancelModal = () => {
     setIsCancelModalOpen(true);
@@ -32,6 +42,34 @@ const DiaryWritePage = () => {
     setImagePreview(preview);
   };
 
+  const handleConfirm = () => {
+    const formData = new FormData();
+    formData.append("title", title);
+    formData.append("content", content);
+    formData.append("date", startDate.toISOString().split("T")[0]);
+    formData.append("travel", "664b1a4dd3a661ebf34c3206"); // travelid 대체
+
+    files.forEach((file) => {
+      formData.append("images", file.fileObject);
+    });
+
+    for (const [key, value] of formData.entries()) {
+      console.log(`${key}: ${value}`);
+    }
+
+    axios.post("http://localhost:5000/diary", formData, { withCredentials: true, headers: {"Content-Type": "multipart/form-data"} })
+    .then((res) => {
+      setDiaryId({
+        diaryid: res.data.diaryid,
+      });
+    })
+    .catch((error) => {
+      console.log("에러", error);
+    });
+
+    navigate("/showdiary", { state: { diaryid: setDiaryId.diaryid } });
+  };
+
   return <div>
     <div>
       <DateDiv>
@@ -47,29 +85,29 @@ const DiaryWritePage = () => {
           />
         </StyledDatePicker>
       </DateDiv>
-      <PlaceDiv>
-        <MapImage src={mapPing} />
-        <PlaceBox placeholder="장소를 검색하세요" />
-      </PlaceDiv>
     </div>
 
     <DiaryDiv>
-      <TitleBox placeholder="제목을 입력하세요" />
-      <ContentBox type="text" placeholder="내용을 입력하세요" maxLength={1000}/>
+      <TitleBox
+        placeholder="제목을 입력하세요"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
+      <ContentBox
+        type="text"
+        placeholder="내용을 입력하세요"
+        maxLength={1000}
+        value={content}
+        onChange={(e) => setContent(e.target.value)}
+      />
     </DiaryDiv>
 
-    <Uploader handleImageUpload={handleImageUpload} />
+    <Uploader onFilesChange={handleImageUpload} files={files} setFiles={setFiles} />
 
-    {/* 이미지 미리보기 */}
-    {imagePreview && (
-      <ImagePreview>
-        <img src={imagePreview} alt="Uploaded" />
-      </ImagePreview>
-    )}
 
     <BtnDiv>
       <CancelBtn onClick={openCancelModal}>취소</CancelBtn>
-      <SaveBtn onClick={openSaveModal}>저장</SaveBtn>
+      <SaveBtn onClick={openSaveModal} disabled={!(startDate && title && content)} >저장</SaveBtn>
     </BtnDiv>
 
     {isCancelModalOpen && (
@@ -102,7 +140,7 @@ const DiaryWritePage = () => {
         buttons={
           <OkayDiv>
             <OkayBtn className="no" onClick={closeModal}>취소</OkayBtn>
-            <OkayBtn className="yes">확인</OkayBtn>
+            <OkayBtn className="yes" onClick={handleConfirm}>확인</OkayBtn>
           </OkayDiv>
         }
       />
@@ -121,7 +159,7 @@ const DateDiv = styled.div`
   border-bottom: solid #bfbfbf 1px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 6%;
+  margin-top: 10%;
 `;
 const CalenderImage = styled.img`
   padding: 1.2%;
@@ -145,31 +183,6 @@ const StyledDatePicker = styled.div`
   }
 `;
 
-const MapImage = styled.img`
-`;
-
-const PlaceBox = styled.input`
-  background-color: none;
-  width: 70%;
-  border: none;
-  font-size: 15px;
-  &::placeholder {
-    color: #bfbfbf;
-  }
-`;
-
-const PlaceDiv = styled.div`
-  display: flex;
-  align-items: center;
-  background-color: none;
-  width: 80%;
-  border: none;
-  font-size: 15px;
-  border-bottom: solid #bfbfbf 1px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 3%;
-`;
 
 const TitleBox = styled.input`
   display: flex;
@@ -208,7 +221,7 @@ const DiaryDiv = styled.div`
   color: #BFBFBF;
   border: 1px solid ${COLOR.MAIN_SKY};
   border-radius: 1.8rem;
-  margin-top: 2rem;
+  margin-top: 2.5rem;
   margin-left: 8%;
   margin-right: 8%;
 `;
@@ -243,6 +256,7 @@ const SaveBtn = styled.button`
   border-radius: 3rem;
   box-shadow: 2px 3px 5px 0px rgba(0, 0, 0, 0.4); 
   margin-left: 3%;
+  background-color: ${(props) => props.disabled ? "rgba(46, 171, 161, 0.3)" : "${COLOR.MAIN_EMER}"}
 `;
 const OkayBtn = styled.button`
   height: 2.5rem;
@@ -273,8 +287,7 @@ const ContentDiv = styled.div`
   margin-top: 4rem;
 `;
 
-const ImagePreview = styled.div`
-`;
 
 export default DiaryWritePage;
+
 
