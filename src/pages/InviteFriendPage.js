@@ -18,7 +18,8 @@ const InviteFriendPage = () => {
   // travel의 정보
   const [invitecode, setInvitecode] = useState("");
   const [title, setTitle] = useState("");
-  const [friendList, setFriendList] = useState([]);
+  const [username, setUsername] = useState([]);
+  const [userimg, setUserimg] = useState([]);
 
   // 서버로부터 여행 정보 받아오기
   useEffect(() => {
@@ -27,7 +28,8 @@ const InviteFriendPage = () => {
       .then((res) => {
         setInvitecode(res.data.travel.ivtoken);
         setTitle(res.data.travel.title);
-        setFriendList(res.data.travel.invited);
+        setUsername(res.data.travel.username); //추후 수정
+        setUserimg(res.data.travel.userimg); // 추후 수정
       })
       .catch((error) => {
         console.log(error);
@@ -75,7 +77,7 @@ const InviteFriendPage = () => {
         </CopyCodeContainer>
       </FixedDiv>
       <FriendListContainer>
-        <FriendList friends={friendList}></FriendList>
+        <FriendList usernames={username} userimgs={userimg} ></FriendList>
       </FriendListContainer>
       <BottomNav />
     </div>

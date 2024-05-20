@@ -1,39 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import Karina from "../../assets/images/karina.png";
-import axios from "axios";
+import defaultImageSrc from "../../assets/images/defaultProfileImg.svg";
 
-const FriendList = ({ friends }) => {
-  const [friendDetails, setFriendDetails] = useState([]);
-
-  useEffect(() => {
-    const fetchFriendDetails = async () => {
-      try {
-        const friendDetailsPromises = friends.map((friendId) =>
-          axios.get(`http://localhost:5000/api/friends/${friendId}`),
-        );
-        const responses = await Promise.all(friendDetailsPromises);
-        const fetchedFriendDetails = responses.map((response) => response.data);
-        setFriendDetails(fetchedFriendDetails);
-      } catch (error) {
-        console.error("Error fetching friend details:", error);
-      }
-    };
-    fetchFriendDetails();
-  }, [friends]);
-
+const FriendList = ({ usernames, userimgs }) => {
   return (
     <div>
       <MyFriend>내 일행</MyFriend>
       <ul>
-        {friends.map((friend, index) => (
+        {usernames.map((name, index) => (
           <li key={index}>
             <FriendItemDiv>
               <FriendImgDiv>
-                <FriendImg src={Karina}></FriendImg>
+                <FriendImg src={userimgs[index] || defaultImageSrc}></FriendImg>
               </FriendImgDiv>
-              <FriendNameDiv>{friend.friendName}</FriendNameDiv>
+              <FriendNameDiv>{name}</FriendNameDiv>
             </FriendItemDiv>
           </li>
         ))}
@@ -43,12 +24,8 @@ const FriendList = ({ friends }) => {
 };
 
 FriendList.propTypes = {
-  friends: PropTypes.arrayOf(
-    PropTypes.shape({
-      friendName: PropTypes.string.isRequired,
-      imagePath: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
+  usernames: PropTypes.string.isRequired,
+  userimgs: PropTypes.string.isRequired,
 };
 
 export default FriendList;
