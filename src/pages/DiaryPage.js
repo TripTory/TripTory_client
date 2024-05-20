@@ -13,20 +13,17 @@ import axios from "axios";
 
 const DiaryPage = () => {
   const navigate = useNavigate();
-  const {state} = useLocation();
 
-  // const images = [image1, image2, image3];
-  // const [title, setTitle] = useRecoilState(TITLE);
-  // const [content, setContent] = useRecoilState(CONTENT);
-  // const [date, setDate] = useRecoilState(DATE);
-  // const [img, setImg] = useRecoilState(IMG);
-  // const [username, setUsername] = useRecoilState(USERNAME);
-  // const [userimg, setUserimg] = useRecoilState(USERIMG);
+  //recoil 흔적들..
+  const [title, setTitle] = useRecoilState(TITLE);
+  const [content, setContent] = useRecoilState(CONTENT);
+  const [date, setDate] = useRecoilState(DATE);
+  const [img, setImg] = useRecoilState(IMG); // [img1, img2, img3 ...]
+  const [username, setUsername] = useRecoilState(USERNAME);
+  const [userimg, setUserimg] = useRecoilState(USERIMG);
 
   axios.get("http://localhost:5000/user", { withCredentials: true})
-  .then((res) => {
-    res.data.
-  })
+  .then((res) => {})
   .catch((error) => {
     console.log(error);
   });
