@@ -9,6 +9,7 @@ import { COLOR } from "../styles/color";
 import BottomNav from "../layout/BottomNav";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router";
 
 const DiaryWritePage = () => {
 
@@ -19,6 +20,8 @@ const DiaryWritePage = () => {
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(false); // Save 버튼을 위한 모달 상태
   const [imagePreview, setImagePreview] = useState(null);
   const [files, setFiles] = useState([]);
+  const { state } = useLocation();
+  const [travelid, setTravelId] = useState(state.travelid);
   const navigate = useNavigate();
 
   const openCancelModal = () => {
@@ -42,11 +45,15 @@ const DiaryWritePage = () => {
     formData.append("title", title);
     formData.append("content", content);
     formData.append("date", startDate.toISOString().split("T")[0]);
-    formData.append("travel", "6643016de9bde360d3d6cc53"); // 예시 travel id
+    formData.append("travel", travelid); // 예시 travel id
 
     files.forEach((file) => {
       formData.append("images", file.fileObject);
     });
+
+    for (const [key, value] of formData.entries()) {
+      console.log(`${key}: ${value}`);
+    }
 
     axios.post("http://localhost:5000/diary", formData, { withCredentials: true, headers: {"Content-Type": "multipart/form-data"} })
     .then((res) => {
