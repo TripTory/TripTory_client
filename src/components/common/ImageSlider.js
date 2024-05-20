@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 import { COLOR } from "../../styles/color";
 
 const ImageSlider = ({ images }) => {
-  if (images[0] === null) {
+  if (images === undefined) {
     return null;
   }
   const settings = {
