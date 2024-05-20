@@ -21,7 +21,7 @@ const BottomNav = () => {
     <NavDiv>
       <NavBtn onClick={() => history("/calendar")} active={activeButton === "/calendar"}><CalendarMonthIcons /></NavBtn>
       <NavBtn onClick={() => history("/home")} active={activeButton === "/home"}><HomeIcons /></NavBtn>
-      <NavBtn onClick={() => history("/")} active={activeButton === "/tripmap"}><PlaceIcons /></NavBtn>
+      <NavBtn onClick={() => history("/tripmap")} active={activeButton === "/tripmap"}><PlaceIcons /></NavBtn>
       <NavBtn onClick={() => history("/mypage")} active={activeButton === "/mypage"}><PersonIcons /></NavBtn>
     </NavDiv>
   );
