@@ -72,10 +72,9 @@ const MypagePage = () => {
   };
 
   const handleLogout = () => {
-    axios.get("http://localhost:5000/user/logout")
+    axios.delete("http://localhost:5000/user/logout", { withCredentials: true})
       .then((response) => {
         const status = response.status;
-        console.log("hihi", status);
         if (status === 200) {
           setMessage("로그아웃 성공");
         } else if (status === 401) {
