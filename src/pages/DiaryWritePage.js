@@ -19,6 +19,7 @@ const DiaryWritePage = () => {
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(false); // Save 버튼을 위한 모달 상태
   const [imagePreview, setImagePreview] = useState(null);
   const [files, setFiles] = useState([]);
+  const navigate = useNavigate();
 
   const openCancelModal = () => {
     setIsCancelModalOpen(true);
@@ -55,7 +56,6 @@ const DiaryWritePage = () => {
       console.log("에러", error);
     });
 
-    const navigate = useNavigate();
     navigate("/showdiary");
   };
 
