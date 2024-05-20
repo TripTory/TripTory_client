@@ -2,8 +2,11 @@ import styled from "styled-components";
 import React, { useState, useEffect } from "react";
 import Modal from "../components/common/Modal";
 import { COLOR } from "../styles/color";
+import { useNavigate } from "react-router-dom";
 
 const JoinPage = () => {
+  const navigate = useNavigate();
+
   const [isChecked, setIsChecked] = useState({
     all: false,
     agreement: false,
@@ -49,6 +52,10 @@ const JoinPage = () => {
 
   const closeModal = () => {
     setIsModalOpen(false);
+  };
+
+  const goToHome = () => {
+    navigate("/home");
   };
 
   const termsOfService1 =
@@ -229,7 +236,10 @@ const JoinPage = () => {
         </AgreeDiv>
       </EntireAgreeDiv>
 
-      <StartDiv disabled={!isRequiredChecked}>
+      <StartDiv
+        disabled={!isRequiredChecked}
+        onClick={goToHome}
+      >
         시작하기
       </StartDiv>
 
