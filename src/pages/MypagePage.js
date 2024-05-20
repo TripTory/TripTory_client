@@ -14,7 +14,6 @@ import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import DoDisturbOutlinedIcon from "@mui/icons-material/DoDisturbOutlined";
 import CancelContent from "../components/common/CancelContent";
 import BottomNav from "../layout/BottomNav";
-import UserData from "../data/UserData.json";
 import axios from "axios";
 
 const MypagePage = () => {
@@ -22,7 +21,7 @@ const MypagePage = () => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [message, setMessage] = useState("");
-  const [userInfo, setUserInfo] = useState({ name: "", email: "" });
+  const [userInfo, setUserInfo] = useState({ name: "", email: "", profileimg: "" });
 
   const toggleModal = () => {
     console.log(isModalOpen);
@@ -34,7 +33,7 @@ const MypagePage = () => {
   };
 
   const goToEdit = () => {
-    navigate("/editprofil", { state: { name: userInfo.name } });
+    navigate("/editprofil", { state: { name: userInfo.name, email: userInfo.email, profileimg: userInfo.profileimg } });
   };
 
   const goToLogin = () => {
@@ -49,16 +48,13 @@ const MypagePage = () => {
     console.log(12123123);
     axios.get("http://localhost:5000/user", { withCredentials: true})
     .then((res) => {
-      const data = res.data.user;
-      // console.log("responsesjelfsdkfj", data);
+      const data = res.data.userinfo;
       setUserInfo(
         { _id: data._id,
           name: data.name,
           email: data.email,
-          profileimg: data.profileimg,
-          authprovider: data.authprovider,
-          oauthId: data.oauthId,
-          oauthAcessToken: data.oauthAcessToken });
+          profileimg: res.data.url,
+          authprovider: data.authprovider});
     })
     .catch((error) => {
       const status = error.status;
@@ -132,7 +128,7 @@ const MypagePage = () => {
         <TitleTypo variant="h4">마이 페이지</TitleTypo>
       </TitleDiv>
       <ProfilDiv>
-        <ProfilAvatar alt="default" src={Default} />
+        <ProfilAvatar alt="default" src={userInfo.profileimg || Default} />
         <NameP>{userInfo.name}</NameP>
         <MailP>{userInfo.email}</MailP>
       </ProfilDiv>
