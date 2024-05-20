@@ -59,7 +59,6 @@ const AddTripPage = () => {
     formData.append("location[latitude]", latitude);
     formData.append("location[longitude]", longitude);
     formData.append("image", imgUrl.fileObject);
-    console.log(imgUrl);
 
     axios
       .post("http://localhost:5000/travel", formData, {
