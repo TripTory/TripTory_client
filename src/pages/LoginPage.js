@@ -11,7 +11,7 @@ const LoginPage = () => {
 
   const goToGoogleOauth = async () => {
     try {
-      const response = await axios.get(`${SERVER_URL}/oauth/google`);
+      const response = await axios.get(`${SERVER_URL}/oauth/google`, {withCredentials: true});
       const { authorizationUrl } = response.data;
       window.location.href = authorizationUrl;
     } catch (error) {
@@ -21,7 +21,7 @@ const LoginPage = () => {
 
   const goToNaverOauth = async () => {
     try {
-      const response = await axios.get(`${SERVER_URL}/oauth/naver`);
+      const response = await axios.get(`${SERVER_URL}/oauth/naver`, {withCredentials: true});
       const { authorizationUrl } = response.data;
       window.location.href = authorizationUrl;
     } catch (error) {
@@ -31,7 +31,7 @@ const LoginPage = () => {
 
   const goToKakaoOauth = async () => {
     try {
-      const response = await axios.get(`${SERVER_URL}/oauth/kakao`);
+      const response = await axios.get(`${SERVER_URL}/oauth/kakao`, {withCredentials: true});
       const { authorizationUrl } = response.data;
       window.location.href = authorizationUrl;
     } catch (error) {

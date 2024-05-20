@@ -17,9 +17,10 @@ import gunsanImage from "../../assets/images/gunsan.jpg";
 // import gwangjuImage from "../../assets/images/gwangju.jpg";
 
 export default function TripListItem(props) {
-  const getImagePath = () => {
-    return require(props.data.travelimg);
-  };
+  // const getImagePath = () => {
+  //   return require(props.data.travelimg);
+  // };
+  // console.log(props.data.title);
 
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -29,7 +30,6 @@ export default function TripListItem(props) {
   };
 
   const toggleModal = () => {
-    console.log(isModalOpen);
     setIsModalOpen(!isModalOpen);
   };
 
@@ -50,11 +50,11 @@ export default function TripListItem(props) {
         <InfoDiv>
           <TitleP>{props.data.title}</TitleP>
           <DateP>
-            {props.data.startdate}~{props.data.enddate}
+            {props.data.startdate.slice(0, 10)}~{props.data.enddate.slice(0, 10)}
           </DateP>
           <LocationDiv>
             <LocationOnIcon sx={{ fontSize: 12 }} />
-            <LocationP>광주광역시</LocationP>
+            <LocationP>{props.data.location.region}</LocationP>
           </LocationDiv>
         </InfoDiv>
         <DeleteDiv>
