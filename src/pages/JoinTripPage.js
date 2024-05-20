@@ -39,7 +39,7 @@ const JoinTripPage = () => {
   // 확인하기 버튼 클릭
   const handleSubmit = () => {
     axios
-      .put(`${SERVER_URL}/travel/invite`, {ivtoken: inputCode})
+      .put(`${SERVER_URL}/travel/invite`, {ivtoken: inputCode}, {withCredentials: true} )
       .then((res) => {
         if (res.status === 200) {
           setInviter(res.invited[0]);
