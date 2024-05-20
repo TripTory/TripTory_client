@@ -2,20 +2,26 @@ import React, { useState, useRef } from "react";
 import Avatar from "@mui/material/Avatar";
 import styled from "styled-components";
 import Default from "../../assets/images/profilavatar.svg";
+import PropTypes from "prop-types";
+import { useLocation } from "react-router";
 
-const ProfilUploader = () => {
-  const [selectedFile, setSelectedFile] = useState(null);
+const ProfilUploader = ({ onFileSelect }) => {
   const [previewUrl, setPreviewUrl] = useState(null);
-
   const fileInput = useRef(null);
+  const { state } = useLocation();
+  const [profileImg, setProfileImg] = useState(state.profileimg);
 
   const fileSelectedHandler = (e) => {
     const file = e.target.files[0];
-    setSelectedFile(file);
+    onFileSelect(file);
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
-        setPreviewUrl(reader.result);
+        setPreviewUrl({
+          fileObject: file,
+          preview_Url: reader.result,
+          type: file.type
+        });
       };
       reader.readAsDataURL(file);
     }
@@ -41,21 +47,24 @@ const ProfilUploader = () => {
       >
         {previewUrl ? (
           <img
-            src={previewUrl}
+            src={previewUrl.preview_Url}
             alt="Preview"
             style={{
               width: "12rem",
               height: "12rem",
               objectFit: "cover",
             }}
-            onClick={() => fileInput.current.click()}
           />
         ) : (
-          <ProfilAvatar alt="default" src={Default} />
+          <ProfilAvatar alt="default" src={profileImg || Default} />
         )}
       </div>
     </StProfilUploader>
   );
+};
+
+ProfilUploader.propTypes = {
+  onFileSelect: PropTypes.func.isRequired,
 };
 
 const StProfilUploader = styled.div`
