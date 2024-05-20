@@ -268,30 +268,6 @@ const JoinP = styled.p`
   margin-bottom: 6rem;
 `;
 
-
-
-const NameP = styled.div`
-  padding-right: 85%;
-  font-size: 1.2rem;
-`;
-
-const NameDiv = styled.div`
-  ${SharedContent}
-  display: flex; 
-  flex-direction: column;
-`;
-
-const NameInput = styled.input`
-  height: 4.5rem;
-  width: 94%;
-  border-radius: 5px;
-  border: 0.1rem solid #F6F6F6;
-  box-shadow: 0.1rem 0.1rem #F6F6F6;
-  margin-bottom: 3rem;
-  font-size: 1.5rem;
-  padding: 1rem;
-`;
-
 const EntireAgreeDiv = styled.div`
   ${SharedContent}
   display: flex; 
