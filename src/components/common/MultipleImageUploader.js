@@ -1,15 +1,16 @@
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
 import { COLOR } from "../../styles/color";
 import CancelIcon from "@mui/icons-material/Cancel";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
+import PropTypes from "prop-types";
 
-const Uploader = () => {
-  const [files, setFiles] = useState([]);
+const Uploader = ({ onFilesChange, files, setFiles }) => {
   const inputRef = useRef(null);
 
   const saveImage = (e) => {
     e.preventDefault();
+    onFilesChange(files);
 
     if (files.length >= 10) {
       return;
@@ -70,6 +71,12 @@ const Uploader = () => {
       </ImageUploadDiv>
     </div>
   );
+};
+
+Uploader.propTypes = {
+  setFiles: PropTypes.node.isRequired,
+  files: PropTypes.node.isRequired,
+  onFilesChange: PropTypes.node.isRequired,
 };
 
 const ImageUploadDiv = styled.div`
