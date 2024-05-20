@@ -9,17 +9,27 @@ import BottomNav from "../layout/BottomNav";
 import { COLOR } from "../styles/color";
 import { useRecoilState } from "recoil";
 import { TITLE, CONTENT, DATE, IMG, USERNAME, USERIMG } from "../recoil/commonState";
+import axios from "axios";
 
 const DiaryPage = () => {
   const navigate = useNavigate();
+  const {state} = useLocation();
 
   // const images = [image1, image2, image3];
-  const [title, setTitle] = useRecoilState(TITLE);
-  const [content, setContent] = useRecoilState(CONTENT);
-  const [date, setDate] = useRecoilState(DATE);
-  const [img, setImg] = useRecoilState(IMG);
-  const [username, setUsername] = useRecoilState(USERNAME);
-  const [userimg, setUserimg] = useRecoilState(USERIMG);
+  // const [title, setTitle] = useRecoilState(TITLE);
+  // const [content, setContent] = useRecoilState(CONTENT);
+  // const [date, setDate] = useRecoilState(DATE);
+  // const [img, setImg] = useRecoilState(IMG);
+  // const [username, setUsername] = useRecoilState(USERNAME);
+  // const [userimg, setUserimg] = useRecoilState(USERIMG);
+
+  axios.get("http://localhost:5000/user", { withCredentials: true})
+  .then((res) => {
+    res.data.
+  })
+  .catch((error) => {
+    console.log(error);
+  });
 
   const goToTriptable = () => {
     navigate("/triptable");
