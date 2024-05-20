@@ -52,24 +52,20 @@ const AddTripPage = () => {
   const handleSubmit = () => {
     const startDate = moment(dateRange[0]).toISOString();
     const endDate = moment(dateRange[1]).toISOString();
+    const formData = new FormData();
+    formData.append("title", tripName);
+    formData.append("startdate", startDate);
+    formData.append("enddate", endDate);
+    formData.append("location[latitude]", latitude);
+    formData.append("location[longitude]", longitude);
+    formData.append("image", imgUrl);
+    console.log(imgUrl);
 
     axios
-      .post(
-        "http://localhost:5000/travel",
-        {
-          title: tripName,
-          startdate: startDate,
-          enddate: endDate,
-          location: {
-            latitude: latitude,
-            longitude: longitude,
-          },
-          TravelImg: imgUrl,
-        },
-        {
-          withCredentials: true,
-        },
-      )
+      .post("http://localhost:5000/travel", formData, {
+        withCredentials: true,
+        headers: { "Content-Type": "multipart/form-data" },
+      })
       .then((res) => {
         console.log(res);
         alert("저장 완료");
