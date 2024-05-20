@@ -28,6 +28,7 @@ export default function TripListItem(props) {
     } catch (error) {
       console.error("삭제 중 에러가 발생했습니다:", error);
     }
+    window.location.reload();
     closeModal();
   };
 
