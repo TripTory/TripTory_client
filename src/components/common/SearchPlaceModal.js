@@ -6,10 +6,8 @@ import PlaceList from "./PlaceList";
 import jsonData from "../../data/PlaceData.json";
 import { COLOR } from "../../styles/color";
 import PropTypes from "prop-types";
-import { PiMapPinFill } from "react-icons/pi";
 
-const SearchPlaceModal = ({ setIsModal, setTripPlace }) => {
-  //전체 지역 데이터 -> 나중에는 백에서 받아와야 함
+const SearchPlaceModal = ({ setIsModal, setTripPlace, setLongitude, setLatitude}) => {
   const allPlaces = jsonData.places;
 
   // 사용자 검색 내용
@@ -20,12 +18,14 @@ const SearchPlaceModal = ({ setIsModal, setTripPlace }) => {
 
   //검색된 지역 리스트
   const filteredPlaces = allPlaces.filter((place) =>
-    place.placeName.toLowerCase().includes(searchText.toLowerCase()),
+    place.city.toLowerCase().includes(searchText.toLowerCase()),
   );
 
   //지역 선택시 실행되는 함수
   const handleSelectPlace = (place) => {
-    setTripPlace(place.location);
+    setTripPlace(place.city);
+    setLongitude(place.longitude);
+    setLatitude(place.latitude);
     closeModal();
   };
 
@@ -60,6 +60,8 @@ const SearchPlaceModal = ({ setIsModal, setTripPlace }) => {
 SearchPlaceModal.propTypes = {
   setIsModal: PropTypes.func,
   setTripPlace: PropTypes.func,
+  setLongitude : PropTypes.func,
+  setLatitude : PropTypes.func,
 };
 
 export default SearchPlaceModal;
@@ -115,8 +117,3 @@ const ModalContainer = styled.div`
   overflow-y: auto;
 `;
 
-const PinIcon = styled(PiMapPinFill)`
-  width: 1.7rem;
-  height: 1.7rem;
-  color: #545454;
-`;

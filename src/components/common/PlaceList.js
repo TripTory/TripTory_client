@@ -12,8 +12,8 @@ const PlaceList = ({ places, onSelectPlace }) => {
             <PlaceItemDiv>
               <PinIcon/>
               <PlaceTextDiv>
-                <PlaceNameDiv>{place.placeName}</PlaceNameDiv>
-                <LocationDiv>{place.location}</LocationDiv>
+                <PlaceNameDiv>{place.city}</PlaceNameDiv>
+                <LocationDiv>{place.docity}</LocationDiv>
               </PlaceTextDiv>
               <ButtonDiv>
                 <SelectBtn onClick={() => onSelectPlace(place)}>선택</SelectBtn>
