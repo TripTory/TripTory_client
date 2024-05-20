@@ -8,7 +8,6 @@ import axios from "axios";
 export default function TripList() {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
-
   useEffect(() => {
     let completed = false;
 
@@ -40,7 +39,7 @@ export default function TripList() {
       }}
     >
       {data.map((it) => {
-        return <TripListItem key={it._id} data={it} />;
+        return <TripListItem key={it._id} data={it}/>;
       })}
     </StTripList>
   );

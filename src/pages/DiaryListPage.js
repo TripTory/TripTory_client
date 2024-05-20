@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { COLOR } from "../styles/color";
 import styled from "styled-components";
 import DiaryList from "../components/common/DiaryList";
@@ -9,14 +9,40 @@ import Busan from "../assets/images/busan.jpg";
 import Gunsan from "../assets/images/gunsan.jpg";
 import Pencil from "../assets/images/pencil.svg";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import BottomNav from "../layout/BottomNav";
+import axios from "axios";
 
 export default function DiaryListPage() {
-  const dummyTitle = "마루와 함께하는 부산";
   const navigate = useNavigate();
+  const location = useLocation();
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState([]);
+  console.log(location.state.id);
+  useEffect(() => {
+    let completed = false;
+
+    // eslint-disable-next-line func-style
+    async function get() {
+      const result = await axios.get(
+        // `${process.env.REACT_APP_SERVER_URL}/diary/travel/${location.state.id}`,
+        `${process.env.REACT_APP_SERVER_URL}/diary/travel/6643016de9bde360d3d6cc53`,
+        { withCredentials: true },
+      );
+      if (!completed) {
+        setData(result.data.diarys);
+      }
+      setLoading(true);
+    }
+    get();
+    return () => {
+      completed = true;
+    };
+  }, []);
+
   const goToAdd = () => {
-    // navigate("/invitefriend");
+    navigate("/invitefriend", {state: location.state.id});
   };
   const goToCreate = () => {
     navigate("/createTrip");
@@ -26,7 +52,7 @@ export default function DiaryListPage() {
     <StDiaryListPage>
       <TitleDiv>
         <img src={Greenbar} style={{ height: "2.7rem" }} />
-        <TitleP>{dummyTitle}</TitleP>
+        <TitleP>{location.state.title}</TitleP>
       </TitleDiv>
       <MainDiv>
         <FriendDiv>
@@ -59,7 +85,7 @@ export default function DiaryListPage() {
             <PencilImg src={Pencil} onClick={goToCreate} />
           </SemiHeaderDiv>
           <DiaryListDiv>
-            <DiaryList />
+            <DiaryList data={data}/>
           </DiaryListDiv>
         </DiaryDiv>
       </MainDiv>
@@ -108,8 +134,6 @@ const FriendDiv = styled.div`
   width: 100%;
   height: 10%;
 `;
-
-
 
 const FriendAvt = styled(Avatar)`
   width: 3.5rem;

@@ -24,6 +24,12 @@ export default function TripListItem(props) {
 
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const goToDiaryList = () => {
+    // navigate("/triptable", {state: props.data._id});
+    navigate("/triptable", {state: {id: props.data._id, title: props.data.title}});
+    // console.log(props.data._id);
+
+  };
   const goToDel = () => {
     closeModal();
     //여행 삭제시 이루어져야하는 로직 추가 예정
@@ -42,10 +48,10 @@ export default function TripListItem(props) {
   };
 
   return (
-    <StTripListItem>
+    <StTripListItem onClick={goToDiaryList}>
       <ListItem>
         <ListItemAvatar>
-          <Avatar src={gunsanImage}/>
+          <Avatar src={props.data.travelimg}/>
         </ListItemAvatar>
         <InfoDiv>
           <TitleP>{props.data.title}</TitleP>

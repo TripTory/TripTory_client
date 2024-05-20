@@ -1,22 +1,44 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import styled from "styled-components";
 import DiaryListItem from "./DiaryListItem";
-export default function TripTable() {
+import axios from "axios";
+import { PropTypes } from "prop-types";
+
+export default function TripTable(props) {
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState([]);
+  // useEffect(() => {
+  //   let completed = false;
+
+  // eslint-disable-next-line func-style
+  //   async function get() {
+  //     const result = await axios.get(
+  //       `${process.env.REACT_APP_SERVER_URL}/travel/${props.data.}`,
+  //       { withCredentials: true },
+  //     );
+  //     if (!completed) {
+  //       setData(result.data.travels);
+  //     }
+  //     setLoading(true);
+  //   }
+  //   get();
+  //   return () => {
+  //     completed = true;
+  //   };
+  // }, []);
+
   return (
     <StTripTable>
-      <DiaryListItem item="1" />
-      <DiaryListItem item="2" />
-      <DiaryListItem item="3" />
-      <DiaryListItem item="4" />
-      <DiaryListItem item="5" />
-      <DiaryListItem item="1" />
-      <DiaryListItem item="2" />
-      <DiaryListItem item="3" />
-      <DiaryListItem item="4" />
-      <DiaryListItem item="5" />
+      {props.data.map((it)=> {
+        return <DiaryListItem key={it._id} data={it}/>;
+      })}
     </StTripTable>
   );
 }
+
+TripTable.propTypes = {
+  data: PropTypes.node.isRequired,
+};
 
 const StTripTable = styled.div`
   display: flex;
