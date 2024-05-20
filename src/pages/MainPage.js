@@ -12,7 +12,7 @@ import BottomNav from "../layout/BottomNav";
 
 const MainPage = () => {
   //db에서 get 해온 username
-  const dummyName = "이채영";
+  const dummyName = "^get예정^";
 
   const [dialog, setDialog] = useRecoilState(dialogState);
   const handleOpen = () => {
