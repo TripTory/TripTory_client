@@ -2,20 +2,41 @@ import styled from "styled-components";
 import kakaologo from "../assets/images/kakaoLogo.svg";
 import googlelogo from "../assets/images/googleLogo.svg";
 import naverlogo from "../assets/images/naverLogo.svg";
-
 import React from "react";
+import axios from "axios";
 
 
 const LoginPage = () => {
+  const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
-  const goToGoogleOauth = () => {
-    window.location.href = "https://triptoryserver-jwakz2rnea-du.a.run.app/oauth/google";
+  const goToGoogleOauth = async () => {
+    try {
+      const response = await axios.get(`${SERVER_URL}/oauth/google`);
+      const { authorizationUrl } = response.data;
+      window.location.href = authorizationUrl;
+    } catch (error) {
+      console.error("구글 로그인 에러:", error);
+    }
   };
-  const goToNaverOauth = () => {
-    window.location.href = "https://triptoryserver-jwakz2rnea-du.a.run.app/oauth/naver";
+
+  const goToNaverOauth = async () => {
+    try {
+      const response = await axios.get(`${SERVER_URL}/oauth/naver`);
+      const { authorizationUrl } = response.data;
+      window.location.href = authorizationUrl;
+    } catch (error) {
+      console.error("네이버 로그인 에러:", error);
+    }
   };
-  const goToKakaoOauth = () => {
-    window.location.href = "https://triptoryserver-jwakz2rnea-du.a.run.app/oauth/kakao";
+
+  const goToKakaoOauth = async () => {
+    try {
+      const response = await axios.get(`${SERVER_URL}/oauth/kakao`);
+      const { authorizationUrl } = response.data;
+      window.location.href = authorizationUrl;
+    } catch (error) {
+      console.error("카카오 로그인 에러:", error);
+    }
   };
 
   return (
@@ -58,7 +79,6 @@ const IntroP = styled.p`
 
 
 const LogoImage = styled.img`
-  //width: 20px;
   height: 38px;
   margin-right: 9px;
 `;
