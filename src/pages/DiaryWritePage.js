@@ -22,6 +22,8 @@ const DiaryWritePage = () => {
   const [files, setFiles] = useState([]);
   const { state } = useLocation();
   const [travelid, setTravelId] = useState(state.travelid);
+  const [diaryid, setDiaryId] = useState({ diaryid: "" });
+
   const navigate = useNavigate();
 
   const openCancelModal = () => {
@@ -45,7 +47,8 @@ const DiaryWritePage = () => {
     formData.append("title", title);
     formData.append("content", content);
     formData.append("date", startDate.toISOString().split("T")[0]);
-    formData.append("travel", travelid); // 예시 travel id
+    formData.append("travelid", travelid); // 예시 travel id
+    formData.append("diaryid", diaryid);
 
     files.forEach((file) => {
       formData.append("images", file.fileObject);
@@ -63,7 +66,7 @@ const DiaryWritePage = () => {
       console.log("에러", error);
     });
 
-    navigate("/showdiary");
+    navigate("/showdiary", { state: { diaryid: setDiaryId.diaryid } });
   };
 
   return <div>
