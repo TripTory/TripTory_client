@@ -170,13 +170,13 @@ const JoinPage = () => {
 
   return (
     <EntireDiv>
-      <JoinP>회원가입</JoinP>
+      <JoinP>약정 동의</JoinP>
       <br />
 
-      <NameDiv>
+      {/* <NameDiv>
         <NameP>이름</NameP>
         <NameInput placeholder="이름을 입력해주세요." />
-      </NameDiv>
+      </NameDiv> */}
 
       <EntireAgreeDiv>
         <AllLabel>
