@@ -19,15 +19,13 @@ export default function DiaryListPage() {
   const location = useLocation();
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
-  console.log(location.state.id);
   useEffect(() => {
     let completed = false;
 
     // eslint-disable-next-line func-style
     async function get() {
       const result = await axios.get(
-        // `${process.env.REACT_APP_SERVER_URL}/diary/travel/${location.state.id}`,
-        `${process.env.REACT_APP_SERVER_URL}/diary/travel/6643016de9bde360d3d6cc53`,
+        `${process.env.REACT_APP_SERVER_URL}/diary/travel/${location.state.id}`,
         { withCredentials: true },
       );
       if (!completed) {
@@ -45,7 +43,8 @@ export default function DiaryListPage() {
     navigate("/invitefriend", {state: location.state.id});
   };
   const goToCreate = () => {
-    navigate("/createTrip");
+    console.log(data);
+    navigate("/diary", {travelid: location.state.id});
   };
 
   return (

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { COLOR } from "../../styles/color";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
@@ -10,29 +10,25 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import Modal from "../../components/common/Modal";
 import { PropTypes } from "prop-types";
 import DelTripContent from "../../components/common/DelTripContent";
-import gunsanImage from "../../assets/images/gunsan.jpg";
-// import ulsanImage from "../../assets/images/ulsan.jpg";
-// import jejuImage from "../../assets/images/jeju.jpg";
-// import busanImage from "../../assets/images/busan.jpg";
-// import gwangjuImage from "../../assets/images/gwangju.jpg";
+import axios from "axios";
 
 export default function TripListItem(props) {
-  // const getImagePath = () => {
-  //   return require(props.data.travelimg);
-  // };
-  // console.log(props.data.title);
-
+  const [id] = useState(props.data._id);
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const goToDiaryList = () => {
-    // navigate("/triptable", {state: props.data._id});
-    navigate("/triptable", {state: {id: props.data._id, title: props.data.title}});
-    // console.log(props.data._id);
-
+    navigate("/triptable", {
+      state: { id: props.data._id, title: props.data.title },
+    });
   };
-  const goToDel = () => {
+
+  const goToDel = async () => {
+    try {
+      await axios.delete(`${process.env.REACT_APP_SERVER_URL}/travel/${id}`, {withCredentials: true});
+    } catch (error) {
+      console.error("삭제 중 에러가 발생했습니다:", error);
+    }
     closeModal();
-    //여행 삭제시 이루어져야하는 로직 추가 예정
   };
 
   const toggleModal = () => {
@@ -44,19 +40,20 @@ export default function TripListItem(props) {
   };
 
   const goToEdit = () => {
-    navigate("/addtrip", {state: props.data._id});
+    navigate("/addtrip", { state: props.data._id });
   };
 
   return (
-    <StTripListItem onClick={goToDiaryList}>
+    <StTripListItem>
       <ListItem>
         <ListItemAvatar>
-          <Avatar src={props.data.travelimg}/>
+          <Avatar src={props.data.travelimg} />
         </ListItemAvatar>
         <InfoDiv>
-          <TitleP>{props.data.title}</TitleP>
+          <TitleP onClick={goToDiaryList}>{props.data.title}</TitleP>
           <DateP>
-            {props.data.startdate.slice(0, 10)}~{props.data.enddate.slice(0, 10)}
+            {props.data.startdate.slice(0, 10)}~
+            {props.data.enddate.slice(0, 10)}
           </DateP>
           <LocationDiv>
             <LocationOnIcon sx={{ fontSize: 12 }} />
@@ -96,6 +93,7 @@ export default function TripListItem(props) {
 
 TripListItem.propTypes = {
   data: PropTypes.node.isRequired,
+  _id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   startdate: PropTypes.string.isRequired,
   enddate: PropTypes.string.isRequired,
@@ -110,7 +108,7 @@ const StTripListItem = styled.div`
   border: 0.2rem solid rgba(228, 228, 228);
   border-radius: 1rem;
   width: 95%;
-  height: 8rem;
+  height: 80px;
   margin-bottom: 0.2rem;
 `;
 

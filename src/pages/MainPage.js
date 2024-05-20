@@ -11,7 +11,7 @@ import { dialogState } from "../recoil/commonState";
 import BottomNav from "../layout/BottomNav";
 
 const MainPage = () => {
-  //db에서 get 해온 username
+  //db에서 get 해온 username or recoil에 저장한 내 정보
   const dummyName = "^get예정^";
 
   const [dialog, setDialog] = useRecoilState(dialogState);
