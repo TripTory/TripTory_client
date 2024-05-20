@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Avatar from "@mui/material/Avatar";
 import { COLOR } from "../styles/color";
@@ -14,6 +14,8 @@ import axios from "axios";
 const EditProfilPage = () => {
   const { state } = useLocation();
   const [user, setUser] = useState(state.name);
+  const [selectedFile, setSelectedFile] = useState(null);
+
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
 
@@ -24,18 +26,24 @@ const EditProfilPage = () => {
   const handleEdit = (e) => {
     setUser(e.target.value);
   };
+  const handleFileSelect = (file) => {
+    setSelectedFile(file);
+  };
 
   const handleSubmit = (e) => {
     //db에 바뀐 이름 post해서 반영
     //db에 이미지 formdata로 반영
     //변경된 이름은 메인페이지, 작성자, 등에서 모두 바뀌어야 하는데.. 되는 건가? 그렇다!
-    axios.put("http://localhost:5000/user", {
-      name : user,
-      // email : string,
-      // profileImg: file
-    }, { withCredentials: true})
+    const formData = new FormData();
+    formData.append("name", user);
+    if (selectedFile) {
+      formData.append("profileImg", selectedFile);
+    }
+
+
+    axios.put("http://localhost:5000/user", formData,
+      { withCredentials: true })
       .then((res) => {
-        console.log("hih",res);
         if (res === 404) {
           setMessage("사용자를 찾을 수 없습니다.");
         } else if (res === 401) {
@@ -59,7 +67,7 @@ const EditProfilPage = () => {
         <BackIcon onClick={moveBack} />
       </BackDiv>
       <ProfilDiv>
-        <ProfilUploader />
+        <ProfilUploader onFileSelect={handleFileSelect} />
         <TextField
           variant="standard"
           color="common"
