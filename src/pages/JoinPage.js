@@ -173,11 +173,6 @@ const JoinPage = () => {
       <JoinP>약정 동의</JoinP>
       <br />
 
-      {/* <NameDiv>
-        <NameP>이름</NameP>
-        <NameInput placeholder="이름을 입력해주세요." />
-      </NameDiv> */}
-
       <EntireAgreeDiv>
         <AllLabel>
           <CustomCheckbox
@@ -301,6 +296,7 @@ const EntireAgreeDiv = styled.div`
   ${SharedContent}
   display: flex; 
   flex-direction: column;
+  margin-top: 4rem;
 `;
 
 const AllLabel = styled.div`
