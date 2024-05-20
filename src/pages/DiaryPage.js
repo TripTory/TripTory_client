@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import goback from "../assets/icons/goback.svg";
@@ -7,20 +7,17 @@ import DiaryContent from "../components/common/DiaryContent";
 import ImageSlider from "../components/common/ImageSlider";
 import BottomNav from "../layout/BottomNav";
 import { COLOR } from "../styles/color";
-import { useRecoilState } from "recoil";
-import { TITLE, CONTENT, DATE, IMG, USERNAME, USERIMG } from "../recoil/commonState";
 import axios from "axios";
 
 const DiaryPage = () => {
   const navigate = useNavigate();
 
-  //recoil 흔적들..
-  const [title, setTitle] = useRecoilState(TITLE);
-  const [content, setContent] = useRecoilState(CONTENT);
-  const [date, setDate] = useRecoilState(DATE);
-  const [img, setImg] = useRecoilState(IMG); // [img1, img2, img3 ...]
-  const [username, setUsername] = useRecoilState(USERNAME);
-  const [userimg, setUserimg] = useRecoilState(USERIMG);
+  const [title, setTitle] = useState();
+  const [content, setContent] = useState();
+  const [date, setDate] = useState();
+  const [img, setImg] = useState(); // [img1, img2, img3 ...]
+  const [username, setUsername] = useState();
+  const [userimg, setUserimg] = useState();
 
   axios.get("http://localhost:5000/user", { withCredentials: true})
   .then((res) => {})
