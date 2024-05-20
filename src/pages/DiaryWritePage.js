@@ -62,12 +62,12 @@ const DiaryWritePage = () => {
       setDiaryId({
         diaryid: res.data.diaryid,
       });
+      console.log("메롱",res.data.diaryid);
+      navigate("/showdiary", { state: { diaryid: diaryid.diaryid } });
     })
     .catch((error) => {
       console.log("에러", error);
     });
-
-    navigate("/showdiary", { state: { diaryid: setDiaryId.diaryid } });
   };
 
   return <div>

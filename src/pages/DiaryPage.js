@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import goback from "../assets/icons/goback.svg";
 import DiaryInfo from "../components/common/DiaryInfo";
@@ -11,6 +11,8 @@ import axios from "axios";
 
 const DiaryPage = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const { diaryid } = location.state;
 
   const [title, setTitle] = useState();
   const [content, setContent] = useState();
@@ -19,8 +21,13 @@ const DiaryPage = () => {
   const [username, setUsername] = useState();
   const [userimg, setUserimg] = useState();
 
-  axios.get("http://localhost:5000/user", { withCredentials: true})
-  .then((res) => {})
+  const { state } = useLocation();
+  const [id, setId] = useState(state.diaryid);
+
+  axios.get(`http://localhost:5000/diary/${id}`, { withCredentials: true})
+  .then((res) => {
+    console.log("안녕", res);
+  })
   .catch((error) => {
     console.log(error);
   });
@@ -30,7 +37,7 @@ const DiaryPage = () => {
   };
 
   const goToEditDiary = () => {
-    navigate("/diary"); // {diaryid} 추가
+    navigate(`/diary/${id}`); // {diaryid} 추가
   };
 
   return (
