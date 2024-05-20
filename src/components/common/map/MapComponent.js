@@ -4,11 +4,11 @@ import { Map, MapMarker, CustomOverlayMap } from "react-kakao-maps-sdk";
 import Busan from "../../../assets/images/busan.jpg";
 import MARKERFRAME from "../../../assets/icons/markericon.svg";
 // import CustomMarker from "./CustomMarker";
+import { PropTypes } from "prop-types";
 import Drawer from "@mui/material/Drawer";
 import MapDrawer from "../../../components/common/map/MapDrawer";
-import TripData from "../../../data/TripData.json";
 
-const MapComponent = () => {
+const MapComponent = (props) => {
   const [data, setData] = useState({});
   const [isOpen, setIsOpen] = useState(false);
   const toggleDrawer = (newOpen, data) => () => {
@@ -29,7 +29,7 @@ const MapComponent = () => {
         zoomable={false}
         disableDoubleClickZoom={true}
       >
-        {TripData.TripData.map((it) => {
+        {props.data.map((it) => {
           return (
             <CustomOverlayMap
               key={it._id}
@@ -52,11 +52,24 @@ const MapComponent = () => {
           );
         })}
       </Map>
-      <Drawer anchor="bottom" open={isOpen} onClose={toggleDrawer(false)}>
+      <Drawer anchor="bottom" open={isOpen} onClose={toggleDrawer(false, data)}>
         <MapDrawer data={data} />
       </Drawer>
     </StMap>
   );
+};
+
+MapComponent.propTypes = {
+  data: PropTypes.node.isRequired,
+  _id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  startdate: PropTypes.string.isRequired,
+  enddate: PropTypes.string.isRequired,
+  location: PropTypes.node.isRequired,
+  latitude: PropTypes.number.isRequired,
+  longitude: PropTypes.number.isRequired,
+  travelimg: PropTypes.string.isRequired,
 };
 
 const StMap = styled.div`
