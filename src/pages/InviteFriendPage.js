@@ -15,8 +15,8 @@ const InviteFriendPage = () => {
   const navigate = useNavigate();
   // navigate 하면서 받은 travel id 값
   const { state } = useLocation();
-  // const travelID = state;
-  const travelID = "664b1bc4d3a661ebf34c320a";
+  // const travelID = state; <----------------나중에 주석 풀고 다음 줄 지우기
+  const travelID = "664c951554d29fb5ec75847b"; // 임시로 쓴 것
   // travel의 정보
   const [invitecode, setInvitecode] = useState("");
   const [title, setTitle] = useState("");
@@ -35,27 +35,31 @@ const InviteFriendPage = () => {
 
   // 서버로부터 여행 정보 받아오기
   useEffect(() => {
+    let usernames = [];
+    let userimgs = [];
     axios
       .get(`${SERVER_URL}/travel/${travelID}`)
       .then((res) => {
         console.log(res);
+        // 초대 코드 저장
         setInvitecode(res.data.travel.ivtoken);
+        // 여행 제목 저장
         setTitle(res.data.travel.title);
-        setUsername((prevUsernames) => [
-          ...prevUsernames,
-          res.data.travel.userName,
-        ]);
-        console.log(res.data.travel.userName);
-        setUserimg((prevUserimgs) => [
-          ...prevUserimgs,
-          res.data.travel.travelimg,
-        ]);
-        console.log(res.data.travel.travelimg);
+        // 여행 참여자 이름 저장
+        res.data.travel.invited.forEach((item) => {
+          usernames.push(item.name);
+        });
+        setUsername(usernames);
+        // 여행 참여자 프로필사진 저장
+        res.data.invited_profile.forEach((item) => {
+          userimgs.push(item.url);
+        });
+        setUserimg(userimgs);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, [SERVER_URL, travelID]);
+  }, []);
 
   // 취소 버튼
   const handleCancel = () => {
