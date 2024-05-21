@@ -9,43 +9,32 @@ import axios from "axios";
 const CalendarPage = () => {
   const SERVER_URL = process.env.REACT_APP_SERVER_URL;
   const [diaryInfo, setDiaryInfo] = useState([]);
-  const [sendData, setSendData] = useState([]);
 
   useEffect(() => {
+    console.log("Test");
     axios
       .get(`${SERVER_URL}/diary`, { withCredentials: true })
       .then((res) => {
-        setDiaryInfo(res.data.diarys_info);
+        const transformedData = res.data.diarys_info.map((item) => {
+          return {
+            date: item.diary.date,
+            username: item.diary.userName,
+            diaryTitle: item.diary.title,
+            imagePath: item.url
+          };
+        });
+        setDiaryInfo(transformedData);
       })
       .catch((error) => {
         console.error("에러:", error);
       });
   }, []);
 
-  useEffect(() => {
-    const transformedData = diaryInfo.map((item) => {
-      const { diary, url } = item;
-      return { ...diary, url };
-    });
-    setSendData(transformedData);
-  }, [diaryInfo]);
-
-
-  // {
-  //   year: 2024,
-  //   month: 5,
-  //   day: 20,
-  //   place: "인천 광역시",
-  //   author: "카리나",
-  //   diaryTitle: "신나는 바다 여행",
-  //   imagePath:
-  //     "https://blog.kakaocdn.net/dn/o1KIw/btqu9mflPY6/rGk1mM3iugV1c6jj9Z3E80/img.jpg",
-  // },
 
   return (
     <div>
       <Title>내 캘린더</Title>
-      <TripCalendar diaryInfo={sendData}></TripCalendar>
+      <TripCalendar diaryInfo={diaryInfo}></TripCalendar>
       <BottomNav></BottomNav>
     </div>
   );
