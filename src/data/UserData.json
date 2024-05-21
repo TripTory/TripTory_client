@@ -1,0 +1,12 @@
+{
+  "user": 
+    {
+      "_id": "id",
+      "name": "최마루",
+      "email": "unniejoa@naver.com",
+      "profileimg": "String",
+      "authprovider": "String",
+      "oauthId": "String",
+      "oauthAcessToken": "String"
+   }
+}

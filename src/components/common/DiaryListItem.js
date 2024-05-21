@@ -5,9 +5,9 @@ import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import Dot from "../../assets/icons/dot.svg";
-import Busan from "../../assets/images/busan.jpg";
+import { PropTypes } from "prop-types";
 
-export default function DiaryListItem() {
+export default function DiaryListItem(props) {
   return (
     <StDiaryListItem>
       <ListItem
@@ -25,21 +25,29 @@ export default function DiaryListItem() {
             <img src={Dot} />
           </DotDiv>
           <InfoDiv>
-            <TitleP>와~ 부산이다!!!</TitleP>
+            <TitleP>{props.data.title}</TitleP>
             <DateDiv>
-              <DateP>2023.06.13</DateP>
-              <UserP>마루</UserP>
+              <DateP>{props.data.startdate}</DateP>
+              <UserP>{props.data.userId}</UserP>
             </DateDiv>
           </InfoDiv>
         </ContentDiv>
         <ListItemAvatar>
-          <Avatar src={Busan} sx={{ width: "5rem", height: "5rem" }}></Avatar>
+          <Avatar src={props.data.img.imgpath} sx={{ width: "5rem", height: "5rem" }}></Avatar>
         </ListItemAvatar>
       </ListItem>
     </StDiaryListItem>
   );
 }
-
+DiaryListItem.propTypes = {
+  data: PropTypes.node.isRequired,
+  _id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  img: PropTypes.node.isRequired,
+  imgpath: PropTypes.string.isRequired,
+  userId: PropTypes.string.isRequired,
+};
 const StDiaryListItem = styled.div`
   display: flex;
   justify-content: center;

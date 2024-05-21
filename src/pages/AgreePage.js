@@ -2,8 +2,11 @@ import styled from "styled-components";
 import React, { useState, useEffect } from "react";
 import Modal from "../components/common/Modal";
 import { COLOR } from "../styles/color";
+import { useNavigate } from "react-router-dom";
 
-const JoinPage = () => {
+const AgreePage = () => {
+  const navigate = useNavigate();
+
   const [isChecked, setIsChecked] = useState({
     all: false,
     agreement: false,
@@ -49,6 +52,10 @@ const JoinPage = () => {
 
   const closeModal = () => {
     setIsModalOpen(false);
+  };
+
+  const goToHome = () => {
+    navigate("/home");
   };
 
   const termsOfService1 =
@@ -170,13 +177,8 @@ const JoinPage = () => {
 
   return (
     <EntireDiv>
-      <JoinP>회원가입</JoinP>
+      <JoinP>약정 동의</JoinP>
       <br />
-
-      <NameDiv>
-        <NameP>이름</NameP>
-        <NameInput placeholder="이름을 입력해주세요." />
-      </NameDiv>
 
       <EntireAgreeDiv>
         <AllLabel>
@@ -234,7 +236,10 @@ const JoinPage = () => {
         </AgreeDiv>
       </EntireAgreeDiv>
 
-      <StartDiv disabled={!isRequiredChecked}>
+      <StartDiv
+        disabled={!isRequiredChecked}
+        onClick={goToHome}
+      >
         시작하기
       </StartDiv>
 
@@ -273,34 +278,11 @@ const JoinP = styled.p`
   margin-bottom: 6rem;
 `;
 
-
-
-const NameP = styled.div`
-  padding-right: 85%;
-  font-size: 1.2rem;
-`;
-
-const NameDiv = styled.div`
-  ${SharedContent}
-  display: flex; 
-  flex-direction: column;
-`;
-
-const NameInput = styled.input`
-  height: 4.5rem;
-  width: 94%;
-  border-radius: 5px;
-  border: 0.1rem solid #F6F6F6;
-  box-shadow: 0.1rem 0.1rem #F6F6F6;
-  margin-bottom: 3rem;
-  font-size: 1.5rem;
-  padding: 1rem;
-`;
-
 const EntireAgreeDiv = styled.div`
   ${SharedContent}
   display: flex; 
   flex-direction: column;
+  margin-top: 4rem;
 `;
 
 const AllLabel = styled.div`
@@ -397,4 +379,4 @@ const ContentDiv = styled.div`
   padding-bottom: 20rem;
 `;
 
-export default JoinPage;
+export default AgreePage;
