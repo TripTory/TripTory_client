@@ -12,15 +12,18 @@ import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router";
 
 const EditDiaryWritePage = () => {
+  const { state } = useLocation();
+  const { diaryInfo } = state || {};
 
-  const [startDate, setStartDate] = useState();
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  const [startDate, setStartDate] = useState(diaryInfo?.date ? new Date(diaryInfo.date) : null);
+  const [title, setTitle] = useState(diaryInfo?.title || "");
+  const [content, setContent] = useState(diaryInfo?.content || "");
+  const [files, setFiles] = useState(diaryInfo?.url || []);
+
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false); // Cancel 버튼을 위한 모달 상태
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(false); // Save 버튼을 위한 모달 상태
   const [imagePreview, setImagePreview] = useState(null);
-  const [files, setFiles] = useState([]);
-  const { state } = useLocation();
+  // const [files, setFiles] = useState([]);
   // const [travelid, setTravelId] = useState(state);
   const [diaryId, setDiaryId] = useState({ diaryid: "" });
 

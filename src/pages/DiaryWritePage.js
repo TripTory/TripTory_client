@@ -47,7 +47,7 @@ const DiaryWritePage = () => {
     formData.append("title", title);
     formData.append("content", content);
     formData.append("date", startDate.toISOString().split("T")[0]);
-    formData.append("travel", "664c257dac93cdbc69a66bf5"); // travelid 대체
+    formData.append("travel", "664c3dc4300f7b0c6126c483"); // travelid 대체
 
     files.forEach((file) => {
       formData.append("images", file.fileObject);
