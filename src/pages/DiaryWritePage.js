@@ -22,7 +22,7 @@ const DiaryWritePage = () => {
   const [files, setFiles] = useState([]);
   const { state } = useLocation();
   // const [travelid, setTravelId] = useState(state.travelid);
-  const [diaryid, setDiaryId] = useState({ diaryid: "" });
+  const [diaryId, setDiaryId] = useState({ diaryid: "" });
 
   const navigate = useNavigate();
 
@@ -62,8 +62,8 @@ const DiaryWritePage = () => {
       setDiaryId({
         diaryid: res.data.diaryid,
       });
-      console.log("메롱",res.data.diaryid);
-      navigate("/showdiary", { state: { diaryid: diaryid.diaryid } });
+      const diary_id = res.data.diaryid;
+      navigate("/showdiary", { state: { diaryid: diary_id } });
     })
     .catch((error) => {
       console.log("에러", error);

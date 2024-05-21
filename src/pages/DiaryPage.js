@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import goback from "../assets/icons/goback.svg";
@@ -20,17 +20,37 @@ const DiaryPage = () => {
   const [img, setImg] = useState(); // [img1, img2, img3 ...]
   const [username, setUsername] = useState();
   const [userimg, setUserimg] = useState();
+  const [diaryInfo, setDiaryInfo] = useState({ _id: "", title: "", content: "", date: "", travel: "", userId: "", userName: "", img: "" });
 
   const { state } = useLocation();
   const [id, setId] = useState(state.diaryid);
 
-  axios.get(`http://localhost:5000/diary/${id}`, { withCredentials: true})
+  useEffect(() => {
+    axios.get(`http://localhost:5000/diary/${id}`, { withCredentials: true})
   .then((res) => {
-    console.log("안녕", res);
+    console.log(res);
+    const data = res.data.diary;
+    setDiaryInfo({
+      _id: data.id, // 얜 굳이 get 안 해와도 ㄱㅊ을 거 같기도???
+      title: data.title,
+      content: data.content,
+      date: data.date,
+      travel: data.travel,
+      userId: data.userId,
+      userName: data.userName,
+      // img: [
+      //   {
+      //     imgpath: String,
+      //     tag: [String],
+      //   },
+      // ]
+    });
   })
   .catch((error) => {
     console.log(error);
   });
+  }, []);
+
 
   const goToTriptable = () => {
     navigate("/triptable");
@@ -50,9 +70,9 @@ const DiaryPage = () => {
           <DeleteBtn>삭제</DeleteBtn>
         </BtnContainer>
       </HeaderConatiner>
-      <DiaryInfo title={title} date={date} username={username} userimg={userimg} ></DiaryInfo>
-      <DiaryContent content={content}></DiaryContent>
-      <ImageSlider images={img}/>
+      <DiaryInfo title={diaryInfo.title} date={diaryInfo.date} username={diaryInfo.userName} userimg={userimg} ></DiaryInfo>
+      <DiaryContent content={diaryInfo.content}></DiaryContent>
+      {/* <ImageSlider images={diaryInfo.img}/> */}
       <BottomNav />
     </div>
   );
