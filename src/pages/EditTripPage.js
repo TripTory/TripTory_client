@@ -6,29 +6,46 @@ import SearchPlaceModal from "../components/common/SearchPlaceModal";
 import { PiMapPinFill } from "react-icons/pi";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router";
 import { COLOR } from "../styles/color";
 import BottomNav from "../layout/BottomNav";
 import moment from "moment";
 import axios from "axios";
 
-const AddTripPage = () => {
+const EditTripPage = () => {
+  const { state } = useLocation();
   const navigate = useNavigate();
-
   //모달창(여행지 검색) 관리 변수
   const [isModal, setIsModal] = useState(false);
 
   // 사용자 입력 정보(여행이름)
-  const [tripName, setTripName] = useState("");
+  const [tripName, setTripName] = useState(state.title);
   //사용자 입력 정보(여행지역)
-  const [tripPlace, setTripPlace] = useState("");
-  const [longitude, setLongitude] = useState("");
-  const [latitude, setLatitude] = useState("");
+  const [tripPlace, setTripPlace] = useState(state.location.region);
+  const [longitude, setLongitude] = useState(state.location.longitude);
+  const [latitude, setLatitude] = useState(state.location.latitude);
   //사용자 입력 정보(여행날짜)
-  const [dateRange, setDateRange] = useState([null, null]);
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
+  const [dateRange, setDateRange] = useState([state.startdate, state.enddate]);
+  const [startDate, setStartDate] = useState(state.startdate);
+  const [endDate, setEndDate] = useState(state.enddate);
   //사용자 업로드 이미지 url
-  const [imgUrl, setImgUrl] = useState(null);
+  const [imgUrl, setImgUrl] = useState(state.travelimg);
+
+  // //모달창(여행지 검색) 관리 변수
+  // const [isModal, setIsModal] = useState(false);
+
+  // // 사용자 입력 정보(여행이름)
+  // const [tripName, setTripName] = useState("");
+  // //사용자 입력 정보(여행지역)
+  // const [tripPlace, setTripPlace] = useState("");
+  // const [longitude, setLongitude] = useState("");
+  // const [latitude, setLatitude] = useState("");
+  // //사용자 입력 정보(여행날짜)
+  // const [dateRange, setDateRange] = useState([null, null]);
+  // const [startDate, setStartDate] = useState(null);
+  // const [endDate, setEndDate] = useState(null);
+  // //사용자 업로드 이미지 url
+  // const [imgUrl, setImgUrl] = useState(null);
 
   // 여행 이름값 변경
   const handleNameChange = (e) => {
@@ -59,7 +76,7 @@ const AddTripPage = () => {
     formData.append("image", imgUrl.fileObject);
 
     axios
-      .post("http://localhost:5000/travel", formData, {
+      .post(`${process.env.REACT_APP_SERVER_URL}`, formData, {
         withCredentials: true,
         headers: { "Content-Type": "multipart/form-data" },
       })
@@ -92,7 +109,7 @@ const AddTripPage = () => {
         />
       )}
       <TitleContainer>
-        <Title>어떤 여행을 만들까요?</Title>
+        <Title>여행 수정하기</Title>
         <CancelBtn onClick={handleCancel}>취소</CancelBtn>
       </TitleContainer>
       <EmptyContainer />
@@ -134,26 +151,36 @@ const AddTripPage = () => {
         </SearchPlaceBtn>
       </InputContainer>
       <Button
-        disabled={
-          !tripName.trim() ||
-          !tripPlace.trim() ||
-          !startDate ||
-          !endDate ||
-          !imgUrl
-        }
+        // disabled={
+        //   !tripName.trim() ||
+        //   !tripPlace.trim() ||
+        //   !startDate ||
+        //   !endDate ||
+        //   !imgUrl
+        // }
         type="submit"
         onClick={handleSubmit}
       >
-        여행 떠나기
+        수정 완료하기
       </Button>
       <BottomNav />
     </div>
   );
 };
-AddTripPage.propTypes = {
-  location: PropTypes.object,
+
+EditTripPage.propTypes = {
+  data: PropTypes.node.isRequired,
+  title: PropTypes.string.isRequired,
+  startdate: PropTypes.string.isRequired,
+  enddate: PropTypes.string.isRequired,
+  location: PropTypes.node.isRequired,
+  region: PropTypes.string.isRequired,
+  longitude: PropTypes.number.isRequired,
+  latitude: PropTypes.number.isRequired,
+  travelimg: PropTypes.string.isRequired,
 };
-export default AddTripPage;
+
+export default EditTripPage;
 
 const Title = styled.h1`
   color: ${COLOR.MAIN_GREEN};
