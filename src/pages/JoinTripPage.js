@@ -69,7 +69,6 @@ const JoinTripPage = () => {
       })
       .catch((error) => {
         console.log(error);
-        console.log("여기서 에러 발셍");
         openFailModal();
       });
   };
