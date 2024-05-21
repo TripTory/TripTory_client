@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, { useState } from "react";
+import React from "react";
 import { COLOR } from "../../../styles/color";
 import Jeju from "../../../assets/images/jeju.jpg";
 import Button from "@mui/material/Button";
