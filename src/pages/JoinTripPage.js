@@ -39,10 +39,14 @@ const JoinTripPage = () => {
         { withCredentials: true },
       )
       .then((res) => {
-        openSuccessModal();
+        if (res.status === 200) {
+          openSuccessModal();
+        } else {
+          openFailModal();
+        }
       })
       .catch((error) => {
-        console.log("여행참여에 실패하였습니다");
+        openFailModal();
         console.log(error);
       });
   };
@@ -50,14 +54,18 @@ const JoinTripPage = () => {
   // 확인하기 버튼 클릭
   const handleSubmit = () => {
     axios
-      .get(
-        `${SERVER_URL}/travel/invite/?`,
+      .post(
+        `${SERVER_URL}/travel/invite`,
         { ivtoken: inputCode },
         { withCredentials: true },
       )
       .then((res) => {
-        setInviter(res.data.auth);
-        openCheckModal();
+        if (res.status === 200) {
+          setInviter(res.data.auth);
+          openCheckModal();
+        } else {
+          openFailModal();
+        }
       })
       .catch((error) => {
         console.log(error);
