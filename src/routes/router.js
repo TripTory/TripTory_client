@@ -9,6 +9,7 @@ import EditProfilPage from "../pages/EditProfilPage";
 import JoinTripPage from "../pages/JoinTripPage";
 import InviteFriendPage from "../pages/InviteFriendPage";
 import TagPage from "../pages/TagPage";
+import EditDiaryWritePage from "../pages/EditDiaryWritePage";
 
 import React from "react";
 import DiaryListPage from "../pages/DiaryListPage";
@@ -25,6 +26,7 @@ const Router = () => {
         <Route path="/agree" element={<AgreePage />} />
         <Route path="/addtrip" element={<AddTripPage/>} />
         <Route path="/diary" element={<DiaryWritePage />} />
+        <Route path="/editdiary" element={<EditDiaryWritePage />} />
         <Route path="/mypage" element={<MypagePage />} />
         <Route path="/editprofil" element={<EditProfilPage />} />
         <Route path="/jointrip" element={<JoinTripPage />} />

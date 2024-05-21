@@ -58,7 +58,7 @@ const DiaryPage = () => {
       console.log(error);
     });
 
-    navigate("/diary"); // {diaryid} 추가
+    navigate("/editdiary"); // {diaryid} 추가
   };
 
 
