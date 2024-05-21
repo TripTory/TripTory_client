@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import List from "@mui/material/List";
 import TripListItem from "./TripListItem";
-import TripData from "../../data/TripData.json";
 import axios from "axios";
 
 export default function TripList() {

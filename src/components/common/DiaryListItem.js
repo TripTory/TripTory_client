@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { COLOR } from "../../styles/color";
 import styled from "styled-components";
 import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import Dot from "../../assets/icons/dot.svg";
-import Busan from "../../assets/images/busan.jpg";
 import { PropTypes } from "prop-types";
 
 export default function DiaryListItem(props) {

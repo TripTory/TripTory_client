@@ -1,6 +1,5 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import styled from "styled-components";
-import { Map, MapMarker } from "react-kakao-maps-sdk";
 import MARKERFRAME from "../../../assets/icons/markericon.svg";
 import Busan from "../../../assets/images/busan.jpg";
 const CustomMarker = () => {

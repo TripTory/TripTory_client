@@ -1,11 +1,10 @@
 import styled from "styled-components";
 import { COLOR } from "../../styles/color";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
-import ImageIcon from "@mui/icons-material/Image";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import Modal from "../../components/common/Modal";
 import { PropTypes } from "prop-types";
