@@ -7,6 +7,8 @@ import axios from "axios";
 export default function TripList() {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
+  const [url, setUrl] = useState("");
+  // const [tripInfo, setTripInfo] = useState({ _id:"", startdate:"", enddate:"", invited:[], ivtoken:"", location: {}, title:"", travelimg:"" });
   useEffect(() => {
     let completed = false;
 
@@ -18,6 +20,8 @@ export default function TripList() {
       );
       if (!completed) {
         setData(result.data.travels);
+        setUrl(result.data.travelUrls);
+        console.log(result);
       }
       setLoading(true);
     }
@@ -37,8 +41,8 @@ export default function TripList() {
         scrollbarWidth: "none",
       }}
     >
-      {data.map((it) => {
-        return <TripListItem key={it._id} data={it}/>;
+      {data.map((it,index) => {
+        return <TripListItem key={it._id} data={it} url={url[index]}/>;
       })}
     </StTripList>
   );

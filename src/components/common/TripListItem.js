@@ -47,7 +47,7 @@ export default function TripListItem(props) {
     <StTripListItem>
       <ListItem>
         <ListItemAvatar>
-          <Avatar src={props.data.travelimg} />
+          <Avatar src={props.url} />
         </ListItemAvatar>
         <InfoDiv>
           <TitleP onClick={goToDiaryList}>{props.data.title}</TitleP>
@@ -97,7 +97,7 @@ TripListItem.propTypes = {
   title: PropTypes.string.isRequired,
   startdate: PropTypes.string.isRequired,
   enddate: PropTypes.string.isRequired,
-  travelimg: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
 };
 
 const CancelModal = styled(Modal)``;
