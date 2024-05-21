@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Map, MapMarker, CustomOverlayMap } from "react-kakao-maps-sdk";
+import { Map, CustomOverlayMap } from "react-kakao-maps-sdk";
 import Busan from "../../../assets/images/busan.jpg";
 import MARKERFRAME from "../../../assets/icons/markericon.svg";
-// import CustomMarker from "./CustomMarker";
 import { PropTypes } from "prop-types";
 import Drawer from "@mui/material/Drawer";
 import MapDrawer from "../../../components/common/map/MapDrawer";
@@ -15,10 +14,6 @@ const MapComponent = (props) => {
     setIsOpen(newOpen);
     setData(data);
   };
-  // const handleDrawer = (data) => {
-  //   setData(data);
-  //   toggleDrawer(true);
-  // };
 
   return (
     <StMap>
