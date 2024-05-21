@@ -27,21 +27,20 @@ const DiaryPage = () => {
 
   useEffect(() => {
     axios.get(`http://localhost:5000/diary/${id}`, { withCredentials: true})
-  .then((res) => {
-    console.log(res.data.diaryImgUrl);
-    const data = res.data.diaryinfo;
-    setDiaryInfo({
-      _id: data.id, // 얜 굳이 get 안 해와도 ㄱㅊ을 거 같기도???
-      title: data.title,
-      content: data.content,
-      date: data.date,
-      travel: data.travel,
-      userId: data.userId,
-      userName: data.userName,
-      url: res.data.diaryImgUrl,
-      userUrl: res.data.userUrl,
-    });
-  })
+    .then((res) => {
+      const data = res.data.diaryinfo;
+      setDiaryInfo({
+        _id: data.id, // 얜 굳이 get 안 해와도 ㄱㅊ을 거 같기도???
+        title: data.title,
+        content: data.content,
+        date: data.date,
+        travel: data.travel,
+        userId: data.userId,
+        userName: data.userName,
+        url: res.data.diaryImgUrl,
+        userUrl: res.data.userUrl,
+      });
+    })
   .catch((error) => {
     console.log(error);
   });
@@ -53,7 +52,19 @@ const DiaryPage = () => {
   };
 
   const goToEditDiary = () => {
-    navigate(`/diary/${id}`); // {diaryid} 추가
+
+    const formData = new FormData();
+    formData.append("title", diaryInfo.title);
+    formData.append("content", diaryInfo.content);
+    formData.append("date", diaryInfo.date);
+    formData.append("images", diaryInfo.url);
+
+    axios.put(`http://localhost:5000/diary/${id}`, formData, { withCredentials: true})
+    .catch((error) => {
+      console.log(error);
+    });
+
+    navigate("/diary"); // {diaryid} 추가
   };
 
   return (
