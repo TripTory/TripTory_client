@@ -13,8 +13,11 @@ import { useLocation } from "react-router";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import BottomNav from "../layout/BottomNav";
 import axios from "axios";
+import { useRecoilValue } from "recoil";
+import { tripNameState } from "../recoil/commonState";
 
 export default function DiaryListPage() {
+  const tripName = useRecoilValue(tripNameState);
   const navigate = useNavigate();
   const location = useLocation();
   const [loading, setLoading] = useState(false);
@@ -51,7 +54,7 @@ export default function DiaryListPage() {
     <StDiaryListPage>
       <TitleDiv>
         <img src={Greenbar} style={{ height: "2.7rem" }} />
-        <TitleP>{location.state.title}</TitleP>
+        <TitleP>{tripName}</TitleP>
       </TitleDiv>
       <MainDiv>
         <FriendDiv>
