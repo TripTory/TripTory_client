@@ -50,15 +50,17 @@ const TripCalendar = ({ diaryInfo }) => {
       }
     }
   };
-
+  console.log("data");
+  console.log(diaryInfo);
   // 일기가 있는 날짜에 사진 삽입
   const tileContent = ({ date, view }) => {
     if (view === "month") {
       // diaryInfo 요소를 순회하며 일기가 존재하는 날짜 검사
+      console.log(diaryInfo[0][date]);
       const diary = diaryInfo.find(
         (item) =>
-          moment(item.date, "YY-MM-DD").format("YYYY") &&
-          moment(item.date, "YY-MM-DD").format("M") &&
+          moment(item.date, "YY-MM-DD").format("YYYY") === date.getFullYear() &&
+          moment(item.date, "YY-MM-DD").format("M") === date.getMonth() &&
           moment(item.date, "YY-MM-DD").format("D") === date.getDate(),
       );
 

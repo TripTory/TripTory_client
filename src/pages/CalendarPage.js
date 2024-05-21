@@ -9,6 +9,7 @@ import axios from "axios";
 const CalendarPage = () => {
   const SERVER_URL = process.env.REACT_APP_SERVER_URL;
   const [diaryInfo, setDiaryInfo] = useState([]);
+  const [sendData, setSendData] = useState([]);
 
   useEffect(() => {
     axios
@@ -26,7 +27,7 @@ const CalendarPage = () => {
       const { diary, url } = item;
       return { ...diary, url };
     });
-    console.log(transformedData);
+    setSendData(transformedData);
   }, [diaryInfo]);
 
 
@@ -44,7 +45,7 @@ const CalendarPage = () => {
   return (
     <div>
       <Title>내 캘린더</Title>
-      {/* <TripCalendar diaryInfo={diaryInfo}></TripCalendar> */}
+      <TripCalendar diaryInfo={sendData}></TripCalendar>
       <BottomNav></BottomNav>
     </div>
   );
