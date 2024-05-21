@@ -21,7 +21,7 @@ const DiaryWritePage = () => {
   const [imagePreview, setImagePreview] = useState(null);
   const [files, setFiles] = useState([]);
   const { state } = useLocation();
-  // const [travelid, setTravelId] = useState(state.travelid);
+  const [travelid, setTravelId] = useState(state);
   const [diaryId, setDiaryId] = useState({ diaryid: "" });
 
   const navigate = useNavigate();
@@ -47,7 +47,7 @@ const DiaryWritePage = () => {
     formData.append("title", title);
     formData.append("content", content);
     formData.append("date", startDate.toISOString().split("T")[0]);
-    formData.append("travel", "664b1a4dd3a661ebf34c3206"); // travelid 대체
+    formData.append("travel", travelid); // travelid 대체
 
     files.forEach((file) => {
       formData.append("images", file.fileObject);

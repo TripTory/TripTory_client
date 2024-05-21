@@ -79,7 +79,7 @@ const DiaryPage = () => {
       console.log(error);
     });
     setIsModalOpen(false);
-    navigate("/triptable"); // 모달 닫으면서 페이지 이동
+    navigate("/triptable"), { state: { id: diaryInfo._id, title: diaryInfo.title } }; // 모달 닫으면서 페이지 이동
   };
 
   return (
