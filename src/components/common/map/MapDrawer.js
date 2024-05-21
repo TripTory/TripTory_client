@@ -1,24 +1,34 @@
 import styled from "styled-components";
-import React, { useState } from "react";
+import React from "react";
 import { COLOR } from "../../../styles/color";
+import { PropTypes } from "prop-types";
 import Jeju from "../../../assets/images/jeju.jpg";
 import Button from "@mui/material/Button";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-const MapDrawer = () => {
+const MapDrawer = (props) => {
   return (
     <StMapDrawer>
-      <TripImg src={Jeju} />
+      <TripImg src={props.data.travelimg} />
       <InfoDiv>
-        <TitleP>한옥 마을 탐방기!</TitleP>
-        <DataP>2024.03.01~2024.03.04</DataP>
+        <TitleP>{props.data.title}</TitleP>
+        <DataP>{props.data.startdate.slice(0,10)}~{props.data.enddate.slice(0,10)}</DataP>
         <LocationDiv>
           <LocationOnIcon sx={{ fontSize: 14, color: COLOR.MAIN_GREEN }} />
-          <LocationP>전북특별자치도 전주시</LocationP>
+          <LocationP>{props.data.location.region}</LocationP>
         </LocationDiv>
       </InfoDiv>
       <GoToTripBtn>여행 보러 가기</GoToTripBtn>
     </StMapDrawer>
   );
+};
+MapDrawer.propTypes = {
+  data: PropTypes.node.isRequired,
+  title: PropTypes.string.isRequired,
+  startdate: PropTypes.string.isRequired,
+  enddate: PropTypes.string.isRequired,
+  location: PropTypes.node.isRequired,
+  region: PropTypes.string.isRequired,
+  travelimg: PropTypes.string.isRequired,
 };
 
 const StMapDrawer = styled.div`
@@ -44,7 +54,6 @@ const InfoDiv = styled.div`
   width: 90%;
   height: 20%;
   justify-content: space-evenly;
-  /* border: 1px solid blue; */
   margin-top: 1rem;
 `;
 

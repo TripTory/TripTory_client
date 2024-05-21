@@ -51,7 +51,6 @@ export default function AddTripDialog(props) {
 AddTripDialog.propTypes = {
   onClose: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
-  selectedValue: PropTypes.string.isRequired,
 };
 
 const StDialog = styled(Dialog)`

@@ -59,7 +59,7 @@ export default function TagImgListItem({ tagName }) {
             padding: "0.2rem 0.6rem 0.2rem 0.6rem",
           }}
         >
-          <ImgDiv style={{ backgroundImage: `url(${firstImagePath})`, color: textColor }}>
+          <ImgDiv style={{ backgroundImage: `url(${firstImagePath})`}}>
             <TagP># {tagName}</TagP>
           </ImgDiv>
         </ListItem>
@@ -82,11 +82,20 @@ const ImgDiv = styled.div`
   width: 15rem;
   height: 100%;
   padding: 1.3rem;
-  background-size: cover;
-  background-position: center;
 `;
 
 const TagP = styled.div`
+  display: inline-block;
   font-size: 1.5rem;
   font-weight: bolder;
+  border: 1px red;
+  border-radius: 1.5rem;
+  background-color: white;
+  width: auto;
+  max-width: 100%;
+  height: 2.4rem;
+  padding-left: 0.5rem;
+  padding-right: 0.6rem;
+  padding-top: 0.5rem;
+
 `;
