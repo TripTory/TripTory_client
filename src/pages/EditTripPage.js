@@ -9,8 +9,6 @@ import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router";
 import { COLOR } from "../styles/color";
 import BottomNav from "../layout/BottomNav";
-import moment from "moment";
-import axios from "axios";
 
 const EditTripPage = () => {
   const { state } = useLocation();
@@ -65,29 +63,30 @@ const EditTripPage = () => {
 
   // 여행떠나기 버튼 클릭
   const handleSubmit = () => {
-    const startDate = moment(dateRange[0]).toISOString();
-    const endDate = moment(dateRange[1]).toISOString();
-    const formData = new FormData();
-    formData.append("title", tripName);
-    formData.append("startdate", startDate);
-    formData.append("enddate", endDate);
-    formData.append("location[latitude]", latitude);
-    formData.append("location[longitude]", longitude);
-    formData.append("image", imgUrl.fileObject);
+    console.log(imgUrl);
+    // const startDate = moment(dateRange[0]).toISOString();
+    // const endDate = moment(dateRange[1]).toISOString();
+    // const formData = new FormData();
+    // formData.append("title", tripName);
+    // formData.append("startdate", startDate);
+    // formData.append("enddate", endDate);
+    // formData.append("location[latitude]", latitude);
+    // formData.append("location[longitude]", longitude);
+    // formData.append("image", imgUrl.fileObject);
 
-    axios
-      .post(`${process.env.REACT_APP_SERVER_URL}`, formData, {
-        withCredentials: true,
-        headers: { "Content-Type": "multipart/form-data" },
-      })
-      .then((res) => {
-        console.log(res);
-        alert("저장 완료");
-        navigate("/home");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // axios
+    //   .post(`${process.env.REACT_APP_SERVER_URL}`, formData, {
+    //     withCredentials: true,
+    //     headers: { "Content-Type": "multipart/form-data" },
+    //   })
+    //   .then((res) => {
+    //     console.log(res);
+    //     alert("저장 완료");
+    //     navigate("/home");
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   };
 
   const handleCancel = () => {
