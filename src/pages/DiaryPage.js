@@ -20,7 +20,7 @@ const DiaryPage = () => {
   const [img, setImg] = useState(); // [img1, img2, img3 ...]
   const [username, setUsername] = useState();
   const [userimg, setUserimg] = useState();
-  const [diaryInfo, setDiaryInfo] = useState({ _id: "", title: "", content: "", date: "", travel: "", userId: "", userName: "", url: "", userUrl: "",});
+  const [diaryInfo, setDiaryInfo] = useState({ _id: "", title: "", content: "", date: "", travel: "", userId: "", userName: "", url: [], userUrl: "",});
 
   const { state } = useLocation();
   const [id, setId] = useState(state.diaryid);
@@ -68,7 +68,7 @@ const DiaryPage = () => {
       </HeaderConatiner>
       <DiaryInfo title={diaryInfo.title} date={diaryInfo.date} username={diaryInfo.userName} userimg={diaryInfo.userUrl} ></DiaryInfo>
       <DiaryContent content={diaryInfo.content}></DiaryContent>
-      {/* <ImageSlider images={diaryInfo.url}/> */}
+      <ImageSlider images={diaryInfo.url}/>
       <BottomNav />
     </div>
   );
