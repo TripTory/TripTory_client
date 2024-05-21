@@ -31,7 +31,6 @@ const JoinTripPage = () => {
 
   // 초대 수락시 실행되는 함수
   const joinTrip = () => {
-    alert(`${inviter} 님의 여행에 참여되었습니다.`);
     setIsCheckModal(false);
     axios
       .put(
@@ -46,7 +45,6 @@ const JoinTripPage = () => {
         console.log("여행참여에 실패하였습니다");
         console.log(error);
       });
-    // navigate("/triptable", { state: { travelID: `${travelId}` } });
   };
 
   // 확인하기 버튼 클릭
@@ -91,7 +89,7 @@ const JoinTripPage = () => {
     setIsSuccessModal(true);
   };
 
-  //success join modal 열기
+  //success join modal 닫기
   const closeSuccessModal = () => {
     setIsSuccessModal(false);
     // navigate("/triptable", { state:travelId});
