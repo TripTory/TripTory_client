@@ -67,6 +67,19 @@ const DiaryPage = () => {
     navigate("/diary"); // {diaryid} 추가
   };
 
+
+  const goToDelDiary = () => {
+
+    axios.delete(`http://localhost:5000/diary/${id}`, { withCredentials: true})
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+    navigate("/triptable");
+  };
+
   return (
     <div>
       <HeaderConatiner>
@@ -74,7 +87,7 @@ const DiaryPage = () => {
         <BtnContainer>
           <EditBtn onClick={goToEditDiary}>수정</EditBtn>
           <Bar>|</Bar>
-          <DeleteBtn>삭제</DeleteBtn>
+          <DeleteBtn onClick={goToDelDiary}>삭제</DeleteBtn>
         </BtnContainer>
       </HeaderConatiner>
       <DiaryInfo title={diaryInfo.title} date={diaryInfo.date} username={diaryInfo.userName} userimg={diaryInfo.userUrl} ></DiaryInfo>
