@@ -11,15 +11,6 @@ import axios from "axios";
 
 const DiaryPage = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const { diaryid } = location.state;
-
-  const [title, setTitle] = useState();
-  const [content, setContent] = useState();
-  const [date, setDate] = useState();
-  const [img, setImg] = useState(); // [img1, img2, img3 ...]
-  const [username, setUsername] = useState();
-  const [userimg, setUserimg] = useState();
   const [diaryInfo, setDiaryInfo] = useState({ _id: "", title: "", content: "", date: "", travel: "", userId: "", userName: "", url: [], userUrl: "",});
 
   const { state } = useLocation();
@@ -30,7 +21,7 @@ const DiaryPage = () => {
     .then((res) => {
       const data = res.data.diaryinfo;
       setDiaryInfo({
-        _id: data.id, // 얜 굳이 get 안 해와도 ㄱㅊ을 거 같기도???
+        _id: data.id,
         title: data.title,
         content: data.content,
         date: data.date,
