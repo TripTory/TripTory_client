@@ -7,29 +7,50 @@ import copyIcon from "../assets/icons/copy.svg";
 import xicon from "../assets/icons/x-icon.svg";
 import BottomNav from "../layout/BottomNav";
 import { useNavigate, useLocation } from "react-router-dom";
+import Modal from "../components/common/Modal";
+import SuccessCopyContent from "../components/common/SuccessCopyContent.js";
 
 const InviteFriendPage = () => {
   const SERVER_URL = process.env.REACT_APP_SERVER_URL;
   const navigate = useNavigate();
   // navigate 하면서 받은 travel id 값
-  const {state} = useLocation();
+  const { state } = useLocation();
   // const travelID = state;
-  const travelID = "664b1a4dd3a661ebf34c3206";
+  const travelID = "664b1bc4d3a661ebf34c320a";
   // travel의 정보
   const [invitecode, setInvitecode] = useState("");
   const [title, setTitle] = useState("");
   const [username, setUsername] = useState([]);
   const [userimg, setUserimg] = useState([]);
 
+  const [isModal, setIsModal] = useState(false);
+
+  const closeModal = () => {
+    setIsModal(false);
+  };
+
+  const openModal = () => {
+    setIsModal(true);
+  };
+
   // 서버로부터 여행 정보 받아오기
   useEffect(() => {
     axios
       .get(`${SERVER_URL}/travel/${travelID}`)
       .then((res) => {
+        console.log(res);
         setInvitecode(res.data.travel.ivtoken);
         setTitle(res.data.travel.title);
-        setUsername(res.data.travel.username); //추후 수정
-        setUserimg(res.data.travel.userimg); // 추후 수정
+        setUsername((prevUsernames) => [
+          ...prevUsernames,
+          res.data.travel.userName,
+        ]);
+        console.log(res.data.travel.userName);
+        setUserimg((prevUserimgs) => [
+          ...prevUserimgs,
+          res.data.travel.travelimg,
+        ]);
+        console.log(res.data.travel.travelimg);
       })
       .catch((error) => {
         console.log(error);
@@ -45,7 +66,7 @@ const InviteFriendPage = () => {
   const copyCode = async () => {
     try {
       await navigator.clipboard.writeText(invitecode);
-      alert("copied");
+      openModal();
     } catch (e) {
       alert("failed");
     }
@@ -53,6 +74,19 @@ const InviteFriendPage = () => {
 
   return (
     <div>
+      {isModal && (
+        <Modal
+          content={<SuccessCopyContent />}
+          closeModals={closeModal}
+          buttons={
+            <ButtonContainer>
+              <OkBtn onClick={closeModal}>확인</OkBtn>
+            </ButtonContainer>
+          }
+          w="80%"
+          h="22%"
+        />
+      )}
       <FixedDiv>
         <div>
           <XButton onClick={handleCancel}>
@@ -77,7 +111,7 @@ const InviteFriendPage = () => {
         </CopyCodeContainer>
       </FixedDiv>
       <FriendListContainer>
-        <FriendList usernames={username} userimgs={userimg} ></FriendList>
+        <FriendList usernames={username} userimgs={userimg}></FriendList>
       </FriendListContainer>
       <BottomNav />
     </div>
@@ -158,4 +192,23 @@ const FriendListContainer = styled.div`
 
 const CopyIconImg = styled.img`
   margin: 0.2rem;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 50%;
+`;
+
+const OkBtn = styled.button`
+  background-color: ${COLOR.MAIN_GREEN};
+  color: white;
+  width: 40%;
+  height: 3rem;
+  border: none;
+  border-radius: 2rem;
+  font-size: 1.3rem;
+  font-weight: bolder;
 `;
