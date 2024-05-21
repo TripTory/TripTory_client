@@ -12,6 +12,7 @@ import DiaryPreviewContent from "../common/DiaryPreviewContent";
 import Drawer from "@mui/material/Drawer";
 
 const TripCalendar = ({ diaryInfo }) => {
+  console.log(diaryInfo);
   const [selectedDiary, setSelectedDiary] = useState(null); // 선택된 일기 정보 상태 추가
   const [isOpen, setIsOpen] = useState(false);
 
@@ -26,9 +27,9 @@ const TripCalendar = ({ diaryInfo }) => {
     // 선택된 날짜에 해당하는 모든 일기를 뽑아서 리턴하기
     const selected = diaryInfo.filter(
       (item) =>
-        moment(item.date, "YY-MM-DD").format("YYYY") === diary.year &&
-        moment(item.date, "YY-MM-DD").format("M") === diary.month &&
-        moment(item.date, "YY-MM-DD").format("D") === diary.day,
+        moment(item.date).format("YYYY") === diary.year &&
+        moment(item.date).format("M") === diary.month &&
+        moment(item.date).format("D") === diary.day,
     );
     // 찾은 일기들을 상태에 저장
     setSelectedDiary(selected);
@@ -41,9 +42,9 @@ const TripCalendar = ({ diaryInfo }) => {
       // diaryInfo 요소를 순회하며 일기가 존재하는 날짜 검사
       const diary = diaryInfo.find(
         (item) =>
-          moment(item.date, "YY-MM-DD").format("YYYY") === date.getFullYear() &&
-          moment(item.date, "YY-MM-DD").format("M") === date.getMonth() &&
-          moment(item.date, "YY-MM-DD").format("D") === date.getDate(),
+          moment(item.date).format("YYYY") === date.getFullYear().toString() &&
+          moment(item.date).format("M") === (date.getMonth() + 1).toString() &&
+          moment(item.date).format("D") === date.getDate().toString(),
       );
       if (diary) {
         return "hasDiary";

@@ -7,14 +7,13 @@ import { COLOR } from "../../styles/color";
 import leftBtn from "../../assets/icons/diary_left_btn.svg";
 import rightBtn from "../../assets/icons/diary_right_btn.svg";
 import { useRecoilState } from "recoil";
-import { TITLE, CONTENT, DATE, IMG, USERNAME } from "../recoil/commonState";
 
 const DiaryPreviewContent = ({ diaries }) => {
-  const [title, setTitle] = useRecoilState(TITLE);
-  const [content, setContent] = useRecoilState(CONTENT);
-  const [date, setDate] = useRecoilState(DATE);
-  const [img, setImg] = useRecoilState(IMG);
-  const [username, setUsername] = useRecoilState(USERNAME);
+  // const [title, setTitle] = useRecoilState(TITLE);
+  // const [content, setContent] = useRecoilState(CONTENT);
+  // const [date, setDate] = useRecoilState(DATE);
+  // const [img, setImg] = useRecoilState(IMG);
+  // const [username, setUsername] = useRecoilState(USERNAME);
 
   const navigate = useNavigate();
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
@@ -39,11 +38,11 @@ const DiaryPreviewContent = ({ diaries }) => {
 
   const goToDiary = () => {
     const currentDiary = diaries[currentSlideIndex];
-    setTitle(currentDiary[title]);
-    setContent(currentDiary[content]);
-    setDate(currentDiary[date]);
-    setImg(currentDiary[img]);
-    setUsername(currentDiary[username]);
+    // setTitle(currentDiary[title]);
+    // setContent(currentDiary[content]);
+    // setDate(currentDiary[date]);
+    // setImg(currentDiary[img]);
+    // setUsername(currentDiary[username]);
     navigate("/showdiary");
   };
 

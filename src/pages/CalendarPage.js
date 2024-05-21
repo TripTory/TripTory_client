@@ -11,9 +11,9 @@ const CalendarPage = () => {
   const [diaryInfo, setDiaryInfo] = useState(null);
 
   axios
-    .get(`${SERVER_URL}/diary`)
+    .get(`${SERVER_URL}/diary`, {withCredentials : true})
     .then((response) => {
-      setDiaryInfo(response.data);
+      console.log(response.data.diarys_info);
     })
     .catch((error) => {
       console.error("에러:", error);
