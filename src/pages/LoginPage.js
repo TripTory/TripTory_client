@@ -5,13 +5,14 @@ import naverlogo from "../assets/images/naverLogo.svg";
 import React from "react";
 import axios from "axios";
 
-
 const LoginPage = () => {
   const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
   const goToGoogleOauth = async () => {
     try {
-      const response = await axios.get(`${SERVER_URL}/oauth/google`);
+      const response = await axios.get(`${SERVER_URL}/oauth/google`, {
+        withCredentials: true,
+      });
       const { authorizationUrl } = response.data;
       window.location.href = authorizationUrl;
     } catch (error) {
@@ -21,7 +22,9 @@ const LoginPage = () => {
 
   const goToNaverOauth = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/oauth/naver", {withCredentials:true});
+      const response = await axios.get(`${SERVER_URL}/oauth/naver`, {
+        withCredentials: true,
+      });
       const { authorizationUrl } = response.data;
       window.location.href = authorizationUrl;
     } catch (error) {
@@ -31,7 +34,9 @@ const LoginPage = () => {
 
   const goToKakaoOauth = async () => {
     try {
-      const response = await axios.get(`${SERVER_URL}/oauth/kakao`);
+      const response = await axios.get(`${SERVER_URL}/oauth/kakao`, {
+        withCredentials: true,
+      });
       const { authorizationUrl } = response.data;
       window.location.href = authorizationUrl;
     } catch (error) {
@@ -41,20 +46,27 @@ const LoginPage = () => {
 
   return (
     <EntireDiv>
-      <IntroP>트립토리로 <br />여행을 기록해보세요!</IntroP>
-
+      <IntroDiv>
+        <IntroP>
+          트립토리로 <br />
+          여행을 기록해보세요!
+        </IntroP>
+      </IntroDiv>
       <SocialDiv>
-        <SocialButton className="kakaoBtn" onClick={goToKakaoOauth}>
-          <LogoImage src={kakaologo} />카카오 로그인 버튼
-        </SocialButton>
+        <BtnDiv>
+          <SocialButton className="kakaoBtn" onClick={goToKakaoOauth}>
+            <LogoImage src={kakaologo} />
+            카카오 로그인
+          </SocialButton>
 
-        <SocialButton className="googleBtn" onClick={goToGoogleOauth}>
-          <LogoImage src={googlelogo} /> 구글 로그인 버튼
-        </SocialButton>
+          <SocialButton className="googleBtn" onClick={goToGoogleOauth}>
+            <LogoImage src={googlelogo} /> 구글 로그인
+          </SocialButton>
 
-        <SocialButton className="naverBtn" onClick={goToNaverOauth}>
-          <LogoImage src={naverlogo} /> 네이버 로그인 버튼
-        </SocialButton>
+          <SocialButton className="naverBtn" onClick={goToNaverOauth}>
+            <LogoImage src={naverlogo} /> 네이버 로그인
+          </SocialButton>
+        </BtnDiv>
       </SocialDiv>
     </EntireDiv>
   );
@@ -66,8 +78,15 @@ const SharedContent = `
 `;
 
 const EntireDiv = styled.div`
+  width: 100%;
+  height: 100%;
 `;
 
+const IntroDiv = styled.div`
+  width: 100%;
+  height: 35%;
+  border: 1px solid white;
+`;
 const IntroP = styled.p`
   ${SharedContent}
   font-size: 2.8rem;
@@ -77,10 +96,23 @@ const IntroP = styled.p`
   margin-left: -5rem;
 `;
 
-
 const LogoImage = styled.img`
   height: 38px;
   margin-right: 9px;
+`;
+const SocialDiv = styled.div`
+  display: flex;
+  justify-content: baseline;
+  flex-direction: column;
+  width: 100%;
+  height: 65%;
+`;
+
+const BtnDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 40%;
 `;
 
 const SocialButton = styled.button`
@@ -94,24 +126,18 @@ const SocialButton = styled.button`
   border-width: 5px;
   border: #747474;
   border-radius: 10px;
-  box-shadow: 3px 6px #F6F6F6;
+  box-shadow: 3px 6px #f6f6f6;
 
   &.kakaoBtn {
-    background-color: #FBE184;
+    background-color: #fbe184;
   }
   &.googleBtn {
     background-color: #ffffff;
   }
   &.naverBtn {
     color: white;
-    background-color: #57CC5C;
+    background-color: #57cc5c;
   }
-`;
-
-const SocialDiv = styled.div`
-  ${SharedContent}
-  margin-top: 30%;
-  flex-direction: column;
 `;
 
 export default LoginPage;

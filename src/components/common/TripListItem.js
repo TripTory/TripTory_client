@@ -5,23 +5,33 @@ import { useNavigate } from "react-router-dom";
 import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
-import ImageIcon from "@mui/icons-material/Image";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import Modal from "../../components/common/Modal";
 import { PropTypes } from "prop-types";
 import DelTripContent from "../../components/common/DelTripContent";
+import axios from "axios";
 
 export default function TripListItem(props) {
+  const [id] = useState(props.data._id);
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const goToDiaryList = () => {
+    navigate("/triptable", {
+      state: { id: props.data._id, title: props.data.title },
+    });
+  };
 
-  const goToDel = () => {
+  const goToDel = async () => {
+    try {
+      await axios.delete(`${process.env.REACT_APP_SERVER_URL}/travel/${id}`, {withCredentials: true});
+    } catch (error) {
+      console.error("삭제 중 에러가 발생했습니다:", error);
+    }
+    window.location.reload();
     closeModal();
-    //여행 삭제시 이루어져야하는 로직 추가 예정
   };
 
   const toggleModal = () => {
-    console.log(isModalOpen);
     setIsModalOpen(!isModalOpen);
   };
 
@@ -30,42 +40,49 @@ export default function TripListItem(props) {
   };
 
   const goToEdit = () => {
-    navigate("/addtrip");
+    navigate("/addtrip", { state: props.data._id });
   };
 
   return (
     <StTripListItem>
       <ListItem>
         <ListItemAvatar>
-          <Avatar>
-            <ImageIcon />
-          </Avatar>
+          <Avatar src={props.data.travelimg} />
         </ListItemAvatar>
         <InfoDiv>
-          <TitleP>{props.item}</TitleP>
-          <DateP>2023.02.13~2023.02.16</DateP>
+          <TitleP onClick={goToDiaryList}>{props.data.title}</TitleP>
+          <DateP>
+            {props.data.startdate.slice(0, 10)}~
+            {props.data.enddate.slice(0, 10)}
+          </DateP>
           <LocationDiv>
             <LocationOnIcon sx={{ fontSize: 12 }} />
-            <LocationP>광주광역시</LocationP>
+            <LocationP>{props.data.location.region}</LocationP>
           </LocationDiv>
         </InfoDiv>
         <DeleteDiv>
           <ModiDiv>
-            <p style={{ color: "#a1a1a1" }} onClick={goToEdit}>수정</p>
+            <p style={{ color: "#a1a1a1" }} onClick={goToEdit}>
+              수정
+            </p>
           </ModiDiv>
           <DelDiv>
-            <p style={{ color: "#a1a1a1" }} onClick={toggleModal}>삭제</p>
+            <p style={{ color: "#a1a1a1" }} onClick={toggleModal}>
+              삭제
+            </p>
           </DelDiv>
         </DeleteDiv>
       </ListItem>
       {isModalOpen && (
         <CancelModal
-          content={<DelTripContent/>}
+          content={<DelTripContent />}
           closeModals={closeModal}
-          buttons={<StCancelButtons>
-            <NoBtn onClick={closeModal}>아니오</NoBtn>
-            <YesBtn onClick={goToDel}>네</YesBtn>
-          </StCancelButtons>}
+          buttons={
+            <StCancelButtons>
+              <NoBtn onClick={closeModal}>아니오</NoBtn>
+              <YesBtn onClick={goToDel}>네</YesBtn>
+            </StCancelButtons>
+          }
           w="80%"
           h="20%"
         />
@@ -75,11 +92,15 @@ export default function TripListItem(props) {
 }
 
 TripListItem.propTypes = {
-  item: PropTypes.string.isRequired,
+  data: PropTypes.node.isRequired,
+  _id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  startdate: PropTypes.string.isRequired,
+  enddate: PropTypes.string.isRequired,
+  travelimg: PropTypes.string.isRequired,
 };
 
-const CancelModal = styled(Modal)`
-`;
+const CancelModal = styled(Modal)``;
 
 const StTripListItem = styled.div`
   display: flex;
@@ -87,7 +108,7 @@ const StTripListItem = styled.div`
   border: 0.2rem solid rgba(228, 228, 228);
   border-radius: 1rem;
   width: 95%;
-  height: 8rem;
+  height: 80px;
   margin-bottom: 0.2rem;
 `;
 
@@ -159,7 +180,7 @@ const YesBtn = styled.button`
 `;
 
 const NoBtn = styled.button`
-  background-color: #D9D9D9;
+  background-color: #d9d9d9;
   width: 40%;
   height: 3rem;
   border: none;

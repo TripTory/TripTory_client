@@ -1,16 +1,40 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Typography } from "@mui/material";
 import { COLOR } from "../styles/color";
 import BottomNav from "../layout/BottomNav";
 import MapComponent from "../components/common/map/MapComponent";
+import axios from "axios";
+
 const MapPage = () => {
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    let completed = false;
+
+    // eslint-disable-next-line func-style
+    async function get() {
+      const result = await axios.get(
+        `${process.env.REACT_APP_SERVER_URL}/travel`,
+        { withCredentials: true },
+      );
+      if (!completed) {
+        setData(result.data.travels);
+      }
+      setLoading(true);
+    }
+    get();
+    return () => {
+      completed = true;
+    };
+  }, []);
   return (
     <StMapPage>
       <TitleDiv>
         <TitleTypo variant="h4">나의 여행 지도</TitleTypo>
       </TitleDiv>
-      <MapComponent style={{ zIndex: 999 }} />
+      <MapComponent data={data} style={{ zIndex: 999 }} />
       <BottomNav style={{ zIndex: 900 }} />
     </StMapPage>
   );
