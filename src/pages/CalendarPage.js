@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useEffect, useState } from "react";
 import "react-calendar/dist/Calendar.css";
 import styled from "styled-components";
 import TripCalendar from "../components/common/TripCalendar";
@@ -8,16 +8,27 @@ import axios from "axios";
 
 const CalendarPage = () => {
   const SERVER_URL = process.env.REACT_APP_SERVER_URL;
-  const [diaryInfo, setDiaryInfo] = useState(null);
+  const [diaryInfo, setDiaryInfo] = useState([]);
 
-  axios
-    .get(`${SERVER_URL}/diary`, {withCredentials : true})
-    .then((response) => {
-      console.log(response.data.diarys_info);
-    })
-    .catch((error) => {
-      console.error("에러:", error);
+  useEffect(() => {
+    axios
+      .get(`${SERVER_URL}/diary`, { withCredentials: true })
+      .then((res) => {
+        setDiaryInfo(res.data.diarys_info);
+      })
+      .catch((error) => {
+        console.error("에러:", error);
+      });
+  }, []);
+
+  useEffect(() => {
+    const transformedData = diaryInfo.map((item) => {
+      const { diary, url } = item;
+      return { ...diary, url };
     });
+    console.log(transformedData);
+  }, [diaryInfo]);
+
 
   // {
   //   year: 2024,
@@ -33,7 +44,7 @@ const CalendarPage = () => {
   return (
     <div>
       <Title>내 캘린더</Title>
-      <TripCalendar diaryInfo={diaryInfo}></TripCalendar>
+      {/* <TripCalendar diaryInfo={diaryInfo}></TripCalendar> */}
       <BottomNav></BottomNav>
     </div>
   );

@@ -12,7 +12,6 @@ import DiaryPreviewContent from "../common/DiaryPreviewContent";
 import Drawer from "@mui/material/Drawer";
 
 const TripCalendar = ({ diaryInfo }) => {
-  console.log(diaryInfo);
   const [selectedDiary, setSelectedDiary] = useState(null); // 선택된 일기 정보 상태 추가
   const [isOpen, setIsOpen] = useState(false);
 
