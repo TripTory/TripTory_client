@@ -20,7 +20,8 @@ const CalendarPage = () => {
             date: item.diary.date,
             username: item.diary.userName,
             diaryTitle: item.diary.title,
-            imagePath: item.url
+            imagePath: item.url,
+            diaryID: item.diary._id
           };
         });
         setDiaryInfo(transformedData);
