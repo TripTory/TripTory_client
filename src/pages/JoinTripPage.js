@@ -8,6 +8,7 @@ import AcceptJoinContent from "../components/common/AcceptJoinContent.js";
 import FailJoinContent from "../components/common/FailJoinContent.js";
 import xicon from "../assets/icons/x-icon.svg";
 import BottomNav from "../layout/BottomNav";
+import SuccessJoinContent from "../components/common/SuccessJoinContent.js";
 
 const JoinTripPage = () => {
   const SERVER_URL = process.env.REACT_APP_SERVER_URL;
@@ -15,10 +16,9 @@ const JoinTripPage = () => {
   const [inputCode, setInputCode] = useState("");
   const [isCheckModal, setIsCheckModal] = useState(false);
   const [isFailModal, setIsFailModal] = useState(false);
+  const [isSuccessModal, setIsSuccessModal] = useState(false);
 
   const [inviter, setInviter] = useState("");
-  const [travelId, setTravelId] = useState("");
-
   // X 버튼 클릭
   const handleCancel = () => {
     navigate("/home");
@@ -33,23 +33,37 @@ const JoinTripPage = () => {
   const joinTrip = () => {
     alert(`${inviter} 님의 여행에 참여되었습니다.`);
     setIsCheckModal(false);
-    navigate("/triptable", { state: { travelID: `${travelId}` } });
+    axios
+      .put(
+        `${SERVER_URL}/travel/invite`,
+        { ivtoken: inputCode },
+        { withCredentials: true },
+      )
+      .then((res) => {
+        openSuccessModal();
+      })
+      .catch((error) => {
+        console.log("여행참여에 실패하였습니다");
+        console.log(error);
+      });
+    // navigate("/triptable", { state: { travelID: `${travelId}` } });
   };
 
   // 확인하기 버튼 클릭
   const handleSubmit = () => {
     axios
-      .put(`${SERVER_URL}/travel/invite`, {ivtoken: inputCode}, {withCredentials: true} )
+      .get(
+        `${SERVER_URL}/travel/invite/?`,
+        { ivtoken: inputCode },
+        { withCredentials: true },
+      )
       .then((res) => {
-        if (res.status === 200) {
-          setInviter(res.invited[0]);
-          setTravelId(res._id);
-          openCheckModal();
-        } else {
-          openFailModal();
-        }
+        setInviter(res.data.auth);
+        openCheckModal();
       })
       .catch((error) => {
+        console.log(error);
+        console.log("여기서 에러 발셍");
         openFailModal();
       });
   };
@@ -62,7 +76,6 @@ const JoinTripPage = () => {
   const closeCheckModal = () => {
     setIsCheckModal(false);
     setInviter("");
-    setTravelId("");
   };
   //fail modal 열기
   const openFailModal = () => {
@@ -71,6 +84,17 @@ const JoinTripPage = () => {
   //fail modal 닫기
   const closeFailModal = () => {
     setIsFailModal(false);
+  };
+
+  //success join modal 열기
+  const openSuccessModal = () => {
+    setIsSuccessModal(true);
+  };
+
+  //success join modal 열기
+  const closeSuccessModal = () => {
+    setIsSuccessModal(false);
+    // navigate("/triptable", { state:travelId});
   };
 
   return (
@@ -100,6 +124,19 @@ const JoinTripPage = () => {
           }
           w="80%"
           h="25%"
+        />
+      )}
+      {isSuccessModal && (
+        <Modal
+          content={<SuccessJoinContent />}
+          closeModals={closeSuccessModal}
+          buttons={
+            <ButtonContainer>
+              <OkBtn onClick={closeSuccessModal}>확인</OkBtn>
+            </ButtonContainer>
+          }
+          w="80%"
+          h="22%"
         />
       )}
       <div>
@@ -253,5 +290,16 @@ const CloseBtn = styled.button`
   border-radius: 2rem;
   font-size: 1.3rem;
   color: white;
+  font-weight: bolder;
+`;
+
+const OkBtn = styled.button`
+  background-color: ${COLOR.MAIN_GREEN};
+  color: white;
+  width: 40%;
+  height: 3rem;
+  border: none;
+  border-radius: 2rem;
+  font-size: 1.3rem;
   font-weight: bolder;
 `;
