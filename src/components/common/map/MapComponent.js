@@ -3,33 +3,17 @@ import styled from "styled-components";
 import { Map, CustomOverlayMap } from "react-kakao-maps-sdk";
 import Busan from "../../../assets/images/busan.jpg";
 import MARKERFRAME from "../../../assets/icons/markericon.svg";
+import { PropTypes } from "prop-types";
 import Drawer from "@mui/material/Drawer";
 import MapDrawer from "../../../components/common/map/MapDrawer";
 
-const MapComponent = () => {
+const MapComponent = (props) => {
+  const [data, setData] = useState({});
   const [isOpen, setIsOpen] = useState(false);
-  const toggleDrawer = (newOpen) => () => {
+  const toggleDrawer = (newOpen, data) => () => {
     setIsOpen(newOpen);
+    setData(data);
   };
-
-  const positions = [
-    {
-      title: "대전",
-      latlng: { lat: 36.75, lng: 127.36 },
-    },
-    {
-      title: "서울",
-      latlng: { lat: 38, lng: 127 },
-    },
-    {
-      title: "대구",
-      latlng: { lat: 36.25, lng: 128.55 },
-    },
-    {
-      title: "제주",
-      latlng: { lat: 33.6, lng: 126.55 },
-    },
-  ];
 
   return (
     <StMap>
@@ -37,27 +21,50 @@ const MapComponent = () => {
         center={{ lat: 36.34, lng: 127.77 }}
         style={{ width: "100%", height: "93.2%" }}
         level={13}
+        zoomable={false}
+        disableDoubleClickZoom={true}
       >
-        {positions.map((position) => (
-          <CustomOverlayMap
-            key={position.title}
-            position={{
-              lat: position.latlng.lat,
-              lng: position.latlng.lng,
-            }}
-          >
-            <div>
-              <MarkerImg src={MARKERFRAME} />
-              <TripImg src={Busan} onClick={toggleDrawer(true)}/>
-            </div>
-          </CustomOverlayMap>
-        ))}
+        {props.data.map((it) => {
+          return (
+            <CustomOverlayMap
+              key={it._id}
+              position={{
+                lat: it.location.latitude,
+                lng: it.location.longitude,
+              }}
+            >
+              <div>
+                <MarkerImg src={MARKERFRAME} />
+                <TripImg
+                  src={Busan}
+                  // onClick={() => {
+                  //   handleDrawer(it);
+                  // }}
+                  onClick={toggleDrawer(true, it)}
+                />
+              </div>
+            </CustomOverlayMap>
+          );
+        })}
       </Map>
-      <Drawer anchor="bottom" open={isOpen} onClose={toggleDrawer(false)}>
-        <MapDrawer />
+      <Drawer anchor="bottom" open={isOpen} onClose={toggleDrawer(false, data)}>
+        <MapDrawer data={data} />
       </Drawer>
     </StMap>
   );
+};
+
+MapComponent.propTypes = {
+  data: PropTypes.node.isRequired,
+  _id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  startdate: PropTypes.string.isRequired,
+  enddate: PropTypes.string.isRequired,
+  location: PropTypes.node.isRequired,
+  latitude: PropTypes.number.isRequired,
+  longitude: PropTypes.number.isRequired,
+  travelimg: PropTypes.string.isRequired,
 };
 
 const StMap = styled.div`

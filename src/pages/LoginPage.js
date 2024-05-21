@@ -5,7 +5,6 @@ import naverlogo from "../assets/images/naverLogo.svg";
 import React from "react";
 import axios from "axios";
 
-
 const LoginPage = () => {
   const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
@@ -41,11 +40,15 @@ const LoginPage = () => {
 
   return (
     <EntireDiv>
-      <IntroP>트립토리로 <br />여행을 기록해보세요!</IntroP>
+      <IntroP>
+        트립토리로 <br />
+        여행을 기록해보세요!
+      </IntroP>
 
       <SocialDiv>
         <SocialButton className="kakaoBtn" onClick={goToKakaoOauth}>
-          <LogoImage src={kakaologo} />카카오 로그인 버튼
+          <LogoImage src={kakaologo} />
+          카카오 로그인 버튼
         </SocialButton>
 
         <SocialButton className="googleBtn" onClick={goToGoogleOauth}>
@@ -65,8 +68,7 @@ const SharedContent = `
   justify-content: center;
 `;
 
-const EntireDiv = styled.div`
-`;
+const EntireDiv = styled.div``;
 
 const IntroP = styled.p`
   ${SharedContent}
@@ -76,7 +78,6 @@ const IntroP = styled.p`
   margin-top: 12rem;
   margin-left: -5rem;
 `;
-
 
 const LogoImage = styled.img`
   height: 38px;
@@ -94,17 +95,17 @@ const SocialButton = styled.button`
   border-width: 5px;
   border: #747474;
   border-radius: 10px;
-  box-shadow: 3px 6px #F6F6F6;
+  box-shadow: 3px 6px #f6f6f6;
 
   &.kakaoBtn {
-    background-color: #FBE184;
+    background-color: #fbe184;
   }
   &.googleBtn {
     background-color: #ffffff;
   }
   &.naverBtn {
     color: white;
-    background-color: #57CC5C;
+    background-color: #57cc5c;
   }
 `;
 
