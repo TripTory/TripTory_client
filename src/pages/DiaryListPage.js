@@ -44,7 +44,7 @@ export default function DiaryListPage() {
   };
   const goToCreate = () => {
     console.log(data);
-    navigate("/diary", {travelid: location.state.id});
+    navigate("/diary", {state: location.state.id});
   };
 
   return (
