@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Typography } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
@@ -14,10 +14,14 @@ import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import DoDisturbOutlinedIcon from "@mui/icons-material/DoDisturbOutlined";
 import CancelContent from "../components/common/CancelContent";
 import BottomNav from "../layout/BottomNav";
+import axios from "axios";
 
 const MypagePage = () => {
+  //axios get으로 받아온 username location으로 전달
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [message, setMessage] = useState("");
+  const [userInfo, setUserInfo] = useState({ name: "", email: "", profileimg: "" });
 
   const toggleModal = () => {
     console.log(isModalOpen);
@@ -29,15 +33,88 @@ const MypagePage = () => {
   };
 
   const goToEdit = () => {
-    navigate("/editprofil");
+    navigate("/editprofil", { state: { name: userInfo.name, email: userInfo.email, profileimg: userInfo.profileimg } });
   };
 
   const goToLogin = () => {
     navigate("/login");
   };
+
+  useEffect(() => {
+    handleUserInfo();
+  }, []);
+
+  const handleUserInfo = () => {
+    console.log(12123123);
+    axios.get("http://localhost:5000/user", { withCredentials: true})
+    .then((res) => {
+      const data = res.data.userinfo;
+      setUserInfo(
+        { _id: data._id,
+          name: data.name,
+          email: data.email,
+          profileimg: res.data.url,
+          authprovider: data.authprovider});
+    })
+    .catch((error) => {
+      const status = error.status;
+      if (status === 404) {
+        setMessage("사용자를 찾을 수 없습니다.");
+      } else if (status === 401) {
+        setMessage("로그인이 필요합니다.");
+      } else if (status === 500) {
+        setMessage("서버 오류가 발생했습니다.");
+      } else {
+        setMessage("알 수 없는 오류가 발생했습니다.");
+      }
+      console.error("요청 실패:", error);
+    });
+  };
+
+  const handleLogout = () => {
+    axios.delete("http://localhost:5000/user/logout", { withCredentials: true})
+      .then((response) => {
+        const status = response.status;
+        if (status === 200) {
+          setMessage("로그아웃 성공");
+        } else if (status === 401) {
+          setMessage("로그인이 필요합니다.");
+        } else if (status === 500) {
+          setMessage("서버 오류가 발생했습니다.");
+        }
+      })
+      .catch((error) => {
+        console.error("요청 실패:", error);
+        setMessage("서버 요청 중 오류가 발생했습니다.");
+      });
+  };
+
+
+  const DelAccount = () =>{
+    axios.delete("http://localhost:5000/user", { withCredentials: true})
+      .then((response) => {
+        const status = response.status;
+        console.log("res",status);
+        if (status === 200) {
+          setMessage("계정이 성공적으로 삭제되었습니다.");
+        } else if (status === 404) {
+          setMessage("사용자를 찾을 수 없습니다.");
+        } else if (status === 401) {
+          setMessage("로그인이 필요합니다.");
+        } else if (status === 500) {
+          setMessage("서버 오류가 발생했습니다.");
+        }
+      })
+      .catch((error) => {
+        console.error("요청 실패:", error);
+        setMessage("서버 요청 중 오류가 발생했습니다.");
+      });
+
+    goToLogin();
+  };
   const Menu = [
     { icon: <ModifyIcon />, text: "프로필 편집", action: goToEdit },
-    { icon: <LogoutIcon />, text: "로그아웃", action: goToLogin },
+    { icon: <LogoutIcon />, text: "로그아웃", action: [handleLogout, goToLogin] },
     {
       icon: <CancelIcon />,
       text: "계정 탈퇴",
@@ -50,9 +127,9 @@ const MypagePage = () => {
         <TitleTypo variant="h4">마이 페이지</TitleTypo>
       </TitleDiv>
       <ProfilDiv>
-        <ProfilAvatar alt="default" src={Default} />
-        <NameP>이채영</NameP>
-        <MailP>cy1234@naver.com</MailP>
+        <ProfilAvatar alt="default" src={userInfo.profileimg || Default} />
+        <NameP>{userInfo.name}</NameP>
+        <MailP>{userInfo.email}</MailP>
       </ProfilDiv>
       <MenuDiv>
         <List sx={{ width: "100%" }}>
@@ -60,7 +137,7 @@ const MypagePage = () => {
             return (
               <div key={it.text}>
                 <MenuLstItem disablePadding>
-                  <MenuLIBtn onClick={it.action}>
+                  <MenuLIBtn onClick={Array.isArray(it.action) ? () => it.action.forEach((actionFunc) => actionFunc()) : it.action}>
                     {it.icon}
                     <MenuP>{it.text}</MenuP>
                   </MenuLIBtn>
@@ -76,7 +153,7 @@ const MypagePage = () => {
           closeModals={closeModal}
           buttons={<StCancelButtons>
             <NoBtn onClick={closeModal}>아니오</NoBtn>
-            <YesBtn onClick={goToLogin}>네</YesBtn>
+            <YesBtn onClick={DelAccount}>네</YesBtn>
           </StCancelButtons>}
           w="80%"
           h="20%"

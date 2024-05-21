@@ -25,12 +25,16 @@ const DiaryPage = () => {
     navigate("/triptable");
   };
 
+  const goToEditDiary = () => {
+    navigate("/diary"); // {diaryid} 추가
+  };
+
   return (
     <div>
       <HeaderConatiner>
         <GoBackIcon src={goback} onClick={goToTriptable}></GoBackIcon>
         <BtnContainer>
-          <EditBtn>수정</EditBtn>
+          <EditBtn onClick={goToEditDiary}>수정</EditBtn>
           <Bar>|</Bar>
           <DeleteBtn>삭제</DeleteBtn>
         </BtnContainer>
