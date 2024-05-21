@@ -8,6 +8,7 @@ import ImageSlider from "../components/common/ImageSlider";
 import BottomNav from "../layout/BottomNav";
 import { COLOR } from "../styles/color";
 import axios from "axios";
+import Modal from "../components/common/Modal";
 
 const DiaryPage = () => {
   const navigate = useNavigate();
@@ -15,6 +16,8 @@ const DiaryPage = () => {
 
   const { state } = useLocation();
   const [id, setId] = useState(state.diaryid);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     axios.get(`http://localhost:5000/diary/${id}`, { withCredentials: true})
@@ -60,7 +63,14 @@ const DiaryPage = () => {
 
 
   const goToDelDiary = () => {
+    setIsModalOpen(true);
+  };
 
+  const justcloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const closeModal = () => {
     axios.delete(`http://localhost:5000/diary/${id}`, { withCredentials: true})
     .then((res) => {
       console.log(res);
@@ -68,7 +78,8 @@ const DiaryPage = () => {
     .catch((error) => {
       console.log(error);
     });
-    navigate("/triptable");
+    setIsModalOpen(false);
+    navigate("/triptable"); // 모달 닫으면서 페이지 이동
   };
 
   return (
@@ -85,6 +96,24 @@ const DiaryPage = () => {
       <DiaryContent content={diaryInfo.content}></DiaryContent>
       <ImageSlider images={diaryInfo.url}/>
       <BottomNav />
+
+      {isModalOpen && (
+        <Modal
+          content={
+            <ContentDiv>
+              일기를 삭제하시겠습니까?
+            </ContentDiv>
+          }
+          w="70%"
+          h="15rem"
+          buttons={
+            <OkayDiv>
+              <OkayBtn className="no" onClick={justcloseModal}>아니오</OkayBtn>
+              <OkayBtn className="yes" onClick={closeModal}>예</OkayBtn>
+            </OkayDiv>
+          }
+        />
+      )}
     </div>
   );
 };
@@ -128,5 +157,34 @@ const DeleteBtn = styled.button`
 const Bar = styled.p`
   font-size: 2rem;
   color: ${COLOR.MAIN_GREEN};
+`;
 
+const ContentDiv = styled.div`
+  text-align: center;
+  font-size: 1.8rem;
+  margin-top: 4rem;
+`;
+
+const OkayDiv = styled.div`
+  margin-top: 3rem;
+`;
+
+const OkayBtn = styled.button`
+  height: 2.5rem;
+  width: 10rem;
+  font-size: 1.7rem;
+  font-weight: 600;
+  text-align: center;
+  vertical-align: center;
+  color: white;
+  border: none;
+  border-radius: 3rem;
+  &.no {
+    color: black;
+    background-color: #D9D9D9;
+    margin-right: 1rem;
+  }
+  &.yes {
+    background-color: ${COLOR.MAIN_GREEN};
+  }
 `;
