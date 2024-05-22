@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Map, CustomOverlayMap } from "react-kakao-maps-sdk";
-import Busan from "../../../assets/images/busan.jpg";
 import MARKERFRAME from "../../../assets/icons/markericon.svg";
 import { PropTypes } from "prop-types";
 import Drawer from "@mui/material/Drawer";
@@ -10,9 +9,13 @@ import MapDrawer from "../../../components/common/map/MapDrawer";
 const MapComponent = (props) => {
   const [data, setData] = useState({});
   const [isOpen, setIsOpen] = useState(false);
-  const toggleDrawer = (newOpen, data) => () => {
+  const [url, setUrl] = useState(props.urls);
+  const [pickedUrl, setPickedUrl] = useState("");
+
+  const toggleDrawer = (newOpen, data, url) => () => {
     setIsOpen(newOpen);
     setData(data);
+    setPickedUrl(url);
   };
 
   return (
@@ -24,7 +27,7 @@ const MapComponent = (props) => {
         zoomable={false}
         disableDoubleClickZoom={true}
       >
-        {props.data.map((it) => {
+        {props.data.map((it, index) => {
           return (
             <CustomOverlayMap
               key={it._id}
@@ -36,19 +39,16 @@ const MapComponent = (props) => {
               <div>
                 <MarkerImg src={MARKERFRAME} />
                 <TripImg
-                  src={Busan}
-                  // onClick={() => {
-                  //   handleDrawer(it);
-                  // }}
-                  onClick={toggleDrawer(true, it)}
+                  src={props.urls[index]}
+                  onClick={toggleDrawer(true, it, props.urls[index])}
                 />
               </div>
             </CustomOverlayMap>
           );
         })}
       </Map>
-      <Drawer anchor="bottom" open={isOpen} onClose={toggleDrawer(false, data)}>
-        <MapDrawer data={data} />
+      <Drawer anchor="bottom" open={isOpen} onClose={toggleDrawer(false, data, pickedUrl)}>
+        <MapDrawer data={data} url={pickedUrl} />
       </Drawer>
     </StMap>
   );
@@ -65,6 +65,7 @@ MapComponent.propTypes = {
   latitude: PropTypes.number.isRequired,
   longitude: PropTypes.number.isRequired,
   travelimg: PropTypes.string.isRequired,
+  urls: PropTypes.node.isRequired,
 };
 
 const StMap = styled.div`
