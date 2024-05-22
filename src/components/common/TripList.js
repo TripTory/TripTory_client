@@ -21,7 +21,6 @@ export default function TripList() {
       if (!completed) {
         setData(result.data.travels);
         setUrl(result.data.travelUrls);
-        console.log(result);
       }
       setLoading(true);
     }
