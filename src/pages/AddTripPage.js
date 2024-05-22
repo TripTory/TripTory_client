@@ -48,9 +48,6 @@ const AddTripPage = () => {
     setEndDate(end);
   };
 
-  console.log(dateRange);
-  console.log(startDate);
-  console.log(endDate);
 
   // 여행떠나기 버튼 클릭
   const handleSubmit = () => {
@@ -63,6 +60,7 @@ const AddTripPage = () => {
     formData.append("title", tripName);
     formData.append("startdate", startdate);
     formData.append("enddate", enddate);
+    formData.append("location[region]", tripPlace);
     formData.append("location[latitude]", latitude);
     formData.append("location[longitude]", longitude);
     formData.append("image", imgUrl.fileObject);
