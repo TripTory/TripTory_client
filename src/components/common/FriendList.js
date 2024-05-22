@@ -1,20 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import Karina from "../../assets/images/karina.png";
+import defaultImageSrc from "../../assets/images/defaultProfileImg.svg";
 
-const FriendList = ({ friends }) => {
+const FriendList = ({ usernames, userimgs }) => {
   return (
     <div>
       <MyFriend>내 일행</MyFriend>
       <ul>
-        {friends.map((friend, index) => (
+        {usernames.map((name, index) => (
           <li key={index}>
             <FriendItemDiv>
               <FriendImgDiv>
-                <FriendImg src={Karina}></FriendImg>
+                <FriendImg src={userimgs[index] || defaultImageSrc}></FriendImg>
               </FriendImgDiv>
-              <FriendNameDiv>{friend.friendName}</FriendNameDiv>
+              <FriendNameDiv>{name}</FriendNameDiv>
             </FriendItemDiv>
           </li>
         ))}
@@ -24,12 +24,8 @@ const FriendList = ({ friends }) => {
 };
 
 FriendList.propTypes = {
-  friends: PropTypes.arrayOf(
-    PropTypes.shape({
-      friendName: PropTypes.string.isRequired,
-      imagePath: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
+  usernames: PropTypes.string.isRequired,
+  userimgs: PropTypes.string.isRequired,
 };
 
 export default FriendList;

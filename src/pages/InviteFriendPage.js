@@ -1,24 +1,96 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import styled from "styled-components";
 import { COLOR } from "../styles/color.js";
 import FriendList from "../components/common/FriendList.js";
-import jsonData from "../data/FriendData.json";
 import copyIcon from "../assets/icons/copy.svg";
 import xicon from "../assets/icons/x-icon.svg";
 import BottomNav from "../layout/BottomNav";
+import { useNavigate, useLocation } from "react-router-dom";
+import Modal from "../components/common/Modal";
+import SuccessCopyContent from "../components/common/SuccessCopyContent.js";
 
 const InviteFriendPage = () => {
-  //임시 작성
-  const handleCancel = () => {
-    alert("일기 목록 화면으로 연결");
+  const SERVER_URL = process.env.REACT_APP_SERVER_URL;
+  const navigate = useNavigate();
+  // navigate 하면서 받은 travel id 값
+  const { state } = useLocation();
+  // const travelID = state; <----------------나중에 주석 풀고 다음 줄 지우기
+  const travelID = "664c951554d29fb5ec75847b"; // 임시로 쓴 것
+  // travel의 정보
+  const [invitecode, setInvitecode] = useState("");
+  const [title, setTitle] = useState("");
+  const [username, setUsername] = useState([]);
+  const [userimg, setUserimg] = useState([]);
+
+  const [isModal, setIsModal] = useState(false);
+
+  const closeModal = () => {
+    setIsModal(false);
   };
-  //임시 작성
-  const copyCode = () => {
-    alert("코드가 복사되었습니다.");
+
+  const openModal = () => {
+    setIsModal(true);
+  };
+
+  // 서버로부터 여행 정보 받아오기
+  useEffect(() => {
+    let usernames = [];
+    let userimgs = [];
+    axios
+      .get(`${SERVER_URL}/travel/${travelID}`)
+      .then((res) => {
+        console.log(res);
+        // 초대 코드 저장
+        setInvitecode(res.data.travel.ivtoken);
+        // 여행 제목 저장
+        setTitle(res.data.travel.title);
+        // 여행 참여자 이름 저장
+        res.data.travel.invited.forEach((item) => {
+          usernames.push(item.name);
+        });
+        setUsername(usernames);
+        // 여행 참여자 프로필사진 저장
+        res.data.invited_profile.forEach((item) => {
+          userimgs.push(item.url);
+        });
+        setUserimg(userimgs);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  // 취소 버튼
+  const handleCancel = () => {
+    navigate("/triptable", { state:travelID } );
+  };
+
+  // 코드 복사 버튼
+  const copyCode = async () => {
+    try {
+      await navigator.clipboard.writeText(invitecode);
+      openModal();
+    } catch (e) {
+      alert("failed");
+    }
   };
 
   return (
     <div>
+      {isModal && (
+        <Modal
+          content={<SuccessCopyContent />}
+          closeModals={closeModal}
+          buttons={
+            <ButtonContainer>
+              <OkBtn onClick={closeModal}>확인</OkBtn>
+            </ButtonContainer>
+          }
+          w="80%"
+          h="22%"
+        />
+      )}
       <FixedDiv>
         <div>
           <XButton onClick={handleCancel}>
@@ -26,7 +98,7 @@ const InviteFriendPage = () => {
           </XButton>
         </div>
         <CopyCodeContainer>
-          <Text className="tripName">마루와 함께하는 부산</Text>
+          <Text className="tripName">{title}</Text>
           <Text className="tripFriend">트립토리 친구</Text>
           <Text className="explain">
             함께 여행간 친구나 가족을 초대해보세요.
@@ -43,7 +115,7 @@ const InviteFriendPage = () => {
         </CopyCodeContainer>
       </FixedDiv>
       <FriendListContainer>
-        <FriendList friends={jsonData.friends}></FriendList>
+        <FriendList usernames={username} userimgs={userimg}></FriendList>
       </FriendListContainer>
       <BottomNav />
     </div>
@@ -124,4 +196,23 @@ const FriendListContainer = styled.div`
 
 const CopyIconImg = styled.img`
   margin: 0.2rem;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 50%;
+`;
+
+const OkBtn = styled.button`
+  background-color: ${COLOR.MAIN_GREEN};
+  color: white;
+  width: 40%;
+  height: 3rem;
+  border: none;
+  border-radius: 2rem;
+  font-size: 1.3rem;
+  font-weight: bolder;
 `;

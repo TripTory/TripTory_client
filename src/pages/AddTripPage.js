@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import SelectDateRange from "../components/common/SelectDateRange";
 import ImageUploader from "../components/common/ImageUploader";
 import SearchPlaceModal from "../components/common/SearchPlaceModal";
+import Modal from "../components/common/Modal";
+import SuccessContent from "../components/common/SuccessAddTripContent";
 import { PiMapPinFill } from "react-icons/pi";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
@@ -17,6 +19,8 @@ const AddTripPage = () => {
   //모달창(여행지 검색) 관리 변수
   const [isModal, setIsModal] = useState(false);
 
+  const [success, setIsSuccess] = useState(false);
+
   // 사용자 입력 정보(여행이름)
   const [tripName, setTripName] = useState("");
   //사용자 입력 정보(여행지역)
@@ -29,6 +33,15 @@ const AddTripPage = () => {
   const [endDate, setEndDate] = useState(null);
   //사용자 업로드 이미지 url
   const [imgUrl, setImgUrl] = useState(null);
+
+  const openSuccessModal = () => {
+    setIsSuccess(true);
+  };
+
+  const closeSuccessModal = () => {
+    setIsSuccess(false);
+    navigate("/home");
+  };
 
   // 여행 이름값 변경
   const handleNameChange = (e) => {
@@ -48,25 +61,31 @@ const AddTripPage = () => {
 
   // 여행떠나기 버튼 클릭
   const handleSubmit = () => {
-    const startDate = moment(dateRange[0]).toISOString();
-    const endDate = moment(dateRange[1]).toISOString();
+    const startdate = moment(startDate)
+      .startOf("day")
+      .format("YYYY-MM-DDTHH:mm:ss.SSS[Z]");
+    const enddate = moment(endDate)
+      .endOf("day")
+      .format("YYYY-MM-DDTHH:mm:ss.SSS[Z]");
+    console.log("---");
+    console.log(startdate);
+    console.log(enddate);
     const formData = new FormData();
     formData.append("title", tripName);
-    formData.append("startdate", startDate);
-    formData.append("enddate", endDate);
+    formData.append("startdate", startdate);
+    formData.append("enddate", enddate);
+    formData.append("location[region]", tripPlace);
     formData.append("location[latitude]", latitude);
     formData.append("location[longitude]", longitude);
     formData.append("image", imgUrl.fileObject);
 
     axios
-      .post("http://localhost:5000/travel", formData, {
+      .post(`${SERVER_URL}/travel`, formData, {
         withCredentials: true,
         headers: { "Content-Type": "multipart/form-data" },
       })
       .then((res) => {
-        console.log(res);
-        alert("저장 완료");
-        navigate("/home");
+        openSuccessModal();
       })
       .catch((error) => {
         console.log(error);
@@ -89,6 +108,19 @@ const AddTripPage = () => {
           setTripPlace={setTripPlace}
           setLongitude={setLongitude}
           setLatitude={setLatitude}
+        />
+      )}
+      {success && (
+        <Modal
+          content={<SuccessContent/>}
+          closeModals={closeSuccessModal}
+          buttons={
+            <ButtonContainer>
+              <OkBtn onClick={closeSuccessModal}>예</OkBtn>
+            </ButtonContainer>
+          }
+          w="80%"
+          h="22%"
         />
       )}
       <TitleContainer>
@@ -260,4 +292,23 @@ const DateWrapper = styled.div`
   border-bottom: solid #bfbfbf 1px;
   margin: auto;
   font-size: 0;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 50%;
+`;
+
+const OkBtn = styled.button`
+  background-color: ${COLOR.MAIN_GREEN};
+  color: white;
+  width: 40%;
+  height: 3rem;
+  border: none;
+  border-radius: 2rem;
+  font-size: 1.3rem;
+  font-weight: bolder;
 `;

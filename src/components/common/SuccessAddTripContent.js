@@ -1,19 +1,19 @@
 import React from "react";
 import styled from "styled-components";
 
-const FailJoinContent = () => {
+const SuccessAddTripContent = () => {
   return (
-    <FailContent>
+    <SuccessContent>
       <ContentDiv>
         <ContentP>
-          이미 참여중이거나 <br/> 존재하지 않는 여행입니다.
+          여행이 추가되었습니다.
         </ContentP>
       </ContentDiv>
-    </FailContent>
+    </SuccessContent>
   );
 };
 
-const FailContent = styled.div`
+const SuccessContent = styled.div`
   width: 100%;
   height: fit-content;
   display: flex;
@@ -37,4 +37,4 @@ const ContentP = styled.p`
   line-height : normal;
 `;
 
-export default FailJoinContent;
+export default SuccessAddTripContent;
