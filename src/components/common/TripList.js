@@ -8,7 +8,6 @@ export default function TripList() {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
   const [url, setUrl] = useState("");
-  // const [tripInfo, setTripInfo] = useState({ _id:"", startdate:"", enddate:"", invited:[], ivtoken:"", location: {}, title:"", travelimg:"" });
   useEffect(() => {
     let completed = false;
 
