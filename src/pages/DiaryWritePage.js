@@ -21,8 +21,8 @@ const DiaryWritePage = () => {
   const [imagePreview, setImagePreview] = useState(null);
   const [files, setFiles] = useState([]);
   const { state } = useLocation();
-  // const [travelid, setTravelId] = useState(state.travelid);
-  const [diaryid, setDiaryId] = useState({ diaryid: "" });
+  // const [travelid, setTravelId] = useState(state);
+  const [diaryId, setDiaryId] = useState({ diaryid: "" });
 
   const navigate = useNavigate();
 
@@ -47,7 +47,7 @@ const DiaryWritePage = () => {
     formData.append("title", title);
     formData.append("content", content);
     formData.append("date", startDate.toISOString().split("T")[0]);
-    formData.append("travel", "664b1a4dd3a661ebf34c3206"); // travelid 대체
+    formData.append("travel", "664c257dac93cdbc69a66bf5"); // travelid 대체
 
     files.forEach((file) => {
       formData.append("images", file.fileObject);
@@ -62,12 +62,12 @@ const DiaryWritePage = () => {
       setDiaryId({
         diaryid: res.data.diaryid,
       });
+      const diary_id = res.data.diaryid;
+      navigate("/showdiary", { state: { diaryid: diary_id } });
     })
     .catch((error) => {
       console.log("에러", error);
     });
-
-    navigate("/showdiary", { state: { diaryid: setDiaryId.diaryid } });
   };
 
   return <div>
