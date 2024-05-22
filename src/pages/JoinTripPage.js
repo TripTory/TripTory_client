@@ -36,7 +36,7 @@ const JoinTripPage = () => {
     axios
       .put(
         `${SERVER_URL}/travel/invite`,
-        { travelid: inputCode },
+        { travelid: travelID },
         { withCredentials: true },
       )
       .then((res) => {
