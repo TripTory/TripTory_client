@@ -10,14 +10,19 @@ import Modal from "../../components/common/Modal";
 import { PropTypes } from "prop-types";
 import DelTripContent from "../../components/common/DelTripContent";
 import axios from "axios";
+import { useRecoilState } from "recoil";
+import { tripNameState } from "../../recoil/commonState";
 
 export default function TripListItem(props) {
+  const [tripName, setTripName] = useRecoilState(tripNameState);
   const [id] = useState(props.data._id);
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const goToDiaryList = () => {
+    setTripName(props.data.title);
     navigate("/triptable", {
-      state: { id: props.data._id, title: props.data.title },
+      state: { id: props.data._id},
     });
   };
 
