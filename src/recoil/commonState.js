@@ -5,4 +5,7 @@ export const dialogState = atom({
   default: false,
 });
 
-
+export const tripNameState = atom({
+  key: "tripName",
+  default: "",
+});
