@@ -2,26 +2,14 @@ import React, { useRef, useState } from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { PiMapPinFill } from "react-icons/pi";
 import { COLOR } from "../../styles/color";
 import leftBtn from "../../assets/icons/diary_left_btn.svg";
 import rightBtn from "../../assets/icons/diary_right_btn.svg";
-import { useRecoilState } from "recoil";
+import moment from "moment";
 
 const DiaryPreviewContent = ({ diaries }) => {
-  // const [title, setTitle] = useRecoilState(TITLE);
-  // const [content, setContent] = useRecoilState(CONTENT);
-  // const [date, setDate] = useRecoilState(DATE);
-  // const [img, setImg] = useRecoilState(IMG);
-  // const [username, setUsername] = useRecoilState(USERNAME);
-
   const navigate = useNavigate();
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
-
-  if (!diaries || diaries.length === 0) {
-    return null; // diaries가 null이거나 비어있으면 렌더링하지 않음
-  }
-
   const sliderRef = useRef(null);
 
   const slideLeft = () => {
@@ -31,38 +19,32 @@ const DiaryPreviewContent = ({ diaries }) => {
   };
 
   const slideRight = () => {
-    if (sliderRef.current.scrollLeft + sliderRef.current.offsetWidth >= sliderRef.current.scrollWidth) return;
+    if (
+      sliderRef.current.scrollLeft + sliderRef.current.offsetWidth >=
+      sliderRef.current.scrollWidth
+    )
+      return;
     sliderRef.current.scrollLeft += sliderRef.current.offsetWidth;
-    setCurrentSlideIndex((prevIndex) => Math.min(prevIndex + 1, diaries.length - 1));
+    setCurrentSlideIndex((prevIndex) =>
+      Math.min(prevIndex + 1, diaries.length - 1),
+    );
   };
 
-  const goToDiary = () => {
-    const currentDiary = diaries[currentSlideIndex];
-    // setTitle(currentDiary[title]);
-    // setContent(currentDiary[content]);
-    // setDate(currentDiary[date]);
-    // setImg(currentDiary[img]);
-    // setUsername(currentDiary[username]);
-    navigate("/showdiary");
-  };
+  let content = null; // 조건부 렌더링을 위한 변수
 
-  return (
-    <div>
+  if (diaries && diaries.length > 0) {
+    content = (
       <ContentWrapper>
         <Slider ref={sliderRef}>
           {diaries.map((diary, index) => (
             <DiaryEntry key={index}>
               <ImgDiv>
-                <DiaryImage src={diary.imgpath} />
+                <DiaryImage src="https://health.chosun.com/site/data/img_dir/2023/05/31/2023053102582_0.jpg" />
               </ImgDiv>
-              <TitleDiv>{diary.title}</TitleDiv>
+              <TitleDiv>{diary.diaryTitle}</TitleDiv>
               <DateDiv>
-                {diary.date} | {diary.username}
+                {moment(diary.date).format("YYYY.MM.DD")} | {diary.username}
               </DateDiv>
-              <PlaceDiv>
-                <PinIcon />
-                {diary.place}
-              </PlaceDiv>
             </DiaryEntry>
           ))}
         </Slider>
@@ -77,7 +59,19 @@ const DiaryPreviewContent = ({ diaries }) => {
           </>
         )}
       </ContentWrapper>
-      <ButtonContainer><GotoDiaryBtn onClick={goToDiary}/></ButtonContainer>
+    );
+  }
+
+
+  const goToDiary = () => {
+    const currentDiary = diaries[currentSlideIndex];
+    navigate("/showdiary", {state:currentDiary.diaryID});
+  };
+
+  return (
+    <div>
+      {content}
+      <ButtonContainer><GotoDiaryBtn onClick={goToDiary}>일기 보러 가기</GotoDiaryBtn></ButtonContainer>
     </div>
   );
 };
@@ -87,13 +81,11 @@ export default DiaryPreviewContent;
 DiaryPreviewContent.propTypes = {
   diaries: PropTypes.arrayOf(
     PropTypes.shape({
-      year: PropTypes.number.isRequired,
-      month: PropTypes.number.isRequired,
-      day: PropTypes.number.isRequired,
-      place: PropTypes.string.isRequired,
-      author: PropTypes.string.isRequired,
+      date: PropTypes.string.isRequired,
+      diaryID: PropTypes.string.isRequired,
       diaryTitle: PropTypes.string.isRequired,
       imagePath: PropTypes.string.isRequired,
+      username: PropTypes.string.isRequired,
     }),
   ).isRequired,
 };
@@ -106,13 +98,14 @@ const ContentWrapper = styled.div`
 `;
 
 const Slider = styled.div`
-  width: 100%;
+  width: 98%;
   height: 100%;
   display: flex;
   overflow: hidden;
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
+  margin: auto;
 `;
 
 const DiaryEntry = styled.div`
@@ -123,9 +116,10 @@ const DiaryEntry = styled.div`
 
 const ImgDiv = styled.div`
   width: 100%;
-  height: 65%;
+  height: 70%;
   display: flex;
   justify-content: center;
+  margin: auto;
 `;
 
 const DiaryImage = styled.img`
@@ -138,39 +132,22 @@ const DiaryImage = styled.img`
 
 const TitleDiv = styled.div`
   width: 100%;
-  height: 15%;
-  font-size: 2rem;
+  height: 16%;
+  font-size: 2.2rem;
   font-weight: 800;
-  padding: 0.5rem 2.2rem;
+  padding: 0.5rem 2.2rem 0.3rem 2.2rem;
   display: flex;
   align-items: center;
 `;
 
 const DateDiv = styled.div`
   width: 100%;
-  height: 10%;
-  font-size: 1.5rem;
+  height: 11%;
+  font-size: 1.6rem;
   padding: 0.5rem 2.2rem;
   color: gray;
   display: flex;
   align-items: center;
-`;
-
-const PlaceDiv = styled.div`
-  width: 100%;
-  height: 10%;
-  font-size: 1.5rem;
-  padding: 0.5rem 2.2rem;
-  color: gray;
-  display: flex;
-  align-items: center;
-`;
-
-const PinIcon = styled(PiMapPinFill)`
-  width: 1.5rem;
-  height: 1.5rem;
-  color: ${COLOR.MAIN_GREEN};
-  margin: 0.1rem 0.1rem 0.1rem 0rem;
 `;
 
 const Button = styled.button`
@@ -193,7 +170,7 @@ const ButtonRight = styled(Button)`
 
 const ButtonContainer = styled.div`
   width: 100%;
-  height: 15%;
+  height: 18%;
   display: flex;
   justify-content: center;
 `;
@@ -201,10 +178,10 @@ const ButtonContainer = styled.div`
 const GotoDiaryBtn = styled.button`
   background-color: ${COLOR.MAIN_EMER};
   width: 95%;
-  height: 3.5rem;
+  height: 3.7rem;
   border: none;
   border-radius: 2rem;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   color: white;
   font-weight: bolder;
   margin: 1rem 0rem;
