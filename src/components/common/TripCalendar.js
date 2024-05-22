@@ -14,7 +14,6 @@ import Drawer from "@mui/material/Drawer";
 const TripCalendar = ({ diaryInfo }) => {
   const [selectedDiary, setSelectedDiary] = useState(null); // 선택된 일기 정보 상태 추가
   const [isOpen, setIsOpen] = useState(false);
-  console.log(diaryInfo);
 
   const toggleDrawer = (newOpen) => () => {
     setIsOpen(newOpen);
