@@ -48,20 +48,27 @@ const AddTripPage = () => {
     setEndDate(end);
   };
 
+  console.log(dateRange);
+  console.log(startDate);
+  console.log(endDate);
+
   // 여행떠나기 버튼 클릭
   const handleSubmit = () => {
-    const startDate = moment(dateRange[0]).toISOString();
-    const endDate = moment(dateRange[1]).toISOString();
+    const startdate = moment(startDate).startOf("day").format("YYYY-MM-DDTHH:mm:ss.SSS[Z]");
+    const enddate = moment(endDate).endOf("day").format("YYYY-MM-DDTHH:mm:ss.SSS[Z]");
+    console.log("---");
+    console.log(startdate);
+    console.log(enddate);
     const formData = new FormData();
     formData.append("title", tripName);
-    formData.append("startdate", startDate);
-    formData.append("enddate", endDate);
+    formData.append("startdate", startdate);
+    formData.append("enddate", enddate);
     formData.append("location[latitude]", latitude);
     formData.append("location[longitude]", longitude);
     formData.append("image", imgUrl.fileObject);
 
     axios
-      .post("http://localhost:5000/travel", formData, {
+      .post(`${SERVER_URL}/travel`, formData, {
         withCredentials: true,
         headers: { "Content-Type": "multipart/form-data" },
       })
