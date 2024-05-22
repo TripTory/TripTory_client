@@ -1,12 +1,13 @@
 import React from "react";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
-const AcceptJoinContent = () => {
+const AcceptJoinContent = ({inviter}) => {
   return (
     <AcceptContent>
       <ContentDiv>
         <ContentP>
-          남궁희님의 초대를 <br/>수락하시겠습니까?
+          {inviter}님의 초대를 <br/>수락하시겠습니까?
         </ContentP>
       </ContentDiv>
     </AcceptContent>
@@ -39,3 +40,7 @@ const ContentP = styled.p`
 `;
 
 export default AcceptJoinContent;
+
+AcceptJoinContent.propTypes = {
+  inviter: PropTypes.string.isRequired,
+};
