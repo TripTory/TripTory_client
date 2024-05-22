@@ -15,16 +15,18 @@ import BottomNav from "../layout/BottomNav";
 import axios from "axios";
 import { useRecoilValue } from "recoil";
 import { tripNameState } from "../recoil/commonState";
+import { tripIdState } from "../recoil/commonState";
 
 export default function DiaryListPage() {
   const tripName = useRecoilValue(tripNameState);
+  const tripId = useRecoilValue(tripIdState);
   const navigate = useNavigate();
   const location = useLocation();
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
   useEffect(() => {
     let completed = false;
-
+    console.log("아이디트립",tripId);
     // eslint-disable-next-line func-style
     async function get() {
       const result = await axios.get(

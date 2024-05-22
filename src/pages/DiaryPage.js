@@ -9,6 +9,8 @@ import BottomNav from "../layout/BottomNav";
 import { COLOR } from "../styles/color";
 import axios from "axios";
 import Modal from "../components/common/Modal";
+import { useRecoilState } from "recoil";
+import { tripIdState } from "../recoil/commonState";
 
 const DiaryPage = () => {
   const navigate = useNavigate();
@@ -16,11 +18,11 @@ const DiaryPage = () => {
 
   const { state } = useLocation();
   const [id, setId] = useState(state);
+  const [tripId, setTripId] = useRecoilState(tripIdState);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    console.log("안녕2?",setDiaryInfo.travel);
     axios.get(`http://localhost:5000/diary/${id.diaryid}`, { withCredentials: true})
     .then((res) => {
       const data = res.data.diaryinfo;
@@ -43,7 +45,9 @@ const DiaryPage = () => {
 
 
   const goToTriptable = () => {
-    navigate("/triptable", {state: { id: setDiaryInfo.travel }});
+    setTripId(diaryInfo.travel);
+    // navigate("/triptable", {state: { id: setDiaryInfo.travel }});
+    navigate("/triptable");
   };
 
   const goToEditDiary = () => {
