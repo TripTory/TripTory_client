@@ -14,6 +14,7 @@ import Drawer from "@mui/material/Drawer";
 const TripCalendar = ({ diaryInfo }) => {
   const [selectedDiary, setSelectedDiary] = useState(null); // 선택된 일기 정보 상태 추가
   const [isOpen, setIsOpen] = useState(false);
+  console.log(diaryInfo);
 
   const toggleDrawer = (newOpen) => () => {
     setIsOpen(newOpen);
@@ -26,9 +27,9 @@ const TripCalendar = ({ diaryInfo }) => {
     // 선택된 날짜에 해당하는 모든 일기를 뽑아서 리턴하기
     const selected = diaryInfo.filter(
       (item) =>
-        moment(item.date).format("YYYY") === diary.year &&
-        moment(item.date).format("M") === diary.month &&
-        moment(item.date).format("D") === diary.day,
+        moment(item.date).format("YYYY") === moment(diary.date).format("YYYY") &&
+        moment(item.date).format("M") === moment(diary.date).format("M") &&
+        moment(item.date).format("D") === moment(diary.date).format("D"),
     );
     // 찾은 일기들을 상태에 저장
     setSelectedDiary(selected);
@@ -41,9 +42,9 @@ const TripCalendar = ({ diaryInfo }) => {
       // diaryInfo 요소를 순회하며 일기가 존재하는 날짜 검사
       const diary = diaryInfo.find(
         (item) =>
-          moment(item.date, "YYYY-MM-DDTHH:mm:ss.SSSZ").format("YYYY") === date.getFullYear().toString() &&
-          moment(item.date, "YYYY-MM-DDTHH:mm:ss.SSSZ").format("M") === (date.getMonth() + 1).toString() &&
-          moment(item.date, "YYYY-MM-DDTHH:mm:ss.SSSZ").format("D") === date.getDate().toString(),
+          moment(item.date).format("YYYY") === date.getFullYear().toString() &&
+          moment(item.date).format("M") === (date.getMonth() + 1).toString() &&
+          moment(item.date).format("D") === date.getDate().toString(),
       );
       if (diary) {
         return "hasDiary";
@@ -56,16 +57,16 @@ const TripCalendar = ({ diaryInfo }) => {
       // diaryInfo 요소를 순회하며 일기가 존재하는 날짜 검사
       const diary = diaryInfo.find(
         (item) =>
-          moment(item.date, "YY-MM-DD").format("YYYY") === date.getFullYear() &&
-          moment(item.date, "YY-MM-DD").format("M") === date.getMonth() &&
-          moment(item.date, "YY-MM-DD").format("D") === date.getDate(),
+          moment(item.date).format("YYYY") === date.getFullYear().toString() &&
+          moment(item.date).format("M") === (date.getMonth() + 1).toString() &&
+          moment(item.date).format("D") === date.getDate().toString(),
       );
 
       if (diary) {
         return (
           <div
             style={{
-              backgroundImage: `url(${diary.imgpath})`,
+              backgroundImage: `url(${diary.imagePath})`,
               backgroundSize: "cover",
               width: "3.5rem",
               height: "3.5rem",
@@ -85,6 +86,8 @@ const TripCalendar = ({ diaryInfo }) => {
       }
     }
     return null;
+
+
   };
 
   return (
@@ -114,10 +117,11 @@ export default TripCalendar;
 TripCalendar.propTypes = {
   diaryInfo: PropTypes.arrayOf(
     PropTypes.shape({
-      year: PropTypes.number.isRequired,
-      month: PropTypes.number.isRequired,
-      day: PropTypes.number.isRequired,
+      date: PropTypes.string.isRequired,
+      diaryID: PropTypes.string.isRequired,
+      diaryTitle: PropTypes.string.isRequired,
       imagePath: PropTypes.string.isRequired,
+      username: PropTypes.string.isRequired,
     }),
   ).isRequired,
 };
