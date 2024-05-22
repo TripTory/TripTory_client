@@ -60,7 +60,7 @@ const EditDiaryWritePage = () => {
       console.log(`${key}: ${value}`);
     }
 
-    axios.post("http://localhost:5000/diary", formData, { withCredentials: true, headers: {"Content-Type": "multipart/form-data"} })
+    axios.put("http://localhost:5000/diary", formData, { withCredentials: true, headers: {"Content-Type": "multipart/form-data"} })
     .then((res) => {
       setDiaryId({
         diaryid: res.data.diaryid,

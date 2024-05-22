@@ -15,12 +15,13 @@ const DiaryPage = () => {
   const [diaryInfo, setDiaryInfo] = useState({ _id: "", title: "", content: "", date: "", travel: "", userId: "", userName: "", url: [], userUrl: "",});
 
   const { state } = useLocation();
-  const [id, setId] = useState(state.diaryid);
+  const [id, setId] = useState(state);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/diary/${id}`, { withCredentials: true})
+    console.log("안녕2?",setDiaryInfo.travel);
+    axios.get(`http://localhost:5000/diary/${id.diaryid}`, { withCredentials: true})
     .then((res) => {
       const data = res.data.diaryinfo;
       setDiaryInfo({
@@ -42,7 +43,7 @@ const DiaryPage = () => {
 
 
   const goToTriptable = () => {
-    navigate("/triptable");
+    navigate("/triptable", {state: { id: setDiaryInfo.travel }});
   };
 
   const goToEditDiary = () => {
@@ -53,7 +54,7 @@ const DiaryPage = () => {
     formData.append("date", diaryInfo.date);
     formData.append("images", diaryInfo.url);
 
-    axios.put(`http://localhost:5000/diary/${id}`, formData, { withCredentials: true})
+    axios.put(`http://localhost:5000/diary/${id.diaryid}`, formData, { withCredentials: true})
     .catch((error) => {
       console.log(error);
     });

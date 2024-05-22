@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import calendar from "../assets/images/calendar.svg";
@@ -21,8 +21,12 @@ const DiaryWritePage = () => {
   const [imagePreview, setImagePreview] = useState(null);
   const [files, setFiles] = useState([]);
   const { state } = useLocation();
-  // const [travelid, setTravelId] = useState(state);
+  const [travelid, setTravelId] = useState(state);
   const [diaryId, setDiaryId] = useState({ diaryid: "" });
+  useEffect(() => {
+    console.log("Travel ID:", travelid); // Travel ID 출력
+  //
+  });
 
   const navigate = useNavigate();
 
@@ -47,7 +51,7 @@ const DiaryWritePage = () => {
     formData.append("title", title);
     formData.append("content", content);
     formData.append("date", startDate.toISOString().split("T")[0]);
-    formData.append("travel", "664c3dc4300f7b0c6126c483"); // travelid 대체
+    formData.append("travel", travelid); // travelid 대체
 
     files.forEach((file) => {
       formData.append("images", file.fileObject);
@@ -63,7 +67,7 @@ const DiaryWritePage = () => {
         diaryid: res.data.diaryid,
       });
       const diary_id = res.data.diaryid;
-      navigate("/showdiary", { state: { diaryid: diary_id } });
+      navigate("/showdiary", { state: { diaryid: diary_id, travelid: travelid } });
     })
     .catch((error) => {
       console.log("에러", error);
