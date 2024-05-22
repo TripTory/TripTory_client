@@ -9,9 +9,9 @@ import axios from "axios";
 const CalendarPage = () => {
   const SERVER_URL = process.env.REACT_APP_SERVER_URL;
   const [diaryInfo, setDiaryInfo] = useState([]);
+  const [loading, setLoading] = useState(true); // 데이터 로딩 상태를 추적하는 새로운 상태
 
   useEffect(() => {
-    console.log("Test");
     axios
       .get(`${SERVER_URL}/diary`, { withCredentials: true })
       .then((res) => {
@@ -25,9 +25,11 @@ const CalendarPage = () => {
           };
         });
         setDiaryInfo(transformedData);
+        setLoading(false); // 데이터를 가져온 후 로딩 상태를 false로 설정
       })
       .catch((error) => {
         console.error("에러:", error);
+        setLoading(false); // 오류 발생 시 로딩 상태를 false로 설정
       });
   }, []);
 
@@ -35,7 +37,7 @@ const CalendarPage = () => {
   return (
     <div>
       <Title>내 캘린더</Title>
-      <TripCalendar diaryInfo={diaryInfo}></TripCalendar>
+      {!loading && <TripCalendar diaryInfo={diaryInfo} />}
       <BottomNav></BottomNav>
     </div>
   );
