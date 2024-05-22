@@ -63,7 +63,7 @@ const InviteFriendPage = () => {
 
   // 취소 버튼
   const handleCancel = () => {
-    navigate("/triptable", { state: { travelID: travelID } });
+    navigate("/triptable", { state:travelID } );
   };
 
   // 코드 복사 버튼
