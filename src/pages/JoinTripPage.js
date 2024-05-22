@@ -14,6 +14,7 @@ const JoinTripPage = () => {
   const SERVER_URL = process.env.REACT_APP_SERVER_URL;
   const navigate = useNavigate();
   const [inputCode, setInputCode] = useState("");
+  const [travelID, setTravelID] = useState("");
   const [isCheckModal, setIsCheckModal] = useState(false);
   const [isFailModal, setIsFailModal] = useState(false);
   const [isSuccessModal, setIsSuccessModal] = useState(false);
@@ -35,7 +36,7 @@ const JoinTripPage = () => {
     axios
       .put(
         `${SERVER_URL}/travel/invite`,
-        { ivtoken: inputCode },
+        { travelid: inputCode },
         { withCredentials: true },
       )
       .then((res) => {
@@ -62,6 +63,7 @@ const JoinTripPage = () => {
       .then((res) => {
         if (res.status === 200) {
           setInviter(res.data.auth);
+          setTravelID(res.data.travelid);
           openCheckModal();
         } else {
           openFailModal();
