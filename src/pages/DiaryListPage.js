@@ -46,7 +46,6 @@ export default function DiaryListPage() {
     navigate("/invitefriend", {state: location.state.id});
   };
   const goToCreate = () => {
-    console.log(data);
     navigate("/diary", {state: location.state.id});
   };
 
