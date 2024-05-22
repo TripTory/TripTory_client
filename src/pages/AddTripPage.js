@@ -14,6 +14,7 @@ import moment from "moment";
 import axios from "axios";
 
 const AddTripPage = () => {
+  const SERVER_URL = process.env.REACT_APP_SERVER_URL;
   const navigate = useNavigate();
 
   //모달창(여행지 검색) 관리 변수
@@ -129,7 +130,7 @@ const AddTripPage = () => {
       </TitleContainer>
       <EmptyContainer />
       <div>
-        <ImageUploader onChange={setImgUrl} />
+        <ImageUploader onChange={setImgUrl} url={null}/>
       </div>
       <EmptyContainer />
       <div></div>

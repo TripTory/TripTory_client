@@ -8,7 +8,11 @@ import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router";
 import { COLOR } from "../styles/color";
+import moment from "moment";
+import axios from "axios";
 import BottomNav from "../layout/BottomNav";
+import Modal from "../components/common/Modal";
+import SuccessContent from "../components/common/SuccessAddTripContent";
 
 const EditTripPage = () => {
   const { state } = useLocation();
@@ -16,34 +20,30 @@ const EditTripPage = () => {
   //모달창(여행지 검색) 관리 변수
   const [isModal, setIsModal] = useState(false);
 
+  const [success, setIsSuccess] = useState(false);
   // 사용자 입력 정보(여행이름)
-  const [tripName, setTripName] = useState(state.title);
+  const [tripName, setTripName] = useState(state.state.title);
   //사용자 입력 정보(여행지역)
-  const [tripPlace, setTripPlace] = useState(state.location.region);
-  const [longitude, setLongitude] = useState(state.location.longitude);
-  const [latitude, setLatitude] = useState(state.location.latitude);
+  const [tripPlace, setTripPlace] = useState(state.state.location.region);
+  const [longitude, setLongitude] = useState(state.state.location.longitude);
+  const [latitude, setLatitude] = useState(state.state.location.latitude);
   //사용자 입력 정보(여행날짜)
-  const [dateRange, setDateRange] = useState([state.startdate, state.enddate]);
-  const [startDate, setStartDate] = useState(state.startdate);
-  const [endDate, setEndDate] = useState(state.enddate);
+  const [dateRange, setDateRange] = useState([
+    state.state.startdate,
+    state.state.enddate,
+  ]);
+  const [startDate, setStartDate] = useState(state.state.startdate);
+  const [endDate, setEndDate] = useState(state.state.enddate);
   //사용자 업로드 이미지 url
-  const [imgUrl, setImgUrl] = useState(state.travelimg);
+  const [imgUrl, setImgUrl] = useState(state.url);
 
-  // //모달창(여행지 검색) 관리 변수
-  // const [isModal, setIsModal] = useState(false);
-
-  // // 사용자 입력 정보(여행이름)
-  // const [tripName, setTripName] = useState("");
-  // //사용자 입력 정보(여행지역)
-  // const [tripPlace, setTripPlace] = useState("");
-  // const [longitude, setLongitude] = useState("");
-  // const [latitude, setLatitude] = useState("");
-  // //사용자 입력 정보(여행날짜)
-  // const [dateRange, setDateRange] = useState([null, null]);
-  // const [startDate, setStartDate] = useState(null);
-  // const [endDate, setEndDate] = useState(null);
-  // //사용자 업로드 이미지 url
-  // const [imgUrl, setImgUrl] = useState(null);
+  const openSuccessModal = () => {
+    setIsSuccess(true);
+  };
+  const closeSuccessModal = () => {
+    setIsSuccess(false);
+    navigate("/home");
+  };
 
   // 여행 이름값 변경
   const handleNameChange = (e) => {
@@ -63,30 +63,32 @@ const EditTripPage = () => {
 
   // 여행떠나기 버튼 클릭
   const handleSubmit = () => {
-    console.log(imgUrl);
-    // const startDate = moment(dateRange[0]).toISOString();
-    // const endDate = moment(dateRange[1]).toISOString();
-    // const formData = new FormData();
-    // formData.append("title", tripName);
-    // formData.append("startdate", startDate);
-    // formData.append("enddate", endDate);
-    // formData.append("location[latitude]", latitude);
-    // formData.append("location[longitude]", longitude);
-    // formData.append("image", imgUrl.fileObject);
+    const startdate = moment(startDate)
+      .startOf("day")
+      .format("YYYY-MM-DDTHH:mm:ss.SSS[Z]");
+    const enddate = moment(endDate)
+      .endOf("day")
+      .format("YYYY-MM-DDTHH:mm:ss.SSS[Z]");
+    const formData = new FormData();
+    formData.append("title", tripName);
+    formData.append("startdate", startdate);
+    formData.append("enddate", enddate);
+    formData.append("location[region]", tripPlace);
+    formData.append("location[latitude]", latitude);
+    formData.append("location[longitude]", longitude);
+    formData.append("image", imgUrl.fileObject);
 
-    // axios
-    //   .post(`${process.env.REACT_APP_SERVER_URL}`, formData, {
-    //     withCredentials: true,
-    //     headers: { "Content-Type": "multipart/form-data" },
-    //   })
-    //   .then((res) => {
-    //     console.log(res);
-    //     alert("저장 완료");
-    //     navigate("/home");
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
+    axios
+      .put(`${process.env.REACT_APP_SERVER_URL}/travel/${state.state._id}`, formData, {
+        withCredentials: true,
+        headers: { "Content-Type": "multipart/form-data" },
+      })
+      .then((res) => {
+        openSuccessModal();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const handleCancel = () => {
@@ -107,13 +109,26 @@ const EditTripPage = () => {
           setLatitude={setLatitude}
         />
       )}
+      {success && (
+        <Modal
+          content={<SuccessContent />}
+          closeModals={closeSuccessModal}
+          buttons={
+            <ButtonContainer>
+              <OkBtn onClick={closeSuccessModal}>예</OkBtn>
+            </ButtonContainer>
+          }
+          w="80%"
+          h="22%"
+        />
+      )}
       <TitleContainer>
         <Title>여행 수정하기</Title>
         <CancelBtn onClick={handleCancel}>취소</CancelBtn>
       </TitleContainer>
       <EmptyContainer />
       <div>
-        <ImageUploader onChange={setImgUrl} />
+        <ImageUploader onChange={setImgUrl} url={imgUrl} />
       </div>
       <EmptyContainer />
       <div></div>
@@ -150,13 +165,13 @@ const EditTripPage = () => {
         </SearchPlaceBtn>
       </InputContainer>
       <Button
-        // disabled={
-        //   !tripName.trim() ||
-        //   !tripPlace.trim() ||
-        //   !startDate ||
-        //   !endDate ||
-        //   !imgUrl
-        // }
+        disabled={
+          !tripName ||
+          !tripPlace ||
+          !startDate ||
+          !endDate ||
+          !imgUrl
+        }
         type="submit"
         onClick={handleSubmit}
       >
@@ -219,6 +234,25 @@ const Button = styled.button`
       color: #666; /* 비활성화된 상태일 때의 글자색 */
       cursor: not-allowed; /* 비활성화된 상태일 때의 커서 스타일 변경 */
     `}
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 50%;
+`;
+
+const OkBtn = styled.button`
+  background-color: ${COLOR.MAIN_GREEN};
+  color: white;
+  width: 40%;
+  height: 3rem;
+  border: none;
+  border-radius: 2rem;
+  font-size: 1.3rem;
+  font-weight: bolder;
 `;
 
 const CancelBtn = styled.button`
