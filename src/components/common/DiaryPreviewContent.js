@@ -30,6 +30,11 @@ const DiaryPreviewContent = ({ diaries }) => {
     );
   };
 
+  const goToDiary = () => {
+    const currentDiary = diaries[currentSlideIndex];
+    navigate("/showdiary", { state: currentDiary.diaryID });
+  };
+
   let content = null; // 조건부 렌더링을 위한 변수
 
   if (diaries && diaries.length > 0) {
@@ -39,7 +44,7 @@ const DiaryPreviewContent = ({ diaries }) => {
           {diaries.map((diary, index) => (
             <DiaryEntry key={index}>
               <ImgDiv>
-                <DiaryImage src="https://health.chosun.com/site/data/img_dir/2023/05/31/2023053102582_0.jpg" />
+                <DiaryImage src={diary.imagePath} />
               </ImgDiv>
               <TitleDiv>{diary.diaryTitle}</TitleDiv>
               <DateDiv>
@@ -58,22 +63,14 @@ const DiaryPreviewContent = ({ diaries }) => {
             </ButtonRight>
           </>
         )}
+        <ButtonContainer>
+          <GotoDiaryBtn onClick={goToDiary}>일기 보러 가기</GotoDiaryBtn>
+        </ButtonContainer>
       </ContentWrapper>
     );
   }
 
-
-  const goToDiary = () => {
-    const currentDiary = diaries[currentSlideIndex];
-    navigate("/showdiary", {state:currentDiary.diaryID});
-  };
-
-  return (
-    <div>
-      {content}
-      <ButtonContainer><GotoDiaryBtn onClick={goToDiary}>일기 보러 가기</GotoDiaryBtn></ButtonContainer>
-    </div>
-  );
+  return <>{content}</>;
 };
 
 export default DiaryPreviewContent;
@@ -91,15 +88,18 @@ DiaryPreviewContent.propTypes = {
 };
 
 const ContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
-  height: 85%;
+  height: 100%;
   overflow: hidden;
   position: relative;
 `;
 
 const Slider = styled.div`
   width: 98%;
-  height: 100%;
+  height: 80%;
   display: flex;
   overflow: hidden;
   scroll-behavior: smooth;
@@ -170,9 +170,10 @@ const ButtonRight = styled(Button)`
 
 const ButtonContainer = styled.div`
   width: 100%;
-  height: 18%;
+  height: 20%;
   display: flex;
   justify-content: center;
+  align-items: center;
 `;
 
 const GotoDiaryBtn = styled.button`

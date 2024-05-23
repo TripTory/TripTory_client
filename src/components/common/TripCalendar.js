@@ -26,7 +26,8 @@ const TripCalendar = ({ diaryInfo }) => {
     // 선택된 날짜에 해당하는 모든 일기를 뽑아서 리턴하기
     const selected = diaryInfo.filter(
       (item) =>
-        moment(item.date).format("YYYY") === moment(diary.date).format("YYYY") &&
+        moment(item.date).format("YYYY") ===
+          moment(diary.date).format("YYYY") &&
         moment(item.date).format("M") === moment(diary.date).format("M") &&
         moment(item.date).format("D") === moment(diary.date).format("D"),
     );
@@ -74,7 +75,6 @@ const TripCalendar = ({ diaryInfo }) => {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              color: "white",
               position: "absolute",
             }}
             onClick={() => showDiary(diary)} // 선택된 일기 정보 업데이트
@@ -85,8 +85,6 @@ const TripCalendar = ({ diaryInfo }) => {
       }
     }
     return null;
-
-
   };
 
   return (
@@ -102,11 +100,11 @@ const TripCalendar = ({ diaryInfo }) => {
         tileContent={tileContent}
         tileClassName={tileClassName}
       />
-      <Drawer anchor="bottom" open={isOpen} onClose={toggleDrawer(false)}>
-        <DiaryModal
+      <StyledDrawer anchor="bottom" open={isOpen} onClose={toggleDrawer(false)}>
+        <StyledDiaryModal
           content={<DiaryPreviewContent diaries={selectedDiary} />}
         />
-      </Drawer>
+      </StyledDrawer>
     </CalendarWrapper>
   );
 };
@@ -223,4 +221,8 @@ const CalendarWrapper = styled.div`
   padding-bottom: 6rem;
 `;
 
+const StyledDrawer = styled(Drawer)`
+`;
 
+const StyledDiaryModal = styled(DiaryModal)`
+`;
