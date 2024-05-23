@@ -79,7 +79,7 @@ const TripCalendar = ({ diaryInfo }) => {
             }}
             onClick={() => showDiary(diary)} // 선택된 일기 정보 업데이트
           >
-            {diary.day}
+            {moment(diary.date).format("D")}
           </div>
         );
       }
