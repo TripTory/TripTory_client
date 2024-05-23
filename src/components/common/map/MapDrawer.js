@@ -8,7 +8,7 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 const MapDrawer = (props) => {
   return (
     <StMapDrawer>
-      <TripImg src={props.data.travelimg} />
+      <TripImg src={props.url} />
       <InfoDiv>
         <TitleP>{props.data.title}</TitleP>
         <DataP>{props.data.startdate.slice(0,10)}~{props.data.enddate.slice(0,10)}</DataP>
@@ -29,6 +29,7 @@ MapDrawer.propTypes = {
   location: PropTypes.node.isRequired,
   region: PropTypes.string.isRequired,
   travelimg: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
 };
 
 const StMapDrawer = styled.div`

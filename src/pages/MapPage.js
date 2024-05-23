@@ -9,6 +9,7 @@ import axios from "axios";
 const MapPage = () => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
+  const [url, setUrl] = useState("");
 
   useEffect(() => {
     let completed = false;
@@ -21,6 +22,8 @@ const MapPage = () => {
       );
       if (!completed) {
         setData(result.data.travels);
+        setUrl(result.data.travelUrls);
+        // console.log(url);
       }
       setLoading(true);
     }
@@ -34,7 +37,7 @@ const MapPage = () => {
       <TitleDiv>
         <TitleTypo variant="h4">나의 여행 지도</TitleTypo>
       </TitleDiv>
-      <MapComponent data={data} style={{ zIndex: 999 }} />
+      <MapComponent data={data} urls={url} style={{ zIndex: 999 }} />
       <BottomNav style={{ zIndex: 900 }} />
     </StMapPage>
   );
