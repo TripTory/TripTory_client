@@ -26,6 +26,7 @@ const EditDiaryWritePage = () => {
   };
 
   useEffect(() => {
+    console.log("안녕?",state.id.diaryid);
     const transformedFiles = transformFiles(files);
     setFiles2(transformedFiles);
   }, []);
@@ -58,7 +59,7 @@ const EditDiaryWritePage = () => {
     formData.append("title", title);
     formData.append("content", content);
     formData.append("date", startDate.toISOString().split("T")[0]);
-    formData.append("travel", "664c257dac93cdbc69a66bf5"); // travelid 대체
+    formData.append("img", files2);
 
     files.forEach((file) => {
       formData.append("images", file.fileObject);
@@ -68,12 +69,13 @@ const EditDiaryWritePage = () => {
       console.log(`${key}: ${value}`);
     }
 
-    axios.put("http://localhost:5000/diary", formData, { withCredentials: true, headers: {"Content-Type": "multipart/form-data"} })
+    axios.put(`http://localhost:5000/diary/${state.id.diaryid}`, formData, { withCredentials: true, headers: {"Content-Type": "multipart/form-data"} })
     .then((res) => {
       setDiaryId({
         diaryid: res.data.diaryid,
       });
       const diary_id = res.data.diaryid;
+      console.log("응?",diary_id);
       navigate("/showdiary", { state: { diaryid: diary_id } });
     })
     .catch((error) => {

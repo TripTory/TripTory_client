@@ -23,6 +23,7 @@ const DiaryPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
+    console.log("응???", id.diaryid);
     axios.get(`http://localhost:5000/diary/${id.diaryid}`, { withCredentials: true})
     .then((res) => {
       const data = res.data.diaryinfo;
@@ -58,12 +59,12 @@ const DiaryPage = () => {
     formData.append("date", diaryInfo.date);
     formData.append("images", diaryInfo.url);
 
-    axios.put(`http://localhost:5000/diary/${id.diaryid}`, formData, { withCredentials: true})
-    .catch((error) => {
-      console.log(error);
-    });
+    // axios.put(`http://localhost:5000/diary/${id.diaryid}`, formData, { withCredentials: true})
+    // .catch((error) => {
+    //   console.log(error);
+    // });
 
-    navigate("/editdiary", { state: { diaryInfo } });
+    navigate("/editdiary", { state: { diaryInfo: diaryInfo, id: id} });
   };
 
 
