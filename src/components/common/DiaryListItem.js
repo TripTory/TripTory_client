@@ -46,7 +46,6 @@ DiaryListItem.propTypes = {
   date: PropTypes.string.isRequired,
   img: PropTypes.node.isRequired,
   imgpath: PropTypes.string.isRequired,
-  userId: PropTypes.string.isRequired,
 };
 const StDiaryListItem = styled.div`
   display: flex;
