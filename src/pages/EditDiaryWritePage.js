@@ -30,17 +30,9 @@ const EditDiaryWritePage = () => {
     setFiles2(transformedFiles);
   }, []);
 
-  useEffect(() => {
-    console.log("이미지 제발:", files2); // Travel ID 출력
-    // console.log("길이",files2.length);
-  //
-  });
-
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false); // Cancel 버튼을 위한 모달 상태
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(false); // Save 버튼을 위한 모달 상태
   const [imagePreview, setImagePreview] = useState(null);
-  // const [files, setFiles] = useState([]);
-  // const [travelid, setTravelId] = useState(state);
   const [diaryId, setDiaryId] = useState({ diaryid: "" });
 
   const navigate = useNavigate();

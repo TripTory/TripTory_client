@@ -8,11 +8,6 @@ import PropTypes from "prop-types";
 const Uploader = ({ onFilesChange, files=[], setFiles }) => {
   const inputRef = useRef(null);
 
-  useEffect(() => {
-    // console.log("이미지 뜨니>?????:", files[0]); // Travel ID 출력
-    console.log(files.length);
-  });
-
   const saveImage = (e) => {
     e.preventDefault();
     onFilesChange(files);
@@ -67,12 +62,8 @@ const Uploader = ({ onFilesChange, files=[], setFiles }) => {
               <div key={index}>
                 <ImageDiv>
                   <UploadedImage src={file.preview_URL} />
-                  {/* <CancelIcons
-                    onClick={() => deleteImage(index)} /> */}
-                  <CancelIcons onClick={() => {
-                    console.log("랴ㅣㄷㄴ", file); // 파일의 preview_URL을 콘솔에 출력
-                    deleteImage(index);
-                  }} />
+                  <CancelIcons
+                    onClick={() => deleteImage(index)} />
                 </ImageDiv>
               </div>
             ))}

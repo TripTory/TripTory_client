@@ -108,11 +108,6 @@ const DiaryWritePage = () => {
 
     <Uploader onFilesChange={handleImageUpload} files={files} setFiles={setFiles} />
 
-    {/* {Array.isArray(files) &&
-      files.map((file, index) => (
-        <Uploader key={index} onFilesChange={handleImageUpload} file={file} setFiles={setFiles} />
-      ))} */}
-
     <BtnDiv>
       <CancelBtn onClick={openCancelModal}>취소</CancelBtn>
       <SaveBtn onClick={openSaveModal} disabled={!(startDate && title && content)} >저장</SaveBtn>
