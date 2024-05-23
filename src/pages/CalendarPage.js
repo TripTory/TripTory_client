@@ -1,73 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "react-calendar/dist/Calendar.css";
 import styled from "styled-components";
 import TripCalendar from "../components/common/TripCalendar";
 import BottomNav from "../layout/BottomNav";
 import { COLOR } from "../styles/color";
+import axios from "axios";
 
 const CalendarPage = () => {
+  const SERVER_URL = process.env.REACT_APP_SERVER_URL;
+  const [diaryInfo, setDiaryInfo] = useState([]);
+  const [loading, setLoading] = useState(true); // 데이터 로딩 상태를 추적하는 새로운 상태
 
-  // DB에서 일기의 년,월,일,사진,제목 등등.. 정보 가져오기
-  const diaryInfo = [
-    {
-      "year": 2024,
-      "month": 3,
-      "day": 6,
-      "place" : "인천 광역시",
-      "author" : "카리나",
-      "diaryTitle" : "신나는 바다 여행",
-      "imagePath": "https://health.chosun.com/site/data/img_dir/2023/05/31/2023053102582_0.jpg"
-    },
-    {
-      "year": 2024,
-      "month": 4,
-      "day": 15,
-      "place" : "인천 광역시",
-      "author" : "카리나",
-      "diaryTitle" : "신나는 바다 여행",
-      "imagePath": "http://giljabi.net/newwp/wp-content/uploads/2017/06/764fd69872ff5b764c21066a1a24d6e2-768x512.jpg"
-    },
-    {
-      "year": 2024,
-      "month": 4,
-      "day": 15,
-      "place" : "인천 광역시",
-      "author" : "카리나",
-      "diaryTitle" : "신나는 바다 여행",
-      "imagePath": "https://mediaim.expedia.com/destination/1/aaa0934df627fdf9d5ae9d1863195d63.jpg"
-    },
-    {
-      "year": 2024,
-      "month": 4,
-      "day": 15,
-      "place" : "인천 광역시",
-      "author" : "카리나",
-      "diaryTitle" : "신나는 바다 여행",
-      "imagePath": "https://health.chosun.com/site/data/img_dir/2023/05/31/2023053102582_0.jpg"
-    },
-    {
-      "year": 2024,
-      "month": 4,
-      "day": 20,
-      "place" : "인천 광역시",
-      "author" : "카리나",
-      "diaryTitle" : "신나는 바다 여행",
-      "imagePath": "https://blog.kakaocdn.net/dn/o1KIw/btqu9mflPY6/rGk1mM3iugV1c6jj9Z3E80/img.jpg"
-    },
-    {
-      "year": 2024,
-      "month": 5,
-      "day": 20,
-      "place" : "인천 광역시",
-      "author" : "카리나",
-      "diaryTitle" : "신나는 바다 여행",
-      "imagePath": "https://blog.kakaocdn.net/dn/o1KIw/btqu9mflPY6/rGk1mM3iugV1c6jj9Z3E80/img.jpg"
-    }
-  ];
+  useEffect(() => {
+    axios
+      .get(`${SERVER_URL}/diary`, { withCredentials: true })
+      .then((res) => {
+        const transformedData = res.data.diarys_info.map((item) => {
+          return {
+            date: item.diary.date,
+            username: item.diary.userName,
+            diaryTitle: item.diary.title,
+            imagePath: item.url,
+            diaryID: item.diary._id
+          };
+        });
+        setDiaryInfo(transformedData);
+        setLoading(false); // 데이터를 가져온 후 로딩 상태를 false로 설정
+      })
+      .catch((error) => {
+        console.error("에러:", error);
+        setLoading(false); // 오류 발생 시 로딩 상태를 false로 설정
+      });
+  }, []);
+
+
   return (
     <div>
       <Title>내 캘린더</Title>
-      <TripCalendar diaryInfo={diaryInfo}></TripCalendar>
+      {!loading && <TripCalendar diaryInfo={diaryInfo} />}
       <BottomNav></BottomNav>
     </div>
   );
