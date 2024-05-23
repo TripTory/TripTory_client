@@ -25,7 +25,7 @@ const DiaryWritePage = () => {
   const [diaryId, setDiaryId] = useState({ diaryid: "" });
   useEffect(() => {
     console.log("Travel ID:", travelid); // Travel ID 출력
-  //
+    console.log("일기 생성 files:", files);
   });
 
   const navigate = useNavigate();
@@ -108,6 +108,10 @@ const DiaryWritePage = () => {
 
     <Uploader onFilesChange={handleImageUpload} files={files} setFiles={setFiles} />
 
+    {/* {Array.isArray(files) &&
+      files.map((file, index) => (
+        <Uploader key={index} onFilesChange={handleImageUpload} file={file} setFiles={setFiles} />
+      ))} */}
 
     <BtnDiv>
       <CancelBtn onClick={openCancelModal}>취소</CancelBtn>

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import calendar from "../assets/images/calendar.svg";
@@ -19,6 +19,22 @@ const EditDiaryWritePage = () => {
   const [title, setTitle] = useState(diaryInfo?.title || "");
   const [content, setContent] = useState(diaryInfo?.content || "");
   const [files, setFiles] = useState(diaryInfo?.url || []);
+  const [files2, setFiles2] = useState();
+
+  const transformFiles = (filesArray) => {
+    return filesArray.map((file) => ({ preview_URL: file }));
+  };
+
+  useEffect(() => {
+    const transformedFiles = transformFiles(files);
+    setFiles2(transformedFiles);
+  }, []);
+
+  useEffect(() => {
+    console.log("이미지 제발:", files2); // Travel ID 출력
+    // console.log("길이",files2.length);
+  //
+  });
 
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false); // Cancel 버튼을 위한 모달 상태
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(false); // Save 버튼을 위한 모달 상태
@@ -105,8 +121,7 @@ const EditDiaryWritePage = () => {
       />
     </DiaryDiv>
 
-    <Uploader onFilesChange={handleImageUpload} files={files} setFiles={setFiles} />
-
+    <Uploader onFilesChange={handleImageUpload} files={files2} setFiles={setFiles2} />
 
     <BtnDiv>
       <CancelBtn onClick={openCancelModal}>취소</CancelBtn>
