@@ -10,6 +10,7 @@ import BottomNav from "../layout/BottomNav";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router";
+import moment from "moment";
 
 const DiaryWritePage = () => {
 
@@ -50,7 +51,7 @@ const DiaryWritePage = () => {
     const formData = new FormData();
     formData.append("title", title);
     formData.append("content", content);
-    formData.append("date", startDate.toISOString().split("T")[0]);
+    formData.append("date", moment(startDate).startOf("day").format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"));
     formData.append("travel", travelid); // travelid 대체
 
     files.forEach((file) => {
