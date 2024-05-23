@@ -100,11 +100,11 @@ const TripCalendar = ({ diaryInfo }) => {
         tileContent={tileContent}
         tileClassName={tileClassName}
       />
-      <StyledDrawer anchor="bottom" open={isOpen} onClose={toggleDrawer(false)}>
-        <StyledDiaryModal
+      <Drawer anchor="bottom" open={isOpen} onClose={toggleDrawer(false)}>
+        <DiaryModal
           content={<DiaryPreviewContent diaries={selectedDiary} />}
         />
-      </StyledDrawer>
+      </Drawer>
     </CalendarWrapper>
   );
 };
@@ -219,10 +219,4 @@ const CalendarWrapper = styled.div`
   display: flex;
   justify-content: center;
   padding-bottom: 6rem;
-`;
-
-const StyledDrawer = styled(Drawer)`
-`;
-
-const StyledDiaryModal = styled(DiaryModal)`
 `;
