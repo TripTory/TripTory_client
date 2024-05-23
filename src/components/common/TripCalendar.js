@@ -76,6 +76,7 @@ const TripCalendar = ({ diaryInfo }) => {
               alignItems: "center",
               justifyContent: "center",
               position: "absolute",
+              color: "white",
             }}
             onClick={() => showDiary(diary)} // 선택된 일기 정보 업데이트
           >
