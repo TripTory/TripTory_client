@@ -6,7 +6,7 @@ import { PropTypes } from "prop-types";
 export default function TripTable(props) {
   return (
     <StTripTable>
-      {props.data.map((it)=> {
+      {props.data && props.data.map((it)=> {
         return <DiaryListItem key={it._id} data={it}/>;
       })}
     </StTripTable>

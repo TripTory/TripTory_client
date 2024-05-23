@@ -42,7 +42,7 @@ export default function TripList() {
         scrollbarWidth: "none",
       }}
     >
-      {data.map((it,index) => {
+      {data && data.map((it,index) => {
         return <TripListItem key={it._id} data={it} url={url[index]}/>;
       })}
     </StTripList>

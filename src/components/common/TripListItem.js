@@ -101,8 +101,6 @@ TripListItem.propTypes = {
   data: PropTypes.node.isRequired,
   _id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  startdate: PropTypes.string.isRequired,
-  enddate: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired,
 };
 
