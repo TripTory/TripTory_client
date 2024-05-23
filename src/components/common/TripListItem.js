@@ -21,6 +21,7 @@ export default function TripListItem(props) {
 
   const goToDiaryList = () => {
     setTripName(props.data.title);
+    // console.log("props.data._id: ", props.data._id);
     navigate("/triptable", {
       state: { id: props.data._id},
     });
@@ -99,9 +100,7 @@ export default function TripListItem(props) {
 
 TripListItem.propTypes = {
   data: PropTypes.node.isRequired,
-  _id: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired,
+  url: PropTypes.array.isRequired,
 };
 
 const CancelModal = styled(Modal)``;

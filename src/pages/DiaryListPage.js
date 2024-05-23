@@ -19,6 +19,7 @@ import { tripNameState } from "../recoil/commonState";
 export default function DiaryListPage() {
   const tripName = useRecoilValue(tripNameState);
   const navigate = useNavigate();
+  //여행 id location으로 받음
   const location = useLocation();
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
@@ -32,7 +33,8 @@ export default function DiaryListPage() {
         { withCredentials: true },
       );
       if (!completed) {
-        setData(result.data.diarys);
+        // console.log("diarys:", result.data.diarys_info);
+        setData(result.data.diarys_info);
       }
       setLoading(true);
     }
@@ -43,12 +45,11 @@ export default function DiaryListPage() {
   }, []);
 
   const goToAdd = () => {
-    navigate("/invitefriend", {state: location.state.id});
+    navigate("/invitefriend", {state: {id: location.state.id }});
   };
   const goToCreate = () => {
-    navigate("/diary", {state: location.state.id});
+    navigate("/diary", {state: {id: location.state.id }});
   };
-
   return (
     <StDiaryListPage>
       <TitleDiv>

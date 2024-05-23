@@ -28,7 +28,7 @@ export default function DiaryListItem(props) {
             <TitleP>{props.data.title}</TitleP>
             <DateDiv>
               <DateP>{props.data.startdate}</DateP>
-              <UserP>{props.data.userId}</UserP>
+              <UserP>{props.data.userName}</UserP>
             </DateDiv>
           </InfoDiv>
         </ContentDiv>
@@ -55,7 +55,7 @@ const StDiaryListItem = styled.div`
   border: 0.2rem solid rgba(228, 228, 228);
   border-radius: 1rem;
   width: 100%;
-  height: 100%;
+  height: 10rem;
   margin-bottom: 0.8rem;
   box-shadow: 1px 1px 3px rgba(228, 228, 228);
 `;
