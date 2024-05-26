@@ -77,7 +77,7 @@ const DiaryPage = () => {
   };
 
   const closeModal = () => {
-    axios.delete(`http://localhost:5000/diary/${id}`, { withCredentials: true})
+    axios.delete(`http://localhost:5000/diary/${id.diaryid}`, { withCredentials: true})
     .then((res) => {
       console.log(res);
     })
