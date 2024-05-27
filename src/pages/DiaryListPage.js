@@ -34,7 +34,7 @@ export default function DiaryListPage() {
     async function get() {
       try {
         const result = await axios.get(
-          `${process.env.REACT_APP_SERVER_URL}/diary/travel/664f3b79e7ecfaede85a7c1f`,
+          `${process.env.REACT_APP_SERVER_URL}/diary/travel/${location.state.id}`,
           { withCredentials: true },
         );
         const Img = await axios.get(
