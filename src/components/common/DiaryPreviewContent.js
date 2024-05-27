@@ -6,8 +6,13 @@ import { COLOR } from "../../styles/color";
 import leftBtn from "../../assets/icons/diary_left_btn.svg";
 import rightBtn from "../../assets/icons/diary_right_btn.svg";
 import moment from "moment";
+import { useRecoilState } from "recoil";
+import { tripIdState, diaryIdState } from "../../recoil/commonState";
 
 const DiaryPreviewContent = ({ diaries }) => {
+
+  const [tripId, setTripId] = useRecoilState(tripIdState);
+  const [diaryId, setDiaryId] = useRecoilState(diaryIdState);
   const navigate = useNavigate();
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const sliderRef = useRef(null);
@@ -31,8 +36,10 @@ const DiaryPreviewContent = ({ diaries }) => {
   };
 
   const goToDiary = () => {
-    const currentDiary = diaries[currentSlideIndex];
-    navigate("/showdiary", { state: currentDiary.diaryID });
+    setTripId(diaries[currentSlideIndex].travelID);
+    setDiaryId(diaries[currentSlideIndex].diaryID);
+
+    navigate("/showdiary");
   };
 
   let content = null; // 조건부 렌더링을 위한 변수
@@ -83,6 +90,7 @@ DiaryPreviewContent.propTypes = {
       diaryTitle: PropTypes.string.isRequired,
       imagePath: PropTypes.string.isRequired,
       username: PropTypes.string.isRequired,
+      travelID: PropTypes.string.isRequired,
     }),
   ).isRequired,
 };
