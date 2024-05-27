@@ -21,7 +21,7 @@ const DiaryWritePage = () => {
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(false); // Save 버튼을 위한 모달 상태
   const [imagePreview, setImagePreview] = useState(null);
   const [files, setFiles] = useState([]);
-  const { state } = useLocation();
+  const location = useLocation();
   const [travelid, setTravelId] = useState(state);
   const [diaryId, setDiaryId] = useState({ diaryid: "" });
   useEffect(() => {
@@ -51,8 +51,8 @@ const DiaryWritePage = () => {
     const formData = new FormData();
     formData.append("title", title);
     formData.append("content", content);
+    formData.append("travel", location.state.id); // travelid 대체
     formData.append("date", moment(startDate).startOf("day").format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"));
-    formData.append("travel", travelid); // travelid 대체
 
     files.forEach((file) => {
       formData.append("images", file.fileObject);

@@ -3,42 +3,43 @@ import React, { useState } from "react";
 import SelectDateRange from "../components/common/SelectDateRange";
 import ImageUploader from "../components/common/ImageUploader";
 import SearchPlaceModal from "../components/common/SearchPlaceModal";
-import Modal from "../components/common/Modal";
-import SuccessContent from "../components/common/SuccessAddTripContent";
 import { PiMapPinFill } from "react-icons/pi";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router";
 import { COLOR } from "../styles/color";
-import BottomNav from "../layout/BottomNav";
 import moment from "moment";
 import axios from "axios";
+import BottomNav from "../layout/BottomNav";
+import Modal from "../components/common/Modal";
+import SuccessContent from "../components/common/SuccessAddTripContent";
 
-const AddTripPage = () => {
-  const SERVER_URL = process.env.REACT_APP_SERVER_URL;
+const EditTripPage = () => {
+  const { state } = useLocation();
   const navigate = useNavigate();
-
   //모달창(여행지 검색) 관리 변수
   const [isModal, setIsModal] = useState(false);
 
   const [success, setIsSuccess] = useState(false);
-
   // 사용자 입력 정보(여행이름)
-  const [tripName, setTripName] = useState("");
+  const [tripName, setTripName] = useState(state.state.title);
   //사용자 입력 정보(여행지역)
-  const [tripPlace, setTripPlace] = useState("");
-  const [longitude, setLongitude] = useState("");
-  const [latitude, setLatitude] = useState("");
+  const [tripPlace, setTripPlace] = useState(state.state.location.region);
+  const [longitude, setLongitude] = useState(state.state.location.longitude);
+  const [latitude, setLatitude] = useState(state.state.location.latitude);
   //사용자 입력 정보(여행날짜)
-  const [dateRange, setDateRange] = useState([null, null]);
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
+  const [dateRange, setDateRange] = useState([
+    state.state.startdate,
+    state.state.enddate,
+  ]);
+  const [startDate, setStartDate] = useState(state.state.startdate);
+  const [endDate, setEndDate] = useState(state.state.enddate);
   //사용자 업로드 이미지 url
-  const [imgUrl, setImgUrl] = useState(null);
+  const [imgUrl, setImgUrl] = useState(state.url);
 
   const openSuccessModal = () => {
     setIsSuccess(true);
   };
-
   const closeSuccessModal = () => {
     setIsSuccess(false);
     navigate("/home");
@@ -68,9 +69,6 @@ const AddTripPage = () => {
     const enddate = moment(endDate)
       .endOf("day")
       .format("YYYY-MM-DDTHH:mm:ss.SSS[Z]");
-    console.log("---");
-    console.log(startdate);
-    console.log(enddate);
     const formData = new FormData();
     formData.append("title", tripName);
     formData.append("startdate", startdate);
@@ -81,7 +79,7 @@ const AddTripPage = () => {
     formData.append("image", imgUrl.fileObject);
 
     axios
-      .post(`${SERVER_URL}/travel`, formData, {
+      .put(`${process.env.REACT_APP_SERVER_URL}/travel/${state.state._id}`, formData, {
         withCredentials: true,
         headers: { "Content-Type": "multipart/form-data" },
       })
@@ -113,7 +111,7 @@ const AddTripPage = () => {
       )}
       {success && (
         <Modal
-          content={<SuccessContent/>}
+          content={<SuccessContent />}
           closeModals={closeSuccessModal}
           buttons={
             <ButtonContainer>
@@ -125,12 +123,12 @@ const AddTripPage = () => {
         />
       )}
       <TitleContainer>
-        <Title>어떤 여행을 만들까요?</Title>
+        <Title>여행 수정하기</Title>
         <CancelBtn onClick={handleCancel}>취소</CancelBtn>
       </TitleContainer>
       <EmptyContainer />
       <div>
-        <ImageUploader onChange={setImgUrl} url={null}/>
+        <ImageUploader onChange={setImgUrl} url={imgUrl} />
       </div>
       <EmptyContainer />
       <div></div>
@@ -168,8 +166,8 @@ const AddTripPage = () => {
       </InputContainer>
       <Button
         disabled={
-          !tripName.trim() ||
-          !tripPlace.trim() ||
+          !tripName ||
+          !tripPlace ||
           !startDate ||
           !endDate ||
           !imgUrl
@@ -177,16 +175,26 @@ const AddTripPage = () => {
         type="submit"
         onClick={handleSubmit}
       >
-        여행 떠나기
+        수정 완료하기
       </Button>
       <BottomNav />
     </div>
   );
 };
-AddTripPage.propTypes = {
-  location: PropTypes.object,
+
+EditTripPage.propTypes = {
+  data: PropTypes.node.isRequired,
+  title: PropTypes.string.isRequired,
+  startdate: PropTypes.string.isRequired,
+  enddate: PropTypes.string.isRequired,
+  location: PropTypes.node.isRequired,
+  region: PropTypes.string.isRequired,
+  longitude: PropTypes.number.isRequired,
+  latitude: PropTypes.number.isRequired,
+  travelimg: PropTypes.string.isRequired,
 };
-export default AddTripPage;
+
+export default EditTripPage;
 
 const Title = styled.h1`
   color: ${COLOR.MAIN_GREEN};
@@ -226,6 +234,25 @@ const Button = styled.button`
       color: #666; /* 비활성화된 상태일 때의 글자색 */
       cursor: not-allowed; /* 비활성화된 상태일 때의 커서 스타일 변경 */
     `}
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 50%;
+`;
+
+const OkBtn = styled.button`
+  background-color: ${COLOR.MAIN_GREEN};
+  color: white;
+  width: 40%;
+  height: 3rem;
+  border: none;
+  border-radius: 2rem;
+  font-size: 1.3rem;
+  font-weight: bolder;
 `;
 
 const CancelBtn = styled.button`
@@ -293,23 +320,4 @@ const DateWrapper = styled.div`
   border-bottom: solid #bfbfbf 1px;
   margin: auto;
   font-size: 0;
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 100%;
-  height: 50%;
-`;
-
-const OkBtn = styled.button`
-  background-color: ${COLOR.MAIN_GREEN};
-  color: white;
-  width: 40%;
-  height: 3rem;
-  border: none;
-  border-radius: 2rem;
-  font-size: 1.3rem;
-  font-weight: bolder;
 `;

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { COLOR } from "../styles/color";
 import styled from "styled-components";
 import DiaryList from "../components/common/DiaryList";
@@ -21,36 +21,47 @@ export default function DiaryListPage() {
   const tripName = useRecoilValue(tripNameState);
   const tripId = useRecoilValue(tripIdState);
   const navigate = useNavigate();
+  //여행 id location으로 받음
   const location = useLocation();
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
+  const [error, setError] = useState(null);
   useEffect(() => {
     let completed = false;
     console.log("아이디트립",tripId);
     // eslint-disable-next-line func-style
     async function get() {
-      const result = await axios.get(
-        `${process.env.REACT_APP_SERVER_URL}/diary/travel/${location.state.id}`,
-        { withCredentials: true },
-      );
-      if (!completed) {
-        setData(result.data.diarys);
+      try {
+        const result = await axios.get(
+          `${process.env.REACT_APP_SERVER_URL}/diary/travel/${location.state.id}`,
+          { withCredentials: true },
+        );
+        if (!completed) {
+          // console.log("diarys:", result.data.diarys_info);
+          setData(result.data.diarys_info);
+          setLoading(true);
+        }
+      } catch (error) {
+        if (!completed) {
+          setError(error);
+          setLoading(true);
+        }
+        console.error("데이터 가져오기 중 에러가 발생했습니다:", error);
       }
-      setLoading(true);
     }
+
     get();
     return () => {
       completed = true;
     };
-  }, []);
+  }, [location.state.id]);
 
   const goToAdd = () => {
-    navigate("/invitefriend", {state: location.state.id});
+    navigate("/invitefriend", { state: { id: location.state.id } });
   };
   const goToCreate = () => {
-    navigate("/diary", {state: location.state.id});
+    navigate("/diary", { state: { id: location.state.id } });
   };
-
   return (
     <StDiaryListPage>
       <TitleDiv>
@@ -88,7 +99,13 @@ export default function DiaryListPage() {
             <PencilImg src={Pencil} onClick={goToCreate} />
           </SemiHeaderDiv>
           <DiaryListDiv>
-            <DiaryList data={data}/>
+            {error ? (
+              <div></div>
+            ) : data.length === 0 && loading ? (
+              <div>데이터가 없습니다.</div>
+            ) : (
+              <DiaryList data={data} />
+            )}
           </DiaryListDiv>
         </DiaryDiv>
       </MainDiv>

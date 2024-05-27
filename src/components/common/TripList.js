@@ -10,6 +10,7 @@ export default function TripList() {
   const [tripName, setTripName] = useRecoilState(tripNameState);
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
+  const [url, setUrl] = useState("");
   useEffect(() => {
     let completed = false;
 
@@ -21,6 +22,7 @@ export default function TripList() {
       );
       if (!completed) {
         setData(result.data.travels);
+        setUrl(result.data.travelUrls);
       }
       setLoading(true);
     }
@@ -40,8 +42,8 @@ export default function TripList() {
         scrollbarWidth: "none",
       }}
     >
-      {data.map((it) => {
-        return <TripListItem key={it._id} data={it}/>;
+      {data && data.map((it,index) => {
+        return <TripListItem key={it._id} data={it} url={url[index]}/>;
       })}
     </StTripList>
   );

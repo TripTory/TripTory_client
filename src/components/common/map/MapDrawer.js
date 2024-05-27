@@ -5,7 +5,18 @@ import { PropTypes } from "prop-types";
 import Jeju from "../../../assets/images/jeju.jpg";
 import Button from "@mui/material/Button";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
+import { useNavigate } from "react-router";
+import { useRecoilState } from "recoil";
+import { tripNameState } from "../../../recoil/commonState";
 const MapDrawer = (props) => {
+  const navigate = useNavigate();
+  const [tripName, setTripName] = useRecoilState(tripNameState);
+  const goToDiary = () => {
+    setTripName(props.data.title);
+    navigate("/triptable", {
+      state: { id: props.data._id},
+    });
+  };
   return (
     <StMapDrawer>
       <TripImg src={props.url} />
@@ -17,7 +28,7 @@ const MapDrawer = (props) => {
           <LocationP>{props.data.location.region}</LocationP>
         </LocationDiv>
       </InfoDiv>
-      <GoToTripBtn>여행 보러 가기</GoToTripBtn>
+      <GoToTripBtn onClick={goToDiary}>여행 보러 가기</GoToTripBtn>
     </StMapDrawer>
   );
 };

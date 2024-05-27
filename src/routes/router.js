@@ -9,8 +9,8 @@ import EditProfilPage from "../pages/EditProfilPage";
 import JoinTripPage from "../pages/JoinTripPage";
 import InviteFriendPage from "../pages/InviteFriendPage";
 import TagPage from "../pages/TagPage";
+import EditTripPage from "../pages/EditTripPage";
 import EditDiaryWritePage from "../pages/EditDiaryWritePage";
-
 import React from "react";
 import DiaryListPage from "../pages/DiaryListPage";
 import MapPage from "../pages/MapPage";
@@ -35,6 +35,7 @@ const Router = () => {
         <Route path="/tripmap" element={<MapPage />} />
         <Route path="/showdiary" element={<DiaryPage />} />
         <Route path="/calendar" element={<CalendarPage />} />
+        <Route path="/edittrip" element={<EditTripPage />} />
         <Route path="/tag/:tagName" element={<TagPage />} />
       </Routes>
     </BrowserRouter>

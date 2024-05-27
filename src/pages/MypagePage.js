@@ -45,7 +45,6 @@ const MypagePage = () => {
   }, []);
 
   const handleUserInfo = () => {
-    console.log(12123123);
     axios.get("http://localhost:5000/user", { withCredentials: true})
     .then((res) => {
       const data = res.data.userinfo;
