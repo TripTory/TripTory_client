@@ -5,10 +5,11 @@ import TripList from "../components/common/TripList";
 import RecomList from "../components/common/RecomList";
 import TagImgList from "../components/common/TagImgList";
 import AddTripDialog from "../components/common/AddTripDialog";
-import React from "react";
+import { React, useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { dialogState } from "../recoil/commonState";
 import BottomNav from "../layout/BottomNav";
+import axios from "axios";
 
 const MainPage = () => {
   //db에서 get 해온 username or recoil에 저장한 내 정보
@@ -18,6 +19,17 @@ const MainPage = () => {
   const handleOpen = () => {
     setDialog(true);
   };
+
+  useEffect(() => {
+    axios.get("http://localhost:5000/tag", { withCredentials: true})
+    .then((res) => {
+      const data = res.data.imageTags;
+      console.log(data);
+    })
+  .catch((error) => {
+    console.log(error);
+  });
+  }, []);
 
   return (
     <StMainPage>
