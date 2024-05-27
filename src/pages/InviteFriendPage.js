@@ -6,17 +6,18 @@ import FriendList from "../components/common/FriendList.js";
 import copyIcon from "../assets/icons/copy.svg";
 import xicon from "../assets/icons/x-icon.svg";
 import BottomNav from "../layout/BottomNav";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Modal from "../components/common/Modal";
 import SuccessCopyContent from "../components/common/SuccessCopyContent.js";
+import { tripIdState } from "../recoil/commonState";
+import { useRecoilValue } from "recoil";
 
 const InviteFriendPage = () => {
   const SERVER_URL = process.env.REACT_APP_SERVER_URL;
   const navigate = useNavigate();
+
   // navigate 하면서 받은 travel id 값
-  const { state } = useLocation();
-  // const travelID = state; <----------------나중에 주석 풀고 다음 줄 지우기
-  const travelID = "664c951554d29fb5ec75847b"; // 임시로 쓴 것
+  const travelID = useRecoilValue(tripIdState);
   // travel의 정보
   const [invitecode, setInvitecode] = useState("");
   const [title, setTitle] = useState("");
