@@ -14,9 +14,7 @@ const MapDrawer = (props) => {
   const goToDiary = () => {
     setTripName(props.data.title);
     setTripId(props.data._id);
-    // navigate("/triptable", {
-    //   state: { id: props.data._id},
-    // });
+    navigate("/triptable");
   };
   return (
     <StMapDrawer>
