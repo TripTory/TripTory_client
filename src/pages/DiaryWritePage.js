@@ -23,6 +23,11 @@ const DiaryWritePage = () => {
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(false); // Save 버튼을 위한 모달 상태
   const [imagePreview, setImagePreview] = useState(null);
   const [files, setFiles] = useState([]);
+  const [travelid, setTravelId] = useState("");
+  useEffect(() => {
+    console.log("Travel ID:", travelid); // Travel ID 출력
+    console.log("일기 생성 files:", files);
+  });
 
   const navigate = useNavigate();
 

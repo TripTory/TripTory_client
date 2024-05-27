@@ -15,13 +15,15 @@ const CalendarPage = () => {
     axios
       .get(`${SERVER_URL}/diary`, { withCredentials: true })
       .then((res) => {
+        console.log(res);
         const transformedData = res.data.diarys_info.map((item) => {
           return {
             date: item.diary.date,
             username: item.diary.userName,
             diaryTitle: item.diary.title,
             imagePath: item.url,
-            diaryID: item.diary._id
+            diaryID: item.diary._id,
+            travelID: item.diary.travel,
           };
         });
         setDiaryInfo(transformedData);

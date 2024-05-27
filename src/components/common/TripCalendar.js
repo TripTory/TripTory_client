@@ -120,6 +120,7 @@ TripCalendar.propTypes = {
       diaryTitle: PropTypes.string.isRequired,
       imagePath: PropTypes.string.isRequired,
       username: PropTypes.string.isRequired,
+      travelID: PropTypes.string.isRequired,
     }),
   ).isRequired,
 };
