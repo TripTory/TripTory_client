@@ -5,8 +5,6 @@ import DiaryList from "../components/common/DiaryList";
 import Greenbar from "../assets/icons/greenbar.svg";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import Busan from "../assets/images/busan.jpg";
-import Gunsan from "../assets/images/gunsan.jpg";
 import Pencil from "../assets/images/pencil.svg";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router";
