@@ -9,11 +9,13 @@ import { COLOR } from "../styles/color";
 import BottomNav from "../layout/BottomNav";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useLocation } from "react-router";
+import { useRecoilValue, useRecoilState } from "recoil";
+import { tripIdState, diaryIdState } from "../recoil/commonState";
 import moment from "moment";
 
 const DiaryWritePage = () => {
-
+  const [diaryId, setDiaryId] = useRecoilState(diaryIdState);
+  const tripId = useRecoilValue(tripIdState);
   const [startDate, setStartDate] = useState();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -21,16 +23,13 @@ const DiaryWritePage = () => {
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(false); // Save 버튼을 위한 모달 상태
   const [imagePreview, setImagePreview] = useState(null);
   const [files, setFiles] = useState([]);
-  const location = useLocation();
-  const [travelid, setTravelId] = useState(state);
-  const [diaryId, setDiaryId] = useState({ diaryid: "" });
-  useEffect(() => {
-    console.log("Travel ID:", travelid); // Travel ID 출력
-    console.log("일기 생성 files:", files);
-  });
 
   const navigate = useNavigate();
 
+  const goToDiaryList = () => {
+    navigate("/triptable");
+    closeModal();
+  };
   const openCancelModal = () => {
     setIsCancelModalOpen(true);
   };
@@ -51,7 +50,7 @@ const DiaryWritePage = () => {
     const formData = new FormData();
     formData.append("title", title);
     formData.append("content", content);
-    formData.append("travel", location.state.id); // travelid 대체
+    formData.append("travel", tripId);
     formData.append("date", moment(startDate).startOf("day").format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"));
 
     files.forEach((file) => {
@@ -64,11 +63,8 @@ const DiaryWritePage = () => {
 
     axios.post("http://localhost:5000/diary", formData, { withCredentials: true, headers: {"Content-Type": "multipart/form-data"} })
     .then((res) => {
-      setDiaryId({
-        diaryid: res.data.diaryid,
-      });
-      const diary_id = res.data.diaryid;
-      navigate("/showdiary", { state: { diaryid: diary_id, travelid: travelid } });
+      setDiaryId(diaryId);
+      navigate("/showdiary");
     })
     .catch((error) => {
       console.log("에러", error);
@@ -126,7 +122,7 @@ const DiaryWritePage = () => {
         buttons={
           <OkayDiv>
             <OkayBtn className="no" onClick={closeModal}>아니오</OkayBtn>
-            <OkayBtn className="yes">예</OkayBtn>
+            <OkayBtn className="yes" onClick={goToDiaryList}>예</OkayBtn>
           </OkayDiv>
         }
       />

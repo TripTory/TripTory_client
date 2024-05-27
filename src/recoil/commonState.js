@@ -14,3 +14,8 @@ export const tripIdState = atom({
   key: "tripId",
   default: "",
 });
+
+export const diaryIdState = atom ({
+  key: "diaryId",
+  default: "",
+});

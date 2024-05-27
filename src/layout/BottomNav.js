@@ -10,7 +10,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 const BottomNav = () => {
 
   const [activeButton, setActiveButton] = useState("/");
-  const location = useLocation();
+  // const location = useLocation();
   const history = useNavigate();
 
   React.useEffect(() => {

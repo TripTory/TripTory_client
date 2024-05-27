@@ -11,25 +11,23 @@ import { PropTypes } from "prop-types";
 import DelTripContent from "../../components/common/DelTripContent";
 import axios from "axios";
 import { useRecoilState } from "recoil";
-import { tripNameState } from "../../recoil/commonState";
+import { tripIdState, tripNameState } from "../../recoil/commonState";
 
 export default function TripListItem(props) {
   const [tripName, setTripName] = useRecoilState(tripNameState);
-  const [id] = useState(props.data._id);
+  const [tripId, setTripId] = useRecoilState(tripIdState);
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const goToDiaryList = () => {
     setTripName(props.data.title);
-    // console.log("props.data._id: ", props.data._id);
-    navigate("/triptable", {
-      state: { id: props.data._id},
-    });
+    setTripId(props.data._id);
+    navigate("/triptable");
   };
 
   const goToDel = async () => {
     try {
-      await axios.delete(`${process.env.REACT_APP_SERVER_URL}/travel/${id}`, {withCredentials: true});
+      await axios.delete(`${process.env.REACT_APP_SERVER_URL}/travel/${tripId}`, {withCredentials: true});
     } catch (error) {
       console.error("삭제 중 에러가 발생했습니다:", error);
     }

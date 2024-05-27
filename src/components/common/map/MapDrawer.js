@@ -2,20 +2,21 @@ import styled from "styled-components";
 import React from "react";
 import { COLOR } from "../../../styles/color";
 import { PropTypes } from "prop-types";
-import Jeju from "../../../assets/images/jeju.jpg";
 import Button from "@mui/material/Button";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { useNavigate } from "react-router";
 import { useRecoilState } from "recoil";
-import { tripNameState } from "../../../recoil/commonState";
+import { tripIdState, tripNameState } from "../../../recoil/commonState";
 const MapDrawer = (props) => {
   const navigate = useNavigate();
+  const [tripId, setTripId] = useRecoilState(tripIdState);
   const [tripName, setTripName] = useRecoilState(tripNameState);
   const goToDiary = () => {
     setTripName(props.data.title);
-    navigate("/triptable", {
-      state: { id: props.data._id},
-    });
+    setTripId(props.data._id);
+    // navigate("/triptable", {
+    //   state: { id: props.data._id},
+    // });
   };
   return (
     <StMapDrawer>
