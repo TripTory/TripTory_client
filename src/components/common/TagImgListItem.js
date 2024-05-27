@@ -19,39 +19,10 @@ export default function TagImgListItem({ tagName, tagImages }) {
   useEffect(() => {
     console.log("이미지ㅇ입니다요",tagImages);
 
-    const getAverageColor = (imgElement) => {
-      const canvas = document.createElement("canvas");
-      const ctx = canvas.getContext("2d");
-      ctx.drawImage(imgElement, 0, 0);
-
-      const imageData = ctx.getImageData(0, 0, imgElement.width, imgElement.height);
-      const pixels = imageData.data;
-      let r = 0,
-        g = 0,
-        b = 0;
-
-      for (let i = 0; i < pixels.length; i += 4) {
-        r += pixels[i];
-        g += pixels[i + 1];
-        b += pixels[i + 2];
-      }
-
-      const pixelCount = pixels.length / 4;
-      const avgR = Math.round(r / pixelCount);
-      const avgG = Math.round(g / pixelCount);
-      const avgB = Math.round(b / pixelCount);
-
-      const luminance = (0.299 * avgR + 0.587 * avgG + 0.114 * avgB) / 255;
-
-      setTextColor(luminance < 0.5 ? "white" : "black");
-    };
-
     if (firstImagePath) {
       const img = new Image();
       img.src = firstImagePath;
-      // img.onload = () => {
-      //   getAverageColor(img);
-      // };
+
     }
   }, [tagName]);
 
