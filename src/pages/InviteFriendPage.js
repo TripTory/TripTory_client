@@ -16,7 +16,6 @@ const InviteFriendPage = () => {
   const tripId = useRecoilValue(tripIdState);
   const SERVER_URL = process.env.REACT_APP_SERVER_URL;
   const navigate = useNavigate();
-  const travelID = useRecoilValue(tripIdState);
   // travel의 정보
   const [invitecode, setInvitecode] = useState("");
 
