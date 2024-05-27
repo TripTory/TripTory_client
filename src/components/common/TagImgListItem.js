@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import ListItem from "@mui/material/ListItem";
 import { Link } from "react-router-dom";
 import tagData from "../../data/TagData.js";
+import axios from "axios";
 
 export default function TagImgListItem({ tagName, tagImages }) {
   const [textColor, setTextColor] = useState("black"); // Default text color
@@ -11,7 +12,7 @@ export default function TagImgListItem({ tagName, tagImages }) {
   // const tag = tagData.tags.find((tag) => tag.tagName === tagName);
   // const firstImagePath = tag && tag.imagePaths.length > 0 ? tag.imagePaths[0] : null;
 
-  const images = tagImages[tagName];
+  const images = tagImages;
   // tagName에 해당하는 이미지 배열이 존재하고, 배열이 비어있지 않다면 첫 번째 이미지를 사용합니다.
   const firstImagePath = images && images.length > 0 ? images[0] : null;
 
@@ -48,11 +49,22 @@ export default function TagImgListItem({ tagName, tagImages }) {
     if (firstImagePath) {
       const img = new Image();
       img.src = firstImagePath;
-      img.onload = () => {
-        getAverageColor(img);
-      };
+      // img.onload = () => {
+      //   getAverageColor(img);
+      // };
     }
   }, [tagName]);
+
+  const handleTagPage = () => {
+    axios.get("http://localhost:5000/tag", {tag: tagName}, { withCredentials: true})
+    .then((res) => {
+      const data = res.data;
+      console.log(data);
+    })
+  .catch((error) => {
+    console.log(error);
+  });
+  };
 
   return (
     <Link to={`/tag/${tagName}`} style={{ width: "100%", height: "100%" }}>
@@ -64,7 +76,7 @@ export default function TagImgListItem({ tagName, tagImages }) {
             padding: "0.2rem 0.6rem 0.2rem 0.6rem",
           }}
         >
-          <ImgDiv style={{ backgroundImage: `url(${firstImagePath})`}}>
+          <ImgDiv onClick={handleTagPage} style={{ backgroundImage: `url(${firstImagePath})`}}>
             <TagP># {tagName}</TagP>
           </ImgDiv>
         </ListItem>
