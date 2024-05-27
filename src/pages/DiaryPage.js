@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import goback from "../assets/icons/goback.svg";
 import DiaryInfo from "../components/common/DiaryInfo";
@@ -10,21 +10,18 @@ import { COLOR } from "../styles/color";
 import axios from "axios";
 import Modal from "../components/common/Modal";
 import { useRecoilState } from "recoil";
-import { tripIdState } from "../recoil/commonState";
+import { tripIdState, diaryIdState } from "../recoil/commonState";
 
 const DiaryPage = () => {
   const navigate = useNavigate();
   const [diaryInfo, setDiaryInfo] = useState({ _id: "", title: "", content: "", date: "", travel: "", userId: "", userName: "", url: [], userUrl: "",});
-
-  const { state } = useLocation();
-  const [id, setId] = useState(state);
+  const [diaryId, setDiaryId] = useRecoilState(diaryIdState);
   const [tripId, setTripId] = useRecoilState(tripIdState);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    console.log("응???", id.diaryid);
-    axios.get(`http://localhost:5000/diary/${id.diaryid}`, { withCredentials: true})
+    axios.get(`http://localhost:5000/diary/${diaryId}`, { withCredentials: true})
     .then((res) => {
       const data = res.data.diaryinfo;
       setDiaryInfo({
@@ -47,24 +44,17 @@ const DiaryPage = () => {
 
   const goToTriptable = () => {
     setTripId(diaryInfo.travel);
-    // navigate("/triptable", {state: { id: setDiaryInfo.travel }});
     navigate("/triptable");
   };
 
   const goToEditDiary = () => {
-
     const formData = new FormData();
     formData.append("title", diaryInfo.title);
     formData.append("content", diaryInfo.content);
     formData.append("date", diaryInfo.date);
     formData.append("images", diaryInfo.url);
 
-    // axios.put(`http://localhost:5000/diary/${id.diaryid}`, formData, { withCredentials: true})
-    // .catch((error) => {
-    //   console.log(error);
-    // });
-
-    navigate("/editdiary", { state: { diaryInfo: diaryInfo, id: id} });
+    navigate("/editdiary", { state: { diaryInfo: diaryInfo} });
   };
 
 
@@ -77,15 +67,14 @@ const DiaryPage = () => {
   };
 
   const closeModal = () => {
-    axios.delete(`http://localhost:5000/diary/${id.diaryid}`, { withCredentials: true})
+    axios.delete(`http://localhost:5000/diary/${diaryId}`, { withCredentials: true})
     .then((res) => {
-      console.log(res);
+      // console.log(res);
     })
     .catch((error) => {
       console.log(error);
     });
     setIsModalOpen(false);
-    // navigate("/triptable"), { state: { id: diaryInfo._id, title: diaryInfo.title } }; // 모달 닫으면서 페이지 이동
     navigate("/triptable");
   };
 

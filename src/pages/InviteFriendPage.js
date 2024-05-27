@@ -8,15 +8,14 @@ import xicon from "../assets/icons/x-icon.svg";
 import BottomNav from "../layout/BottomNav";
 import { useNavigate } from "react-router-dom";
 import Modal from "../components/common/Modal";
-import SuccessCopyContent from "../components/common/SuccessCopyContent.js";
 import { tripIdState } from "../recoil/commonState";
 import { useRecoilValue } from "recoil";
+import SuccessCopyContent from "../components/common/SuccessCopyContent.js";
 
 const InviteFriendPage = () => {
+  const tripId = useRecoilValue(tripIdState);
   const SERVER_URL = process.env.REACT_APP_SERVER_URL;
   const navigate = useNavigate();
-
-  const travelID = useRecoilValue(tripIdState);
   // travel의 정보
   const [invitecode, setInvitecode] = useState("");
 
@@ -39,7 +38,7 @@ const InviteFriendPage = () => {
     let usernames = [];
     let userimgs = [];
     axios
-      .get(`${SERVER_URL}/travel/${travelID}`)
+      .get(`${SERVER_URL}/travel/${tripId}`)
       .then((res) => {
         console.log(res);
         // 초대 코드 저장
@@ -64,7 +63,7 @@ const InviteFriendPage = () => {
 
   // 취소 버튼
   const handleCancel = () => {
-    navigate("/triptable", { state:travelID } );
+    navigate("/triptable");
   };
 
   // 코드 복사 버튼

@@ -7,21 +7,17 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Pencil from "../assets/images/pencil.svg";
 import { useNavigate } from "react-router-dom";
-import { useLocation } from "react-router";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import BottomNav from "../layout/BottomNav";
 import axios from "axios";
 import { useRecoilValue } from "recoil";
-import { tripNameState } from "../recoil/commonState";
-import { tripIdState } from "../recoil/commonState";
+import { tripNameState, tripIdState} from "../recoil/commonState";
 import defaultImageSrc from "../assets/images/defaultProfileImg.svg";
 
 export default function DiaryListPage() {
   const tripName = useRecoilValue(tripNameState);
   const tripId = useRecoilValue(tripIdState);
   const navigate = useNavigate();
-  //여행 id location으로 받음
-  const location = useLocation();
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
   const [userimg, setUserimg] = useState([]);
@@ -34,11 +30,11 @@ export default function DiaryListPage() {
     async function get() {
       try {
         const result = await axios.get(
-          `${process.env.REACT_APP_SERVER_URL}/diary/travel/${location.state.id}`,
+          `${process.env.REACT_APP_SERVER_URL}/diary/travel/${tripId}`,
           { withCredentials: true },
         );
         const Img = await axios.get(
-          `${process.env.REACT_APP_SERVER_URL}/travel/${location.state.id}`,
+          `${process.env.REACT_APP_SERVER_URL}/travel/${tripId}`,
           { withCredentials: true },
         );
         if (!completed) {
@@ -64,13 +60,13 @@ export default function DiaryListPage() {
     return () => {
       completed = true;
     };
-  }, [location.state.id]);
+  }, [tripId]);
 
   const goToAdd = () => {
-    navigate("/invitefriend", { state: { id: location.state.id } });
+    navigate("/invitefriend");
   };
   const goToCreate = () => {
-    navigate("/diary", { state: { id: location.state.id } });
+    navigate("/diary");
   };
   return (
     <StDiaryListPage>
