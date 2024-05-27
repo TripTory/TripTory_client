@@ -22,7 +22,7 @@ const DiaryWritePage = () => {
   const [imagePreview, setImagePreview] = useState(null);
   const [files, setFiles] = useState([]);
   const location = useLocation();
-  const [travelid, setTravelId] = useState(state);
+  const [travelid, setTravelId] = useState("");
   const [diaryId, setDiaryId] = useState({ diaryid: "" });
   useEffect(() => {
     console.log("Travel ID:", travelid); // Travel ID 출력

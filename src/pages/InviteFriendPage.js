@@ -16,7 +16,7 @@ const InviteFriendPage = () => {
   // navigate 하면서 받은 travel id 값
   const { state } = useLocation();
   // const travelID = state; <----------------나중에 주석 풀고 다음 줄 지우기
-  const travelID = "664c951554d29fb5ec75847b"; // 임시로 쓴 것
+  const travelID = "664f3b79e7ecfaede85a7c1f"; // 임시로 쓴 것
   // travel의 정보
   const [invitecode, setInvitecode] = useState("");
   const [title, setTitle] = useState("");
