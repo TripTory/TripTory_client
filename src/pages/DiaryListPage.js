@@ -16,6 +16,7 @@ import axios from "axios";
 import { useRecoilValue } from "recoil";
 import { tripNameState } from "../recoil/commonState";
 import { tripIdState } from "../recoil/commonState";
+import defaultImageSrc from "../assets/images/defaultProfileImg.svg";
 
 export default function DiaryListPage() {
   const tripName = useRecoilValue(tripNameState);
@@ -25,21 +26,32 @@ export default function DiaryListPage() {
   const location = useLocation();
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
+  const [userimg, setUserimg] = useState([]);
   const [error, setError] = useState(null);
   useEffect(() => {
     let completed = false;
-    console.log("아이디트립",tripId);
+    let userimgs = [];
+    console.log("아이디트립", tripId);
     // eslint-disable-next-line func-style
     async function get() {
       try {
         const result = await axios.get(
-          `${process.env.REACT_APP_SERVER_URL}/diary/travel/${location.state.id}`,
+          `${process.env.REACT_APP_SERVER_URL}/diary/travel/664f3b79e7ecfaede85a7c1f`,
+          { withCredentials: true },
+        );
+        const Img = await axios.get(
+          `${process.env.REACT_APP_SERVER_URL}/travel/${location.state.id}`,
           { withCredentials: true },
         );
         if (!completed) {
-          // console.log("diarys:", result.data.diarys_info);
           setData(result.data.diarys_info);
           setLoading(true);
+          Img.data.invited_profile.forEach((item) => {
+            userimgs.push(item.url);
+          });
+          setUserimg(userimgs);
+          console.log(userimg[1]);
+          console.log(userimg[2]);
         }
       } catch (error) {
         if (!completed) {
@@ -70,15 +82,17 @@ export default function DiaryListPage() {
       </TitleDiv>
       <MainDiv>
         <FriendDiv>
-          <FriendAvt
-            sx={{ position: "absolute", left: "56%" }}
-            alt="1"
-            src={Busan}
-          />
+          {userimg[1]!==undefined && (
+            <FriendAvt
+              sx={{ position: "absolute", left: "56%" }}
+              alt="1"
+              src={userimg[1] ? userimg[1] : defaultImageSrc }
+            />
+          )}
           <FriendAvt
             sx={{ position: "absolute", left: "63%" }}
             alt="2"
-            src={Gunsan}
+            src={userimg[0]}
           />
           <AddFriendBtn variant="contained" onClick={goToAdd}>
             + 일행 추가

@@ -33,7 +33,7 @@ export default function DiaryListItem(props) {
           </InfoDiv>
         </ContentDiv>
         <ListItemAvatar>
-          <Avatar src={props.data.img.imgpath} sx={{ width: "5rem", height: "5rem" }}></Avatar>
+          <Avatar src={props.img} sx={{ width: "5rem", height: "5rem" }}></Avatar>
         </ListItemAvatar>
       </ListItem>
     </StDiaryListItem>
