@@ -21,6 +21,7 @@ export default function TripListItem(props) {
 
   const goToDiaryList = () => {
     setTripName(props.data.title);
+    // console.log("props.data._id: ", props.data._id);
     navigate("/triptable", {
       state: { id: props.data._id},
     });
@@ -45,14 +46,15 @@ export default function TripListItem(props) {
   };
 
   const goToEdit = () => {
-    navigate("/addtrip", { state: props.data._id });
+    console.log(props.data);
+    navigate("/edittrip", { state: {state: props.data, url: props.url }});
   };
 
   return (
     <StTripListItem>
       <ListItem>
         <ListItemAvatar>
-          <Avatar src={props.data.travelimg} />
+          <Avatar src={props.url} />
         </ListItemAvatar>
         <InfoDiv>
           <TitleP onClick={goToDiaryList}>{props.data.title}</TitleP>
@@ -98,11 +100,7 @@ export default function TripListItem(props) {
 
 TripListItem.propTypes = {
   data: PropTypes.node.isRequired,
-  _id: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  startdate: PropTypes.string.isRequired,
-  enddate: PropTypes.string.isRequired,
-  travelimg: PropTypes.string.isRequired,
+  url: PropTypes.array.isRequired,
 };
 
 const CancelModal = styled(Modal)``;

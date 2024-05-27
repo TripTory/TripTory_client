@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import { AiFillCamera } from "react-icons/ai";
 // import axios from "axios";
 
-const ImageUploader = ({onChange}) => {
+const ImageUploader = ({onChange, url}) => {
   const [selectedFile, setSelectedFile] = useState(null);
-  const [previewUrl, setPreviewUrl] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(url);
   const fileInput = useRef(null);
   const setFile = (e) => {};
 
@@ -87,6 +87,7 @@ const ImageUploader = ({onChange}) => {
 
 ImageUploader.propTypes = {
   onChange: PropTypes.func,
+  url: PropTypes.string.isRequired,
 };
 
 export default ImageUploader;

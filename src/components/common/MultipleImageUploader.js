@@ -1,11 +1,11 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import styled from "styled-components";
 import { COLOR } from "../../styles/color";
 import CancelIcon from "@mui/icons-material/Cancel";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import PropTypes from "prop-types";
 
-const Uploader = ({ onFilesChange, files, setFiles }) => {
+const Uploader = ({ onFilesChange, files=[], setFiles }) => {
   const inputRef = useRef(null);
 
   const saveImage = (e) => {

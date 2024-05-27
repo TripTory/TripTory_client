@@ -12,22 +12,30 @@ import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router";
 import moment from "moment";
 
-const DiaryWritePage = () => {
+const EditDiaryWritePage = () => {
+  const { state } = useLocation();
+  const { diaryInfo } = state || {};
 
-  const [startDate, setStartDate] = useState();
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  const [startDate, setStartDate] = useState(diaryInfo?.date ? new Date(diaryInfo.date) : null);
+  const [title, setTitle] = useState(diaryInfo?.title || "");
+  const [content, setContent] = useState(diaryInfo?.content || "");
+  const [files, setFiles] = useState(diaryInfo?.url || []);
+  const [files2, setFiles2] = useState();
+
+  const transformFiles = (filesArray) => {
+    return filesArray.map((file) => ({ preview_URL: file }));
+  };
+
+  useEffect(() => {
+    console.log("안녕?",state.id.diaryid);
+    const transformedFiles = transformFiles(files);
+    setFiles2(transformedFiles);
+  }, []);
+
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false); // Cancel 버튼을 위한 모달 상태
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(false); // Save 버튼을 위한 모달 상태
   const [imagePreview, setImagePreview] = useState(null);
-  const [files, setFiles] = useState([]);
-  const location = useLocation();
-  const [travelid, setTravelId] = useState("");
   const [diaryId, setDiaryId] = useState({ diaryid: "" });
-  useEffect(() => {
-    console.log("Travel ID:", travelid); // Travel ID 출력
-    console.log("일기 생성 files:", files);
-  });
 
   const navigate = useNavigate();
 
@@ -51,8 +59,8 @@ const DiaryWritePage = () => {
     const formData = new FormData();
     formData.append("title", title);
     formData.append("content", content);
-    formData.append("travel", location.state.id); // travelid 대체
     formData.append("date", moment(startDate).startOf("day").format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"));
+    formData.append("img", files2);
 
     files.forEach((file) => {
       formData.append("images", file.fileObject);
@@ -62,13 +70,14 @@ const DiaryWritePage = () => {
       console.log(`${key}: ${value}`);
     }
 
-    axios.post("http://localhost:5000/diary", formData, { withCredentials: true, headers: {"Content-Type": "multipart/form-data"} })
+    axios.put(`http://localhost:5000/diary/${state.id.diaryid}`, formData, { withCredentials: true, headers: {"Content-Type": "multipart/form-data"} })
     .then((res) => {
       setDiaryId({
         diaryid: res.data.diaryid,
       });
       const diary_id = res.data.diaryid;
-      navigate("/showdiary", { state: { diaryid: diary_id, travelid: travelid } });
+      console.log("응?",diary_id);
+      navigate("/showdiary", { state: { diaryid: diary_id } });
     })
     .catch((error) => {
       console.log("에러", error);
@@ -107,7 +116,7 @@ const DiaryWritePage = () => {
       />
     </DiaryDiv>
 
-    <Uploader onFilesChange={handleImageUpload} files={files} setFiles={setFiles} />
+    <Uploader onFilesChange={handleImageUpload} files={files2} setFiles={setFiles2} />
 
     <BtnDiv>
       <CancelBtn onClick={openCancelModal}>취소</CancelBtn>
@@ -292,6 +301,6 @@ const ContentDiv = styled.div`
 `;
 
 
-export default DiaryWritePage;
+export default EditDiaryWritePage;
 
 

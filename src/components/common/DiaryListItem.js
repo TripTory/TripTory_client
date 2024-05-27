@@ -28,12 +28,12 @@ export default function DiaryListItem(props) {
             <TitleP>{props.data.title}</TitleP>
             <DateDiv>
               <DateP>{props.data.startdate}</DateP>
-              <UserP>{props.data.userId}</UserP>
+              <UserP>{props.data.userName}</UserP>
             </DateDiv>
           </InfoDiv>
         </ContentDiv>
         <ListItemAvatar>
-          <Avatar src={props.data.img.imgpath} sx={{ width: "5rem", height: "5rem" }}></Avatar>
+          <Avatar src={props.img} sx={{ width: "5rem", height: "5rem" }}></Avatar>
         </ListItemAvatar>
       </ListItem>
     </StDiaryListItem>
@@ -46,7 +46,6 @@ DiaryListItem.propTypes = {
   date: PropTypes.string.isRequired,
   img: PropTypes.node.isRequired,
   imgpath: PropTypes.string.isRequired,
-  userId: PropTypes.string.isRequired,
 };
 const StDiaryListItem = styled.div`
   display: flex;
@@ -55,7 +54,7 @@ const StDiaryListItem = styled.div`
   border: 0.2rem solid rgba(228, 228, 228);
   border-radius: 1rem;
   width: 100%;
-  height: 100%;
+  height: 10rem;
   margin-bottom: 0.8rem;
   box-shadow: 1px 1px 3px rgba(228, 228, 228);
 `;
