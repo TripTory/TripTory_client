@@ -48,7 +48,6 @@ const DiaryPage = () => {
   };
 
   const goToEditDiary = () => {
-
     const formData = new FormData();
     formData.append("title", diaryInfo.title);
     formData.append("content", diaryInfo.content);

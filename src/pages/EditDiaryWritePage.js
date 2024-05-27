@@ -78,7 +78,6 @@ const EditDiaryWritePage = () => {
 
     axios.put(`http://localhost:5000/diary/${diaryId}`, formData, { withCredentials: true, headers: {"Content-Type": "multipart/form-data"} })
     .then((res) => {
-      setDiaryId(res.data.diaryid);
       navigate("/showdiary");
     })
     .catch((error) => {

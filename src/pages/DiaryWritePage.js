@@ -68,7 +68,8 @@ const DiaryWritePage = () => {
 
     axios.post("http://localhost:5000/diary", formData, { withCredentials: true, headers: {"Content-Type": "multipart/form-data"} })
     .then((res) => {
-      setDiaryId(diaryId);
+      console.log("res.data:", res.data);
+      setDiaryId(res.data.diaryid);
       navigate("/showdiary");
     })
     .catch((error) => {
