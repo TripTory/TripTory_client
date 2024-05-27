@@ -21,12 +21,14 @@ const EditDiaryWritePage = () => {
   const [content, setContent] = useState(diaryInfo?.content || "");
   const [files, setFiles] = useState(diaryInfo?.url || []);
   const [files2, setFiles2] = useState();
+  const [imgmodified, setImgModified] = useState(false);
 
   const transformFiles = (filesArray) => {
     return filesArray.map((file) => ({ preview_URL: file }));
   };
 
   useEffect(() => {
+    console.log("이미지 바뀜?",imgmodified);
     console.log("안녕?",state.id.diaryid);
     const transformedFiles = transformFiles(files);
     setFiles2(transformedFiles);
@@ -61,6 +63,7 @@ const EditDiaryWritePage = () => {
     formData.append("content", content);
     formData.append("date", moment(startDate).startOf("day").format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"));
     formData.append("img", files2);
+    formData.append("imgmodified", imgmodified);
 
     files.forEach((file) => {
       formData.append("images", file.fileObject);
@@ -75,9 +78,7 @@ const EditDiaryWritePage = () => {
       setDiaryId({
         diaryid: res.data.diaryid,
       });
-      const diary_id = res.data.diaryid;
-      console.log("응?",diary_id);
-      navigate("/showdiary", { state: { diaryid: diary_id } });
+      navigate("/showdiary", { state: { diaryid: state.id.diaryid} });
     })
     .catch((error) => {
       console.log("에러", error);
@@ -116,7 +117,7 @@ const EditDiaryWritePage = () => {
       />
     </DiaryDiv>
 
-    <Uploader onFilesChange={handleImageUpload} files={files2} setFiles={setFiles2} />
+    <Uploader onFilesChange={handleImageUpload} files={files2} setFiles={setFiles2} onImgModified={setImgModified}/>
 
     <BtnDiv>
       <CancelBtn onClick={openCancelModal}>취소</CancelBtn>

@@ -13,7 +13,7 @@ import { useLocation } from "react-router";
 import moment from "moment";
 
 const DiaryWritePage = () => {
-
+  const [imgmodified, setImgModified] = useState(false);
   const [startDate, setStartDate] = useState();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -22,6 +22,7 @@ const DiaryWritePage = () => {
   const [imagePreview, setImagePreview] = useState(null);
   const [files, setFiles] = useState([]);
   const location = useLocation();
+  const { state } = useLocation();
   const [travelid, setTravelId] = useState(state);
   const [diaryId, setDiaryId] = useState({ diaryid: "" });
   useEffect(() => {
@@ -107,7 +108,7 @@ const DiaryWritePage = () => {
       />
     </DiaryDiv>
 
-    <Uploader onFilesChange={handleImageUpload} files={files} setFiles={setFiles} />
+    <Uploader onFilesChange={handleImageUpload} files={files} setFiles={setFiles} onImgModified={setImgModified}/>
 
     <BtnDiv>
       <CancelBtn onClick={openCancelModal}>취소</CancelBtn>
