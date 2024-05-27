@@ -9,18 +9,22 @@ import BottomNav from "../layout/BottomNav";
 import { COLOR } from "../styles/color";
 import axios from "axios";
 import Modal from "../components/common/Modal";
+import { useRecoilState } from "recoil";
+import { tripIdState } from "../recoil/commonState";
 
 const DiaryPage = () => {
   const navigate = useNavigate();
   const [diaryInfo, setDiaryInfo] = useState({ _id: "", title: "", content: "", date: "", travel: "", userId: "", userName: "", url: [], userUrl: "",});
 
   const { state } = useLocation();
-  const [id, setId] = useState(state.diaryid);
+  const [id, setId] = useState(state);
+  const [tripId, setTripId] = useRecoilState(tripIdState);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/diary/${id}`, { withCredentials: true})
+    console.log("응???", id.diaryid);
+    axios.get(`http://localhost:5000/diary/${id.diaryid}`, { withCredentials: true})
     .then((res) => {
       const data = res.data.diaryinfo;
       setDiaryInfo({
@@ -42,6 +46,8 @@ const DiaryPage = () => {
 
 
   const goToTriptable = () => {
+    setTripId(diaryInfo.travel);
+    // navigate("/triptable", {state: { id: setDiaryInfo.travel }});
     navigate("/triptable");
   };
 
@@ -53,12 +59,12 @@ const DiaryPage = () => {
     formData.append("date", diaryInfo.date);
     formData.append("images", diaryInfo.url);
 
-    axios.put(`http://localhost:5000/diary/${id}`, formData, { withCredentials: true})
-    .catch((error) => {
-      console.log(error);
-    });
+    // axios.put(`http://localhost:5000/diary/${id.diaryid}`, formData, { withCredentials: true})
+    // .catch((error) => {
+    //   console.log(error);
+    // });
 
-    navigate("/diary"); // {diaryid} 추가
+    navigate("/editdiary", { state: { diaryInfo: diaryInfo, id: id} });
   };
 
 
@@ -71,7 +77,7 @@ const DiaryPage = () => {
   };
 
   const closeModal = () => {
-    axios.delete(`http://localhost:5000/diary/${id}`, { withCredentials: true})
+    axios.delete(`http://localhost:5000/diary/${id.diaryid}`, { withCredentials: true})
     .then((res) => {
       console.log(res);
     })
