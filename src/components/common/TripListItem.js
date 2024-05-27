@@ -27,12 +27,12 @@ export default function TripListItem(props) {
 
   const goToDel = async () => {
     try {
-      await axios.delete(`${process.env.REACT_APP_SERVER_URL}/travel/${tripId}`, {withCredentials: true});
+      await axios.delete(`${process.env.REACT_APP_SERVER_URL}/travel/${props.data._id}`, {withCredentials: true});
     } catch (error) {
       console.error("삭제 중 에러가 발생했습니다:", error);
     }
-    window.location.reload();
     closeModal();
+    window.location.reload();
   };
 
   const toggleModal = () => {
