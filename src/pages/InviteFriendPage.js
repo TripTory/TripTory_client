@@ -15,11 +15,11 @@ import { useRecoilValue } from "recoil";
 const InviteFriendPage = () => {
   const SERVER_URL = process.env.REACT_APP_SERVER_URL;
   const navigate = useNavigate();
-  
+
   const travelID = useRecoilValue(tripIdState);
   // travel의 정보
   const [invitecode, setInvitecode] = useState("");
-  
+
   const [title, setTitle] = useState("");
   const [username, setUsername] = useState([]);
   const [userimg, setUserimg] = useState([]);
