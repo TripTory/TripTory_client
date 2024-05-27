@@ -5,7 +5,7 @@ import TripList from "../components/common/TripList";
 import RecomList from "../components/common/RecomList";
 import TagImgList from "../components/common/TagImgList";
 import AddTripDialog from "../components/common/AddTripDialog";
-import { React, useEffect } from "react";
+import { React, useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { dialogState } from "../recoil/commonState";
 import BottomNav from "../layout/BottomNav";
@@ -20,11 +20,25 @@ const MainPage = () => {
     setDialog(true);
   };
 
+  const [tagNames, setTagNames] = useState([]);
+  const [tagImages, setTagImages] = useState([]);
+  console.log("hiu",tagNames);
   useEffect(() => {
     axios.get("http://localhost:5000/tag", { withCredentials: true})
     .then((res) => {
       const data = res.data.imageTags;
-      console.log(data);
+      console.log("data", data);
+
+      const newTagNames = [...tagNames];
+      const newTagImages= [...tagImages];
+      for (const tag in data) {
+        newTagNames.push(tag);
+        newTagImages.push(data[tag]);
+      }
+      setTagNames(newTagNames);
+      setTagImages(newTagImages);
+
+
     })
   .catch((error) => {
     console.log(error);
@@ -63,7 +77,7 @@ const MainPage = () => {
             <DivNameP>태그 별 사진 보기</DivNameP>
           </UpTDiv>
           <DownRDiv>
-            <TagImgList />
+            <TagImgList tagNames={tagNames} tagImages={tagImages} />
           </DownRDiv>
         </TagDiv>
       </MainDiv>

@@ -5,13 +5,18 @@ import ListItem from "@mui/material/ListItem";
 import { Link } from "react-router-dom";
 import tagData from "../../data/TagData.js";
 
-export default function TagImgListItem({ tagName }) {
+export default function TagImgListItem({ tagName, tagImages }) {
   const [textColor, setTextColor] = useState("black"); // Default text color
 
-  const tag = tagData.tags.find((tag) => tag.tagName === tagName);
-  const firstImagePath = tag && tag.imagePaths.length > 0 ? tag.imagePaths[0] : null;
+  // const tag = tagData.tags.find((tag) => tag.tagName === tagName);
+  // const firstImagePath = tag && tag.imagePaths.length > 0 ? tag.imagePaths[0] : null;
+
+  const images = tagImages[tagName];
+  // tagName에 해당하는 이미지 배열이 존재하고, 배열이 비어있지 않다면 첫 번째 이미지를 사용합니다.
+  const firstImagePath = images && images.length > 0 ? images[0] : null;
 
   useEffect(() => {
+    console.log("이미지ㅇ입니다요",tagImages);
 
     const getAverageColor = (imgElement) => {
       const canvas = document.createElement("canvas");
@@ -70,6 +75,7 @@ export default function TagImgListItem({ tagName }) {
 
 TagImgListItem.propTypes = {
   tagName: PropTypes.string.isRequired,
+  tagImages: PropTypes.string.isRequired,
 };
 
 const StTagImgListItem = styled.div`
