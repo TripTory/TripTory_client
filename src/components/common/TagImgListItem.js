@@ -3,37 +3,19 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import ListItem from "@mui/material/ListItem";
 import { Link } from "react-router-dom";
-import tagData from "../../data/TagData.js";
 import axios from "axios";
 
-export default function TagImgListItem({ tagName, tagImages, index }) {
-  const [textColor, setTextColor] = useState("black"); // Default text color
-
-  // const tag = tagData.tags.find((tag) => tag.tagName === tagName);
-  // const firstImagePath = tag && tag.imagePaths.length > 0 ? tag.imagePaths[0] : null;
-
-  // console.log("안녕?",images);
-  // tagName에 해당하는 이미지 배열이 존재하고, 배열이 비어있지 않다면 첫 번째 이미지를 사용합니다.
-  // const firstImagePath = images && images.length > 0 ? images[0] : null;
-  const firstImagePath = tagImages && tagImages.length > index ? tagImages[index] : null;
-  useEffect(() => {
-
-    if (firstImagePath) {
-      const img = new Image();
-      img.src = firstImagePath;
-
-    }
-  }, [tagName]);
+export default function TagImgListItem({ tagName, tagImages }) {
 
   const handleTagPage = () => {
-    axios.get("http://localhost:5000/tag", {tag: tagName}, { withCredentials: true})
-    .then((res) => {
-      const data = res.data;
-      console.log(data);
-    })
-  .catch((error) => {
-    console.log(error);
-  });
+    axios.get("http://localhost:5000/tag", {tag: tagName}, { withCredentials: true}) // 태그의 모든 이미지 받아오는 것에서 에러
+      .then((res) => {
+        const data = res.data;
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (

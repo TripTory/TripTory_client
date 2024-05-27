@@ -22,7 +22,7 @@ const MainPage = () => {
 
   const [tagNames, setTagNames] = useState([]);
   const [tagImages, setTagImages] = useState([]);
-  console.log("hiu",tagImages);
+
   useEffect(() => {
     axios.get("http://localhost:5000/tag", { withCredentials: true})
     .then((res) => {
@@ -37,8 +37,6 @@ const MainPage = () => {
       }
       setTagNames(newTagNames);
       setTagImages(newTagImages);
-
-
     })
   .catch((error) => {
     console.log(error);
