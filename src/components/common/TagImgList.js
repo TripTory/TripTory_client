@@ -14,7 +14,7 @@ export default function TagImgList( { tagNames, tagImages } ) {
     >
 
       {tagNames.map((tagName, index) => (
-        <TagImgListItem key={index} tagName={tagName} tagImages={tagImages} />
+        <TagImgListItem key={index} tagName={tagName} tagImages={tagImages[index]} />
       ))}
     </StTagImgList>
   );

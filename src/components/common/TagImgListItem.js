@@ -6,18 +6,17 @@ import { Link } from "react-router-dom";
 import tagData from "../../data/TagData.js";
 import axios from "axios";
 
-export default function TagImgListItem({ tagName, tagImages }) {
+export default function TagImgListItem({ tagName, tagImages, index }) {
   const [textColor, setTextColor] = useState("black"); // Default text color
 
   // const tag = tagData.tags.find((tag) => tag.tagName === tagName);
   // const firstImagePath = tag && tag.imagePaths.length > 0 ? tag.imagePaths[0] : null;
 
-  const images = tagImages;
+  // console.log("안녕?",images);
   // tagName에 해당하는 이미지 배열이 존재하고, 배열이 비어있지 않다면 첫 번째 이미지를 사용합니다.
-  const firstImagePath = images && images.length > 0 ? images[0] : null;
-
+  // const firstImagePath = images && images.length > 0 ? images[0] : null;
+  const firstImagePath = tagImages && tagImages.length > index ? tagImages[index] : null;
   useEffect(() => {
-    console.log("이미지ㅇ입니다요",tagImages);
 
     if (firstImagePath) {
       const img = new Image();
@@ -47,7 +46,7 @@ export default function TagImgListItem({ tagName, tagImages }) {
             padding: "0.2rem 0.6rem 0.2rem 0.6rem",
           }}
         >
-          <ImgDiv onClick={handleTagPage} style={{ backgroundImage: `url(${firstImagePath})`}}>
+          <ImgDiv onClick={handleTagPage} style={{ backgroundImage: `url(${tagImages[tagName]})`}}>
             <TagP># {tagName}</TagP>
           </ImgDiv>
         </ListItem>
@@ -59,6 +58,7 @@ export default function TagImgListItem({ tagName, tagImages }) {
 TagImgListItem.propTypes = {
   tagName: PropTypes.string.isRequired,
   tagImages: PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
 };
 
 const StTagImgListItem = styled.div`
