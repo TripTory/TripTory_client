@@ -15,9 +15,11 @@ import BottomNav from "../layout/BottomNav";
 import axios from "axios";
 import { useRecoilValue } from "recoil";
 import { tripNameState } from "../recoil/commonState";
+import { tripIdState } from "../recoil/commonState";
 
 export default function DiaryListPage() {
   const tripName = useRecoilValue(tripNameState);
+  const tripId = useRecoilValue(tripIdState);
   const navigate = useNavigate();
   //여행 id location으로 받음
   const location = useLocation();
@@ -26,7 +28,7 @@ export default function DiaryListPage() {
   const [error, setError] = useState(null);
   useEffect(() => {
     let completed = false;
-
+    console.log("아이디트립",tripId);
     // eslint-disable-next-line func-style
     async function get() {
       try {

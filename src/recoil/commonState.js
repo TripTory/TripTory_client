@@ -9,3 +9,8 @@ export const tripNameState = atom({
   key: "tripName",
   default: "",
 });
+
+export const tripIdState = atom({
+  key: "tripId",
+  default: "",
+});
