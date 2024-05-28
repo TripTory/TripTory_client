@@ -53,6 +53,9 @@ const ImgDiv = styled.div`
   width: 15rem;
   height: 100%;
   padding: 1.3rem;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 `;
 
 const TagP = styled.div`
