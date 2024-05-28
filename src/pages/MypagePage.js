@@ -19,7 +19,6 @@ import { useRecoilState } from "recoil";
 import { tripNameState, tripIdState, diaryIdState } from "../recoil/commonState";
 
 const MypagePage = () => {
-  //axios get으로 받아온 username location으로 전달
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [message, setMessage] = useState("");
