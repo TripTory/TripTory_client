@@ -21,7 +21,39 @@ code {
   font-family: "InterExtraBold";
   src: url(./assets/fonts/Inter/static/Inter-ExtraBold.ttf);
 }
+
+@font-face {
+  font-family: "PretendardLight";
+  src: url(./assets/fonts/Pretendard-Light.woff);
+}
+
+@font-face {
+  font-family: "PretendardExtraLight";
+  src: url(./assets/fonts/Pretendard-ExtraLight.woff);
+}
+
+
+@font-face {
+  font-family: "PretendardBold";
+  src: url(./assets/fonts/Pretendard-Bold.woff);
+}
+
+@font-face {
+  font-family: "PretendardSemibold";
+  src: url(./assets/fonts/Pretendard-SemiBold.woff);
+}
+
+@font-face {
+  font-family: "PretendardRegular";
+  src: url(./assets/fonts/Pretendard-Regular.woff);
+}
+
 :root{
   --inter-medium: "InterMedium";
   --inter-extrabold: "InterExtraBold";
+  --pretendard-medium: "PretendardLight";
+  --pretendard-bold: "PretendardBold";
+  --pretendard-regular: "PretendardRegular";
+  --pretendard-semibold: "PretendardSemibold";
+  --pretendard-extralight: "PretendardExtraLight";
 }

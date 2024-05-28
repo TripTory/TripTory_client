@@ -72,11 +72,15 @@ const InfoDiv = styled.div`
 const TitleP = styled.p`
   font-size: 2.2rem;
   font-weight: 800;
+  font-family: var(--pretendard-medium);
+  margin-bottom: 0.2rem;
+  letter-spacing: 1px;
 `;
 
 const DataP = styled.p`
   color: rgba(119, 119, 119);
   font-size: 1.3rem;
+  font-family: var(--pretendard-regular);
 `;
 
 const LocationDiv = styled.div`
@@ -87,19 +91,21 @@ const LocationDiv = styled.div`
 `;
 
 const LocationP = styled.p`
-  font-size: 1rem;
+  font-size: 1.2rem;
   color: rgba(119, 119, 119);
   margin-left: 0.3rem;
+  font-family: var(--pretendard-medium);
 `;
 
 const GoToTripBtn = styled(Button)`
   color: ${COLOR.MAIN_WHITE};
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   background-color: ${COLOR.MAIN_EMER};
   width: 90%;
   height: 4rem;
   border-radius: 10rem;
   font-weight: 800;
+  font-family: var(--pretendard-semibold);
   box-shadow: 0.2rem 0.2rem 0.2rem rgba(180, 180, 180);
   margin-top: 2rem;
   &:hover {

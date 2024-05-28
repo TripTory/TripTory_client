@@ -122,8 +122,8 @@ const SubmitBtn = styled(Button)`
   border-radius: 2rem;
   font-size: 1.8rem;
   color: white;
-  font-weight: bolder;
   margin-top: 2.2rem;
+  font-family: var(--pretendard-medium);
   &:hover {
     background-color: ${COLOR.MAIN_EMER};
   }

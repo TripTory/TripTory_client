@@ -94,6 +94,7 @@ const IntroP = styled.p`
   text-align: left;
   margin-top: 12rem;
   margin-left: -5rem;
+  font-family: var(--pretendard-bold);
 `;
 
 const LogoImage = styled.img`
@@ -119,6 +120,7 @@ const SocialButton = styled.button`
   ${SharedContent}
   align-items: center;
   font-size: 17px;
+  font-family: var(--pretendard-medium);
   height: 50px;
   width: 90%;
   margin: auto;

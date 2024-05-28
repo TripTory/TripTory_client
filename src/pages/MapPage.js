@@ -35,7 +35,7 @@ const MapPage = () => {
   return (
     <StMapPage>
       <TitleDiv>
-        <TitleTypo variant="h4">나의 여행 지도</TitleTypo>
+        <TitleTypo>나의 여행 지도</TitleTypo>
       </TitleDiv>
       <MapComponent data={data} urls={url} style={{ zIndex: 999 }} />
       <BottomNav style={{ zIndex: 900 }} />
@@ -65,6 +65,8 @@ const TitleDiv = styled.div`
 const TitleTypo = styled(Typography)`
   color: ${COLOR.MAIN_GREEN};
   font-weight: 1000;
+  font-size: 2.5rem;
+  font-family: var(--pretendard-bold);
 `;
 
 export default MapPage;

@@ -8,8 +8,8 @@ import React from "react";
 const App = () => {
   return (
     <StyledEngineProvider injectFirst>
+      <GlobalStyle />
       <RecoilRoot>
-        <GlobalStyle />
         <Router />
       </RecoilRoot>
     </StyledEngineProvider>

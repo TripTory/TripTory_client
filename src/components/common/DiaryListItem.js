@@ -93,8 +93,8 @@ const TitleP = styled.p`
   color: ${COLOR.MAIN_BLACK};
   font-size: 1.8rem;
   font-weight: bold;
-  font-family: var(--inter-extrabold);
-  margin-bottom: 0.5rem;
+  font-family: var(--pretendard-medium);
+  margin-bottom: 0.7rem;
 `;
 
 const DateDiv = styled.div`
@@ -106,11 +106,13 @@ const DateP = styled.p`
   font-size: 1.3rem;
   color: rgba(119, 119, 119);
   border-right: 1px solid rgba(119, 119, 119);
-  padding-right: 0.3rem;
+  padding-right: 0.5rem;
+  font-family: var(--pretendard-medium);
 `;
 
 const UserP = styled.p`
-  font-size: 1rem;
+  font-size: 1.1rem;
   color: rgba(119, 119, 119);
-  padding-left: 0.3rem;
+  padding-left: 0.5rem;
+  font-family: var(--pretendard-medium);
 `;

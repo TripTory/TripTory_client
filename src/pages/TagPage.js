@@ -114,6 +114,7 @@ const Tagbox = styled.div`
 
 const TagP = styled.p`
   font-size: 1.5rem;
+  font-family: var(--pretendard-medium);
 `;
 
 const ModalContent = styled(Box)`

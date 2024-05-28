@@ -147,6 +147,7 @@ const TitleDiv = styled.div`
   padding: 0.5rem 2.2rem 0.3rem 2.2rem;
   display: flex;
   align-items: center;
+  font-family: var(--pretendard-medium);
 `;
 
 const DateDiv = styled.div`
@@ -157,6 +158,7 @@ const DateDiv = styled.div`
   color: gray;
   display: flex;
   align-items: center;
+  font-family: var(--pretendard-medium);
 `;
 
 const Button = styled.button`
@@ -167,6 +169,7 @@ const Button = styled.button`
   border: none;
   font-size: 2rem;
   cursor: pointer;
+  font-family: var(--pretendard-medium);
 `;
 
 const ButtonLeft = styled(Button)`
@@ -195,4 +198,5 @@ const GotoDiaryBtn = styled.button`
   color: white;
   font-weight: bolder;
   margin: 1rem 0rem;
+  font-family: var(--pretendard-medium);
 `;

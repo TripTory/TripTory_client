@@ -144,7 +144,6 @@ const CopyCodeContainer = styled.div`
 const CopyCodeButton = styled.button`
   border: none;
   background-color: ${COLOR.MAIN_EMER};
-  font-weight: 900;
   width: 40%;
   height: 3.5rem;
   border-radius: 5rem;
@@ -154,6 +153,7 @@ const CopyCodeButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: var(--pretendard-semibold);
 
   &:active {
     background-color: ${COLOR.MAIN_GREEN};
@@ -167,25 +167,27 @@ const ButtonWrapper = styled.div`
 `;
 const Text = styled.p`
   &.tripName {
-    font-size: 2rem;
+    font-size: 2.3rem;
     font-weight: 900;
     padding: 1rem;
     margin: 1rem 2rem;
+    font-family: var(--pretendard-bold);
   }
 
   &.tripFriend {
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     font-weight: 900;
     padding: 0.7rem 1rem;
     margin: 2rem 2.5rem;
+    font-family: var(--pretendard-medium);
   }
 
   &.explain {
-    font-size: 1rem;
-    font-weight: 800;
+    font-size: 1.2rem;
     color: #747474;
     padding: 0.5rem 1rem;
     margin: 0rem 2.5rem;
+    font-family: var(--pretendard-medium);
   }
 `;
 

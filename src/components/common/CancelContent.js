@@ -30,6 +30,7 @@ const TitleTypo = styled(Typography)`
   font-weight: bolder;
   font-size: 1.8rem;
   margin-bottom: 0.5rem;
+  font-family: var(--pretendard-medium);
 `;
 
 const ContentDiv =styled.div`

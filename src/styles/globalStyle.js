@@ -2,6 +2,14 @@ import { createGlobalStyle } from "styled-components";
 import { reset } from "styled-reset";
 
 const GlobalStyle = createGlobalStyle`
+
+  @font-face {
+    font-family: "Pretendard";
+    src: url("../assets/fonts/Pretendard-Medium.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+  }
+
   ${reset}
 
   #root, 
