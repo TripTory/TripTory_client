@@ -3,19 +3,18 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import ListItem from "@mui/material/ListItem";
 import { Link } from "react-router-dom";
-import axios from "axios";
 
 export default function TagImgListItem({ tagName, tagImages }) {
 
   const handleTagPage = () => {
-    axios.get("http://localhost:5000/tag", {tag: tagName}, { withCredentials: true}) // 태그의 모든 이미지 받아오는 것에서 에러
-      .then((res) => {
-        const data = res.data;
-        console.log(data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    // axios.get(`http://localhost:5000/tag/${tagName}`,{ withCredentials: true })
+    //   .then((res) => {
+    //     const data = res.data.images;
+    //     console.log("data123",data);
+    //   })
+    //   .catch((error) => {
+    //     console.log(error);
+    //   });
   };
 
   return (

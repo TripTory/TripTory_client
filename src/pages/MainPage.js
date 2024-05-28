@@ -27,7 +27,6 @@ const MainPage = () => {
     axios.get("http://localhost:5000/tag", { withCredentials: true})
     .then((res) => {
       const data = res.data.imageTags;
-      console.log("data", data);
 
       const newTagNames = [...tagNames];
       const newTagImages= [...tagImages];
