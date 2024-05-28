@@ -5,41 +5,47 @@ import DiaryList from "../components/common/DiaryList";
 import Greenbar from "../assets/icons/greenbar.svg";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import Busan from "../assets/images/busan.jpg";
-import Gunsan from "../assets/images/gunsan.jpg";
 import Pencil from "../assets/images/pencil.svg";
 import { useNavigate } from "react-router-dom";
-import { useLocation } from "react-router";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import BottomNav from "../layout/BottomNav";
 import axios from "axios";
 import { useRecoilValue } from "recoil";
-import { tripNameState } from "../recoil/commonState";
-import { tripIdState } from "../recoil/commonState";
+import { tripNameState, tripIdState} from "../recoil/commonState";
+import defaultImageSrc from "../assets/images/defaultProfileImg.svg";
 
 export default function DiaryListPage() {
   const tripName = useRecoilValue(tripNameState);
   const tripId = useRecoilValue(tripIdState);
   const navigate = useNavigate();
-  //여행 id location으로 받음
-  const location = useLocation();
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
+  const [userimg, setUserimg] = useState([]);
   const [error, setError] = useState(null);
   useEffect(() => {
     let completed = false;
-    console.log("아이디트립",tripId);
+    let userimgs = [];
+    console.log("아이디트립", tripId);
     // eslint-disable-next-line func-style
     async function get() {
       try {
         const result = await axios.get(
-          `${process.env.REACT_APP_SERVER_URL}/diary/travel/${location.state.id}`,
+          `${process.env.REACT_APP_SERVER_URL}/diary/travel/${tripId}`,
+          { withCredentials: true },
+        );
+        const Img = await axios.get(
+          `${process.env.REACT_APP_SERVER_URL}/travel/${tripId}`,
           { withCredentials: true },
         );
         if (!completed) {
-          // console.log("diarys:", result.data.diarys_info);
           setData(result.data.diarys_info);
           setLoading(true);
+          Img.data.invited_profile.forEach((item) => {
+            userimgs.push(item.url);
+          });
+          setUserimg(userimgs);
+          console.log(userimg[1]);
+          console.log(userimg[2]);
         }
       } catch (error) {
         if (!completed) {
@@ -54,13 +60,13 @@ export default function DiaryListPage() {
     return () => {
       completed = true;
     };
-  }, [location.state.id]);
+  }, [tripId]);
 
   const goToAdd = () => {
-    navigate("/invitefriend", { state: { id: location.state.id } });
+    navigate("/invitefriend");
   };
   const goToCreate = () => {
-    navigate("/diary", { state: { id: location.state.id } });
+    navigate("/diary");
   };
   return (
     <StDiaryListPage>
@@ -70,15 +76,17 @@ export default function DiaryListPage() {
       </TitleDiv>
       <MainDiv>
         <FriendDiv>
-          <FriendAvt
-            sx={{ position: "absolute", left: "56%" }}
-            alt="1"
-            src={Busan}
-          />
+          {userimg[1]!==undefined && (
+            <FriendAvt
+              sx={{ position: "absolute", left: "56%" }}
+              alt="1"
+              src={userimg[1] ? userimg[1] : defaultImageSrc }
+            />
+          )}
           <FriendAvt
             sx={{ position: "absolute", left: "63%" }}
             alt="2"
-            src={Gunsan}
+            src={userimg[0]}
           />
           <AddFriendBtn variant="contained" onClick={goToAdd}>
             + 일행 추가

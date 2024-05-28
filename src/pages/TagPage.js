@@ -1,13 +1,11 @@
 import styled from "styled-components";
 import { COLOR } from "../styles/color";
-import tagData from "../data/TagData.js";
 import { useParams } from "react-router-dom";
 import goback from "../assets/icons/goback.svg";
 import xicon from "../assets/icons/x-icon.svg";
-
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Menubar from "../components/common/Menubar.js";
@@ -15,8 +13,6 @@ import Menubar from "../components/common/Menubar.js";
 export default function TagPage() {
   const navigate = useNavigate();
   const { tagName } = useParams();
-
-  const tag = tagData.tags.find((tag) => tag.tagName === tagName);
 
   const [open, setOpen] = React.useState(false);
   const [modalImageIndex, setModalImageIndex] = useState(null);
@@ -34,6 +30,19 @@ export default function TagPage() {
     setOpen(false);
   };
 
+
+  const [tagImages, setTagImages] = useState([]);
+  useEffect(() => {
+    axios.get(`http://localhost:5000/tag/${tagName}`, { withCredentials: true })
+      .then((res) => {
+        const data = res.data.images;
+        setTagImages(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [tagName]);
+
   return (
     <EntireDiv>
       <UpDiv>
@@ -47,23 +56,22 @@ export default function TagPage() {
           <TagP># {tagName}</TagP>
         </Tagbox>
         <ImageContainer>
-          {tag &&
-            tag.imagePaths.map((imagePath, index) => (
-              <img
-                key={index}
-                src={imagePath}
-                alt={`${tagName}`}
-                onClick={() => handleImageClick(index)}
-                style={{ width: "30%" }}
-              />
-            ))}
+          {tagImages.map((imagePath, index) => (
+            <img
+              key={index}
+              src={imagePath}
+              alt={`${tagName}`}
+              onClick={() => handleImageClick(index)}
+              style={{ width: "30%" }}
+            />
+          ))}
         </ImageContainer>
       </div>
       <Modal open={open} onClose={handleClose}>
         <ModalContent>
           {modalImageIndex !== null && (
             <img
-              src={tag.imagePaths[modalImageIndex]}
+              src={tagImages[modalImageIndex]}
               alt={`${tagName}`}
               style={{ padding: "1rem", width: "100%" }}
             />

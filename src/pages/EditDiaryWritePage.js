@@ -11,9 +11,12 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router";
 import moment from "moment";
+import { useRecoilState } from "recoil";
+import { diaryIdState } from "../recoil/commonState";
 
 const EditDiaryWritePage = () => {
   const { state } = useLocation();
+  const [diaryId, setDiaryId] = useRecoilState(diaryIdState);
   const { diaryInfo } = state || {};
 
   const [startDate, setStartDate] = useState(diaryInfo?.date ? new Date(diaryInfo.date) : null);
@@ -23,13 +26,16 @@ const EditDiaryWritePage = () => {
   const [files2, setFiles2] = useState();
   const [imgmodified, setImgModified] = useState(false);
 
+  const goToShowDiary = () => {
+    navigate("/showdiary");
+    closeModal();
+  };
+
   const transformFiles = (filesArray) => {
     return filesArray.map((file) => ({ preview_URL: file }));
   };
 
   useEffect(() => {
-    console.log("이미지 바뀜?",imgmodified);
-    console.log("안녕?",state.id.diaryid);
     const transformedFiles = transformFiles(files);
     setFiles2(transformedFiles);
   }, []);
@@ -37,7 +43,6 @@ const EditDiaryWritePage = () => {
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false); // Cancel 버튼을 위한 모달 상태
   const [isSaveModalOpen, setIsSaveModalOpen] = useState(false); // Save 버튼을 위한 모달 상태
   const [imagePreview, setImagePreview] = useState(null);
-  const [diaryId, setDiaryId] = useState({ diaryid: "" });
 
   const navigate = useNavigate();
 
@@ -73,12 +78,9 @@ const EditDiaryWritePage = () => {
       console.log(`${key}: ${value}`);
     }
 
-    axios.put(`http://localhost:5000/diary/${state.id.diaryid}`, formData, { withCredentials: true, headers: {"Content-Type": "multipart/form-data"} })
+    axios.put(`http://localhost:5000/diary/${diaryId}`, formData, { withCredentials: true, headers: {"Content-Type": "multipart/form-data"} })
     .then((res) => {
-      setDiaryId({
-        diaryid: res.data.diaryid,
-      });
-      navigate("/showdiary", { state: { diaryid: state.id.diaryid} });
+      navigate("/showdiary");
     })
     .catch((error) => {
       console.log("에러", error);
@@ -136,7 +138,7 @@ const EditDiaryWritePage = () => {
         buttons={
           <OkayDiv>
             <OkayBtn className="no" onClick={closeModal}>아니오</OkayBtn>
-            <OkayBtn className="yes">예</OkayBtn>
+            <OkayBtn className="yes" onClick={goToShowDiary}>예</OkayBtn>
           </OkayDiv>
         }
       />

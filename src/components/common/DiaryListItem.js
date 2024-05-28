@@ -6,10 +6,18 @@ import ListItemAvatar from "@mui/material/ListItemAvatar";
 import Avatar from "@mui/material/Avatar";
 import Dot from "../../assets/icons/dot.svg";
 import { PropTypes } from "prop-types";
-
+import { useRecoilState } from "recoil";
+import { tripIdState, diaryIdState } from "../../recoil/commonState";
+import { useNavigate } from "react-router-dom";
 export default function DiaryListItem(props) {
+  const [diaryId, setDiaryId] = useRecoilState(diaryIdState);
+  const navigate = useNavigate();
+  const goToDiary = () => {
+    setDiaryId(props.data._id);
+    navigate("/showdiary");
+  };
   return (
-    <StDiaryListItem>
+    <StDiaryListItem onClick={goToDiary}>
       <ListItem
         sx={{
           display: "flex",
@@ -17,7 +25,7 @@ export default function DiaryListItem(props) {
           alignItems: "center",
           height: "9.6rem",
           width: "100%",
-          paddingLeft: "1rem"
+          paddingLeft: "1rem",
         }}
       >
         <ContentDiv>
@@ -27,13 +35,13 @@ export default function DiaryListItem(props) {
           <InfoDiv>
             <TitleP>{props.data.title}</TitleP>
             <DateDiv>
-              <DateP>{props.data.startdate}</DateP>
+              <DateP>{props.data.date.slice(0,10)}</DateP>
               <UserP>{props.data.userName}</UserP>
             </DateDiv>
           </InfoDiv>
         </ContentDiv>
         <ListItemAvatar>
-          <Avatar src={props.data.img.imgpath} sx={{ width: "5rem", height: "5rem" }}></Avatar>
+          <Avatar src={props.img} sx={{ width: "5rem", height: "5rem" }}></Avatar>
         </ListItemAvatar>
       </ListItem>
     </StDiaryListItem>
@@ -97,9 +105,8 @@ const DateDiv = styled.div`
 const DateP = styled.p`
   font-size: 1.3rem;
   color: rgba(119, 119, 119);
-  border-right: 1px solid rgba(119,119,119);
+  border-right: 1px solid rgba(119, 119, 119);
   padding-right: 0.3rem;
-
 `;
 
 const UserP = styled.p`
@@ -107,4 +114,3 @@ const UserP = styled.p`
   color: rgba(119, 119, 119);
   padding-left: 0.3rem;
 `;
-
