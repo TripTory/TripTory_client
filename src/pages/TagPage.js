@@ -1,14 +1,11 @@
 import styled from "styled-components";
 import { COLOR } from "../styles/color";
-import tagData from "../data/TagData.js";
 import { useParams } from "react-router-dom";
 import goback from "../assets/icons/goback.svg";
 import xicon from "../assets/icons/x-icon.svg";
 import axios from "axios";
-
 import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
-
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Menubar from "../components/common/Menubar.js";
@@ -17,8 +14,6 @@ export default function TagPage() {
   const navigate = useNavigate();
   const { tagName } = useParams();
 
-  const tag = tagData.tags.find((tag) => tag.tagName === tagName);
-  // console.log("태그", tag);
   const [open, setOpen] = React.useState(false);
   const [modalImageIndex, setModalImageIndex] = useState(null);
 
@@ -41,7 +36,6 @@ export default function TagPage() {
     axios.get(`http://localhost:5000/tag/${tagName}`, { withCredentials: true })
       .then((res) => {
         const data = res.data.images;
-        console.log("data123", data);
         setTagImages(data);
       })
       .catch((error) => {
