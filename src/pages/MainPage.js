@@ -25,7 +25,7 @@ const MainPage = () => {
   const [tagImages, setTagImages] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/user", { withCredentials: true})
+    axios.get(`${process.env.REACT_APP_SERVER_URL}/user`, { withCredentials: true})
     .then((res) => {
       setUserName(res.data.userinfo.name);
     })
@@ -35,7 +35,7 @@ const MainPage = () => {
   }, []);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/tag", { withCredentials: true})
+    axios.get(`${process.env.REACT_APP_SERVER_URL}/tag`, { withCredentials: true})
     .then((res) => {
       const data = res.data.imageTags;
 
