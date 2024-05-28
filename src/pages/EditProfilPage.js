@@ -41,7 +41,7 @@ const EditProfilPage = () => {
     }
 
 
-    axios.put("http://localhost:5000/user", formData,
+    axios.put(`${process.env.REACT_APP_SERVER_URL}/user`, formData,
       { withCredentials: true })
       .then((res) => {
         if (res === 404) {

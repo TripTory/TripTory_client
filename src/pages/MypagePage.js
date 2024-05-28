@@ -45,7 +45,7 @@ const MypagePage = () => {
   }, []);
 
   const handleUserInfo = () => {
-    axios.get("http://localhost:5000/user", { withCredentials: true})
+    axios.get(`${process.env.REACT_APP_SERVER_URL}/user`, { withCredentials: true})
     .then((res) => {
       const data = res.data.userinfo;
       setUserInfo(
@@ -71,7 +71,7 @@ const MypagePage = () => {
   };
 
   const handleLogout = () => {
-    axios.delete("http://localhost:5000/user/logout", { withCredentials: true})
+    axios.delete(`${process.env.REACT_APP_SERVER_URL}/user/logout`, { withCredentials: true})
       .then((response) => {
         const status = response.status;
         if (status === 200) {
@@ -90,7 +90,7 @@ const MypagePage = () => {
 
 
   const DelAccount = () =>{
-    axios.delete("http://localhost:5000/user", { withCredentials: true})
+    axios.delete(`${process.env.REACT_APP_SERVER_URL}/user`, { withCredentials: true})
       .then((response) => {
         const status = response.status;
         console.log("res",status);

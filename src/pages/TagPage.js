@@ -33,7 +33,7 @@ export default function TagPage() {
 
   const [tagImages, setTagImages] = useState([]);
   useEffect(() => {
-    axios.get(`http://localhost:5000/tag/${tagName}`, { withCredentials: true })
+    axios.get(`${process.env.REACT_APP_SERVER_URL}/tag/${tagName}`, { withCredentials: true })
       .then((res) => {
         const data = res.data.images;
         setTagImages(data);
