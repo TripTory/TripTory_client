@@ -16,14 +16,26 @@ export default function TripList() {
 
     // eslint-disable-next-line func-style
     async function get() {
-      const result = await axios.get(
-        `${process.env.REACT_APP_SERVER_URL}/travel`,
-        { withCredentials: true },
-      );
-      if (!completed) {
-        setData(result.data.travels);
-        setUrl(result.data.travelUrls);
+      try {
+        const result = await axios.get(
+          `${process.env.REACT_APP_SERVER_URL}/travel`,
+          { withCredentials: true },
+        );
+        if (!completed) {
+          setData(result.data.travels);
+          setUrl(result.data.travelUrls);
+        }
+      } catch (error) {
+        if (!completed) {
+          if(error.response.status===404){
+            setData([]);
+            setUrl([]);
+          }else{
+            console.log(error);
+          }
+        }
       }
+
       setLoading(true);
     }
     get();
