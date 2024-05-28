@@ -1,11 +1,11 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
 import { COLOR } from "../../styles/color";
 import CancelIcon from "@mui/icons-material/Cancel";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import PropTypes from "prop-types";
 
-const Uploader = ({ onFilesChange, files=[], setFiles }) => {
+const Uploader = ({ onFilesChange, files=[], setFiles, onImgModified }) => {
   const inputRef = useRef(null);
 
   const saveImage = (e) => {
@@ -25,6 +25,7 @@ const Uploader = ({ onFilesChange, files=[], setFiles }) => {
         ...prevFiles,
         { fileObject: e.target.files[0], preview_URL: fileReader.result, type: fileType },
       ]);
+      onImgModified(true);
     };
   };
 
@@ -32,6 +33,7 @@ const Uploader = ({ onFilesChange, files=[], setFiles }) => {
     const updatedFiles = [...files];
     updatedFiles.splice(index, 1);
     setFiles(updatedFiles);
+    onImgModified(true);
   };
 
   return (
@@ -77,6 +79,7 @@ Uploader.propTypes = {
   setFiles: PropTypes.node.isRequired,
   files: PropTypes.node.isRequired,
   onFilesChange: PropTypes.node.isRequired,
+  onImgModified: PropTypes.func.isRequired,
 };
 
 const ImageUploadDiv = styled.div`

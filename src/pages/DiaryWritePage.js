@@ -14,6 +14,7 @@ import { tripIdState, diaryIdState } from "../recoil/commonState";
 import moment from "moment";
 
 const DiaryWritePage = () => {
+  const [imgmodified, setImgModified] = useState(false);
   const [diaryId, setDiaryId] = useRecoilState(diaryIdState);
   const tripId = useRecoilValue(tripIdState);
   const [startDate, setStartDate] = useState();
@@ -24,10 +25,6 @@ const DiaryWritePage = () => {
   const [imagePreview, setImagePreview] = useState(null);
   const [files, setFiles] = useState([]);
   const [travelid, setTravelId] = useState("");
-  useEffect(() => {
-    console.log("Travel ID:", travelid); // Travel ID 출력
-    console.log("일기 생성 files:", files);
-  });
 
   const navigate = useNavigate();
 
@@ -62,13 +59,8 @@ const DiaryWritePage = () => {
       formData.append("images", file.fileObject);
     });
 
-    for (const [key, value] of formData.entries()) {
-      console.log(`${key}: ${value}`);
-    }
-
     axios.post(`${process.env.REACT_APP_SERVER_URL}/diary`, formData, { withCredentials: true, headers: {"Content-Type": "multipart/form-data"} })
     .then((res) => {
-      console.log("res.data:", res.data);
       setDiaryId(res.data.diaryid);
       navigate("/showdiary");
     })
@@ -109,7 +101,7 @@ const DiaryWritePage = () => {
       />
     </DiaryDiv>
 
-    <Uploader onFilesChange={handleImageUpload} files={files} setFiles={setFiles} />
+    <Uploader onFilesChange={handleImageUpload} files={files} setFiles={setFiles} onImgModified={setImgModified}/>
 
     <BtnDiv>
       <CancelBtn onClick={openCancelModal}>취소</CancelBtn>
