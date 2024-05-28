@@ -15,13 +15,17 @@ import DoDisturbOutlinedIcon from "@mui/icons-material/DoDisturbOutlined";
 import CancelContent from "../components/common/CancelContent";
 import BottomNav from "../layout/BottomNav";
 import axios from "axios";
+import { useRecoilState } from "recoil";
+import { tripNameState, tripIdState, diaryIdState } from "../recoil/commonState";
 
 const MypagePage = () => {
-  //axios get으로 받아온 username location으로 전달
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [message, setMessage] = useState("");
   const [userInfo, setUserInfo] = useState({ name: "", email: "", profileimg: "" });
+  const [tripName, setTripName] = useRecoilState(tripNameState);
+  const [tripId, setTripId] = useRecoilState(tripIdState);
+  const [diaryID, setDiaryId] = useRecoilState(diaryIdState);
 
   const toggleModal = () => {
     console.log(isModalOpen);
@@ -45,7 +49,7 @@ const MypagePage = () => {
   }, []);
 
   const handleUserInfo = () => {
-    axios.get("http://localhost:5000/user", { withCredentials: true})
+    axios.get(`${process.env.REACT_APP_SERVER_URL}/user`, { withCredentials: true})
     .then((res) => {
       const data = res.data.userinfo;
       setUserInfo(
@@ -71,10 +75,13 @@ const MypagePage = () => {
   };
 
   const handleLogout = () => {
-    axios.delete("http://localhost:5000/user/logout", { withCredentials: true})
+    axios.delete(`${process.env.REACT_APP_SERVER_URL}/user/logout`, { withCredentials: true})
       .then((response) => {
         const status = response.status;
         if (status === 200) {
+          setTripName("");
+          setTripId("");
+          setDiaryId("");
           setMessage("로그아웃 성공");
         } else if (status === 401) {
           setMessage("로그인이 필요합니다.");
@@ -90,11 +97,14 @@ const MypagePage = () => {
 
 
   const DelAccount = () =>{
-    axios.delete("http://localhost:5000/user", { withCredentials: true})
+    axios.delete(`${process.env.REACT_APP_SERVER_URL}/user`, { withCredentials: true})
       .then((response) => {
         const status = response.status;
         console.log("res",status);
         if (status === 200) {
+          setTripName("");
+          setTripId("");
+          setDiaryId("");
           setMessage("계정이 성공적으로 삭제되었습니다.");
         } else if (status === 404) {
           setMessage("사용자를 찾을 수 없습니다.");

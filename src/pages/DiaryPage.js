@@ -21,7 +21,7 @@ const DiaryPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/diary/${diaryId}`, { withCredentials: true})
+    axios.get(`${process.env.REACT_APP_SERVER_URL}/diary/${diaryId}`, { withCredentials: true})
     .then((res) => {
       const data = res.data.diaryinfo;
       setDiaryInfo({
@@ -67,7 +67,7 @@ const DiaryPage = () => {
   };
 
   const closeModal = () => {
-    axios.delete(`http://localhost:5000/diary/${diaryId}`, { withCredentials: true})
+    axios.delete(`${process.env.REACT_APP_SERVER_URL}/diary/${diaryId}`, { withCredentials: true})
     .then((res) => {
       // console.log(res);
     })

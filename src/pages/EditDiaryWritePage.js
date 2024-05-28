@@ -79,7 +79,7 @@ const EditDiaryWritePage = () => {
     formData.append("originImage", files2PreviewURLs); // edit diary 시 수정이 아닌 원본 이미지
 
 
-    axios.put(`http://localhost:5000/diary/${diaryId}`, formData, { withCredentials: true, headers: {"Content-Type": "multipart/form-data"} })
+    axios.put(`${process.env.REACT_APP_SERVER_URL}/diary/${diaryId}`, formData, { withCredentials: true, headers: {"Content-Type": "multipart/form-data"} })
     .then((res) => {
       navigate("/showdiary");
     })

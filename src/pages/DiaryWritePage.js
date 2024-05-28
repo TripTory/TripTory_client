@@ -59,7 +59,7 @@ const DiaryWritePage = () => {
       formData.append("images", file.fileObject);
     });
 
-    axios.post("http://localhost:5000/diary", formData, { withCredentials: true, headers: {"Content-Type": "multipart/form-data"} })
+    axios.post(`${process.env.REACT_APP_SERVER_URL}/diary`, formData, { withCredentials: true, headers: {"Content-Type": "multipart/form-data"} })
     .then((res) => {
       setDiaryId(res.data.diaryid);
       navigate("/showdiary");

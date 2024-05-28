@@ -1,4 +1,7 @@
 import { atom } from "recoil";
+import { recoilPersist } from "recoil-persist";
+
+const { persistAtom } = recoilPersist();
 
 export const dialogState = atom({
   key: "dialogState",
@@ -8,15 +11,22 @@ export const dialogState = atom({
 export const tripNameState = atom({
   key: "tripName",
   default: "",
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const tripIdState = atom({
   key: "tripId",
   default: "",
+  effects_UNSTABLE: [persistAtom],
 });
 
 export const diaryIdState = atom ({
   key: "diaryId",
   default: "",
+  effects_UNSTABLE: [persistAtom],
 });
 
+export const userNameState = atom ({
+  key: "userName",
+  default: "",
+});
