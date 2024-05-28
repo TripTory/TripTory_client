@@ -25,10 +25,6 @@ const DiaryWritePage = () => {
   const [imagePreview, setImagePreview] = useState(null);
   const [files, setFiles] = useState([]);
   const [travelid, setTravelId] = useState("");
-  useEffect(() => {
-    console.log("Travel ID:", travelid); // Travel ID 출력
-    console.log("일기 생성 files:", files);
-  });
 
   const navigate = useNavigate();
 
@@ -63,13 +59,8 @@ const DiaryWritePage = () => {
       formData.append("images", file.fileObject);
     });
 
-    for (const [key, value] of formData.entries()) {
-      console.log(`${key}: ${value}`);
-    }
-
     axios.post("http://localhost:5000/diary", formData, { withCredentials: true, headers: {"Content-Type": "multipart/form-data"} })
     .then((res) => {
-      console.log("res.data:", res.data);
       setDiaryId(res.data.diaryid);
       navigate("/showdiary");
     })
