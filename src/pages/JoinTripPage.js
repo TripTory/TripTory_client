@@ -191,25 +191,27 @@ const EmptyDiv = styled.div`
 `;
 const Text = styled.p`
   &.tripName {
-    font-size: 2rem;
-    font-weight: 900;
+    font-size: 2.2rem;
     padding: 1rem;
     margin: 1rem 2rem;
+    font-family: var(--pretendard-bold);
   }
 
   &.tripFriend {
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     font-weight: 900;
     padding: 0.7rem 1rem;
     margin: 2rem 2.5rem;
+    font-family: var(--pretendard-medium);
   }
 
   &.explain {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     font-weight: 800;
     color: #747474;
     padding: 0.5rem 1rem;
     margin: 0rem 2.5rem;
+    font-family: var(--pretendard-medium);
   }
 `;
 const InputContainer = styled.div``;
@@ -227,6 +229,7 @@ const SubmitButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: var(--pretendard-medium);
 
   //버튼 비활성화일때 색상
   ${(props) =>
@@ -258,7 +261,8 @@ const InputCode = styled.input`
   justify-content: center;
   align-items: center;
   margin: 3rem 0rem 0rem 0rem;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
+  font-family: var(--pretendard-medium);
 `;
 const ButtonContainer = styled.div`
   display: flex;

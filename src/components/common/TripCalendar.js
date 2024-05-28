@@ -102,9 +102,7 @@ const TripCalendar = ({ diaryInfo }) => {
         tileClassName={tileClassName}
       />
       <Drawer anchor="bottom" open={isOpen} onClose={toggleDrawer(false)}>
-        <DiaryModal
-          content={<DiaryPreviewContent diaries={selectedDiary} />}
-        />
+        <DiaryModal content={<DiaryPreviewContent diaries={selectedDiary} />} />
       </Drawer>
     </CalendarWrapper>
   );
@@ -169,6 +167,7 @@ const CalendarStyle = styled(Calendar)`
   .react-calendar__navigation__label {
     font-size: 2.5rem;
     font-weight: 600;
+    font-family: var(--pretendard-medium);
   }
 
   .react-calendar__tile {
@@ -179,6 +178,7 @@ const CalendarStyle = styled(Calendar)`
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: var(--pretendard-medium);
   }
 
   .react-calendar__month-view__weekdays__weekday {
@@ -189,6 +189,7 @@ const CalendarStyle = styled(Calendar)`
     justify-content: center;
     align-items: center;
     text-align: center;
+    font-family: var(--pretendard-medium);
   }
   .react-calendar__month-view__weekdays__weekday--weekend abbr[title="Sunday"] {
     //일요일에 빨간 폰트

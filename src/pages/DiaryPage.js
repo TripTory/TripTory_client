@@ -139,6 +139,7 @@ const EditBtn = styled.button`
   border: none;
   background-color: transparent;
   font-size: 1.8rem;
+  font-family: var(--pretendard-regular);
   color: ${COLOR.MAIN_GREEN};
 `;
 
@@ -146,17 +147,20 @@ const DeleteBtn = styled.button`
   border: none;
   background-color: transparent;
   font-size: 1.8rem;
+  font-family: var(--pretendard-regular);
   color: ${COLOR.MAIN_GREEN};
 `;
 
 const Bar = styled.p`
   font-size: 2rem;
+  font-family: var(--pretendard-regular);
   color: ${COLOR.MAIN_GREEN};
 `;
 
 const ContentDiv = styled.div`
   text-align: center;
   font-size: 1.8rem;
+  font-family: var(--pretendard-regular);
   margin-top: 4rem;
 `;
 
@@ -165,10 +169,11 @@ const OkayDiv = styled.div`
 `;
 
 const OkayBtn = styled.button`
-  height: 2.5rem;
+  height: 3rem;
   width: 10rem;
   font-size: 1.7rem;
   font-weight: 600;
+  font-family: var(--pretendard-regular);
   text-align: center;
   vertical-align: center;
   color: white;

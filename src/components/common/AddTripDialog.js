@@ -34,13 +34,13 @@ export default function AddTripDialog(props) {
         <AddlstItm disableGutters onClick={goToAdd}>
           <AddItemBtn onClick={handleClose}>
             <IconImg src={Person} />
-            <ListItemText>여행 추가하기</ListItemText>
+            <LstItmTxt>여행 추가하기</LstItmTxt>
           </AddItemBtn>
         </AddlstItm>
         <AddlstItm disableGutters onClick={goToParticipate}>
           <AddItemBtn onClick={handleClose}>
             <IconImg src={People} />
-            <ListItemText>친구 여행 참여하기</ListItemText>
+            <LstItmTxt>친구 여행 참여하기</LstItmTxt>
           </AddItemBtn>
         </AddlstItm>
       </AddList>
@@ -89,3 +89,8 @@ const AddItemBtn = styled(ListItemButton)`
 const IconImg = styled.img`
   margin-right: 0.7rem;
 `;
+
+const LstItmTxt = styled(ListItemText)`
+  font-family: var(--pretendard-regular);
+`;
+
