@@ -126,6 +126,7 @@ const TitleP = styled.p`
   font-weight: bold;
   font-family: var(--pretendard-regular);
   margin-bottom: 0.1rem;
+  letter-spacing: 1px;
 `;
 
 const DateP = styled.p`
@@ -179,6 +180,7 @@ const YesBtn = styled.button`
   font-size: 1.3rem;
   color: white;
   font-weight: bolder;
+  font-family: var(--pretendard-medium);
 `;
 
 const NoBtn = styled.button`
@@ -190,4 +192,5 @@ const NoBtn = styled.button`
   font-size: 1.3rem;
   color: black;
   font-weight: bolder;
+  font-family: var(--pretendard-medium);
 `;

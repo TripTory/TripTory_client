@@ -204,6 +204,7 @@ const TitleBox = styled.input`
   width: 92%;
   border: none;
   font-size: 15px;
+  font-family: var(--pretendard-medium);
   border-bottom: solid ${COLOR.MAIN_SKY} 1px;
   margin: auto;
   margin-top: 2rem;
@@ -220,6 +221,7 @@ const ContentBox = styled.textarea`
   height: 37rem;
   border: none;
   font-size: 15px;
+  font-family: var(--pretendard-medium);
   margin: auto;
   margin-top: 1rem;
   &::placeholder {
@@ -253,6 +255,7 @@ const CancelBtn = styled.button`
   width: 14.5rem;
   font-size: 1.8rem;
   font-weight: 600;
+  font-family: var(--pretendard-medium);
   background-color: white;
   border: none;
   border-radius: 3rem;
@@ -264,6 +267,7 @@ const SaveBtn = styled.button`
   width: 14.5rem;
   font-size: 1.8rem;
   font-weight: 600;
+  font-family: var(--pretendard-medium);
   color: white;
   background-color: #2EABA1;
   border: none;
@@ -273,10 +277,11 @@ const SaveBtn = styled.button`
   background-color: ${(props) => props.disabled ? "rgba(46, 171, 161, 0.3)" : "${COLOR.MAIN_EMER}"}
 `;
 const OkayBtn = styled.button`
-  height: 2.5rem;
+  height: 3rem;
   width: 10rem;
   font-size: 1.7rem;
   font-weight: 600;
+  font-family: var(--pretendard-medium);
   text-align: center;
   vertical-align: center;
   color: white;
@@ -298,6 +303,7 @@ const OkayDiv = styled.div`
 const ContentDiv = styled.div`
   text-align: center;
   font-size: 1.8rem;
+  font-family: var(--pretendard-medium);
   margin-top: 4rem;
 `;
 

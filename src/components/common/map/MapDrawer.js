@@ -74,6 +74,7 @@ const TitleP = styled.p`
   font-weight: 800;
   font-family: var(--pretendard-medium);
   margin-bottom: 0.2rem;
+  letter-spacing: 1px;
 `;
 
 const DataP = styled.p`

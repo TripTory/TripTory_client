@@ -311,6 +311,7 @@ const YesBtn = styled.button`
   font-size: 1.3rem;
   color: white;
   font-weight: bolder;
+  font-family: var(--pretendard-medium);
 `;
 
 const NoBtn = styled.button`
@@ -322,5 +323,6 @@ const NoBtn = styled.button`
   font-size: 1.3rem;
   color: black;
   font-weight: bolder;
+  font-family: var(--pretendard-medium);
 `;
 export default MypagePage;

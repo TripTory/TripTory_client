@@ -65,7 +65,7 @@ const MainPage = () => {
           <UpDiv>
             <DivNameP>내 여행</DivNameP>
             <AddBtn variant="contained" onClick={handleOpen}>
-              + 여행 추가
+              + &nbsp;여행 추가
             </AddBtn>
           </UpDiv>
           <DownDiv>
@@ -123,15 +123,16 @@ const IntroDiv = styled.div`
 const HiP = styled.p`
   font-size: 2rem;
   color: white;
-  font-family: var(--pretendard-medium);
-  font-weight: 700;
+  font-family: var(--pretendard-bold);
   padding-bottom: 0.5rem;
+  letter-spacing: 1px;
 `;
 
 const WelcomeP = styled.p`
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   color: white;
-  font-family: var(--pretendard-medium);
+  font-family: var(--pretendard-extralight);
+  letter-spacing: 1px;
 `;
 
 const MainDiv = styled.div`
@@ -175,7 +176,7 @@ const AddBtn = styled(Button)`
   width: 9rem;
   height: 3rem;
   border-radius: 3rem;
-  font-size: 1rem;
+  font-size: 1.1rem;
   padding-left: 1rem;
   padding-right: 1rem;
   &:hover {

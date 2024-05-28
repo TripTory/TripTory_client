@@ -34,7 +34,7 @@ const MyFriend = styled.p`
   padding: 2rem;
   margin: 0rem 0.5rem;
   font-size: 2rem;
-  font-weight: 900;
+  font-family: var(--pretendard-bold);
 `;
 
 const FriendItemDiv = styled.div`
@@ -54,8 +54,8 @@ const FriendImg = styled.img`
 
 const FriendNameDiv = styled.div`
   font-size: 1.8rem;
-  font-weight: 900;
   display: flex;
   align-items: center;
   margin: 1rem 1.5rem;
+  font-family: var(--pretendard-semibold);
 `;

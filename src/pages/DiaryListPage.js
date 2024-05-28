@@ -178,8 +178,8 @@ const AddFriendBtn = styled(Button)`
   width: 10rem;
   background-color: ${COLOR.MAIN_EMER};
   color: white;
-  font-size: 1.1rem;
-  font-family: var(--pretendard-semibold);
+  font-size: 1.2rem;
+  font-family: var(--pretendard-regular);
   border-radius: 3rem;
   &:hover {
     background-color: ${COLOR.MAIN_EMER};
