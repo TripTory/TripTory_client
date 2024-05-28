@@ -5,7 +5,7 @@ import TripCalendar from "../components/common/TripCalendar";
 import BottomNav from "../layout/BottomNav";
 import { COLOR } from "../styles/color";
 import axios from "axios";
-
+import { Typography } from "@mui/material";
 const CalendarPage = () => {
   const SERVER_URL = process.env.REACT_APP_SERVER_URL;
   const [diaryInfo, setDiaryInfo] = useState([]);
@@ -37,18 +37,36 @@ const CalendarPage = () => {
 
 
   return (
-    <div>
-      <Title>내 캘린더</Title>
+    <StCalendarPage>
+      <TitleDiv>
+        <TitleTypo>내 캘린더</TitleTypo>
+      </TitleDiv>
       {!loading && <TripCalendar diaryInfo={diaryInfo} />}
       <BottomNav></BottomNav>
-    </div>
+    </StCalendarPage>
   );
 };
 export default CalendarPage;
 
-const Title = styled.div`
-  font-size: 3rem;
-  font-weight: 900;
+const StCalendarPage = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+`;
+
+const TitleDiv = styled.div`
+  display: flex;
+  justify-content: baseline;
+  align-items: center;
+  width: 100%;
+  height: 10%;
+  padding-left: 2rem;
+`;
+
+const TitleTypo = styled(Typography)`
   color: ${COLOR.MAIN_GREEN};
-  padding: 3rem 2rem;
+  font-weight: 1000;
+  font-size: 2.5rem;
+  font-family: var(--pretendard-bold);
 `;

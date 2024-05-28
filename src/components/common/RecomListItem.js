@@ -89,4 +89,5 @@ const TitleP = styled.p`
   font-weight: bold;
   margin-bottom: 0.5rem;
   margin-right: 0.2rem;
+  font-family: var(--pretendard-medium);
 `;

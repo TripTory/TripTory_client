@@ -123,7 +123,7 @@ const IntroDiv = styled.div`
 const HiP = styled.p`
   font-size: 2rem;
   color: white;
-  font-family: var(--inter-extrabold);
+  font-family: var(--pretendard-medium);
   font-weight: 700;
   padding-bottom: 0.5rem;
 `;
@@ -131,6 +131,7 @@ const HiP = styled.p`
 const WelcomeP = styled.p`
   font-size: 1.2rem;
   color: white;
+  font-family: var(--pretendard-medium);
 `;
 
 const MainDiv = styled.div`
@@ -162,19 +163,19 @@ const UpDiv = styled.div`
 
 const DivNameP = styled.p`
   font-weight: bold;
-  font-size: 1.4rem;
-  font-family: var(--inter-extrabold);
+  font-size: 1.6rem;
+  font-family: var(--pretendard-medium);
   margin-left: 2rem;
 `;
 
 const AddBtn = styled(Button)`
   display: flex;
   background-color: ${COLOR.MAIN_GREEN};
-  width: 7.5rem;
+  font-family: var(--pretendard-extralight);
+  width: 9rem;
   height: 3rem;
   border-radius: 3rem;
-  font-size: 0.9rem;
-  font-weight: bold;
+  font-size: 1rem;
   padding-left: 1rem;
   padding-right: 1rem;
   &:hover {

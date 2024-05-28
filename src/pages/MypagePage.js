@@ -21,7 +21,11 @@ const MypagePage = () => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [message, setMessage] = useState("");
-  const [userInfo, setUserInfo] = useState({ name: "", email: "", profileimg: "" });
+  const [userInfo, setUserInfo] = useState({
+    name: "",
+    email: "",
+    profileimg: "",
+  });
 
   const toggleModal = () => {
     console.log(isModalOpen);
@@ -33,7 +37,13 @@ const MypagePage = () => {
   };
 
   const goToEdit = () => {
-    navigate("/editprofil", { state: { name: userInfo.name, email: userInfo.email, profileimg: userInfo.profileimg } });
+    navigate("/editprofil", {
+      state: {
+        name: userInfo.name,
+        email: userInfo.email,
+        profileimg: userInfo.profileimg,
+      },
+    });
   };
 
   const goToLogin = () => {
@@ -45,33 +55,40 @@ const MypagePage = () => {
   }, []);
 
   const handleUserInfo = () => {
-    axios.get(`${process.env.REACT_APP_SERVER_URL}/user`, { withCredentials: true})
-    .then((res) => {
-      const data = res.data.userinfo;
-      setUserInfo(
-        { _id: data._id,
+    axios
+      .get(`${process.env.REACT_APP_SERVER_URL}/user`, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        const data = res.data.userinfo;
+        setUserInfo({
+          _id: data._id,
           name: data.name,
           email: data.email,
           profileimg: res.data.url,
-          authprovider: data.authprovider});
-    })
-    .catch((error) => {
-      const status = error.status;
-      if (status === 404) {
-        setMessage("사용자를 찾을 수 없습니다.");
-      } else if (status === 401) {
-        setMessage("로그인이 필요합니다.");
-      } else if (status === 500) {
-        setMessage("서버 오류가 발생했습니다.");
-      } else {
-        setMessage("알 수 없는 오류가 발생했습니다.");
-      }
-      console.error("요청 실패:", error);
-    });
+          authprovider: data.authprovider,
+        });
+      })
+      .catch((error) => {
+        const status = error.status;
+        if (status === 404) {
+          setMessage("사용자를 찾을 수 없습니다.");
+        } else if (status === 401) {
+          setMessage("로그인이 필요합니다.");
+        } else if (status === 500) {
+          setMessage("서버 오류가 발생했습니다.");
+        } else {
+          setMessage("알 수 없는 오류가 발생했습니다.");
+        }
+        console.error("요청 실패:", error);
+      });
   };
 
   const handleLogout = () => {
-    axios.delete(`${process.env.REACT_APP_SERVER_URL}/user/logout`, { withCredentials: true})
+    axios
+      .delete(`${process.env.REACT_APP_SERVER_URL}/user/logout`, {
+        withCredentials: true,
+      })
       .then((response) => {
         const status = response.status;
         if (status === 200) {
@@ -88,12 +105,14 @@ const MypagePage = () => {
       });
   };
 
-
-  const DelAccount = () =>{
-    axios.delete(`${process.env.REACT_APP_SERVER_URL}/user`, { withCredentials: true})
+  const DelAccount = () => {
+    axios
+      .delete(`${process.env.REACT_APP_SERVER_URL}/user`, {
+        withCredentials: true,
+      })
       .then((response) => {
         const status = response.status;
-        console.log("res",status);
+        console.log("res", status);
         if (status === 200) {
           setMessage("계정이 성공적으로 삭제되었습니다.");
         } else if (status === 404) {
@@ -113,7 +132,11 @@ const MypagePage = () => {
   };
   const Menu = [
     { icon: <ModifyIcon />, text: "프로필 편집", action: goToEdit },
-    { icon: <LogoutIcon />, text: "로그아웃", action: [handleLogout, goToLogin] },
+    {
+      icon: <LogoutIcon />,
+      text: "로그아웃",
+      action: [handleLogout, goToLogin],
+    },
     {
       icon: <CancelIcon />,
       text: "계정 탈퇴",
@@ -123,7 +146,7 @@ const MypagePage = () => {
   return (
     <StMyPagePage>
       <TitleDiv>
-        <TitleTypo variant="h4">마이 페이지</TitleTypo>
+        <TitleTypo>마이 페이지</TitleTypo>
       </TitleDiv>
       <ProfilDiv>
         <ProfilAvatar alt="default" src={userInfo.profileimg || Default} />
@@ -136,7 +159,13 @@ const MypagePage = () => {
             return (
               <div key={it.text}>
                 <MenuLstItem disablePadding>
-                  <MenuLIBtn onClick={Array.isArray(it.action) ? () => it.action.forEach((actionFunc) => actionFunc()) : it.action}>
+                  <MenuLIBtn
+                    onClick={
+                      Array.isArray(it.action)
+                        ? () => it.action.forEach((actionFunc) => actionFunc())
+                        : it.action
+                    }
+                  >
                     {it.icon}
                     <MenuP>{it.text}</MenuP>
                   </MenuLIBtn>
@@ -148,12 +177,14 @@ const MypagePage = () => {
       </MenuDiv>
       {isModalOpen && (
         <CancelModal
-          content={<CancelContent/>}
+          content={<CancelContent />}
           closeModals={closeModal}
-          buttons={<StCancelButtons>
-            <NoBtn onClick={closeModal}>아니오</NoBtn>
-            <YesBtn onClick={DelAccount}>네</YesBtn>
-          </StCancelButtons>}
+          buttons={
+            <StCancelButtons>
+              <NoBtn onClick={closeModal}>아니오</NoBtn>
+              <YesBtn onClick={DelAccount}>네</YesBtn>
+            </StCancelButtons>
+          }
           w="80%"
           h="20%"
         />
@@ -183,6 +214,8 @@ const TitleDiv = styled.div`
 const TitleTypo = styled(Typography)`
   color: ${COLOR.MAIN_GREEN};
   font-weight: 1000;
+  font-size: 2.5rem;
+  font-family: var(--pretendard-bold);
 `;
 
 const ProfilDiv = styled.div`
@@ -204,6 +237,7 @@ const NameP = styled.p`
   font-size: 2.5rem;
   font-weight: 600;
   margin-top: 1.5rem;
+  font-family: var(--pretendard-medium);
 `;
 
 const MailP = styled.p`
@@ -211,6 +245,7 @@ const MailP = styled.p`
   color: #868686;
   font-weight: 400;
   margin-top: 1.2rem;
+  font-family: var(--pretendard-medium);
 `;
 
 const MenuDiv = styled.div`
@@ -236,6 +271,7 @@ const MenuLIBtn = styled(ListItemButton)`
 const MenuP = styled.p`
   font-size: 1.6rem;
   margin-left: 1.8rem;
+  font-family: var(--pretendard-medium);
 `;
 
 const SharedAttr = `
@@ -257,8 +293,7 @@ const LogoutIcon = styled(LogoutOutlinedIcon)`
   ${SharedAttr};
 `;
 
-const CancelModal = styled(Modal)`
-`;
+const CancelModal = styled(Modal)``;
 
 const StCancelButtons = styled.div`
   display: flex;
@@ -279,7 +314,7 @@ const YesBtn = styled.button`
 `;
 
 const NoBtn = styled.button`
-  background-color: #D9D9D9;
+  background-color: #d9d9d9;
   width: 40%;
   height: 3rem;
   border: none;

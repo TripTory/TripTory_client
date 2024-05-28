@@ -143,7 +143,8 @@ const TitleDiv = styled.div`
 const TitleP = styled.p`
   font-size: 2rem;
   padding-left: 1rem;
-  font-weight: bold;
+  font-family: var(--pretendard-medium);
+  font-weight: 800;
 `;
 
 const MainDiv = styled.div`
@@ -174,11 +175,11 @@ const AddFriendBtn = styled(Button)`
   right: 5%;
   left: 70%;
   height: 3.5rem;
-  width: 9rem;
+  width: 10rem;
   background-color: ${COLOR.MAIN_EMER};
   color: white;
   font-size: 1.1rem;
-  font-weight: 600;
+  font-family: var(--pretendard-semibold);
   border-radius: 3rem;
   &:hover {
     background-color: ${COLOR.MAIN_EMER};
@@ -214,6 +215,7 @@ const SemititleDiv = styled.div`
 const SemititleP = styled.p`
   font-size: 1.7rem;
   margin-left: 1rem;
+  font-family: var(--pretendard-medium);
 `;
 
 const PencilImg = styled.img`

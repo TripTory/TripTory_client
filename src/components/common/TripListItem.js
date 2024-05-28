@@ -72,7 +72,7 @@ export default function TripListItem(props) {
             </p>
           </ModiDiv>
           <DelDiv>
-            <p style={{ color: "#a1a1a1" }} onClick={toggleModal}>
+            <p style={{ color: "#a1a1a1"}} onClick={toggleModal}>
               삭제
             </p>
           </DelDiv>
@@ -124,7 +124,7 @@ const TitleP = styled.p`
   color: ${COLOR.MAIN_EMER};
   font-size: 1.2rem;
   font-weight: bold;
-  font-family: var(--inter-extrabold);
+  font-family: var(--pretendard-regular);
   margin-bottom: 0.1rem;
 `;
 
@@ -143,6 +143,7 @@ const LocationDiv = styled.div`
 const LocationP = styled.p`
   font-size: 0.8rem;
   color: rgba(119, 119, 119);
+  font-family: var(--pretendard-medium);
 `;
 
 const DeleteDiv = styled.div`
