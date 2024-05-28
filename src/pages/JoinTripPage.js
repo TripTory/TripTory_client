@@ -101,7 +101,6 @@ const JoinTripPage = () => {
   //success join modal 닫기
   const closeSuccessModal = () => {
     setIsSuccessModal(false);
-    // navigate("/triptable", { state:travelId});
   };
 
   return (

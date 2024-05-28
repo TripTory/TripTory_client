@@ -31,9 +31,6 @@ const EditProfilPage = () => {
   };
 
   const handleSubmit = (e) => {
-    //db에 바뀐 이름 post해서 반영
-    //db에 이미지 formdata로 반영
-    //변경된 이름은 메인페이지, 작성자, 등에서 모두 바뀌어야 하는데.. 되는 건가? 그렇다!
     const formData = new FormData();
     formData.append("name", user);
     if (selectedFile) {

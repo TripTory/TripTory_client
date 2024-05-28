@@ -1,7 +1,6 @@
 import React, {useState ,useRef} from "react";
 import PropTypes from "prop-types";
 import { AiFillCamera } from "react-icons/ai";
-// import axios from "axios";
 
 const ImageUploader = ({onChange, url}) => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -14,8 +13,6 @@ const ImageUploader = ({onChange, url}) => {
     const file = e.target.files[0];
     setSelectedFile(file);
     if(file){
-      // const img = new FormData();
-      // img.append("file", file);
       const reader = new FileReader();
       reader.onload = () => {
         setPreviewUrl(reader.result);
