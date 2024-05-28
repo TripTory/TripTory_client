@@ -99,7 +99,7 @@ export default function DiaryListPage() {
           <FriendAvt
             sx={{ position: "absolute", left: "63%" }}
             alt="2"
-            src={userimg[0]}
+            src={userimg[0]===null ? defaultImageSrc :userimg[0]}
           />
           <AddFriendBtn variant="contained" onClick={goToAdd}>
             + 일행 추가

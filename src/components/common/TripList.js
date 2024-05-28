@@ -57,6 +57,7 @@ export default function TripList() {
       {data && data.map((it,index) => {
         return <TripListItem key={it._id} data={it} url={url[index]}/>;
       })}
+      {data.length===0 && <Emptydiv>여행을 추가해보세요!</Emptydiv>}
     </StTripList>
   );
 }
@@ -66,3 +67,15 @@ const StTripList = styled(List)`
   align-items: center;
   flex-direction: column;
 `;
+
+const Emptydiv = styled.div`
+  width: 96%;
+  height: 100%;
+  display: flex;
+  border-radius: 1rem;
+  justify-content: center;
+  align-items: center;
+  color: #e4e4e4;
+  font-size: 2rem;
+`;
+
