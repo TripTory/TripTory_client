@@ -4,7 +4,6 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import calendar from "../assets/images/calendar.svg";
 import Modal from "../components/common/Modal";
-import Uploader from "../components/common/MultipleImageUploader";
 import { COLOR } from "../styles/color";
 import BottomNav from "../layout/BottomNav";
 import axios from "axios";
@@ -39,13 +38,12 @@ const EditDiaryWritePage = () => {
   };
 
   useEffect(() => {
-    // console.log("files22",files2.length);
     const transformedFiles = transformFiles(files);
     setFiles2(transformedFiles);
   }, []);
 
-  const [isCancelModalOpen, setIsCancelModalOpen] = useState(false); // Cancel 버튼을 위한 모달 상태
-  const [isSaveModalOpen, setIsSaveModalOpen] = useState(false); // Save 버튼을 위한 모달 상태
+  const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
+  const [isSaveModalOpen, setIsSaveModalOpen] = useState(false);
   const [imagePreview, setImagePreview] = useState(null);
 
   const navigate = useNavigate();
@@ -71,26 +69,15 @@ const EditDiaryWritePage = () => {
     formData.append("title", title);
     formData.append("content", content);
     formData.append("date", moment(startDate).startOf("day").format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"));
-    // formData.append("img", files2);
     formData.append("imgmodified", imgmodified);
 
     files2.forEach((file) => {
-      formData.append("images", file.fileObject);
+      formData.append("images", file.fileObject); // edit diary 시 수정한 이미지
     });
-    // files2.forEach((file) => {
-    //   formData.append("originImage", file.preview_URL);
-    // });
 
-    // const files2PreviewURLs = files2.map((file) => file.preview_URL || null);
-    // formData.append("originImage", JSON.stringify(files2PreviewURLs));
-    // const files2PreviewURLs = files2.map((file) => `'${file.preview_URL || ''}'`);
-    // formData.append("originImage", `[${files2PreviewURLs.join(',')}]`);
     const files2PreviewURLs = files2.map((file) => file.preview_URL || null);
-    formData.append("originImage", files2PreviewURLs);
+    formData.append("originImage", files2PreviewURLs); // edit diary 시 수정이 아닌 원본 이미지
 
-    for (const [key, value] of formData.entries()) {
-      console.log(`${key}: ${value}`);
-    }
 
     axios.put(`http://localhost:5000/diary/${diaryId}`, formData, { withCredentials: true, headers: {"Content-Type": "multipart/form-data"} })
     .then((res) => {
@@ -101,16 +88,14 @@ const EditDiaryWritePage = () => {
     });
   };
 
-  ///////////////////////////////
+  //////////// MultipleImageUploader ////////////
 
   const inputRef = useRef(null);
 
   const saveImage = (e) => {
     e.preventDefault();
-    // console.log("image length", e.target.files);
 
     handleImageUpload(files);
-    // console.log("image length", e.target.files);
     if (files2.length >= 10) {
       return;
     }
@@ -167,7 +152,6 @@ const EditDiaryWritePage = () => {
       />
     </DiaryDiv>
 
-    {/* <Uploader onFilesChange={handleImageUpload} files={files2} setFiles={setFiles2} onImgModified={setImgModified}/> */}
     <div className="uploader-wrapper">
       <input
         type="file"
@@ -386,7 +370,7 @@ const ContentDiv = styled.div`
   margin-top: 4rem;
 `;
 
-////////////////////////
+////////// MultipleImageUploader ////////////
 
 const ImageUploadDiv = styled.div`
   display: flex;
