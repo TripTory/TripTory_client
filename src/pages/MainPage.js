@@ -7,13 +7,14 @@ import TagImgList from "../components/common/TagImgList";
 import AddTripDialog from "../components/common/AddTripDialog";
 import { React, useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
-import { dialogState } from "../recoil/commonState";
+import { dialogState, userNameState } from "../recoil/commonState";
 import BottomNav from "../layout/BottomNav";
 import axios from "axios";
 
 const MainPage = () => {
   //db에서 get 해온 username or recoil에 저장한 내 정보
   const dummyName = "^get예정^";
+  const [userName, setUserName] = useRecoilState(userNameState);
 
   const [dialog, setDialog] = useRecoilState(dialogState);
   const handleOpen = () => {
@@ -22,6 +23,16 @@ const MainPage = () => {
 
   const [tagNames, setTagNames] = useState([]);
   const [tagImages, setTagImages] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:5000/user", { withCredentials: true})
+    .then((res) => {
+      setUserName(res.data.userinfo.name);
+    })
+  .catch((error) => {
+    console.log(error);
+  });
+  }, []);
 
   useEffect(() => {
     axios.get("http://localhost:5000/tag", { withCredentials: true})
@@ -45,7 +56,7 @@ const MainPage = () => {
   return (
     <StMainPage>
       <IntroDiv>
-        <HiP>{dummyName}님&nbsp;반가워요!</HiP>
+        <HiP>{userName}님&nbsp;반가워요!</HiP>
         <WelcomeP>트립토리와 함께 여행을 기록해요.</WelcomeP>
       </IntroDiv>
       <MainDiv>
