@@ -136,6 +136,7 @@ const DiaryImage = styled.img`
   margin: 2rem 2rem 1rem 2rem;
   max-width: 100%;
   max-height: 100%;
+  object-fit: cover;
 `;
 
 const TitleDiv = styled.div`

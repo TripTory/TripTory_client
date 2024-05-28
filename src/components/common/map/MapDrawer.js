@@ -57,6 +57,7 @@ const TripImg = styled.img`
   width: 90%;
   height: 45%;
   border-radius: 1.5rem;
+  object-fit: cover;
 `;
 
 const InfoDiv = styled.div`
