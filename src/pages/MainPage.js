@@ -27,7 +27,6 @@ const MainPage = () => {
   useEffect(() => {
     axios.get("http://localhost:5000/user", { withCredentials: true})
     .then((res) => {
-      console.log("메롱", res.data.userinfo.name);
       setUserName(res.data.userinfo.name);
     })
   .catch((error) => {
