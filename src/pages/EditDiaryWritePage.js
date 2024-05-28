@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useRef } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import calendar from "../assets/images/calendar.svg";
@@ -14,6 +14,9 @@ import moment from "moment";
 import { useRecoilState } from "recoil";
 import { diaryIdState } from "../recoil/commonState";
 
+import CancelIcon from "@mui/icons-material/Cancel";
+import CameraAltIcon from "@mui/icons-material/CameraAlt";
+
 const EditDiaryWritePage = () => {
   const { state } = useLocation();
   const [diaryId, setDiaryId] = useRecoilState(diaryIdState);
@@ -23,7 +26,7 @@ const EditDiaryWritePage = () => {
   const [title, setTitle] = useState(diaryInfo?.title || "");
   const [content, setContent] = useState(diaryInfo?.content || "");
   const [files, setFiles] = useState(diaryInfo?.url || []);
-  const [files2, setFiles2] = useState();
+  const [files2, setFiles2] = useState([]);
   const [imgmodified, setImgModified] = useState(false);
 
   const goToShowDiary = () => {
@@ -36,6 +39,7 @@ const EditDiaryWritePage = () => {
   };
 
   useEffect(() => {
+    // console.log("files22",files2.length);
     const transformedFiles = transformFiles(files);
     setFiles2(transformedFiles);
   }, []);
@@ -67,12 +71,22 @@ const EditDiaryWritePage = () => {
     formData.append("title", title);
     formData.append("content", content);
     formData.append("date", moment(startDate).startOf("day").format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"));
-    formData.append("img", files2);
+    // formData.append("img", files2);
     formData.append("imgmodified", imgmodified);
 
-    files.forEach((file) => {
+    files2.forEach((file) => {
       formData.append("images", file.fileObject);
     });
+    // files2.forEach((file) => {
+    //   formData.append("originImage", file.preview_URL);
+    // });
+
+    // const files2PreviewURLs = files2.map((file) => file.preview_URL || null);
+    // formData.append("originImage", JSON.stringify(files2PreviewURLs));
+    // const files2PreviewURLs = files2.map((file) => `'${file.preview_URL || ''}'`);
+    // formData.append("originImage", `[${files2PreviewURLs.join(',')}]`);
+    const files2PreviewURLs = files2.map((file) => file.preview_URL || null);
+    formData.append("originImage", files2PreviewURLs);
 
     for (const [key, value] of formData.entries()) {
       console.log(`${key}: ${value}`);
@@ -85,6 +99,40 @@ const EditDiaryWritePage = () => {
     .catch((error) => {
       console.log("에러", error);
     });
+  };
+
+  ///////////////////////////////
+
+  const inputRef = useRef(null);
+
+  const saveImage = (e) => {
+    e.preventDefault();
+    // console.log("image length", e.target.files);
+
+    handleImageUpload(files);
+    // console.log("image length", e.target.files);
+    if (files2.length >= 10) {
+      return;
+    }
+    const fileReader = new FileReader();
+    if (e.target.files[0]) {
+      fileReader.readAsDataURL(e.target.files[0]);
+    }
+    fileReader.onload = () => {
+      const fileType = e.target.files[0].type.split("/")[0];
+      setFiles2((prevFiles) => [
+        ...prevFiles,
+        { fileObject: e.target.files[0], preview_URL: fileReader.result, type: fileType },
+      ]);
+      setImgModified(true);
+    };
+  };
+
+  const deleteImage = (index) => {
+    const updatedFiles = [...files2];
+    updatedFiles.splice(index, 1);
+    setFiles2(updatedFiles);
+    setImgModified(true);
   };
 
   return <div>
@@ -119,7 +167,42 @@ const EditDiaryWritePage = () => {
       />
     </DiaryDiv>
 
-    <Uploader onFilesChange={handleImageUpload} files={files2} setFiles={setFiles2} onImgModified={setImgModified}/>
+    {/* <Uploader onFilesChange={handleImageUpload} files={files2} setFiles={setFiles2} onImgModified={setImgModified}/> */}
+    <div className="uploader-wrapper">
+      <input
+        type="file"
+        accept="image/*"
+        onChange={saveImage}
+        onClick={(e) => {
+          e.target.value = null;
+        }}
+        style={{ display: "none" }}
+        ref={inputRef}
+      />
+
+      <ImageUploadDiv>
+        <ImgUploadBtn
+          variant="contained"
+          onClick={() => inputRef.current && inputRef.current.click()}
+          disabled={files2.length >= 10}
+        >
+          <CameraAltIcons />
+          <UploadCount>{files2.length}/10</UploadCount>
+        </ImgUploadBtn>
+        <Slider>
+          {Array.isArray(files2) &&
+            files2.map((file, index) => (
+              <div key={index}>
+                <ImageDiv>
+                  <UploadedImage src={file.preview_URL} />
+                  <CancelIcons
+                    onClick={() => deleteImage(index)} />
+                </ImageDiv>
+              </div>
+            ))}
+        </Slider>
+      </ImageUploadDiv>
+    </div>
 
     <BtnDiv>
       <CancelBtn onClick={openCancelModal}>취소</CancelBtn>
@@ -303,6 +386,69 @@ const ContentDiv = styled.div`
   margin-top: 4rem;
 `;
 
+////////////////////////
+
+const ImageUploadDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 8.5rem;
+  margin-top: 0.5rem;
+  margin-left: 8%;
+  margin-right: 8%;
+`;
+
+const ImgUploadBtn = styled.button`
+  background-color: #eeeeee;
+  border: none;
+  border-radius: 0.8rem;
+  height: 7rem;
+  width: 7rem;
+  margin-right: 0.5rem;
+  min-width: 7rem;
+  min-height: 7rem;
+  color: ${COLOR.MAIN_GREEN};
+  color: ${(props) => props.disabled ? "rgba(46, 171, 161, 0.3)" : "${COLOR.MAIN_GREEN}"}
+`;
+
+const UploadedImage = styled.img`
+  border-radius: 0.8rem;
+  height: 7rem;
+  width: 7rem;
+  margin: 0.5rem;
+  object-fit: cover;
+`;
+
+const CancelIcons = styled(CancelIcon)`
+  color: ${COLOR.MAIN_GREEN};
+  height: 2rem;
+  width: 2rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+`;
+
+const Slider = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  position: relative;
+  overflow: auto;
+`;
+
+const ImageDiv = styled.div`
+  position: relative;
+`;
+
+const CameraAltIcons= styled(CameraAltIcon)`
+  height: 3rem;
+  width: 3rem;
+`;
+
+const UploadCount = styled.p`
+  color: ${COLOR.MAIN_GREEN};
+  font-weight: 500;
+`;
 
 export default EditDiaryWritePage;
 
