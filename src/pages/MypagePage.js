@@ -28,7 +28,6 @@ const MypagePage = () => {
   const [diaryID, setDiaryId] = useRecoilState(diaryIdState);
 
   const toggleModal = () => {
-    console.log(isModalOpen);
     setIsModalOpen(!isModalOpen);
   };
 
@@ -100,7 +99,6 @@ const MypagePage = () => {
     axios.delete(`${process.env.REACT_APP_SERVER_URL}/user`, { withCredentials: true})
       .then((response) => {
         const status = response.status;
-        console.log("res",status);
         if (status === 200) {
           setTripName("");
           setTripId("");

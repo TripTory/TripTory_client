@@ -4,7 +4,6 @@ import DiaryListItem from "./DiaryListItem";
 import { PropTypes } from "prop-types";
 
 export default function TripTable(props) {
-  console.log(props);
   return (
     <StTripTable>
       {

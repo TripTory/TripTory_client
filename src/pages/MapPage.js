@@ -23,7 +23,6 @@ const MapPage = () => {
       if (!completed) {
         setData(result.data.travels);
         setUrl(result.data.travelUrls);
-        // console.log(url);
       }
       setLoading(true);
     }

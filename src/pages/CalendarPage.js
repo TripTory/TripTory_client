@@ -15,7 +15,6 @@ const CalendarPage = () => {
     axios
       .get(`${SERVER_URL}/diary`, { withCredentials: true })
       .then((res) => {
-        console.log(res);
         const transformedData = res.data.diarys_info.map((item) => {
           return {
             date: item.diary.date,
