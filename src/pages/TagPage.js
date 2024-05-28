@@ -77,7 +77,7 @@ export default function TagPage() {
         <ModalContent>
           {modalImageIndex !== null && (
             <img
-              src={tag.imagePaths[modalImageIndex]}
+              src={tagImages[modalImageIndex]}
               alt={`${tagName}`}
               style={{ padding: "1rem", width: "100%" }}
             />
