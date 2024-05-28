@@ -16,14 +16,26 @@ export default function TripList() {
 
     // eslint-disable-next-line func-style
     async function get() {
-      const result = await axios.get(
-        `${process.env.REACT_APP_SERVER_URL}/travel`,
-        { withCredentials: true },
-      );
-      if (!completed) {
-        setData(result.data.travels);
-        setUrl(result.data.travelUrls);
+      try {
+        const result = await axios.get(
+          `${process.env.REACT_APP_SERVER_URL}/travel`,
+          { withCredentials: true },
+        );
+        if (!completed) {
+          setData(result.data.travels);
+          setUrl(result.data.travelUrls);
+        }
+      } catch (error) {
+        if (!completed) {
+          if(error.response.status===404){
+            setData([]);
+            setUrl([]);
+          }else{
+            console.log(error);
+          }
+        }
       }
+
       setLoading(true);
     }
     get();
@@ -45,6 +57,7 @@ export default function TripList() {
       {data && data.map((it,index) => {
         return <TripListItem key={it._id} data={it} url={url[index]}/>;
       })}
+      {data.length===0 && <Emptydiv>여행을 추가해보세요!</Emptydiv>}
     </StTripList>
   );
 }
@@ -54,3 +67,15 @@ const StTripList = styled(List)`
   align-items: center;
   flex-direction: column;
 `;
+
+const Emptydiv = styled.div`
+  width: 96%;
+  height: 100%;
+  display: flex;
+  border-radius: 1rem;
+  justify-content: center;
+  align-items: center;
+  color: #e4e4e4;
+  font-size: 2rem;
+`;
+

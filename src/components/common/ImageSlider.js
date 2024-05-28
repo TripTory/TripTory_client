@@ -10,7 +10,7 @@ import Box from "@mui/material/Box";
 import xicon from "../../assets/icons/x-icon.svg";
 
 const ImageSlider = ({ images }) => {
-  if (images === undefined) {
+  if (!images || images.length === 0) {
     return null;
   }
   const settings = {

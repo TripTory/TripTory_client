@@ -7,11 +7,13 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Pencil from "../assets/images/pencil.svg";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import BottomNav from "../layout/BottomNav";
 import axios from "axios";
 import { useRecoilValue } from "recoil";
-import { tripNameState, tripIdState} from "../recoil/commonState";
+import { tripNameState } from "../recoil/commonState";
+import { tripIdState } from "../recoil/commonState";
 import defaultImageSrc from "../assets/images/defaultProfileImg.svg";
 
 export default function DiaryListPage() {
@@ -25,38 +27,49 @@ export default function DiaryListPage() {
   useEffect(() => {
     let completed = false;
     let userimgs = [];
-    console.log("아이디트립", tripId);
-    // eslint-disable-next-line func-style
-    async function get() {
+
+    const fetchImages = async () => {
       try {
-        const result = await axios.get(
-          `${process.env.REACT_APP_SERVER_URL}/diary/travel/${tripId}`,
-          { withCredentials: true },
-        );
         const Img = await axios.get(
           `${process.env.REACT_APP_SERVER_URL}/travel/${tripId}`,
           { withCredentials: true },
         );
         if (!completed) {
-          setData(result.data.diarys_info);
-          setLoading(true);
           Img.data.invited_profile.forEach((item) => {
             userimgs.push(item.url);
           });
           setUserimg(userimgs);
-          console.log(userimg[1]);
-          console.log(userimg[2]);
+        }
+      } catch (error) {
+        if (!completed) {
+          setError(error);
+          console.error("사진 가져오기 중 에러가 발생했습니다:", error);
+        }
+      }
+    };
+
+    const fetchData = async () => {
+      try {
+        const result = await axios.get(
+          `${process.env.REACT_APP_SERVER_URL}/diary/travel/${tripId}`,
+          { withCredentials: true }
+        );
+        if (!completed) {
+          setData(result.data.diarys_info);
+          setLoading(true);
         }
       } catch (error) {
         if (!completed) {
           setError(error);
           setLoading(true);
+          console.error("데이터 가져오기 중 에러가 발생했습니다:", error);
         }
-        console.error("데이터 가져오기 중 에러가 발생했습니다:", error);
       }
-    }
+    };
 
-    get();
+    fetchImages();
+    fetchData();
+
     return () => {
       completed = true;
     };
@@ -86,7 +99,7 @@ export default function DiaryListPage() {
           <FriendAvt
             sx={{ position: "absolute", left: "63%" }}
             alt="2"
-            src={userimg[0]}
+            src={userimg[0]===null ? defaultImageSrc :userimg[0]}
           />
           <AddFriendBtn variant="contained" onClick={goToAdd}>
             + 일행 추가
