@@ -6,17 +6,6 @@ import { Link } from "react-router-dom";
 
 export default function TagImgListItem({ tagName, tagImages }) {
 
-  const handleTagPage = () => {
-    // axios.get(`http://localhost:5000/tag/${tagName}`,{ withCredentials: true })
-    //   .then((res) => {
-    //     const data = res.data.images;
-    //     console.log("data123",data);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-  };
-
   return (
     <Link to={`/tag/${tagName}`} style={{ width: "100%", height: "100%" }}>
       <StTagImgListItem>
@@ -27,7 +16,7 @@ export default function TagImgListItem({ tagName, tagImages }) {
             padding: "0.2rem 0.6rem 0.2rem 0.6rem",
           }}
         >
-          <ImgDiv onClick={handleTagPage} style={{ backgroundImage: `url(${tagImages[tagName]})`}}>
+          <ImgDiv style={{ backgroundImage: `url(${tagImages[tagName]})`}}>
             <TagP># {tagName}</TagP>
           </ImgDiv>
         </ListItem>
