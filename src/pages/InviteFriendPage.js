@@ -40,7 +40,6 @@ const InviteFriendPage = () => {
     axios
       .get(`${SERVER_URL}/travel/${tripId}`)
       .then((res) => {
-        console.log(res);
         // 초대 코드 저장
         setInvitecode(res.data.travel.ivtoken);
         // 여행 제목 저장

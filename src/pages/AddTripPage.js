@@ -68,9 +68,6 @@ const AddTripPage = () => {
     const enddate = moment(endDate)
       .endOf("day")
       .format("YYYY-MM-DDTHH:mm:ss.SSS[Z]");
-    console.log("---");
-    console.log(startdate);
-    console.log(enddate);
     const formData = new FormData();
     formData.append("title", tripName);
     formData.append("startdate", startdate);

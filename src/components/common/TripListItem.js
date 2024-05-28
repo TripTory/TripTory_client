@@ -44,7 +44,6 @@ export default function TripListItem(props) {
   };
 
   const goToEdit = () => {
-    console.log(props.data);
     navigate("/edittrip", { state: {state: props.data, url: props.url }});
   };
 

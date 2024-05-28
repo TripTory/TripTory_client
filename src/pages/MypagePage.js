@@ -28,7 +28,6 @@ const MypagePage = () => {
   const [diaryID, setDiaryId] = useRecoilState(diaryIdState);
 
   const toggleModal = () => {
-    console.log(isModalOpen);
     setIsModalOpen(!isModalOpen);
   };
 
@@ -115,7 +114,6 @@ const MypagePage = () => {
       })
       .then((response) => {
         const status = response.status;
-        console.log("res", status);
         if (status === 200) {
           setTripName("");
           setTripId("");

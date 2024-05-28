@@ -69,7 +69,6 @@ const DiaryPage = () => {
   const closeModal = () => {
     axios.delete(`${process.env.REACT_APP_SERVER_URL}/diary/${diaryId}`, { withCredentials: true})
     .then((res) => {
-      // console.log(res);
     })
     .catch((error) => {
       console.log(error);
