@@ -6,9 +6,9 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 export default function TagImgListItem({ tagName, tagImages }) {
-
+  console.log("t1: ",tagName);
   const handleTagPage = () => {
-    axios.get("http://localhost:5000/tag", {tag: tagName}, { withCredentials: true}) // 태그의 모든 이미지 받아오는 것에서 에러
+    axios.get("http://localhost:5000/tag",{ withCredentials: true}, {tag: tagName}) // 태그의 모든 이미지 받아오는 것에서 에러
       .then((res) => {
         const data = res.data;
         console.log(data);
@@ -17,7 +17,7 @@ export default function TagImgListItem({ tagName, tagImages }) {
         console.log(error);
       });
   };
-
+  console.log("t2: ",tagName);
   return (
     <Link to={`/tag/${tagName}`} style={{ width: "100%", height: "100%" }}>
       <StTagImgListItem>
