@@ -8,12 +8,6 @@ export const dialogState = atom({
   default: false,
 });
 
-export const tripNameState = atom({
-  key: "tripName",
-  default: "",
-  effects_UNSTABLE: [persistAtom],
-});
-
 export const tripIdState = atom({
   key: "tripId",
   default: "",

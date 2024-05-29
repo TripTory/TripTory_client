@@ -16,14 +16,13 @@ import CancelContent from "../components/common/CancelContent";
 import BottomNav from "../layout/BottomNav";
 import axios from "axios";
 import { useRecoilState } from "recoil";
-import { tripNameState, tripIdState, diaryIdState } from "../recoil/commonState";
+import { tripIdState, diaryIdState } from "../recoil/commonState";
 
 const MypagePage = () => {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [message, setMessage] = useState("");
   const [userInfo, setUserInfo] = useState({ name: "", email: "", profileimg: "" });
-  const [tripName, setTripName] = useRecoilState(tripNameState);
   const [tripId, setTripId] = useRecoilState(tripIdState);
   const [diaryID, setDiaryId] = useRecoilState(diaryIdState);
 
@@ -91,7 +90,6 @@ const MypagePage = () => {
       .then((response) => {
         const status = response.status;
         if (status === 200) {
-          setTripName("");
           setTripId("");
           setDiaryId("");
           setMessage("로그아웃 성공");
@@ -115,7 +113,6 @@ const MypagePage = () => {
       .then((response) => {
         const status = response.status;
         if (status === 200) {
-          setTripName("");
           setTripId("");
           setDiaryId("");
           setMessage("계정이 성공적으로 삭제되었습니다.");
