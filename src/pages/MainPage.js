@@ -12,8 +12,7 @@ import BottomNav from "../layout/BottomNav";
 import axios from "axios";
 
 const MainPage = () => {
-  //db에서 get 해온 username or recoil에 저장한 내 정보
-  const dummyName = "^get예정^";
+
   const [userName, setUserName] = useRecoilState(userNameState);
 
   const [dialog, setDialog] = useRecoilState(dialogState);
@@ -85,7 +84,11 @@ const MainPage = () => {
             <DivNameP>태그 별 사진 보기</DivNameP>
           </UpTDiv>
           <DownRDiv>
-            <TagImgList tagNames={tagNames} tagImages={tagImages} />
+            {tagNames.length === 0 ? (
+              <NoTagsDiv>일기를 추가해보세요!</NoTagsDiv>
+            ) : (
+              <TagImgList tagNames={tagNames} tagImages={tagImages} />
+            )}
           </DownRDiv>
         </TagDiv>
       </MainDiv>
@@ -235,6 +238,16 @@ const UpTDiv = styled.div`
   margin-top: 2.5rem;
   padding-bottom: 0.5rem;
   padding-right: 1rem;
+`;
+
+const NoTagsDiv = styled.div`
+  ${SharedContent};
+  font-size: 1.2rem;
+  color: ${COLOR.MAIN_GREEN};
+  font-family: var(--pretendard-medium);
+  border-radius: 1rem;
+  color: #e4e4e4;
+  font-size: 2rem;
 `;
 
 export default MainPage;
