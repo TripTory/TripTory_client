@@ -3,18 +3,18 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import defaultImageSrc from "../../assets/images/defaultProfileImg.svg";
 
-const FriendList = ({ usernames, userimgs }) => {
+const FriendList = ({ userinfos }) => {
   return (
     <div>
       <MyFriend>내 일행</MyFriend>
       <ul>
-        {usernames.map((name, index) => (
+        {userinfos.map((userinfo, index) => (
           <li key={index}>
             <FriendItemDiv>
               <FriendImgDiv>
-                <FriendImg src={userimgs[index] || defaultImageSrc}></FriendImg>
+                <FriendImg src={userinfo["url"] || defaultImageSrc}></FriendImg>
               </FriendImgDiv>
-              <FriendNameDiv>{name}</FriendNameDiv>
+              <FriendNameDiv>{userinfo["name"]}</FriendNameDiv>
             </FriendItemDiv>
           </li>
         ))}
@@ -24,8 +24,12 @@ const FriendList = ({ usernames, userimgs }) => {
 };
 
 FriendList.propTypes = {
-  usernames: PropTypes.string.isRequired,
-  userimgs: PropTypes.string.isRequired,
+  userinfos: PropTypes.arrayOf(
+    PropTypes.shape({
+      url: PropTypes.string,
+      name: PropTypes.string.isRequired,
+    })
+  ).isRequired,
 };
 
 export default FriendList;
