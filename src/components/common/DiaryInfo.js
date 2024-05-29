@@ -3,16 +3,17 @@ import styled from "styled-components";
 import { COLOR } from "../../styles/color";
 import PropTypes from "prop-types";
 import moment from "moment";
+import defaultImageSrc from "../../assets/images/defaultProfileImg.svg";
 
 const DiaryInfo = ({ title, date, username, userimg }) => {
   return (
     <InfoContainer>
       <TitleDiv>{title}</TitleDiv>
       <AuthorContainer>
-        <AuthorImg src={userimg}></AuthorImg>
+        <AuthorImg src={userimg ? userimg : defaultImageSrc}></AuthorImg>
         <AuthorDiv>{username}</AuthorDiv>
       </AuthorContainer>
-      <DateDiv>{moment(date, "YY-MM-DD").format("YYYY.MM.DD")}</DateDiv>
+      <DateDiv>{moment(date).format("YYYY.MM.DD")}</DateDiv>
     </InfoContainer>
   );
 };
