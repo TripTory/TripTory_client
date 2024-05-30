@@ -20,10 +20,9 @@ const InviteFriendPage = () => {
   const [invitecode, setInvitecode] = useState("");
 
   const [title, setTitle] = useState("");
-  const [username, setUsername] = useState([]);
-  const [userimg, setUserimg] = useState([]);
-
+  const [userinfo, setUserinfo] = useState();
   const [isModal, setIsModal] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const closeModal = () => {
     setIsModal(false);
@@ -35,8 +34,6 @@ const InviteFriendPage = () => {
 
   // 서버로부터 여행 정보 받아오기
   useEffect(() => {
-    let usernames = [];
-    let userimgs = [];
     axios
       .get(`${SERVER_URL}/travel/${tripId}`)
       .then((res) => {
@@ -44,19 +41,23 @@ const InviteFriendPage = () => {
         setInvitecode(res.data.travel.ivtoken);
         // 여행 제목 저장
         setTitle(res.data.travel.title);
-        // 여행 참여자 이름 저장
-        res.data.travel.invited.forEach((item) => {
-          usernames.push(item.name);
-        });
-        setUsername(usernames);
-        // 여행 참여자 프로필사진 저장
-        res.data.invited_profile.forEach((item) => {
-          userimgs.push(item.url);
-        });
-        setUserimg(userimgs);
+
+        const mergeProfilesAndInvites = (profiles, invites) => {
+          return profiles.map((profile) => {
+            const invite = invites.find((inv) => inv.user === profile.user);
+            return {
+              ...profile,
+              ...invite
+            };
+          });
+        };
+        const mergedData = mergeProfilesAndInvites(res.data.travel.invited, res.data.invited_profile);
+        setUserinfo(mergedData);
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
+        setLoading(false);
       });
   }, []);
 
@@ -114,7 +115,7 @@ const InviteFriendPage = () => {
         </CopyCodeContainer>
       </FixedDiv>
       <FriendListContainer>
-        <FriendList usernames={username} userimgs={userimg}></FriendList>
+        {!loading && <FriendList userinfos={userinfo}></FriendList>}
       </FriendListContainer>
       <BottomNav />
     </div>

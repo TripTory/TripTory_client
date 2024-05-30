@@ -12,12 +12,11 @@ import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import BottomNav from "../layout/BottomNav";
 import axios from "axios";
 import { useRecoilValue } from "recoil";
-import { tripNameState } from "../recoil/commonState";
 import { tripIdState } from "../recoil/commonState";
 import defaultImageSrc from "../assets/images/defaultProfileImg.svg";
 
 export default function DiaryListPage() {
-  const tripName = useRecoilValue(tripNameState);
+  const [tripName, setTripName] = useState("");
   const tripId = useRecoilValue(tripIdState);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -39,6 +38,8 @@ export default function DiaryListPage() {
             userimgs.push(item.url);
           });
           setUserimg(userimgs);
+          setTripName(Img.data.travel.title);
+
         }
       } catch (error) {
         if (!completed) {

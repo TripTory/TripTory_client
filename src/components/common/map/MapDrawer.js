@@ -6,13 +6,11 @@ import Button from "@mui/material/Button";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { useNavigate } from "react-router";
 import { useRecoilState } from "recoil";
-import { tripIdState, tripNameState } from "../../../recoil/commonState";
+import { tripIdState } from "../../../recoil/commonState";
 const MapDrawer = (props) => {
   const navigate = useNavigate();
   const [tripId, setTripId] = useRecoilState(tripIdState);
-  const [tripName, setTripName] = useRecoilState(tripNameState);
   const goToDiary = () => {
-    setTripName(props.data.title);
     setTripId(props.data._id);
     navigate("/triptable");
   };

@@ -4,10 +4,10 @@ import List from "@mui/material/List";
 import TripListItem from "./TripListItem";
 import axios from "axios";
 import { useRecoilState } from "recoil";
-import { tripNameState } from "../../recoil/commonState";
+
 
 export default function TripList() {
-  const [tripName, setTripName] = useRecoilState(tripNameState);
+
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
   const [url, setUrl] = useState("");
