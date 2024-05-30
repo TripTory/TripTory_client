@@ -14,33 +14,56 @@ import { tripIdState, diaryIdState } from "../recoil/commonState";
 
 const DiaryPage = () => {
   const navigate = useNavigate();
-  const [diaryInfo, setDiaryInfo] = useState({ _id: "", title: "", content: "", date: "", travel: "", userId: "", userName: "", url: [], userUrl: "",});
+  const [myId, setMyId] = useState("");
+  const [diaryInfo, setDiaryInfo] = useState({
+    _id: "",
+    title: "",
+    content: "",
+    date: "",
+    travel: "",
+    userId: "",
+    userName: "",
+    url: [],
+    userUrl: "",
+  });
   const [diaryId, setDiaryId] = useRecoilState(diaryIdState);
   const [tripId, setTripId] = useRecoilState(tripIdState);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_SERVER_URL}/diary/${diaryId}`, { withCredentials: true})
-    .then((res) => {
-      const data = res.data.diaryinfo;
-      setDiaryInfo({
-        _id: data.id,
-        title: data.title,
-        content: data.content,
-        date: data.date,
-        travel: data.travel,
-        userId: data.userId,
-        userName: data.userName,
-        url: res.data.diaryImgUrl,
-        userUrl: res.data.userUrl,
+    axios
+      .get(`${process.env.REACT_APP_SERVER_URL}/user`, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        setMyId(res.data.userinfo._id);
       });
-    })
-  .catch((error) => {
-    console.log(error);
-  });
   }, []);
 
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_SERVER_URL}/diary/${diaryId}`, {
+        withCredentials: true,
+      })
+      .then((res) => {
+        const data = res.data.diaryinfo;
+        setDiaryInfo({
+          _id: data.id,
+          title: data.title,
+          content: data.content,
+          date: data.date,
+          travel: data.travel,
+          userId: data.userId,
+          userName: data.userName,
+          url: res.data.diaryImgUrl,
+          userUrl: res.data.userUrl,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   const goToTriptable = () => {
     setTripId(diaryInfo.travel);
@@ -54,9 +77,8 @@ const DiaryPage = () => {
     formData.append("date", diaryInfo.date);
     formData.append("images", diaryInfo.url);
 
-    navigate("/editdiary", { state: { diaryInfo: diaryInfo} });
+    navigate("/editdiary", { state: { diaryInfo: diaryInfo } });
   };
-
 
   const goToDelDiary = () => {
     setIsModalOpen(true);
@@ -67,12 +89,14 @@ const DiaryPage = () => {
   };
 
   const closeModal = () => {
-    axios.delete(`${process.env.REACT_APP_SERVER_URL}/diary/${diaryId}`, { withCredentials: true})
-    .then((res) => {
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+    axios
+      .delete(`${process.env.REACT_APP_SERVER_URL}/diary/${diaryId}`, {
+        withCredentials: true,
+      })
+      .then((res) => {})
+      .catch((error) => {
+        console.log(error);
+      });
     setIsModalOpen(false);
     navigate("/triptable");
   };
@@ -81,30 +105,41 @@ const DiaryPage = () => {
     <div>
       <HeaderConatiner>
         <GoBackIcon src={goback} onClick={goToTriptable}></GoBackIcon>
-        <BtnContainer>
-          <EditBtn onClick={goToEditDiary}>수정</EditBtn>
-          <Bar>|</Bar>
-          <DeleteBtn onClick={goToDelDiary}>삭제</DeleteBtn>
-        </BtnContainer>
+        <div>
+          {myId === diaryInfo.userId ? (
+            <BtnContainer>
+              <EditBtn onClick={goToEditDiary}>수정</EditBtn>
+              <Bar>|</Bar>
+              <DeleteBtn onClick={goToDelDiary}>삭제</DeleteBtn>
+            </BtnContainer>
+          ) : (
+            <div></div>
+          )}
+        </div>
       </HeaderConatiner>
-      <DiaryInfo title={diaryInfo.title} date={diaryInfo.date} username={diaryInfo.userName} userimg={diaryInfo.userUrl} ></DiaryInfo>
+      <DiaryInfo
+        title={diaryInfo.title}
+        date={diaryInfo.date}
+        username={diaryInfo.userName}
+        userimg={diaryInfo.userUrl}
+      ></DiaryInfo>
       <DiaryContent content={diaryInfo.content}></DiaryContent>
-      <ImageSlider images={diaryInfo.url}/>
+      <ImageSlider images={diaryInfo.url} />
       <BottomNav />
 
       {isModalOpen && (
         <Modal
-          content={
-            <ContentDiv>
-              일기를 삭제하시겠습니까?
-            </ContentDiv>
-          }
+          content={<ContentDiv>일기를 삭제하시겠습니까?</ContentDiv>}
           w="70%"
           h="15rem"
           buttons={
             <OkayDiv>
-              <OkayBtn className="no" onClick={justcloseModal}>아니오</OkayBtn>
-              <OkayBtn className="yes" onClick={closeModal}>예</OkayBtn>
+              <OkayBtn className="no" onClick={justcloseModal}>
+                아니오
+              </OkayBtn>
+              <OkayBtn className="yes" onClick={closeModal}>
+                예
+              </OkayBtn>
             </OkayDiv>
           }
         />
@@ -181,7 +216,7 @@ const OkayBtn = styled.button`
   border-radius: 3rem;
   &.no {
     color: black;
-    background-color: #D9D9D9;
+    background-color: #d9d9d9;
     margin-right: 1rem;
   }
   &.yes {
