@@ -13,7 +13,7 @@ const AgreePage = () => {
     privacy: false,
     marketing: false,
   });
-  const [isRequiredChecked, setIsRequiredChecked] = useState(false); // New state to track if both required checkboxes are checked
+  const [isRequiredChecked, setIsRequiredChecked] = useState(false);
 
   useEffect(() => {
     setIsRequiredChecked(isChecked.agreement && isChecked.privacy);
