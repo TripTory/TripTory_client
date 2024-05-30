@@ -83,12 +83,10 @@ const EditTripPage = () => {
         withCredentials: true,
         headers: { "Content-Type": "multipart/form-data" },
       })
-      .then((res) => {
-        openSuccessModal();
-      })
       .catch((error) => {
         console.log(error);
       });
+    openSuccessModal();
   };
 
   const handleCancel = () => {
