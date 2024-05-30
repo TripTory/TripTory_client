@@ -90,13 +90,13 @@ export default function DiaryListPage() {
       <MainDiv>
         <FriendDiv>
           {userimg[1]!==undefined && (
-            <FriendAvt
+            <FriendAvta
               sx={{ position: "absolute", left: "56%" }}
               alt="1"
               src={userimg[1] ? userimg[1] : defaultImageSrc }
             />
           )}
-          <FriendAvt
+          <FriendAvtb
             sx={{ position: "absolute", left: "63%" }}
             alt="2"
             src={userimg[0]===null ? defaultImageSrc :userimg[0]}
@@ -170,29 +170,43 @@ const MainDiv = styled.div`
 `;
 
 const FriendDiv = styled.div`
+  position: relative;
   display: flex;
-  justify-content: end;
+  flex-direction: row;
   align-items: center;
   width: 100%;
   height: 10%;
 `;
 
-const FriendAvt = styled(Avatar)`
+const FriendAvta = styled(Avatar)`
+  position: absolute;
   width: 3.5rem;
   height: 3.5rem;
   border: 1.5px solid white;
+  z-index: 1;
+  left: calc(100% - 146px);
+`;
+
+const FriendAvtb = styled(Avatar)`
+  position: absolute;
+  width: 3.5rem;
+  height: 3.5rem;
+  border: 1.5px solid white;
+  z-index: 2;
+  left: calc(100% - 123px);
+
 `;
 
 const AddFriendBtn = styled(Button)`
   position: absolute;
-  right: 5%;
-  left: 70%;
+  left: calc(100% - 100px);
   height: 3.5rem;
   width: 10rem;
   background-color: ${COLOR.MAIN_EMER};
   color: white;
   font-size: 1.2rem;
   font-family: var(--pretendard-regular);
+  z-index: 3;
   border-radius: 3rem;
   &:hover {
     background-color: ${COLOR.MAIN_EMER};
