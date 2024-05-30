@@ -3,8 +3,6 @@ import styled from "styled-components";
 import List from "@mui/material/List";
 import TripListItem from "./TripListItem";
 import axios from "axios";
-import { useRecoilState } from "recoil";
-
 
 export default function TripList() {
 

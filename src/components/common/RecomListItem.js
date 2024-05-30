@@ -65,14 +65,11 @@ RecomListItem.propTypes = {
 const StRecomListItem = styled.div`
   width: 100%;
   height: 100%;
-  /* border: 1px solid black; */
-  /* padding: 0.1rem; */
 `;
 
 const ItemCard = styled(Card)`
   width: 14rem;
   height: 17rem;
-  /* border: 1px solid blue; */
 `;
 
 const InfoCardContent = styled(CardContent)`
