@@ -12,7 +12,7 @@ import moment from "moment";
 import axios from "axios";
 import BottomNav from "../layout/BottomNav";
 import Modal from "../components/common/Modal";
-import SuccessContent from "../components/common/SuccessAddTripContent";
+// import SuccessContent from "../components/common/SuccessAddTripContent";
 
 const EditTripPage = () => {
   const { state } = useLocation();
@@ -83,12 +83,10 @@ const EditTripPage = () => {
         withCredentials: true,
         headers: { "Content-Type": "multipart/form-data" },
       })
-      .then((res) => {
-        openSuccessModal();
-      })
       .catch((error) => {
         console.log(error);
       });
+    openSuccessModal();
   };
 
   const handleCancel = () => {
@@ -111,7 +109,13 @@ const EditTripPage = () => {
       )}
       {success && (
         <Modal
-          content={<SuccessContent />}
+          content={<SuccessContent>
+            <ContentDiv>
+              <ContentP>
+                여행이 수정되었습니다.
+              </ContentP>
+            </ContentDiv>
+          </SuccessContent>}
           closeModals={closeSuccessModal}
           buttons={
             <ButtonContainer>
@@ -320,4 +324,29 @@ const DateWrapper = styled.div`
   border-bottom: solid #bfbfbf 1px;
   margin: auto;
   font-size: 0;
+`;
+
+
+const SuccessContent = styled.div`
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 1rem;
+`;
+
+
+const ContentDiv =styled.div`
+  padding: 2rem 1em;
+  margin: 1rem;
+`;
+
+const ContentP = styled.p`
+  font-size: 1.8rem;
+  text-align: center;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+  line-height: 1.5rem;
+  font-weight: 700;
+  line-height : normal;
 `;
