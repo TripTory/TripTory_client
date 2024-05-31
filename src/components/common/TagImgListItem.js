@@ -59,5 +59,5 @@ const TagP = styled.div`
   padding-left: 0.5rem;
   padding-right: 0.6rem;
   padding-top: 0.5rem;
-
+  font-family: var(--pretendard-semibold);
 `;
