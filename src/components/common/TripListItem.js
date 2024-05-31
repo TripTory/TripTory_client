@@ -65,12 +65,12 @@ export default function TripListItem(props) {
         </InfoDiv>
         <DeleteDiv>
           <ModiDiv>
-            <p style={{ color: "#a1a1a1" }} onClick={goToEdit}>
+            <p style={{ color: "#a1a1a1", fontSize: "1.2rem" }} onClick={goToEdit}>
               수정
             </p>
           </ModiDiv>
           <DelDiv>
-            <p style={{ color: "#a1a1a1"}} onClick={toggleModal}>
+            <p style={{ color: "#a1a1a1",  fontSize: "1.2rem"}} onClick={toggleModal}>
               삭제
             </p>
           </DelDiv>
@@ -149,7 +149,8 @@ const DeleteDiv = styled.div`
   display: flex;
   justify-content: center;
   width: 20%;
-  margin-left: 5rem;
+  margin-left: 6rem;
+  width: 10rem;
 `;
 
 const ModiDiv = styled.div`

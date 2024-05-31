@@ -93,7 +93,7 @@ const IntroP = styled.p`
   font-weight: 800;
   text-align: left;
   margin-top: 12rem;
-  margin-left: -5rem;
+  margin-left: -9rem;
   font-family: var(--pretendard-bold);
 `;
 
